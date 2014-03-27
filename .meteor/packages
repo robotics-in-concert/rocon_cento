@@ -7,3 +7,9 @@ standard-app-packages
 autopublish
 insecure
 preserve-inputs
+coffeescript
+http
+d3
+iron-router
+bootstrap-3
+moment
