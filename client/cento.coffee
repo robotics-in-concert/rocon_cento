@@ -7,9 +7,7 @@ Deps.autorun (c)->
   console.log("Oh no!")
 
 Template.d3.rendered = ->
-  console.log 'rendered!'
   svg = @find('#svg')
-  console.log svg
   new TrelloCards(svg)
 
 Template.foo.value = ->
