@@ -27,4 +27,4 @@ Template.files.events
 
     t.find('input[type=file]').value = ''
 Template.files.files = ->
-  Files.find({}, {sort: {created: -1}})
+  Cento.Files.find({}, {sort: {created: -1}})
