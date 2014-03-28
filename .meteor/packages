@@ -13,3 +13,5 @@ d3
 iron-router
 bootstrap-3
 moment
+accounts-base
+accounts-github

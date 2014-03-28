@@ -28,3 +28,17 @@ Template.files.events
     t.find('input[type=file]').value = ''
 Template.files.files = ->
   Cento.Files.find({}, {sort: {created: -1}})
+
+
+
+Template.layout.events
+  'click #github_login': ->
+    Meteor.loginWithGithub requestPermissions: ['user'], (e)->
+      console.log(e)
+  'click #github_logout': ->
+    Meteor.logout (e)->
+      if e?
+        console.log e
+      else
+        alert('logged out!')
+

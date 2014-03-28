@@ -6,6 +6,14 @@
 
 }
 
+/* common */
+.navbar .avatar {
+  border-radius: 3px;
+  margin-right: 3px;
+}
+
+/* trello_vis */
+
 #svg {
   padding: 1px;
 }

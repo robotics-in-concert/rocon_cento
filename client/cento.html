@@ -19,8 +19,15 @@
           <ul class="nav navbar-nav">
             <li class="active-"><a href="/">Home</a></li>
             <li><a href="/d3">D3</a></li>
-            <li><a href="/foo">Foo</a></li>
             <li><a href="/files">Images</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            {{#if currentUser}}
+            <li><a href="#"><img class="avatar" src="{{currentUser.profile.avatar_url}}" width="25" height="25"> {{currentUser.profile.login}}</a></li>
+            <li><a id="github_logout" href="#"><i class="glyphicon glyphicon-log-out"></i></a></li>
+            {{else}}
+            <li><a id="github_login" href="#"><i class="glyphicon glyphicon-log-in"></i></a></li>
+            {{/if}}
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -58,6 +65,7 @@ Foo!
 <div><button class="save">save</button></div>
 
 </template>
+
 <template name='d3'>
   <div class='wrapper' style="border: solid 1px #efefef;">
       {{#constant}}
