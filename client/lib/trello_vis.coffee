@@ -29,7 +29,7 @@ class @TrelloCards
     console.log dm0, dm1
 
 
-    ab = 
+    ab =
       source:
         x: dm0.cy
         y: dm0.x + dm0.width
