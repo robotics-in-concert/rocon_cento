@@ -13,13 +13,14 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Cento</a>
+          <a class="navbar-brand" href="/">Cento</a>
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li class="active-"><a href="/">Home</a></li>
             <li><a href="/d3">D3</a></li>
             <li><a href="/foo">Foo</a></li>
+            <li><a href="/files">Images</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -34,8 +35,20 @@
 </template>
 
 <template name='home'>
-Home! <a href="/foo">go to foo</a>
-Home! <a href="/d3">go to d3</a>
+Welcome!
+</template>
+
+<template name='files'>
+<h2>Images</h2>
+<input type="file" accept="image/*">
+
+<div class="images_wrap">
+<ul class="images">
+{{#each files}}
+  <li><a href="/data/{{name}}" target="_blank"><img src="/data/{{name}}" width="200" height="200"></a></li>
+{{/each}}
+</ul>
+</div>
 </template>
 
 <template name='foo'>

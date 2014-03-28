@@ -19,3 +19,12 @@ Template.foo.events =
     v = $('input').val()
     Session.set('foo.value2', v)
 
+Template.files.events
+  'change input': (e, t)->
+    _.each e.target.files, (file)->
+      Meteor.saveFile(file);
+
+
+    t.find('input[type=file]').value = ''
+Template.files.files = ->
+  Files.find({}, {sort: {created: -1}})

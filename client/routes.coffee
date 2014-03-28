@@ -16,3 +16,6 @@ Router.map ()->
     path: '/d3',
     template: 'd3'
 
+  this.route 'files',
+    path: '/files',
+    template: 'files'
