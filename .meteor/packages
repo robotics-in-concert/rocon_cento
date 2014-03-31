@@ -15,3 +15,7 @@ bootstrap-3
 moment
 accounts-base
 accounts-github
+accounts-oauth
+service-configuration
+oauth
+oauth1

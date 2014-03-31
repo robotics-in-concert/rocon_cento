@@ -35,6 +35,10 @@ Template.layout.events
   'click #github_login': ->
     Meteor.loginWithGithub requestPermissions: ['user'], (e)->
       console.log(e)
+Template.layout.events
+  'click #trello_login': ->
+    Meteor.loginWithTrello requestPermissions: ['user'], (e)->
+      console.log(e)
   'click #github_logout': ->
     Meteor.logout (e)->
       if e?
