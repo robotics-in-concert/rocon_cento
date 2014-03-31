@@ -35,10 +35,12 @@ Template.layout.events
   'click #github_login': ->
     Meteor.loginWithGithub requestPermissions: ['user'], (e)->
       console.log(e)
+      location.href = "/"
 Template.layout.events
   'click #trello_login': ->
     Meteor.loginWithTrello requestPermissions: ['user'], (e)->
       console.log(e)
+      location.href = "/"
   'click #github_logout': ->
     Meteor.logout (e)->
       if e?

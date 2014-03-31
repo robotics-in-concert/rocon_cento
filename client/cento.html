@@ -1,5 +1,7 @@
 <head>
   <title>cento</title>
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+
 </head>
 
 <template name='layout'>
@@ -26,8 +28,7 @@
             <li><a href="#"><img class="avatar" src="{{currentUser.profile.avatar_url}}" width="25" height="25"> {{currentUser.profile.login}}</a></li>
             <li><a id="github_logout" href="#"><i class="glyphicon glyphicon-log-out"></i></a></li>
             {{else}}
-            <li><a id="github_login" href="#"><i class="glyphicon glyphicon-log-in"></i></a></li>
-            <li><a id="trello_login" href="#"><i class="glyphicon glyphicon-log-in"></i></a></li>
+            <li><a id="xgithub_login" href="/login"><i class="glyphicon glyphicon-log-in"></i></a></li>
             {{/if}}
           </ul>
         </div><!--/.nav-collapse -->
@@ -44,6 +45,15 @@
 
 <template name='home'>
 Welcome!
+</template>
+
+
+<template name="login">
+
+<ul>
+  <li><i class="fa fa-github"></i> <a href="#" id="github_login">Login with Github</a></li>
+  <li><i class="fa fa-trello"></i> <a href="#" id="trello_login">Login with Trello</a></li>
+</ul>
 </template>
 
 <template name='files'>

@@ -16,6 +16,8 @@ Router.map ()->
     path: '/d3',
     template: 'd3'
 
+  @route 'login',
+    path: '/login',
   @route 'files',
     path: '/files',
     template: 'files'
