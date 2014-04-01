@@ -1,0 +1,21 @@
+# Meteor packages used by this project, one per line.
+#
+# 'meteor add' and 'meteor remove' will edit this file for you,
+# but you can also edit it by hand.
+
+standard-app-packages
+autopublish
+insecure
+preserve-inputs
+coffeescript
+http
+d3
+iron-router
+bootstrap-3
+moment
+accounts-base
+accounts-github
+accounts-oauth
+service-configuration
+oauth
+oauth1
