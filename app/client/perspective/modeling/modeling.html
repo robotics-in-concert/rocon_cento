@@ -1,0 +1,15 @@
+<template name="modeling">
+<h2>Modeling</h2>
+
+<h3>Files</h3>
+<input type="file" accept="image/*">
+
+<div class="images_wrap">
+  <ul class="images">
+  {{#each files}}
+    <li><a href="/data/{{name}}" target="_blank"><img src="/data/{{name}}" width="200" height="200"></a></li>
+  {{/each}}
+  </ul>
+</div>
+
+</template>

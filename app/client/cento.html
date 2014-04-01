@@ -19,16 +19,18 @@
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active-"><a href="/">Home</a></li>
-            <li><a href="/d3">D3</a></li>
-            <li><a href="/files">Images</a></li>
+            <li {{#if isActivePath 'ideation' }}class="active"{{/if}}><a href="/ideation">Ideation</a></li>
+            <li {{#if isActivePath 'modeling' }}class="active"{{/if}}><a href="/modeling">Modeling</a></li>
+            <li {{#if isActivePath 'battle' }}class="active"{{/if}}><a href="/battle">Battle(dev)</a></li>
+            <li {{#if isActivePath 'configuration' }}class="active"{{/if}}><a href="/configuration">Configuration</a></li>
+            <li {{#if isActivePath 'management' }}class="active"{{/if}}><a href="/management">Management</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             {{#if currentUser}}
             <li><a href="#"><img class="avatar" src="{{avatarUrl}}" width="25" height="25"> {{username}}</a></li>
             <li><a id="github_logout" href="#"><i class="glyphicon glyphicon-log-out"></i></a></li>
             {{else}}
-            <li><a id="xgithub_login" href="/login"><i class="glyphicon glyphicon-log-in"></i></a></li>
+            <li><a href="/login"><i class="glyphicon glyphicon-log-in"></i></a></li>
             {{/if}}
           </ul>
         </div><!--/.nav-collapse -->
@@ -49,40 +51,10 @@ Welcome!
 
 
 <template name="login">
-
+<h2>Login</h2>
 <ul>
   <li><i class="fa fa-github"></i> <a href="#" id="github_login">Login with Github</a></li>
   <li><i class="fa fa-trello"></i> <a href="#" id="trello_login">Login with Trello</a></li>
 </ul>
-</template>
-
-<template name='files'>
-<h2>Images</h2>
-<input type="file" accept="image/*">
-
-<div class="images_wrap">
-<ul class="images">
-{{#each files}}
-  <li><a href="/data/{{name}}" target="_blank"><img src="/data/{{name}}" width="200" height="200"></a></li>
-{{/each}}
-</ul>
-</div>
-</template>
-
-<template name='foo'>
-Foo! 
-<p>value = {{value}}</p>
-<p>value2 = <input value="{{value2}}"></p>
-<div><button class="save">save</button></div>
-
-</template>
-
-<template name='d3'>
-  <div class='wrapper' style="border: solid 1px #efefef;">
-      {{#constant}}
-      <svg id='svg' width='100%' height='100%'>    
-      </svg>
-      {{/constant}}
-</div>
 </template>
 
