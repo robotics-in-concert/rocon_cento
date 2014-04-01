@@ -16,23 +16,26 @@ export MONGO_URL=$MONGO_URL;
 cd $DEPLOY_PATH/git;
 
 echo 'update code';
-git pull;
+git pull > /dev/null;
 
 
+echo 'bundle package';
 cd $DEPLOY_PATH/git/app;
-mrt bundle $DEPLOY_PATH/bundle.tgz;
+mrt bundle $DEPLOY_PATH/bundle.tgz > /dev/null;
 
 cd $DEPLOY_PATH;
 
 echo 'stop server';
-forever --plain stop $DEPLOY_PATH/bundle/main.js;
+forever --plain -s stop $DEPLOY_PATH/bundle/main.js > /dev/null;
 mv $DEPLOY_PATH/bundle $DEPLOY_PATH/bundle.$DD;
 tar xzvf $DEPLOY_PATH/bundle.tgz > /dev/null;
 
 
 echo 'clean';
 rm $DEPLOY_PATH/bundle.tgz;
-forever --plain start $DEPLOY_PATH/bundle/main.js;
+
+echo 'start server';
+forever --plain -s start $DEPLOY_PATH/bundle/main.js > /dev/null;
 "
 
 
