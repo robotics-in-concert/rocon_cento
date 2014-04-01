@@ -17,6 +17,9 @@ cd $DEPLOY_PATH/git;
 
 echo 'update code';
 git pull;
+
+
+cd $DEPLOY_PATH/git/app;
 mrt bundle $DEPLOY_PATH/bundle.tgz;
 
 cd $DEPLOY_PATH;

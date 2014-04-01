@@ -18,7 +18,7 @@ Router.map ()->
 
   @route 'login',
     path: '/login',
-  @route 'files',
-    path: '/files',
-    template: 'files'
+
+  @route 'users',
+    path: '/users',
 
