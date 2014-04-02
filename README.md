@@ -9,6 +9,6 @@ cento_server
 
 ## Pre-requisites
 
- - Meteor
+ - [Meteor](http://docs.meteor.com)
 
   ```curl https://install.meteor.com | /bin/sh```
