@@ -19,3 +19,5 @@ accounts-oauth
 service-configuration
 oauth
 oauth1
+accounts-ui
+accounts-google

@@ -83,3 +83,22 @@ ul.images li {
 }
 
 
+/* google drive */
+
+#google_drive {
+  position: relative;
+  overflow: hidden;
+
+}
+
+#google_drive #items_wrap {
+  float: left;
+  width: 300px;
+  margin-right: 20px;
+}
+#google_drive #embed_area {
+  float: left;
+  height: 600px;
+  width: 800px;
+}
+

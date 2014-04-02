@@ -35,3 +35,7 @@ Router.map ()->
     path: '/configuration',
     template: 'configuration'
 
+  @route 'google_drive',
+    path: '/google_drive',
+    template: 'google_drive'
+
