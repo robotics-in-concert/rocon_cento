@@ -21,3 +21,4 @@ cento_server
     sudo apt-get install python-software-properties python g++ make nodejs curl
     curl https://install.meteor.com | /bin/sh
     sudo npm install -g meteorite
+    sudo rm -Rf ~/tmp
