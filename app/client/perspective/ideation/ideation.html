@@ -1,3 +1,32 @@
 <template name="ideation">
-Ideation
+
+<div id="ideation">
+  <h1>Ideation</h1>
+
+
+  <div class="well">
+    <form>
+    <div class="form-group"><textarea class="form-control" rows="3"></textarea></div>
+    <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+
+
+  <ul class="posts list-unstyled">
+    {{#each posts}}
+    <li class="post">
+    <div class="user"><img src="{{avatarUrl user}}"> Eunsub Kim</div>
+      <div>{{nl2br body}}</div>
+      <div class="datetime">{{formatDate created 'YYYY-MM-DD HH:mm:ss'}}</div>
+      <div class="actions">
+        <a href="#">edit</a>
+        <a href="#">delete</a>
+      </div>
+    </li>
+    {{/each}}
+  </ul>
+</div>
+
+
+
 </template>
