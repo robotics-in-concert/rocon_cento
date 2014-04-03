@@ -9,6 +9,15 @@ cento_server
 
 ## Pre-requisites
 
+ - [node/npm](http://nodejs.org/download/)
+ - [git](http://git-scm.com/downloads)
  - [Meteor](http://docs.meteor.com)
+ - [Meteorite](https://atmospherejs.com/docs/installing)
 
-  ```curl https://install.meteor.com | /bin/sh```
+### Recommended Install on Ubuntu Precise 12.04
+
+    sudo add-apt-repository ppa:chris-lea/node.js
+    sudo apt-get update
+    sudo apt-get install python-software-properties python g++ make nodejs curl
+    curl https://install.meteor.com | /bin/sh
+    sudo npm install -g meteorite
