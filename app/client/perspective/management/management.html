@@ -2,12 +2,19 @@
 
   <h2>Management</h2>
 
-  <div class='wrapper' style="border: solid 1px #efefef;">
+  {{#unless _id}}
+  <p>Please <a href="/">select a solution</a> to work with</p>
+  {{else}}
+  <p>Current project: {{ _id }}</p>
+  {{/unless}}
+
+  <!-- Temporarily disabled to experiment with other views
+       div class='wrapper' style="border: solid 1px #efefef;">
       {{#constant}}
       <svg id='svg' width='100%' height='100%'>    
       </svg>
       {{/constant}}
-  </div>
+  </div -->
 </template>
 
 

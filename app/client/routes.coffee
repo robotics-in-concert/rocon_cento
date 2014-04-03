@@ -8,7 +8,6 @@ Router.map ()->
     path: '/',
     template: 'home'
 
-
   @route 'login',
     path: '/login',
 
@@ -17,25 +16,25 @@ Router.map ()->
 
   @route 'ideation',
     path: '/ideation',
-    template: 'ideation'
 
   @route 'modeling',
     path: '/modeling',
-    template: 'modeling'
 
   @route 'battle',
     path: '/battle',
-    template: 'battle'
 
   @route 'management',
-    path: '/management',
+    path: 'management/:_id'
     template: 'management'
+    data: () -> Cento.Solutions.findOne @params._id
 
   @route 'configuration',
     path: '/configuration',
-    template: 'configuration'
 
   @route 'google_drive',
     path: '/google_drive',
-    template: 'google_drive'
 
+  @route 'catch_all',
+    path: '*',
+    action: () ->
+      @redirect 'home'

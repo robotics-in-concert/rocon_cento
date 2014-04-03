@@ -1,0 +1,23 @@
+<template name="home">
+  <div class="row">
+    <!-- Solution list (if none currently selected) -->
+    <div class="col-md-4">
+      <div class="panel panel-default">
+        <div class="panel-heading">My Solutions</div>
+        <div class="panel-body">
+          <p>Select a solution to work with:</p>
+          <div class="list-group">
+            {{#each solutions}}
+            <a href="management/{{_id}}" class="list-group-item">
+              {{#with notifications}}
+              <span class="badge">{{length}}</span>
+              {{/with}}
+              {{name}}
+            </a>
+            {{/each}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
