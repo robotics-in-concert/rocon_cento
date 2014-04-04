@@ -43,7 +43,7 @@ Template.ideation.events({
     return false;
   },
 
-  'click .btn': function(e, t){
+  'click .btn.post': function(e, t){
     var txt = $('textarea').val();
     var files = Session.get('filesToAttach');
     var attachments = _.map(files, function(f){
@@ -53,6 +53,15 @@ Template.ideation.events({
     Cento.Posts.insert({type: 'ideation', 'title': txt, 'body': txt, 'created':new Date(), attachments: attachments, user_id: Meteor.userId()});
     Meteor.saveFile(files[0], console.log);
     $('textarea').val('');
+    return false;
+  },
+  'click .btn.comment': function(e, t){
+    var f = $(e.target).closest('form');
+    var id = f.data('post_id');
+    var txt = f.find('textarea').val()
+    
+    Cento.Posts.update({_id: id},{$push: {comments:{body: txt, 'created':new Date(), user_id: Meteor.userId()}}});
+    f.find('textarea').val('');
     return false;
   }
 

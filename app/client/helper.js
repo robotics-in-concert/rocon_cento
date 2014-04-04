@@ -7,9 +7,12 @@ Handlebars.registerHelper('nl2br', function(text){
   return new Handlebars.SafeString(nl2br);0
 });
 
-
+// FIXME
 Handlebars.registerHelper('avatarUrl', function(user, options){
   var u = user;
+  if(typeof user == 'string')
+    u = Meteor.users.findOne(u);
+
   // if(!u) u = Meteor.user();
   
   if(typeof u != 'undefined' && typeof u.services != 'undefined' && u.services.google){
@@ -24,18 +27,19 @@ Handlebars.registerHelper('avatarUrl', function(user, options){
     // return "https://trello-avatars.s3.amazonaws.com/#{u.services.trello.avatarHash}/30.png";
 });
 
+// FIXME
+Handlebars.registerHelper('username', function(user, options){
+  var u = user;
+  if(typeof user == 'string')
+    u = Meteor.users.findOne(u);
 
-// Handlebars.registerHelper 'avatarUrl', (context, options)->
-  
-  // u = Meteor.user()
-  // if u.services.github?
-    // u.profile.avatar_url
-  // else if u.services.trello?
-    // "https://trello-avatars.s3.amazonaws.com/#{u.services.trello.avatarHash}/30.png"
+  if(typeof u != 'undefined' && typeof u.services != 'undefined' && u.services.google){
+    if(u.services.github){
+      return u.profile.login;
+    }else if(u.services.google){
+      return u.services.google.name;
+    }
+  }
+  return "";
+});
 
-// Handlebars.registerHelper 'username', (context, options)->
-  // u = Meteor.user()
-  // if u.services.github?
-    // u.profile.login
-  // else if u.services.trello?
-    // u.services.trello.username
