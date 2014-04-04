@@ -21,16 +21,22 @@ Router.map(function(){
   });
 
   this.route('ideation', {
-    path: '/ideation',
+    path: '/ideation/:_id',
     template: 'ideation',
     before: function(){
       Session.set('filesToAttach', []);
+    },
+    data: function() {
+      return Cento.WorkItems.findOne(this.params._id);
     }
   });
 
   this.route('modeling', {
-    path: '/modeling',
-    template: 'modeling'
+    path: '/modeling/:_id',
+    template: 'modeling',
+    data: function() {
+      return Cento.WorkItems.findOne(this.params._id);
+    }
   });
 
   this.route('battle', {
@@ -61,4 +67,5 @@ Router.map(function(){
     action: function() {
       this.redirect('home');
     }
+  });
 });

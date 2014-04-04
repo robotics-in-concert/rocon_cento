@@ -25,11 +25,11 @@ Meteor.startup ->
       name: 'High-level goal definition'
       type: Cento.WorkItemTypes.IDEA
       solution: solution1._id
-      state: Cento.WorkItemStatus.DOING
+      status: Cento.WorkItemStatus.DOING
       artifacts: []
     Cento.WorkItems.insert
       name: 'Define workflow'
       type: Cento.WorkItemTypes.BUSINESS_MODEL
       solution: solution1._id
-      state: Cento.WorkItemStatus.TODO
+      status: Cento.WorkItemStatus.TODO
       artifacts: []

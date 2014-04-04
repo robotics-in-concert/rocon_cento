@@ -1,11 +1,49 @@
 <template name="management">
 
-  <h2>Management</h2>
-
   {{#unless _id}}
   <p>Please <a href="/">select a solution</a> to work with</p>
   {{else}}
-  <p>Current project: {{ _id }}</p>
+  <div class="panel panel-default">
+    <div class="panel-heading">{{name}}</div>
+    <div class="panel-body">{{description}}</div>
+
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="panel panel-warning">
+            <div class="panel-heading">To do</div>
+            <div class="panel-body">
+                {{#each workItems 'todo'}}
+                  {{> workItemSummary }}
+                {{/each}}
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="panel panel-primary">
+            <div class="panel-heading">Doing</div>
+            <div class="panel-body">
+                {{#each workItems 'doing'}}
+                  {{> workItemSummary }}
+                {{/each}}
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="panel panel-success">
+            <div class="panel-heading">Done</div>
+            <div class="panel-body">
+                {{#each workItems 'done'}}
+                  {{> workItemSummary }}
+                {{/each}}
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+  </div>
   {{/unless}}
 
   <!-- Temporarily disabled to experiment with other views
@@ -17,4 +55,14 @@
   </div -->
 </template>
 
-
+<template name="workItemSummary">
+  <div class="panel panel-default">
+    <div class="panel-heading clickable">
+      <span class="glyphicon glyphicon-{{icon}}"></span>
+      &nbsp;{{name}}
+    </div>
+    <div class="panel-body">
+      It will have more content
+    </div>
+  </div>
+</template>
