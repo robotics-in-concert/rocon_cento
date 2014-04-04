@@ -20,15 +20,22 @@ Template.ideation.helpers({
 
 Template.ideation.events({
   'dragenter .dropzone': function(e, t){
-    $(e.target).addClass('dragenter');
-  },
-  'dragleave .dropzone': function(e, t){
-    $(e.target).removeClass('dragenter');
-  },
-  'dragover .dropzone': function(e, t){
+    $('.dropzone').addClass('dragenter');
+    $('.dropmask').show();
     return false;
   },
-  'drop .dropzone': function(e, t){
+  'dragleave .dropmask': function(e, t){
+    $('.dropzone').removeClass('dragenter');
+    $('.dropmask').hide();
+    return false;
+
+  },
+  'dragover .dropzone': function(e, t){
+    e.preventDefault();
+    return false;
+  },
+  'drop .dropmask': function(e, t){
+    $('.dropmask').hide();
     if (e.preventDefault) {
       e.preventDefault(); 
     }
