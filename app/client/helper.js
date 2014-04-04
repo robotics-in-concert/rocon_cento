@@ -13,12 +13,9 @@ Handlebars.registerHelper('avatarUrl', function(user, options){
   // if(!u) u = Meteor.user();
   
   if(typeof u != 'undefined' && typeof u.services != 'undefined' && u.services.google){
-  console.log(u);
     if(u.services.github){
-      console.log(1);
       return u.profile.avatar_url;
     }else if(u.services.google){
-      console.log(2);
       return u.services.google.picture;
     }
   }

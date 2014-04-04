@@ -1,7 +1,30 @@
 
 #ideation {
 padding: 0px 120px;
+  .dropzone {
+    position: relative;
+
+  }
+  .dropzone.dragenter:after {
+    content: 'Drop here to attach';
+    display: flex;
+       justify-content:center;
+    align-content:center;
+    flex-direction:column; /* column | row */
+    position: absolute; /* could also be absolute */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+    background-color: rgba(255,255,255,0.8);
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    
+  }
   .posts {
+    
     .post {
       padding-bottom: 15px;
       padding-top: 15px;
@@ -11,6 +34,12 @@ padding: 0px 120px;
       .user img {
         width: 30px;
         height: 30px;
+      }
+      .body {
+        padding: 10px;
+      }
+      .attachments {
+        font-size: 0.9em;
       }
       .datetime {
         margin-right: 20px;

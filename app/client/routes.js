@@ -22,7 +22,10 @@ Router.map(function(){
 
   this.route('ideation', {
     path: '/ideation',
-    template: 'ideation'
+    template: 'ideation',
+    before: function(){
+      Session.set('filesToAttach', []);
+    }
   });
 
   this.route('modeling', {

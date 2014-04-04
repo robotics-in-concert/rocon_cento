@@ -4,9 +4,16 @@
   <h1>Ideation</h1>
 
 
-  <div class="well">
+  <div class="well dropzone">
     <form>
     <div class="form-group"><textarea class="form-control" rows="3"></textarea></div>
+    <div class="form-group">
+      <ul>
+        {{#each filesToAttach}}
+          <li>{{name}}</li>
+        {{/each}}
+      </ul>
+    </div>
     <button type="submit" class="btn btn-default">Submit</button>
     </form>
   </div>
@@ -16,7 +23,14 @@
     {{#each posts}}
     <li class="post">
     <div class="user"><img src="{{avatarUrl user}}"> Eunsub Kim</div>
-      <div>{{nl2br body}}</div>
+      <div class="body">{{nl2br body}}</div>
+      <div class="attachments">
+        <ul>
+          {{#each attachments}}
+          <li><a href="/data/{{name}}">{{name}} ({{size}})</a></li>
+          {{/each}}
+      </ul>
+      </div>
       <div class="datetime">{{formatDate created 'YYYY-MM-DD HH:mm:ss'}}</div>
       <div class="actions">
         <a href="#">edit</a>
