@@ -1,41 +1,53 @@
 
-Router.configure
+
+Router.configure({
   layoutTemplate: 'layout'
+});
 
 
-Router.map ()->
-  @route 'home',
+Router.map(function(){
+  this.route('home', {
     path: '/',
     template: 'home'
+  });
 
 
-  @route 'login',
+  this.route('login', {
     path: '/login',
+  });
 
-  @route 'users',
+  this.route('users', {
     path: '/users',
+  });
 
-  @route 'ideation',
+  this.route('ideation', {
     path: '/ideation',
     template: 'ideation'
+  });
 
-  @route 'modeling',
+  this.route('modeling', {
     path: '/modeling',
     template: 'modeling'
+  });
 
-  @route 'battle',
+  this.route('battle', {
     path: '/battle',
     template: 'battle'
+  });
 
-  @route 'management',
+  this.route('management', {
     path: '/management',
     template: 'management'
+  });
 
-  @route 'configuration',
+  this.route('configuration', {
     path: '/configuration',
     template: 'configuration'
+  });
 
-  @route 'google_drive',
+  this.route('google_drive', {
     path: '/google_drive',
     template: 'google_drive'
+  });
 
+});
