@@ -1,0 +1,77 @@
+
+#ideation {
+padding: 0px 120px;
+  .dropzone {
+    position: relative;
+
+  }
+  .dropzone.dragenter:after {
+    content: 'Drop here to attach';
+    display: flex;
+       justify-content:center;
+    align-content:center;
+    flex-direction:column; /* column | row */
+    position: absolute; /* could also be absolute */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+    background-color: rgba(255,255,255,0.8);
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    
+  }
+  .posts {
+    
+    .comment_wrap {
+
+      li {
+        border-top: dotted 1px #ccc;
+        padding: 1em 0;
+        font-size: 0.9em;
+
+        span.datetime { color: #999; }
+      }
+      li:nth-child(1) {
+        border-top: none;
+      }
+
+    }
+    .post {
+      padding-bottom: 15px;
+      padding-top: 15px;
+      border-top: solid 1px #dfdfdf;
+
+
+      .user img {
+        width: 30px;
+        height: 30px;
+      }
+      .body {
+        padding: 20px 0px;
+      }
+      .attachments {
+        font-size: 0.9em;
+      }
+      .datetime {
+        margin-right: 20px;
+        text-align: right;
+        font-size: 0.9em;
+        color: #555;
+
+      }
+      .actions {
+        margin-right: 20px;
+        text-align: right;
+        font-size: 0.9em;
+      }
+
+    }
+    .post:nth-child(1) {
+      border-top: none;
+
+    }
+  }
+}
