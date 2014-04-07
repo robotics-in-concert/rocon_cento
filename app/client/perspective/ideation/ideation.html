@@ -4,65 +4,82 @@
   <h1>Ideation</h1>
 
 
-  <div class="well dropzone">
-    <form>
-    <div class="form-group"><textarea class="form-control" rows="3"></textarea></div>
-    <div class="form-group">
-      <ul>
-        {{#each filesToAttach}}
-          <li>{{name}}</li>
+
+  <div class="row">
+
+    <div class="col-md-3">
+      <ul class="nav nav-pills nav-stacked">
+        <li class="{{#unless currentCategory}}active{{/unless}}"><a href="?category=">All</a></li>
+        {{#each categories}}
+        <li class="{{activeIfEq ../currentCategory._id _id}}"><a href="?category={{_id}}">{{title}}</a></li>
         {{/each}}
       </ul>
     </div>
-    <div class="text-right">
-      <button type="submit" class="btn post btn-default">Submit</button>
-    </div>
-    </form>
-    <div class="dropmask">&nbsp;</div>
-    <div class="dropinfo">
-      Drop here to attach.
-    </div>
-  </div>
-
-
-  <ul class="posts list-unstyled">
-    {{#each posts}}
-    <li class="post">
-      <div class="user"><img src="{{avatarUrl user}}"> {{username user}}</div>
-      <div class="body">{{nl2br body}}</div>
-      <div class="attachments">
-        <ul>
-          {{#each attachments}}
-          <li><a href="/data/{{name}}">{{name}} ({{size}})</a></li>
-          {{/each}}
-      </ul>
-      </div>
-      <div class="datetime">{{formatDate created 'YYYY-MM-DD HH:mm:ss'}}</div>
-      <div class="actions">
-        <a href="#">edit</a>
-        <a href="#">delete</a>
-      </div>
-
-      <div class="comment_wrap">
-        <ul class="comments list-unstyled">
-          {{#each comments}} 
-          <li> 
-          <span>{{body}}</span> - <span> <img src="{{avatarUrl user_id}}" height="18"> <a href="#">{{username user_id}}</a></span> <span class="datetime">{{formatDate created 'YYYY-MM-DD HH:mm:ss'}}</span>
-          </li>
-          {{/each}} 
-        </ul>
-        <div class="comment_form text-right">
-          <form data-post_id="{{_id}}">
-          <div class="form-group"><textarea class="comment_text form-control" rows="3"></textarea></div>
-          <button type="submit" class="btn btn-sm comment btn-default">Comment</button>
-          </form>
-
+    
+    <div class="col-md-9">
+      <div class="well dropzone">
+        <form data-current_category="{{currentCategory._id}}">
+        <div class="form-group"><textarea class="form-control" rows="3"></textarea></div>
+        <div class="form-group">
+          <ul>
+            {{#each filesToAttach}}
+              <li>{{name}}</li>
+            {{/each}}
+          </ul>
+        </div>
+        <div class="text-right">
+          <button type="submit" class="btn post btn-default">Submit</button>
+        </div>
+        </form>
+        <div class="dropmask">&nbsp;</div>
+        <div class="dropinfo">
+          Drop here to attach.
         </div>
       </div>
-    </li>
-    {{/each}}
-  </ul>
-</div>
+
+
+      <ul class="posts list-unstyled">
+        {{#each posts}}
+        <li class="post" data-post_id="{{_id}}">
+          <div class="user"><img src="{{avatarUrl user}}"> {{username user}}</div>
+          <div class="body" contenteditable>{{nl2br body}}</div>
+          <div class="attachments">
+            <ul class="list-unstyled">
+              {{#each attachments}}
+              <li><i class="glyphicon glyphicon-picture"></i> <a href="/data/{{name}}">{{name}} ({{size}})</a></li>
+              {{/each}}
+          </ul>
+          </div>
+          <div class="datetime">{{formatDate created 'YYYY-MM-DD HH:mm:ss'}}</div>
+          <div class="actions">
+            <a href="#" class="delete_post"><i class="glyphicon glyphicon-remove"></i> delete</a>
+          </div>
+
+          <div class="comment_wrap">
+            <ul class="comments list-unstyled">
+              {{#each comments}} 
+              <li> 
+              <span>{{body}}</span> - <span> <img src="{{avatarUrl user_id}}" height="18"> <a href="#">{{username user_id}}</a></span> <span class="datetime">{{formatDate created 'YYYY-MM-DD HH:mm:ss'}}</span>
+              </li>
+              {{/each}} 
+            </ul>
+            <div class="comment_form text-right">
+              <form data-post_id="{{_id}}">
+              <div class="form-group"><textarea class="comment_text form-control" rows="3"></textarea></div>
+              <button type="submit" class="btn btn-sm comment btn-default">Comment</button>
+              </form>
+
+            </div>
+          </div>
+        </li>
+        {{/each}}
+      </ul>
+    </div>
+
+    </div>
+  
+  </div>
+
 
 
 

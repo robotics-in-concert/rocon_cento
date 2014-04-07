@@ -1,17 +1,12 @@
 Template.ideation.helpers({
-  'posts': function(){
-    return Cento.Posts.find({}, {'sort': {'created': -1},
-      transform: function(doc){
-        doc.user = Meteor.users.findOne(doc.user_id);
-        return doc;
-
-       }
-    });
-  },
 
   'filesToAttach': function(){
     Session.setDefault('filesToAttach', []);
     return Session.get('filesToAttach');
+  },
+
+  'categories': function(){
+    return Cento.Categories.find({type: 'ideation'});
   }
 });
 
@@ -49,16 +44,29 @@ Template.ideation.events({
     }
     return false;
   },
+  'blur .body': function(e, t){
+    var $e = $(e.target);
+    var id = $e.closest('li.post').data('post_id');
+    Cento.Posts.update({_id:id}, {$set:{body: $e.html()}});
 
+  },
+
+  'click .delete_post': function(e, t){
+    var id = $(e.target).closest('li.post').data('post_id');
+    Cento.Posts.remove({_id: id});
+    console.log('delete');
+  },
   'click .btn.post': function(e, t){
+    var f = $(e.target).closest('form');
     var txt = $('textarea').val();
     var files = Session.get('filesToAttach');
     var attachments = _.map(files, function(f){
       return _.pick(f, 'name', 'size', 'type');
     });
     
-    Cento.Posts.insert({type: 'ideation', 'title': txt, 'body': txt, 'created':new Date(), attachments: attachments, user_id: Meteor.userId()});
-    Meteor.saveFile(files[0], console.log);
+    Cento.Posts.insert({type: 'ideation', category: f.data('current_category'), 'title': txt, 'body': txt, 'created':new Date(), attachments: attachments, user_id: Meteor.userId()});
+    if(files && files.length > 0)
+      Meteor.saveFile(files[0], console.log);
     $('textarea').val('');
     return false;
   },
