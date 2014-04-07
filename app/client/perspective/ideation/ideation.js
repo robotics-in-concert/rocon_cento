@@ -56,6 +56,14 @@ Template.ideation.events({
     Cento.Posts.remove({_id: id});
     console.log('delete');
   },
+  'click .upvote_post': function(e, t){
+    var id = $(e.target).closest('li.post').data('post_id');
+    Cento.Posts.update({_id: id}, {$inc: {votes:1}});
+  },
+  'click .downvote_post': function(e, t){
+    var id = $(e.target).closest('li.post').data('post_id');
+    Cento.Posts.update({_id: id}, {$inc: {votes:-1}});
+  },
   'click .btn.post': function(e, t){
     var f = $(e.target).closest('form');
     var txt = $('textarea').val();
@@ -64,7 +72,9 @@ Template.ideation.events({
       return _.pick(f, 'name', 'size', 'type');
     });
     
-    Cento.Posts.insert({type: 'ideation', category: f.data('current_category'), 'title': txt, 'body': txt, 'created':new Date(), attachments: attachments, user_id: Meteor.userId()});
+    Cento.Posts.insert({type: 'ideation', category: f.data('current_category'), 'title': txt, 'body': txt, 'created':new Date(), 
+      votes: 0,
+      attachments: attachments, user_id: Meteor.userId()});
     if(files && files.length > 0)
       Meteor.saveFile(files[0], console.log);
     $('textarea').val('');
