@@ -10,8 +10,12 @@ Handlebars.registerHelper('activeIfEq', function(a, b, options){
 });
 
 
-Handlebars.registerHelper('fileIconPath', function(mime){
-  return "/fileicons/"+mime.split("/")[1]+".png";
+Handlebars.registerHelper('fileIconPath', function(name){
+  var m = name.match(/\.([0-9a-zA-Z]+)$/i)
+  var ext = "file";
+  if(m) ext = m[1];
+
+  return "/fileicons/"+ext+".png";
 });
 
 Handlebars.registerHelper('nl2br', function(text){
