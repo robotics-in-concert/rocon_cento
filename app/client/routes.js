@@ -33,9 +33,9 @@ Router.map(function(){
     template: 'modeling'
   });
 
-  this.route('battle', {
-    path: '/battle',
-    template: 'battle'
+  this.route('battle_loom', {
+    path: '/battle_loom',
+    template: 'battle_loom'
   });
 
   this.route('management', {
@@ -43,9 +43,9 @@ Router.map(function(){
     template: 'management'
   });
 
-  this.route('configuration', {
-    path: '/configuration',
-    template: 'configuration'
+  this.route('solution', {
+    path: '/solution',
+    template: 'solution'
   });
 
   this.route('google_drive', {
