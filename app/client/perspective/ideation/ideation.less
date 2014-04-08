@@ -84,12 +84,22 @@
         color: #555;
 
       }
-      .actions {
+      .post_actions {
         margin: 5px 20px;
         text-align: right;
         font-size: 0.9em;
       }
+      .comment_actions {
+        font-size: 0.9em;
 
+      }
+
+      .comment:hover .comment_actions {
+        display: inline;
+      }
+      .comment .comment_actions {
+        display: none;
+      }
     }
     .post:nth-child(1) {
       border-top: none;
