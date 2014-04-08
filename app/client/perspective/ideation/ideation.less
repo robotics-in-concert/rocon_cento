@@ -1,16 +1,30 @@
 
 #ideation {
-padding: 0px 120px;
   .dropzone {
     position: relative;
 
+    * {
+      /* pointer-events: none; */
+    }
+
   }
-  .dropzone.dragenter:after {
-    content: 'Drop here to attach';
+
+
+  .dropmask {
+    position: absolute; /* could also be absolute */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 33;
+    display: none;
+
+  }
+  .dropinfo {
     display: flex;
-       justify-content:center;
-    align-content:center;
-    flex-direction:column; /* column | row */
+     justify-content: center;
+    align-content: center;
+    flex-direction: column; /* column | row */
     position: absolute; /* could also be absolute */
     top: 0;
     left: 0;
@@ -23,6 +37,13 @@ padding: 0px 120px;
     font-weight: bold;
     
   }
+  .dropzone .dropinfo {
+    display: none;
+  }
+  .dropzone.dragenter .dropinfo {
+    display: flex;
+  }
+
   .posts {
     
     .comment_wrap {
@@ -54,6 +75,7 @@ padding: 0px 120px;
       }
       .attachments {
         font-size: 0.9em;
+        li { margin-bottom: 8px; }
       }
       .datetime {
         margin-right: 20px;
@@ -62,12 +84,22 @@ padding: 0px 120px;
         color: #555;
 
       }
-      .actions {
-        margin-right: 20px;
+      .post_actions {
+        margin: 5px 20px;
         text-align: right;
         font-size: 0.9em;
       }
+      .comment_actions {
+        font-size: 0.9em;
 
+      }
+
+      .comment:hover .comment_actions {
+        display: inline;
+      }
+      .comment .comment_actions {
+        display: none;
+      }
     }
     .post:nth-child(1) {
       border-top: none;

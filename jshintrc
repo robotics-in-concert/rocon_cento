@@ -1,0 +1,38 @@
+{
+  "browser": true,
+  "jquery": true,
+  "node": true,
+
+  "predef": [
+    "Handlebars",
+    "moment",
+    "Meteor",
+    "Accounts",
+    "Session",
+    "Template",
+    "check",
+    "Match",
+    "Deps",
+    "EJSON",
+    "Email",
+    "Package",
+    "Npm",
+    "Assets",
+    "process",
+    "Cento"
+  ],
+
+  "curly": true,
+
+  "camelcase": false,
+  "eqeqeq": true,
+  "eqnull": true,
+  "indent": 2,
+  "latedef": true,
+  "newcap": true,
+  "trailing": true,
+  "undef": true,
+  "unused": true,
+  "maxlen": 120,
+  "strict": false
+}

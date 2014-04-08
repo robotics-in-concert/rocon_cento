@@ -1,0 +1,19 @@
+<template name="ideation_manage">
+
+<h1>Ideation</h1>
+
+<h2>Category</h2>
+
+<ul>
+  {{#each categories}}
+    <li>{{title}}</li>
+  {{/each}}
+</ul>
+
+<form name="ideation_category" class="form-inline">
+<input type="text" class="form-control">
+<button class="btn btn-default">Add</button>
+</form>
+
+
+</template>
