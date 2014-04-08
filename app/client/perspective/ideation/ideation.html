@@ -51,7 +51,7 @@
           </ul>
           </div>
           <div class="datetime">{{formatDate created 'YYYY-MM-DD HH:mm:ss'}}</div>
-          <div class="actions">
+          <div class="post_actions">
             Votes : {{votes}}
             <a href="#" class="upvote_post"><i class="glyphicon glyphicon-arrow-up"></i> upvote</a>
             <a href="#" class="downvote_post"><i class="glyphicon glyphicon-arrow-down"></i> downvote</a>
@@ -61,8 +61,11 @@
           <div class="comment_wrap">
             <ul class="comments list-unstyled">
               {{#each comments}} 
-              <li> 
-              <span>{{body}}</span> - <span> <img src="{{avatarUrl user_id}}" height="18"> <a href="#">{{username user_id}}</a></span> <span class="datetime">{{formatDate created 'YYYY-MM-DD HH:mm:ss'}}</span>
+              <li class="comment" data-comment_id="{{_id}}"> 
+                <span>{{body}}</span> - 
+                <span> <img src="{{avatarUrl user_id}}" height="18"> <a href="#">{{username user_id}}</a></span>
+                <span class="datetime">{{formatDate created 'YYYY-MM-DD HH:mm:ss'}}</span>
+                <span class="comment_actions"><a href="#" class="delete_comment">delete</a></span>
               </li>
               {{/each}} 
             </ul>
@@ -77,6 +80,9 @@
         </li>
         {{/each}}
       </ul>
+      <div id="showMoreResults">
+        <span class="loading">Loading...</span>
+      </div>
     </div>
 
     </div>

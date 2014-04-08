@@ -24,6 +24,8 @@ Router.map(function(){
     path: '/ideation',
     template: 'ideation',
     before: function(){
+      var ITEMS_PER_PAGE = 10;
+      Session.setDefault('itemsLimit', ITEMS_PER_PAGE);
       Session.set('filesToAttach', []);
     },
     data: function(){
@@ -35,17 +37,17 @@ Router.map(function(){
       if(categoryId && categoryId != "")
         query['category'] = categoryId;
 
-      data['posts'] = Cento.Posts.find(query, {'sort': {'created': -1},
+      data['posts'] = Cento.Posts.find(query, {limit: Session.get('itemsLimit'), sort: {'created': -1},
         transform: function(doc){
           doc.user = Meteor.users.findOne(doc.user_id);
           return doc;
-
-       }});
+        }
+       });
 
       if(categoryId){
-        data['currentCategory'] = Cento.Categories.findOne(categoryId);
+        data.currentCategory = Cento.Categories.findOne(categoryId);
         return data;
-        }
+      }
       return data;
     }
     });
