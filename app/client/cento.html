@@ -19,11 +19,11 @@
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li {{#if isActivePath 'ideation' }}class="active"{{/if}}><a href="/ideation">Ideation</a></li>
-            <li {{#if isActivePath 'modeling' }}class="active"{{/if}}><a href="/modeling">Modeling</a></li>
-            <li {{#if isActivePath 'battle_loom' }}class="active"{{/if}}><a href="/battle_loom">Battle loom</a></li>
-            <li {{#if isActivePath 'solution' }}class="active"{{/if}}><a href="/solution">Solution</a></li>
-            <li {{#if isActivePath 'management' }}class="active"{{/if}}><a href="/management">Management</a></li>
+            <li class="{{#if isActivePath 'ideation' }}active{{/if}}"><a href="/ideation">Ideation</a></li>
+            <li class="{{#if isActivePath 'modeling' }}active{{/if}}"><a href="/modeling">Modeling</a></li>
+            <li class="{{#if isActivePath 'battle_loom' }}active{{/if}}"><a href="/battle_loom">Battle loom</a></li>
+            <li class="{{#if isActivePath 'solution' }}active{{/if}}"><a href="/solution">Solution</a></li>
+            <li class="{{#if isActivePath 'management' }}active{{/if}}"><a href="/management">Management</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             {{#if currentUser}}
@@ -39,7 +39,7 @@
 
     <div class="container contents">
 
-  {{yield}}
+      {{> yield}}
 
     </div><!-- /.container -->
 

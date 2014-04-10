@@ -1,4 +1,7 @@
 {
+  "meteor": {
+    "release": "0.8.0"
+  },
   "packages": {
     "moment": {},
     "iron-router": {},
