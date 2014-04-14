@@ -26,42 +26,28 @@ Handlebars.registerHelper('nl2br', function(text){
   return new Handlebars.SafeString(nl2br);
 });
 
-// FIXME
 Handlebars.registerHelper('avatarUrl', function(user){
   var u = user;
   if(typeof user === 'string'){
     u = Meteor.users.findOne(u);
   }
-
-  // if(!u) u = Meteor.user();
-  
-  if(typeof u !== 'undefined' && typeof u.services !== 'undefined' && u.services.google){
-    if(u.services.github){
-      return u.profile.avatar_url;
-    }else if(u.services.google){
-      return u.services.google.picture;
-    }
+  try{
+    return u.profile.avatar_url;
+  }catch(e){
+    return "";
   }
 
-  return "";
-  // else if(u.services.trello)
-    // return "https://trello-avatars.s3.amazonaws.com/#{u.services.trello.avatarHash}/30.png";
 });
 
-// FIXME
 Handlebars.registerHelper('username', function(user){
   var u = user;
   if(typeof user === 'string'){
     u = Meteor.users.findOne(u);
   }
-
-  if(typeof u !== 'undefined' && typeof u.services !== 'undefined' && u.services.google){
-    if(u.services.github){
-      return u.profile.login;
-    }else if(u.services.google){
-      return u.services.google.name;
-    }
+  try{
+    return u.profile.login;
+  }catch(e){
+    return "";
   }
-  return "";
 });
 

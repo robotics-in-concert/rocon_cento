@@ -27,7 +27,7 @@
           </ul>
           <ul class="nav navbar-nav navbar-right">
             {{#if currentUser}}
-            <li><a href="#"><img class="avatar" src="{{avatarUrl}}" width="25" height="25"> {{username}}</a></li>
+            <li><a href="#"><img class="avatar" src="{{avatarUrl currentUser}}" width="25" height="25"> {{username currentUser}}</a></li>
             <li><a id="github_logout" href="#"><i class="glyphicon glyphicon-log-out"></i></a></li>
             {{else}}
             <li><a href="/login"><i class="glyphicon glyphicon-log-in"></i></a></li>
