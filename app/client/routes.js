@@ -29,13 +29,18 @@ Router.map(function(){
       Session.set('filesToAttach', []);
     },
     data: function(){
+      console.log("DATA!!!!")
       console.log(this.params);
       var categoryId = this.params.category;
     
       var data = {};
-      var query = {};
-      if(categoryId && categoryId != "")
-        query['category'] = categoryId;
+      var query = {type: 'ideation'};
+      if(categoryId && categoryId !== ""){
+        query.category = categoryId;
+        data.category = categoryId;
+
+        console.log(categoryId);
+      }
 
       data['posts'] = Cento.Posts.find(query, {limit: Session.get('itemsLimit'), sort: {'created': -1},
         transform: function(doc){

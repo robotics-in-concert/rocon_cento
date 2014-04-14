@@ -20,16 +20,13 @@ function showMoreVisible(){
   }
 
   threshold = $(window).scrollTop() + $(window).height() + target.height();
-  console.log(target.offset().top, threshold);
 
   if (target.offset().top < threshold) {
-    console.log('1');
     if (!target.data('visible')) {
       target.data('visible', true);
       Session.set('itemsLimit', Session.get('itemsLimit') + 10);
     }
   } else {
-    console.log('2');
     if (target.data('visible')) {
       target.data('visible', false);
     }
@@ -37,7 +34,6 @@ function showMoreVisible(){
 }
 
 Template.ideation.rendered = function(){
-  console.log('rendered');
   $(window).scroll(showMoreVisible);
 
 }
@@ -64,14 +60,16 @@ Template.ideation.events({
     if (e.preventDefault) {
       e.preventDefault();
     }
-    if(e.dataTransfer.files){
+    if(e.originalEvent.dataTransfer.files){
       var files = Session.get('filesToAttach');
-      _.each(e.dataTransfer.files, function(f){
+      _.each(e.originalEvent.dataTransfer.files, function(f){
         files.push(f);
         Meteor.saveFile(f);
       });
       Session.set('filesToAttach', files);
     }
+    $('.dropzone').removeClass('dragenter');
+    $('.dropmask').hide();
     return false;
   },
   'blur .body': function(e){
@@ -84,7 +82,6 @@ Template.ideation.events({
   'click .delete_post': function(e){
     var id = $(e.target).closest('li.post').data('post_id');
     Cento.Posts.remove({_id: id});
-    console.log('delete');
   },
   'click .upvote_post': function(e){
     var id = $(e.target).closest('li.post').data('post_id');
@@ -96,15 +93,17 @@ Template.ideation.events({
   },
   'click .btn.post': function(e){
     var f = $(e.target).closest('form');
+    var cat = this.category;
     var txt = $('textarea').val();
     var files = Session.get('filesToAttach');
     var attachments = _.map(files, function(f){
       return _.pick(f, 'name', 'size', 'type');
     });
+
     
     Cento.Posts.insert({
       type: 'ideation',
-      category: f.data('current_category'),
+      category: cat,
       title: txt,
       body: txt,
       created:new Date(),
