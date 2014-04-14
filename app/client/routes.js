@@ -21,7 +21,7 @@ Router.map(function(){
   });
 
   this.route('ideation', {
-    path: '/ideation',
+    path: '/ideation/:_id',
     template: 'ideation',
     before: function(){
       var ITEMS_PER_PAGE = 10;
@@ -32,7 +32,7 @@ Router.map(function(){
       console.log("DATA!!!!")
       console.log(this.params);
       var categoryId = this.params.category;
-    
+
       var data = {};
       var query = {type: 'ideation'};
       if(categoryId && categoryId !== ""){
@@ -58,8 +58,11 @@ Router.map(function(){
     });
 
   this.route('modeling', {
-    path: '/modeling',
-    template: 'modeling'
+    path: '/modeling/:_id',
+    template: 'modeling',
+    data: function() {
+      return Cento.WorkItems.findOne(this.params._id);
+    }
   });
 
   this.route('battle_loom', {
@@ -68,8 +71,11 @@ Router.map(function(){
   });
 
   this.route('management', {
-    path: '/management',
-    template: 'management'
+    path: '/management/:_id',
+    template: 'management',
+    data: function() {
+      return Cento.Solutions.findOne(this.params._id);
+    }
   });
 
   this.route('solution', {
@@ -86,4 +92,10 @@ Router.map(function(){
     template: 'manage'
   });
 
+  this.route('catch_all', {
+    path: '*',
+    action: function() {
+      this.redirect('home');
+    }
+  });
 });
