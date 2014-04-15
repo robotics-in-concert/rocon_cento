@@ -11,6 +11,54 @@ Router.map(function(){
     template: 'home'
   });
 
+  this.route('admin_solution', {
+    path: '/admin/solutions',
+    template: 'admin_solutions',
+    data: function(){
+      return {
+        solutions: Cento.Solutions.find({})
+      };
+    }
+
+  });
+
+  this.route('solution-ideation', {
+    path: '/solutions/:solution/ideation',
+    template: 'ideation',
+    onBeforeAction: function(){
+      var ITEMS_PER_PAGE = 10;
+      Session.setDefault('itemsLimit', ITEMS_PER_PAGE);
+      Session.set('filesToAttach', []);
+    },
+    data: function(){
+      console.log("DATA!!!!")
+      console.log(this.params);
+      var categoryId = this.params.category;
+    
+      var data = {};
+      var query = {type: 'ideation'};
+      if(categoryId && categoryId !== ""){
+        query.category = categoryId;
+        data.category = categoryId;
+
+        console.log(categoryId);
+      }
+
+      data['posts'] = Cento.Posts.find(query, {limit: Session.get('itemsLimit'), sort: {'created': -1},
+        transform: function(doc){
+          doc.user = Meteor.users.findOne(doc.user_id);
+          return doc;
+        }
+       });
+
+      if(categoryId){
+        data.currentCategory = Cento.Categories.findOne(categoryId);
+        return data;
+      }
+      return data;
+    }
+  });
+
 
   this.route('login', {
     path: '/login',
