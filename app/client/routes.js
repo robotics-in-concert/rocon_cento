@@ -22,7 +22,7 @@ Router.map(function(){
 
   });
 
-  this.route('solution-ideation', {
+  this.route('solution_ideation', {
     path: '/solutions/:solution/ideation',
     template: 'ideation',
     onBeforeAction: function(){
