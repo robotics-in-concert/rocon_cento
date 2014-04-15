@@ -36,6 +36,9 @@ Router.map(function(){
       var categoryId = this.params.category;
     
       var data = {};
+      if(this.params.solution){
+        data.solution = Cento.Solutions.findOne({_id: this.params.solution});
+      }
       var query = {type: 'ideation'};
       if(categoryId && categoryId !== ""){
         query.category = categoryId;
@@ -82,6 +85,9 @@ Router.map(function(){
       var categoryId = this.params.category;
     
       var data = {};
+      if(this.params.solution){
+        data.solution = Cento.Solutions.findOne({_id: this.params.solution});
+      }
       var query = {type: 'ideation'};
       if(categoryId && categoryId !== ""){
         query.category = categoryId;
