@@ -35,11 +35,12 @@ Router.map(function(){
       var sid = this.params.solution;
     
       var data = {};
+      
       if(this.params.solution){
         data.currentSolution = Cento.Solutions.findOne({_id: this.params.solution});
       }
       data.workGroups = Cento.WorkGroups.find({solution_id: sid});
-      var query = {type: Cento.WorkItemTypes.IDEA};
+      var query = {type: Cento.WorkItemTypes.IDEA, solution_id: sid};
       if(groupId && groupId !== ""){
         query.work_group_id = groupId;
         data.group_id = groupId;
