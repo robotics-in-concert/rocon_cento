@@ -18,11 +18,27 @@
 
 </div>
 
-<ul>
+<ul class="splits-line">
   {{#each solutions}}
   <li>
     <h3>{{title}}</h3>
     <div class="desc">{{description}}</div>
+    <h4>Work Groups</h4>
+
+    <ul>
+      {{#each workGroupsFor _id}}
+      <li>{{title}}</li>
+      {{/each}}
+
+      <form class="form-inline">
+        <div class="form-group">
+          <label>Title</label>
+          <input class="form-control" name="title" type="text">
+        </div>
+        <button class="add_work_group btn btn-default">Add</button>
+      </form>
+    </ul>
+
     <div>
       <a class="btn btn-default btn-sm" href="/solutions/{{_id}}/ideation">ideation</a>
       <a class="btn btn-default btn-sm" href="/solutions/{{_id}}/modeling">modeling</a>

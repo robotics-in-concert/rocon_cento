@@ -31,33 +31,28 @@ Router.map(function(){
       Session.set('filesToAttach', []);
     },
     data: function(){
-      console.log("DATA!!!!")
-      console.log(this.params);
-      var categoryId = this.params.category;
+      var groupId = this.params.group;
+      var sid = this.params.solution;
     
       var data = {};
       if(this.params.solution){
-        data.solution = Cento.Solutions.findOne({_id: this.params.solution});
+        data.currentSolution = Cento.Solutions.findOne({_id: this.params.solution});
       }
-      var query = {type: 'ideation'};
-      if(categoryId && categoryId !== ""){
-        query.category = categoryId;
-        data.category = categoryId;
-
-        console.log(categoryId);
+      data.workGroups = Cento.WorkGroups.find({solution_id: sid});
+      var query = {type: Cento.WorkItemTypes.IDEA};
+      if(groupId && groupId !== ""){
+        query.work_group_id = groupId;
+        data.group_id = groupId;
+        data.currentWorkGroup = Cento.WorkGroups.findOne(groupId);
       }
 
-      data['posts'] = Cento.Posts.find(query, {limit: Session.get('itemsLimit'), sort: {'created': -1},
+      data.workItems = Cento.WorkItems.find(query, {limit: Session.get('itemsLimit'), sort: {'created': -1},
         transform: function(doc){
           doc.user = Meteor.users.findOne(doc.user_id);
           return doc;
         }
        });
 
-      if(categoryId){
-        data.currentCategory = Cento.Categories.findOne(categoryId);
-        return data;
-      }
       return data;
     }
   });
@@ -83,6 +78,7 @@ Router.map(function(){
       console.log("DATA!!!!")
       console.log(this.params);
       var categoryId = this.params.category;
+      var sid = this.params.solution;
     
       var data = {};
       if(this.params.solution){
@@ -92,6 +88,7 @@ Router.map(function(){
       if(categoryId && categoryId !== ""){
         query.category = categoryId;
         data.category = categoryId;
+        data.workGroups = Cento.WorkGroups.find({solution_id: sid});
 
         console.log(categoryId);
       }

@@ -6,9 +6,6 @@ Template.ideation.helpers({
     return Session.get('filesToAttach');
   },
 
-  'categories': function(){
-    return Cento.Categories.find({type: 'ideation'});
-  },
 
   'users': function(){
     return Meteor.users.find({'services.github': {$exists: true}}).fetch();
@@ -80,48 +77,48 @@ Template.ideation.events({
   },
   'blur .body': function(e){
     var $e = $(e.target);
-    var id = $e.closest('li.post').data('post_id');
-    Cento.Posts.update({_id:id}, {$set:{body: $e.html()}});
+    Cento.WorkItems.update({_id:this._id}, {$set:{body: $e.html()}});
 
   },
 
-  'click .delete_post': function(e){
-    var id = $(e.target).closest('li.post').data('post_id');
-    Cento.Posts.remove({_id: id});
+  'click .delete_post': function(){
+    Cento.WorkItems.remove({_id: this._id});
   },
-  'click .upvote_post': function(e){
-    var id = $(e.target).closest('li.post').data('post_id');
-    Cento.Posts.update({_id: id}, {$inc: {votes:1}});
+  'click .upvote_post': function(){
+    Cento.WorkItems.update({_id: this._id}, {$inc: {votes:1}});
   },
-  'click .downvote_post': function(e){
-    var id = $(e.target).closest('li.post').data('post_id');
-    Cento.Posts.update({_id: id}, {$inc: {votes:-1}});
+  'click .downvote_post': function(){
+    Cento.WorkItems.update({_id: this._id}, {$inc: {votes:-1}});
   },
   'click .btn.post': function(e){
     var f = $(e.target).closest('form');
-    var cat = this.category;
     var txt = $('textarea').val();
     var files = Session.get('filesToAttach');
     var attachments = _.map(files, function(f){
       return _.pick(f, 'name', 'size', 'type');
     });
-
     
-    Cento.Posts.insert({
-      type: 'ideation',
-      category: cat,
-      title: txt,
-      body: txt,
-      created:new Date(),
-      votes: 0,
-      attachments: attachments,
-      user_id: Meteor.userId()
-    });
+    try{
+      Cento.WorkItems.insert({
+        type: Cento.WorkItemTypes.IDEA,
+        solution_id: this.currentSolution._id,
+        work_group_id: this.currentWorkGroup._id,
+        user_id: Meteor.userId(),
+        title: txt,
+        body: txt,
+        created:new Date(),
+        votes: 0,
+        attachments: attachments
+      });
 
-    if(files && files.length > 0){
-      Meteor.saveFile(files[0], console.log);
+      if(files && files.length > 0){
+        Meteor.saveFile(files[0], console.log);
+      }
+      f[0].reset();
+    }catch(e){
+      console.error(e.message);
+      console.trace(e);
     }
-    $('textarea').val('');
     return false;
   },
   'click .create_task': function(e){
@@ -135,9 +132,9 @@ Template.ideation.events({
     var id = f.data('post_id');
     var txt = f.find('textarea').val();
     
-    Cento.Posts.update({_id: id},
+    Cento.WorkItems.update({_id: id},
         {$push: {comments:{_id: Random.id(), body: txt, 'created':new Date(), user_id: Meteor.userId()}}});
-    f.find('textarea').val('');
+    f[0].reset();
     return false;
   },
 
@@ -145,7 +142,7 @@ Template.ideation.events({
     var pid = $(e.target).closest('li.post').data('post_id');
     var cid = $(e.target).closest('li').data('comment_id');
     console.log(cid);
-    Cento.Posts.update({_id:pid}, {$pull:{comments:{_id: cid}}});
+    Cento.WorkItems.update({_id:pid}, {$pull:{comments:{_id: cid}}});
     return false;
   }
 

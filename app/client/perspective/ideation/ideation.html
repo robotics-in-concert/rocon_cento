@@ -1,7 +1,7 @@
 <template name="ideation">
 
 <div id="ideation">
-  <h1><span class="label label-default">{{solution.title}}</span> - Ideation</h1>
+  <h1><span class="label label-default">{{currentSolution.title}}</span> - Ideation</h1>
 
 
 
@@ -10,16 +10,16 @@
     <div class="col-md-3">
       
       <ul class="nav nav-pills nav-stacked">
-        <li class="{{#unless currentCategory}}active{{/unless}}"><a href="?category=">All</a></li>
-        {{#each categories}}
-        <li class="{{activeIfEq ../currentCategory._id _id}}"><a href="?category={{_id}}">{{title}}</a></li>
+        <li class="{{#unless currentWorkGroup}}active{{/unless}}"><a href="?group=">All</a></li>
+        {{#each workGroups}}
+        <li class="{{activeIfEq ../currentWorkGroup._id _id}}"><a href="?group={{_id}}">{{title}}</a></li>
         {{/each}}
       </ul>
     </div>
     
     <div class="col-md-9">
       {{#if currentUser}}
-      {{#if category}}
+      {{#if currentWorkGroup}}
       <div class="well dropzone">
         <form data-category="{{category}}">
         <div class="form-group"><textarea class="form-control" rows="3"></textarea></div>
@@ -44,7 +44,7 @@
 
 
       <ul class="posts list-unstyled">
-        {{#each posts}}
+        {{#each workItems}}
         <li class="post" data-post_id="{{_id}}">
 
 <div id="modal-{{_id}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
