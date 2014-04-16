@@ -8,6 +8,10 @@ Template.ideation.helpers({
 
   'categories': function(){
     return Cento.Categories.find({type: 'ideation'});
+  },
+
+  'users': function(){
+    return Meteor.users.find({});
   }
 });
 
@@ -35,6 +39,7 @@ function showMoreVisible(){
 
 Template.ideation.rendered = function(){
   $(window).scroll(showMoreVisible);
+  $('.select_users').select2();
 
 }
 
@@ -116,6 +121,12 @@ Template.ideation.events({
       Meteor.saveFile(files[0], console.log);
     }
     $('textarea').val('');
+    return false;
+  },
+  'click .create_task': function(e){
+    var ideation_id = this._id;
+    console.log(ideation_id);
+    $('#modal-'+ideation_id).modal();
     return false;
   },
   'click .btn.comment': function(e){
