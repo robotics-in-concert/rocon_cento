@@ -59,30 +59,35 @@
         <div class="left">
 
              <form data-card_id="{{_id}}">
-             <div class="form-group"><textarea class="comment_text form-control" rows="3"></textarea></div>
-             <button type="submit" class="btn btn-sm comment btn-default">Comment</button>
-             </form>
-
+               <div class="form-group">
+                 <label>Title</label>
+                 <input class="form-control" type="text">
+               </div>
+               <div class="form-group">
+                 <label>Description</label>
+                 <textarea class="comment_text form-control" rows="3"></textarea>
+               </div>
           <h4>Asignee</h4>
+          <div class="form-group">
           <select class="select_users" style="width:200px" multiple>
           {{#each users}}
             <option>{{profile.login}}</option>
           {{/each}}
         </select>
+      </div>
           <h4>Reviewer</h4>
 
+          <div class="form-group">
           <select class="select_users" style="width:200px" multiple>
           {{#each users}}
             <option>{{profile.login}}</option>
           {{/each}}
           </select>
-
         </div>
-        <div class="right">
-          <div><button class="delete_card btn btn-default">Delete</button></div>
-          <div><button class="btn btn-default">Action #1</button></div>
-          <div><button class="btn btn-default">Action #1</button></div>
-          <div><button class="btn btn-default">Action #1</button></div>
+             <button type="submit" class="btn comment btn-default">Create</button>
+             </form>
+
+
         </div>
       </div>
 
