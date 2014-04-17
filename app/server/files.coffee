@@ -28,5 +28,6 @@ Meteor.methods
     
     fs.writeFileSync(path+'/'+name, blob, encoding)
     console.log 'file saved', name, encoding
-    Cento.Files.insert({name: name, created: new Date()})
+    name
+    # Cento.Files.insert({name: name, created: new Date()})
  

@@ -61,30 +61,30 @@
              <form data-card_id="{{_id}}">
                <div class="form-group">
                  <label>Title</label>
-                 <input class="form-control" type="text">
+                 <input class="form-control" type="text" name="title">
                </div>
                <div class="form-group">
                  <label>Description</label>
                  <textarea class="comment_text form-control" rows="3"></textarea>
                </div>
-          <h4>Asignee</h4>
+          <h4>Assignee</h4>
           <div class="form-group">
-          <select class="select_users" style="width:200px" multiple>
+            <select id="assignee_{{_id}}" name="assignee" class="select_users" style="width:200px" multiple>
           {{#each users}}
-            <option>{{profile.login}}</option>
+          <option value="{{_id}}">{{profile.login}}</option>
           {{/each}}
         </select>
       </div>
           <h4>Reviewer</h4>
 
           <div class="form-group">
-          <select class="select_users" style="width:200px" multiple>
+          <select id="reviewers_{{_id}}" name="reviewers" class="select_users" style="width:200px" multiple>
           {{#each users}}
-            <option>{{profile.login}}</option>
+          <option value="{{_id}}">{{profile.login}}</option>
           {{/each}}
           </select>
         </div>
-             <button type="submit" class="btn comment btn-default">Create</button>
+             <button type="submit" class="create_modeling_task btn btn-default">Create</button>
              </form>
 
 
@@ -96,7 +96,7 @@
   </div>
 </div>
 
-        <div class="user"><img src="{{avatarUrl user}}"> {{username user}} ({{_id}})</div>
+        <div class="user"><img src="{{avatarUrl user}}"> {{username user}}</div>
           <div class="body" contenteditable>{{nl2br body}}</div>
           <div class="attachments">
             <ul class="list-unstyled">
@@ -113,26 +113,8 @@
             <a href="#" class="downvote_post"><i class="glyphicon glyphicon-arrow-down"></i> downvote</a>
             <a href="#" class="delete_post"><i class="glyphicon glyphicon-remove"></i> delete</a>
           </div>
+          {{>comments}}
 
-          <div class="comment_wrap">
-            <ul class="comments list-unstyled">
-              {{#each comments}} 
-              <li class="comment" data-comment_id="{{_id}}"> 
-                <span>{{body}}</span> - 
-                <span> <img src="{{avatarUrl user_id}}" height="18"> <a href="#">{{username user_id}}</a></span>
-                <span class="datetime">{{formatDate created 'YYYY-MM-DD HH:mm:ss'}}</span>
-                <span class="comment_actions"><a href="#" class="delete_comment">delete</a></span>
-              </li>
-              {{/each}} 
-            </ul>
-            <div class="comment_form text-right">
-              <form data-post_id="{{_id}}">
-              <div class="form-group"><textarea class="comment_text form-control" rows="3"></textarea></div>
-              <button type="submit" class="btn btn-sm comment btn-default">Comment</button>
-              </form>
-
-            </div>
-          </div>
         </li>
         {{/each}}
       </ul>

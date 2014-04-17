@@ -23,7 +23,7 @@ Router.map(function(){
   });
 
   this.route('solution_ideation', {
-    path: '/solutions/:solution/ideation',
+    path: '/solutions/:solution/ideations',
     template: 'ideation',
     onBeforeAction: function(){
       var ITEMS_PER_PAGE = 10;
@@ -112,6 +112,60 @@ Router.map(function(){
   this.route('modeling', {
     path: '/modeling',
     template: 'modeling'
+  });
+
+
+  this.route('solutions_modelings', {
+    path: '/solutions/:solution/modelings',
+    template: 'modeling_list',
+    data: function(){
+      var data = {};
+
+      data.workItems = Cento.WorkItems.find({
+        type: Cento.WorkItemTypes.MODELING
+      });
+
+
+      return data;
+    }
+
+  });
+  this.route('solutions_modelings_show', {
+    path: '/solutions/:solution/modelings/:item',
+    template: 'modeling_show',
+    data: function(){
+      var data = {};
+
+      data.workItems = Cento.WorkItems.find({
+        type: Cento.WorkItemTypes.MODELING
+      });
+
+      data.workItem = Cento.WorkItems.findOne({_id: this.params.item});
+      data.artifacts = Cento.Artifacts.find({work_item_id: this.params.item});
+
+
+
+      return data;
+    }
+
+  });
+  this.route('modeling2', {
+    path: '/modeling2',
+    template: 'modeling2',
+    onBeforeAction: function(){
+      Session.set('selectedWorkItem', null);
+
+    },
+    data: function(){
+      var data = {};
+
+      data.workItems = Cento.WorkItems.find({
+        type: Cento.WorkItemTypes.MODELING
+      });
+
+
+      return data;
+    }
   });
 
   this.route('battle_loom', {

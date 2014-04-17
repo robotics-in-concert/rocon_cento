@@ -1,5 +1,5 @@
 
-Meteor.saveFile = (file, name, callback)->
+Meteor.saveFile = (file, callback)->
   fileReader = new FileReader()
   name = file.name
   
