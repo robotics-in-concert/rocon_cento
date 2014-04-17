@@ -20,7 +20,7 @@
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li class="{{#if isActivePath 'solutions_ideations' }}active{{/if}}"><a href="/solutions/{{currentSolution._id}}/ideations">Ideation</a></li>
-            <li class="{{#if isActivePath 'solutions_modelings' }}active{{/if}}"><a href="/solutions/{{currentSolution._id}}/modelings">Modeling</a></li>
+            <li class="{{#if isActivePath 'solutions_modelings' }}active{{/if}} {{#if isActivePath 'solutions_modelings_show' }}active{{/if}}"><a href="/solutions/{{currentSolution._id}}/modelings">Modeling</a></li>
             <li class="{{#if isActivePath 'battle_loom' }}active{{/if}}"><a href="/battle_loom">Battle loom</a></li>
             <li class="{{#if isActivePath 'solution' }}active{{/if}}"><a href="/solutions">Solution</a></li>
             <li class="{{#if isActivePath 'management' }}active{{/if}}"><a href="/management">Management</a></li>
