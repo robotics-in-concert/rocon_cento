@@ -1,7 +1,11 @@
 
 
 Router.configure({
-  layoutTemplate: 'layout'
+  layoutTemplate: 'layout',
+});
+
+Router.before(function(){
+  Session.set('currentSolution', Cento.Solutions.findOne({_id: this.params.solution}));
 });
 
 
@@ -22,17 +26,6 @@ Router.map(function(){
     }
   });
 
-  this.route('admin_solution', {
-    path: '/admin/solutions',
-    template: 'admin_solutions',
-    data: function(){
-      return {
-        solutions: Cento.Solutions.find({})
-      };
-    }
-
-  });
-
   this.route('solutions_ideations', {
     path: '/solutions/:solution/ideations',
     template: 'ideation',
@@ -47,9 +40,6 @@ Router.map(function(){
     
       var data = {};
       
-      if(this.params.solution){
-        data.currentSolution = Cento.Solutions.findOne({_id: this.params.solution});
-      }
       data.workGroups = Cento.WorkGroups.find({solution_id: sid});
       var query = {type: Cento.WorkItemTypes.IDEA, solution_id: sid};
       if(groupId && groupId !== ""){
@@ -70,6 +60,70 @@ Router.map(function(){
   });
 
 
+
+
+  this.route('solutions_modelings', {
+    path: '/solutions/:solution/modelings',
+    template: 'modeling_list',
+    data: function(){
+      var data = {};
+
+      data.workItems = Cento.WorkItems.find({
+        type: Cento.WorkItemTypes.MODELING
+      });
+
+
+      return data;
+    }
+
+  });
+  this.route('solutions_modelings_show', {
+    path: '/solutions/:solution/modelings/:item',
+    template: 'modeling_show',
+    data: function(){
+      var data = {};
+
+      data.workItems = Cento.WorkItems.find({
+        type: Cento.WorkItemTypes.MODELING
+      });
+
+      data.workItem = Cento.WorkItems.findOne({_id: this.params.item});
+      data.artifacts = Cento.Artifacts.find({work_item_id: this.params.item});
+
+
+
+      return data;
+    }
+
+  });
+
+  this.route('battle_loom', {
+    path: '/battle_loom',
+    template: 'battle_loom',
+    data: function(){
+      var data = {};
+      return data;
+    }
+  });
+
+  this.route('management', {
+    path: '/management',
+    template: 'management'
+  });
+
+  this.route('solution', {
+    path: '/solution',
+    template: 'solution'
+  });
+
+  this.route('google_drive', {
+    path: '/google_drive',
+    template: 'google_drive'
+  });
+  this.route('manage', {
+    path: '/manage',
+    template: 'manage'
+  });
   this.route('login', {
     path: '/login',
   });
@@ -78,6 +132,22 @@ Router.map(function(){
     path: '/users',
   });
 
+  /*
+   * admin
+   */
+
+  this.route('admin_solution', {
+    path: '/admin/solutions',
+    template: 'admin_solutions',
+    data: function(){
+      return {
+        solutions: Cento.Solutions.find({})
+      };
+    }
+
+  });
+
+  /*
   this.route('ideation', {
     path: '/ideation',
     template: 'ideation',
@@ -119,94 +189,6 @@ Router.map(function(){
       return data;
     }
     });
-
-  this.route('modeling', {
-    path: '/modeling',
-    template: 'modeling'
-  });
-
-
-  this.route('solutions_modelings', {
-    path: '/solutions/:solution/modelings',
-    template: 'modeling_list',
-    data: function(){
-      var data = {};
-
-      if(this.params.solution){
-        data.currentSolution = Cento.Solutions.findOne({_id: this.params.solution});
-      }
-      data.workItems = Cento.WorkItems.find({
-        type: Cento.WorkItemTypes.MODELING
-      });
-
-
-      return data;
-    }
-
-  });
-  this.route('solutions_modelings_show', {
-    path: '/solutions/:solution/modelings/:item',
-    template: 'modeling_show',
-    data: function(){
-      var data = {};
-
-      if(this.params.solution){
-        data.currentSolution = Cento.Solutions.findOne({_id: this.params.solution});
-      }
-      data.workItems = Cento.WorkItems.find({
-        type: Cento.WorkItemTypes.MODELING
-      });
-
-      data.workItem = Cento.WorkItems.findOne({_id: this.params.item});
-      data.artifacts = Cento.Artifacts.find({work_item_id: this.params.item});
-
-
-
-      return data;
-    }
-
-  });
-  this.route('modeling2', {
-    path: '/modeling2',
-    template: 'modeling2',
-    onBeforeAction: function(){
-      Session.set('selectedWorkItem', null);
-
-    },
-    data: function(){
-      var data = {};
-
-      data.workItems = Cento.WorkItems.find({
-        type: Cento.WorkItemTypes.MODELING
-      });
-
-
-      return data;
-    }
-  });
-
-  this.route('battle_loom', {
-    path: '/battle_loom',
-    template: 'battle_loom'
-  });
-
-  this.route('management', {
-    path: '/management',
-    template: 'management'
-  });
-
-  this.route('solution', {
-    path: '/solution',
-    template: 'solution'
-  });
-
-  this.route('google_drive', {
-    path: '/google_drive',
-    template: 'google_drive'
-  });
-  this.route('manage', {
-    path: '/manage',
-    template: 'manage'
-  });
+    */
 
 });

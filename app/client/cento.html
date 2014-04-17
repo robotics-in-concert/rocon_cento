@@ -22,17 +22,19 @@
             <li class="{{#if isActivePath 'solutions_ideations' }}active{{/if}}"><a href="/solutions/{{currentSolution._id}}/ideations">Ideation</a></li>
             <li class="{{#if isActivePath 'solutions_modelings' }}active{{/if}}"><a href="/solutions/{{currentSolution._id}}/modelings">Modeling</a></li>
             <li class="{{#if isActivePath 'battle_loom' }}active{{/if}}"><a href="/battle_loom">Battle loom</a></li>
-            <li class="{{#if isActivePath 'solution' }}active{{/if}}"><a href="/solution">Solution</a></li>
+            <li class="{{#if isActivePath 'solution' }}active{{/if}}"><a href="/solutions">Solution</a></li>
             <li class="{{#if isActivePath 'management' }}active{{/if}}"><a href="/management">Management</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li>
-              <select class="form-control" data-current_solution="{{currentSolution._id}}">
+              <select class="form-control" data-current_solution="{{solution._id}}">
                 <option>Select Solution..</option>
                 {{#each solutions}}
                  <option value="{{_id}}">{{title}}</option>
                 {{/each}}
               </select>
+              {{#with solution}}
+              {{/with}}
 
             </li>
 

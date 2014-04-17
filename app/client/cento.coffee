@@ -3,6 +3,13 @@ Template.layout.rendered = ->
   $('.navbar select option[value='+sid+']').attr('selected', 'selected')
 
 
+  $('.navbar select').change ->
+    sid = $(@).val()
+    # location.href = '/solutions/'+sid+'/ideations'
+    Router.go('solutions_ideations', {solution: sid})
+    false
+
+
 Template.layout.isActivePath = (path)->
   current = Router.current()
   return current && current.route.name == path
@@ -21,6 +28,17 @@ Template.layout.selectIfCurrentSolution = (currentSolution)->
 
 Template.layout.solutions = ->
   Cento.Solutions.find({})
+
+Deps.autorun (c)->
+  solution = Session.get('currentSolution')
+  $('.navbar select option').removeAttr('selected')
+  if solution?
+    console.log "SS", solution._id
+    $('.navbar select option[value='+solution._id+']').attr('selected', 'selected')
+
+  
+Template.layout.solution = ->
+  Session.get('currentSolution')
 
 
 Template.layout.events

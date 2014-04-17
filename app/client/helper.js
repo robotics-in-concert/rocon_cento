@@ -1,3 +1,6 @@
+UI.registerHelper('currentSolution', function(){
+  return Session.get('currentSolution');
+});
 Handlebars.registerHelper('formatDate', function(dt, format){
   return moment(dt).format(format);
 });
