@@ -1,6 +1,27 @@
+Template.layout.rendered = ->
+  sid = $('.navbar select').data('current_solution')
+  $('.navbar select option[value='+sid+']').attr('selected', 'selected')
+
+
 Template.layout.isActivePath = (path)->
   current = Router.current()
   return current && current.route.name == path
+
+Template.layout.selectIfCurrentSolution = (currentSolution)->
+      # return "selected=\"selected\""
+      return "selected"
+  # console.log(currentSolution);
+  # unless currentSolution?
+    # return ""
+  # else
+    # if @_id == currentSolution._id
+      # return "selected='selected'"
+    # else
+      # ""
+
+Template.layout.solutions = ->
+  Cento.Solutions.find({})
+
 
 Template.layout.events
   'click #github_login': ->

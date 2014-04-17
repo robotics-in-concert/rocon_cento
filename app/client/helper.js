@@ -1,24 +1,3 @@
-Handlebars.registerHelper('isEmpty', function(item, options){
-  console.log(options);
-  if(item){
-    if(item instanceof Array){
-      if(item.length === 0){
-        return options.fn(this);
-      }else{
-        return options.inverse(this);
-      }
-    }else{
-      if(item.fetch().length === 0){
-        return options.fn(this);
-      } else {
-        return options.inverse(this);
-      }
-    }
-  }else{
-    return options.inverse(this);
-  }
-
-});
 Handlebars.registerHelper('formatDate', function(dt, format){
   return moment(dt).format(format);
 });
@@ -26,6 +5,13 @@ Handlebars.registerHelper('formatDate', function(dt, format){
 Handlebars.registerHelper('activeIfEq', function(a, b){
   if(a === b) {
     return "active";
+  } else {
+    return "";
+  }
+});
+Handlebars.registerHelper('selectIfEq', function(a, b){
+  if(a === b) {
+    return "select='selected'";
   } else {
     return "";
   }

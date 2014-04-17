@@ -11,6 +11,17 @@ Router.map(function(){
     template: 'home'
   });
 
+  this.route('solutions', {
+    path: '/solutions',
+    template: 'solutions',
+    data: function(){
+      return {
+        solutions: Cento.Solutions.find({})
+      }
+
+    }
+  });
+
   this.route('admin_solution', {
     path: '/admin/solutions',
     template: 'admin_solutions',
@@ -22,7 +33,7 @@ Router.map(function(){
 
   });
 
-  this.route('solution_ideation', {
+  this.route('solution_ideations', {
     path: '/solutions/:solution/ideations',
     template: 'ideation',
     onBeforeAction: function(){

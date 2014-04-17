@@ -19,13 +19,24 @@
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="{{#if isActivePath 'ideation' }}active{{/if}}"><a href="/ideation">Ideation</a></li>
+            <li class="{{#if isActivePath 'solution_ideations' }}active{{/if}}"><a href="/ideation">Ideation</a></li>
             <li class="{{#if isActivePath 'modeling' }}active{{/if}}"><a href="/modeling">Modeling</a></li>
             <li class="{{#if isActivePath 'battle_loom' }}active{{/if}}"><a href="/battle_loom">Battle loom</a></li>
             <li class="{{#if isActivePath 'solution' }}active{{/if}}"><a href="/solution">Solution</a></li>
             <li class="{{#if isActivePath 'management' }}active{{/if}}"><a href="/management">Management</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
+            <li>
+              <select class="form-control" data-current_solution="{{currentSolution._id}}">
+                <option>Select Solution..</option>
+                {{#each solutions}}
+                 <option value="{{_id}}">{{title}}</option>
+                {{/each}}
+              </select>
+
+            </li>
+
+
             {{#if currentUser}}
             <li><a href="#"><img class="avatar" src="{{avatarUrl currentUser}}" width="25" height="25"> {{username currentUser}}</a></li>
             <li><a id="github_logout" href="#"><i class="glyphicon glyphicon-log-out"></i></a></li>
