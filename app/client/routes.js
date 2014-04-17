@@ -33,7 +33,7 @@ Router.map(function(){
 
   });
 
-  this.route('solution_ideations', {
+  this.route('solutions_ideations', {
     path: '/solutions/:solution/ideations',
     template: 'ideation',
     onBeforeAction: function(){
@@ -132,6 +132,9 @@ Router.map(function(){
     data: function(){
       var data = {};
 
+      if(this.params.solution){
+        data.currentSolution = Cento.Solutions.findOne({_id: this.params.solution});
+      }
       data.workItems = Cento.WorkItems.find({
         type: Cento.WorkItemTypes.MODELING
       });
@@ -147,6 +150,9 @@ Router.map(function(){
     data: function(){
       var data = {};
 
+      if(this.params.solution){
+        data.currentSolution = Cento.Solutions.findOne({_id: this.params.solution});
+      }
       data.workItems = Cento.WorkItems.find({
         type: Cento.WorkItemTypes.MODELING
       });
