@@ -1,3 +1,10 @@
+Deps.autorun (c)->
+  solution = Session.get('currentSolution')
+  $('.navbar select option').removeAttr('selected')
+  if solution?
+    console.log "SS", solution._id
+    $('.navbar select option[value='+solution._id+']').attr('selected', 'selected')
+
 Template.layout.rendered = ->
   sid = $('.navbar select').data('current_solution')
   $('.navbar select option[value='+sid+']').attr('selected', 'selected')
@@ -29,12 +36,6 @@ Template.layout.selectIfCurrentSolution = (currentSolution)->
 Template.layout.solutions = ->
   Cento.Solutions.find({})
 
-Deps.autorun (c)->
-  solution = Session.get('currentSolution')
-  $('.navbar select option').removeAttr('selected')
-  if solution?
-    console.log "SS", solution._id
-    $('.navbar select option[value='+solution._id+']').attr('selected', 'selected')
 
   
 Template.layout.solution = ->
