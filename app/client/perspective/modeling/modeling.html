@@ -1,39 +1,34 @@
-<template name="modeling">
-<h2><span class="label label-primary">{{currentSolution.title}}</span> -Modeling</h2>
-
-<h3>Files</h3>
-<input type="file" accept="image/*">
-
-<div class="images_wrap">
-  <ul class="images">
-  {{#each files}}
-    <li><a href="/data/{{name}}" target="_blank"><img src="/data/{{name}}" width="200" height="200"></a></li>
-  {{/each}}
-  </ul>
-</div>
-
-</template>
-
 <template name="modeling_item">
   <div class="panel panel-default">
     <div class="panel-heading">
-      <h3 class="panel-title"><span class="label label-default">{{status}}</span>
+      <h3 class="panel-title"><span class="label {{itemStatusLabelClass status}} ">{{status}}</span>
       <a class="select_item" href="/solutions/{{solution_id}}/modelings/{{_id}}">{{title}}</a> </h3>
     </div>
     <div class="panel-body">
 
+      <div class="half_left">
       <strong>assignee</strong>
         <div>
         {{#each assignee}}
           <span class="ib"><img src="{{avatarUrl .}}" height="25"></span>
         {{/each}}
         </div>
+      </div>
+      <div class="half_right">
       <strong>reviewers</strong>
         <div>
         {{#each reviewers}}
           <span class="ib"><img src="{{avatarUrl .}}" height="25"></span>
         {{/each}}
         </div>
+      </div>
+
+      <select name="status" data-status="{{status}}">
+        <option value="todo">todo</option>
+        <option value="doing" {{selectIfEq status 'doing'}}>doing</option>
+        <option value="done">done</option>
+      </select>
+
     </div>
   </div>
 </template>

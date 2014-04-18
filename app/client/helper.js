@@ -14,9 +14,21 @@ UI.registerHelper('activeIfEq', function(a, b){
 });
 UI.registerHelper('selectIfEq', function(a, b){
   if(a === b) {
-    return "select='selected'";
+    console.log('1');
+    return "selected";
   } else {
+    console.log('2');
     return "";
+  }
+});
+
+UI.registerHelper('itemStatusLabelClass', function(status){
+  if(status === 'todo'){
+    return 'label-default';
+  }else if(status == 'doing'){
+    return 'label-info';
+  }else if(status == 'done'){
+    return 'label-success';
   }
 });
 

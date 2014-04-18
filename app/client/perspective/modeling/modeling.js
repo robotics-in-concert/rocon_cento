@@ -1,3 +1,10 @@
+Template.modeling_item.events({
+  'change select': function(e){
+    var newStatus = $(e.target).val();
+    Cento.WorkItems.update({_id: this._id}, {$set: {status: newStatus}});
+  }
+
+});
 
 Template.modeling_show.events({
   'change input': function(e, t){
