@@ -1,6 +1,46 @@
+Deps.autorun (c)->
+  solution = Session.get('currentSolution')
+  $('.navbar select option').removeAttr('selected')
+  if solution?
+    console.log "SS", solution._id
+    $('.navbar select option[value='+solution._id+']').attr('selected', 'selected')
+
+Template.layout.rendered = ->
+  sid = $('.navbar select').data('current_solution')
+  $('.navbar select option[value='+sid+']').attr('selected', 'selected')
+
+
+  $('.navbar select').change ->
+    sid = $(@).val()
+    # location.href = '/solutions/'+sid+'/ideations'
+    Router.go('solutions_ideations', {solution: sid})
+    false
+
+
 Template.layout.isActivePath = (path)->
   current = Router.current()
   return current && current.route.name == path
+
+Template.layout.selectIfCurrentSolution = (currentSolution)->
+      # return "selected=\"selected\""
+      return "selected"
+  # console.log(currentSolution);
+  # unless currentSolution?
+    # return ""
+  # else
+    # if @_id == currentSolution._id
+      # return "selected='selected'"
+    # else
+      # ""
+
+Template.layout.solutions = ->
+  Cento.Solutions.find({})
+
+
+  
+Template.layout.solution = ->
+  Session.get('currentSolution')
+
 
 Template.layout.events
   'click #github_login': ->

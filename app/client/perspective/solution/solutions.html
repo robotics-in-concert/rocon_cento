@@ -1,0 +1,25 @@
+<template name="solutions">
+
+<h2>Solutions</h2>
+
+
+<div class="solutions">
+{{#each solutions}}
+  <div class="solution panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title"><a class="select_item" href="/solutions/{{solution_id}}/ideations">{{title}}</a> </h3>
+    </div>
+    <div class="panel-body">
+      {{description}}
+
+      <div class="solution_actions">
+        <a class="btn btn-default btn-sm" href="/solutions/{{_id}}/ideations">ideation</a>
+        <a class="btn btn-default btn-sm" href="/solutions/{{_id}}/modelings">modeling</a>
+      </div>
+    </div>
+  </div>
+{{/each}}
+</div>
+
+
+</template>

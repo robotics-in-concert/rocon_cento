@@ -1,24 +1,25 @@
 <template name="ideation">
 
 <div id="ideation">
-  <h1>Ideation</h1>
+  <h2><span class="label label-primary">{{currentSolution.title}}</span> - Ideation</h2>
 
 
 
   <div class="row">
 
     <div class="col-md-3">
+      
       <ul class="nav nav-pills nav-stacked">
-        <li class="{{#unless currentCategory}}active{{/unless}}"><a href="?category=">All</a></li>
-        {{#each categories}}
-        <li class="{{activeIfEq ../currentCategory._id _id}}"><a href="?category={{_id}}">{{title}}</a></li>
+        <li class="{{#unless currentWorkGroup}}active{{/unless}}"><a href="?group=">All</a></li>
+        {{#each workGroups}}
+        <li class="{{activeIfEq ../currentWorkGroup._id _id}}"><a href="?group={{_id}}">{{title}}</a></li>
         {{/each}}
       </ul>
     </div>
     
     <div class="col-md-9">
       {{#if currentUser}}
-      {{#if category}}
+      {{#if currentWorkGroup}}
       <div class="well dropzone">
         <form data-category="{{category}}">
         <div class="form-group"><textarea class="form-control" rows="3"></textarea></div>
@@ -43,9 +44,59 @@
 
 
       <ul class="posts list-unstyled">
-        {{#each posts}}
+        {{#each workItems}}
         <li class="post" data-post_id="{{_id}}">
-        <div class="user"><img src="{{avatarUrl user}}"> {{username user}} ({{_id}})</div>
+
+<div id="modal-{{_id}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">{{title}} </h4>
+      </div>
+
+      <div class="modal-body">
+        <div class="left">
+
+             <form data-card_id="{{_id}}">
+               <div class="form-group">
+                 <label>Title</label>
+                 <input class="form-control" type="text" name="title">
+               </div>
+               <div class="form-group">
+                 <label>Description</label>
+                 <textarea class="comment_text form-control" rows="3"></textarea>
+               </div>
+          <h4>Assignee</h4>
+          <div class="form-group">
+            <select id="assignee_{{_id}}" name="assignee" class="select_users" style="width:200px" multiple>
+          {{#each users}}
+          <option value="{{_id}}">{{profile.login}}</option>
+          {{/each}}
+        </select>
+      </div>
+          <h4>Reviewer</h4>
+
+          <div class="form-group">
+          <select id="reviewers_{{_id}}" name="reviewers" class="select_users" style="width:200px" multiple>
+          {{#each users}}
+          <option value="{{_id}}">{{profile.login}}</option>
+          {{/each}}
+          </select>
+        </div>
+             <button type="submit" class="create_modeling_task btn btn-default">Create</button>
+             </form>
+
+
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+
+        <div class="user"><img src="{{avatarUrl user}}"> {{username user}}</div>
           <div class="body" contenteditable>{{nl2br body}}</div>
           <div class="attachments">
             <ul class="list-unstyled">
@@ -57,30 +108,13 @@
           <div class="datetime">{{formatDate created 'YYYY-MM-DD HH:mm:ss'}}</div>
           <div class="post_actions">
             Votes : {{votes}}
+            <a href="#" class="create_task"><i class="glyphicon glyphicon-arrow-up"></i> create task</a>
             <a href="#" class="upvote_post"><i class="glyphicon glyphicon-arrow-up"></i> upvote</a>
             <a href="#" class="downvote_post"><i class="glyphicon glyphicon-arrow-down"></i> downvote</a>
             <a href="#" class="delete_post"><i class="glyphicon glyphicon-remove"></i> delete</a>
           </div>
+          {{>comments}}
 
-          <div class="comment_wrap">
-            <ul class="comments list-unstyled">
-              {{#each comments}} 
-              <li class="comment" data-comment_id="{{_id}}"> 
-                <span>{{body}}</span> - 
-                <span> <img src="{{avatarUrl user_id}}" height="18"> <a href="#">{{username user_id}}</a></span>
-                <span class="datetime">{{formatDate created 'YYYY-MM-DD HH:mm:ss'}}</span>
-                <span class="comment_actions"><a href="#" class="delete_comment">delete</a></span>
-              </li>
-              {{/each}} 
-            </ul>
-            <div class="comment_form text-right">
-              <form data-post_id="{{_id}}">
-              <div class="form-group"><textarea class="comment_text form-control" rows="3"></textarea></div>
-              <button type="submit" class="btn btn-sm comment btn-default">Comment</button>
-              </form>
-
-            </div>
-          </div>
         </li>
         {{/each}}
       </ul>

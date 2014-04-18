@@ -1,15 +1,144 @@
-<template name="modeling">
-<h2>Modeling</h2>
+<template name="modeling_item">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title"><span class="label {{itemStatusLabelClass status}} ">{{status}}</span>
+      <a class="select_item" href="/solutions/{{solution_id}}/modelings/{{_id}}">{{title}}</a> </h3>
+    </div>
+    <div class="panel-body">
 
-<h3>Files</h3>
-<input type="file" accept="image/*">
+      <div class="half_left">
+      <strong>assignee</strong>
+        <div>
+        {{#each assignee}}
+          <span class="ib"><img src="{{avatarUrl .}}" height="25"></span>
+        {{/each}}
+        </div>
+      </div>
+      <div class="half_right">
+      <strong>reviewers</strong>
+        <div>
+        {{#each reviewers}}
+          <span class="ib"><img src="{{avatarUrl .}}" height="25"></span>
+        {{/each}}
+        </div>
+      </div>
 
-<div class="images_wrap">
-  <ul class="images">
-  {{#each files}}
-    <li><a href="/data/{{name}}" target="_blank"><img src="/data/{{name}}" width="200" height="200"></a></li>
+      <select name="status" data-status="{{status}}">
+        <option value="todo">todo</option>
+        <option value="doing" {{selectIfEq status 'doing'}}>doing</option>
+        <option value="done">done</option>
+      </select>
+
+    </div>
+  </div>
+</template>
+
+
+
+<template name="modeling_list">
+<h2><span class="label label-primary">{{currentSolution.title}}</span> -Modeling</h2>
+
+
+<div class="row">
+
+  <div class="col-md-3">
+    {{#each workItems}}
+      {{> modeling_item}}
+    {{/each}}
+  </div>
+
+  <div class="col-md-9">
+  select modeling item...
+  </div>
+
+</div>
+
+</template>
+
+
+<template name="modeling_show">
+<h2><span class="label label-primary">{{currentSolution.title}}</span> -Modeling</h2>
+
+
+<div class="row">
+
+<div class="col-md-3">
+  {{#each workItems}}
+    {{> modeling_item}}
   {{/each}}
-  </ul>
+</div>
+
+<div class="col-md-9">
+{{#with workItem}}
+
+<h3>{{title}}</h3>
+<div>{{description}}</div>
+
+
+<hr />
+
+<h4>Artifacts</h4>
+
+
+  <div class="images_wrap">
+    <ul class="images">
+  {{#each ../artifacts}}
+    {{#each attachments}}
+      <li><a href="/data/{{name}}" target="_blank"><img src="/data/{{name}}" width="200" height="200"></a></li>
+    {{/each}}
+  {{else}}
+    No artifacts...
+  {{/each}}
+    </ul>
+  </div>
+<button class="btn btn-default" data-toggle="modal" data-target="#add_artifact_modal">Add artifacts</button>
+
+
+
+<h4>Comments</h4>
+{{> comments}}
+
+
+<div id="add_artifact_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">New Artifact</h4>
+      </div>
+
+      <div class="modal-body">
+        <div class="left">
+
+             <form data-card_id="{{_id}}">
+               <div class="form-group">
+                 <label>Title</label>
+                 <input class="form-control" type="text" name="title">
+               </div>
+               <div class="form-group">
+                 <label>Description</label>
+                 <textarea name="description" class="comment_text form-control" rows="3"></textarea>
+               </div>
+               <div class="form-group">
+                 <label>Attachment</label>
+                  <input name="file" type="file" accept="image/*">
+               </div>
+               <button type="submit" class="create_artifact btn btn-default">Create</button>
+             </form>
+
+
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+
+
+{{/with}}
+</div>
+
 </div>
 
 </template>

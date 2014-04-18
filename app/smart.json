@@ -5,6 +5,7 @@
   "packages": {
     "moment": {},
     "iron-router": {},
-    "bootstrap-3": {}
+    "bootstrap-3": {},
+    "select2": {}
   }
 }

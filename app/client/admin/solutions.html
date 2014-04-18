@@ -1,0 +1,51 @@
+<template name="admin_solutions">
+
+<h1>Solutions</h1>
+<div class="well">
+  <h3>New Solution</h3>
+  <form>
+    <div class="form-group">
+      <label>Title</label>
+      <input name="title" class="form-control" type="text">
+    </div>
+    <div class="form-group">
+      <label>Description</label>
+      <textarea class="form-control"></textarea>
+    </div>
+    <button type="submit" class="save_solution btn btn-default">Save</button>
+
+  </form>
+
+</div>
+
+<ul class="splits-line">
+  {{#each solutions}}
+  <li>
+    <h3>{{title}}</h3>
+    <div class="desc">{{description}}</div>
+    <h4>Work Groups</h4>
+
+    <ul>
+      {{#each workGroupsFor _id}}
+      <li>{{title}}</li>
+      {{/each}}
+
+      <form class="form-inline">
+        <div class="form-group">
+          <label>Title</label>
+          <input class="form-control" name="title" type="text">
+        </div>
+        <button class="add_work_group btn btn-default">Add</button>
+      </form>
+    </ul>
+
+    <div>
+      <a class="btn btn-default btn-sm" href="/solutions/{{_id}}/ideations">ideation</a>
+      <a class="btn btn-default btn-sm" href="/solutions/{{_id}}/modelings">modeling</a>
+    </div>
+  </li>
+  {{/each}}
+
+</ul>
+
+</template>

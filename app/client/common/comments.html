@@ -1,0 +1,23 @@
+<template name="comments">
+
+<div class="comment_wrap">
+  <ul class="comments list-unstyled">
+    {{#each comments}} 
+    <li class="comment" data-comment_id="{{_id}}"> 
+      <span>{{body}}</span> - 
+      <span> <img src="{{avatarUrl user_id}}" height="18"> <a href="#">{{username user_id}}</a></span>
+      <span class="datetime">{{formatDate created 'YYYY-MM-DD HH:mm:ss'}}</span>
+      <span class="comment_actions"><a href="#" class="delete_comment">delete</a></span>
+    </li>
+    {{/each}} 
+  </ul>
+  <div class="comment_form text-right">
+    <form data-post_id="{{_id}}">
+    <div class="form-group"><textarea class="comment_text form-control" rows="3"></textarea></div>
+    <button type="submit" class="btn btn-sm comment btn-default">Comment</button>
+    </form>
+
+  </div>
+</div>
+
+</template>
