@@ -96,11 +96,12 @@ Template.ideation.events({
     var attachments = _.map(files, function(f){
       return _.pick(f, 'name', 'size', 'type');
     });
+
     
     try{
       Cento.WorkItems.insert({
         type: Cento.WorkItemTypes.IDEA,
-        solution_id: this.currentSolution._id,
+        solution_id: Session.get('currentSolution')._id,
         work_group_id: this.currentWorkGroup._id,
         user_id: Meteor.userId(),
         title: txt,
