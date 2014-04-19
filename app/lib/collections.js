@@ -11,7 +11,8 @@ Cento.Actions = new Meteor.Collection('actions');
 
 Cento.WorkItemTypes = {
   IDEA: 'idea',
-  MODELING: 'modeling'
+  MODELING: 'modeling',
+  USER_NEEDS: 'user_needs'
 };
 
 Cento.WorkItemStatus = {
