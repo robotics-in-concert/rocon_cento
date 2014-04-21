@@ -47,6 +47,7 @@ Router.map(function(){
       data.workItems = Cento.WorkItems.find(query, {limit: Session.get('itemsLimit'), sort: {'created': -1},
         transform: function(doc){
           doc.user = Meteor.users.findOne(doc.user_id);
+          doc.solutions = Cento.Solutions.find({'related.related_work_id': doc._id}).fetch();
           return doc;
         }
        });

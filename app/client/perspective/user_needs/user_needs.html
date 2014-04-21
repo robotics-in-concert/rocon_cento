@@ -13,7 +13,9 @@
       <ul class="nav nav-pills nav-stacked">
         <li class="{{#unless currentWorkGroup}}active{{/unless}}"><a href="?group=">All</a></li>
         {{#each workGroups}}
-        <li class="{{activeIfEq ../currentWorkGroup._id _id}}"><a href="?group={{_id}}">{{title}}</a></li>
+        <li class="{{activeIfEq ../currentWorkGroup._id _id}}"><a href="?group={{_id}}">
+          {{title}}
+        </a></li>
         {{/each}}
       </ul>
     </div>
@@ -88,8 +90,16 @@
   </div>
 </div>
 
-        <div class="user"><img src="{{avatarUrl user}}"> {{username user}}</div>
-          <div class="body" contenteditable>{{nl2br body}}</div>
+          {{#if solutions.length}}
+<div class="mark">
+  <h4><span class="label label-info">Solution Created</span></h4>
+</div>
+          {{/if}}
+<div class="user">
+  <img src="{{avatarUrl user}}"> {{username user}}</div>
+        <div class="body" contenteditable>
+          {{nl2br body}}
+        </div>
           <div class="attachments">
             <ul class="list-unstyled">
               {{#each attachments}}
