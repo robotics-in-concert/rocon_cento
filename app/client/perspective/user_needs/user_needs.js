@@ -12,6 +12,18 @@ Template.user_needs.helpers({
   }
 });
 
+Template.user_needs.rendered = function(){
+
+  $('.modal .add_group').click(function(){
+    var $s = $(this).closest('form').find('select');
+    var title = $(this).closest('form').find('input[name=group_title]').val();
+
+    $s.append('<option>'+title+'</option>');
+    $(this).closest('form').find('input[name=group_title]').val('');
+    return false;
+  });
+};
+
 Template.user_needs.events({
   'dragenter .dropzone': function(){
     $('.dropzone').addClass('dragenter');
@@ -94,7 +106,6 @@ Template.user_needs.events({
   'click .create_task': function(e){
     console.log('xxx');
     var ideation_id = this._id;
-    $('#modal-'+ideation_id).find('select').select2();
     // $('#modal-'+ideation_id).find('select').select2().on('change', function(e){
       // $(this).data("selected", e.val.join());
     // });
@@ -111,7 +122,7 @@ Template.user_needs.events({
     var title = f.find('input[name=title]').val();
     var description = f.find('textarea').val();
 
-    Cento.Solutions.insert({
+    var sid = Cento.Solutions.insert({
       solution_id: this.solution_id,
       related: [
         {
@@ -123,6 +134,13 @@ Template.user_needs.events({
       title: title,
       description: description,
       created:new Date()
+    });
+
+
+
+    f.find('select option').each(function(){
+      Cento.WorkGroups.insert({solution_id: sid, title: $(this).text()});
+
     });
 
     modal.modal('hide');
