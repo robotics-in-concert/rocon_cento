@@ -26,6 +26,36 @@ Router.map(function(){
     }
   });
 
+  this.route('user_needs', {
+    path: '/user_needs',
+    template: 'user_needs',
+    onBeforeAction: function(){
+      Session.set('filesToAttach', []);
+    },
+    data: function(){
+      var data = {};
+      var groupId = this.params.group;
+
+      data.workGroups = Cento.WorkGroups.find({solution_id: {$exists: false}});
+      var query = {type: Cento.WorkItemTypes.USER_NEEDS};
+      if(groupId && groupId !== ""){
+        query.work_group_id = groupId;
+        data.group_id = groupId;
+        data.currentWorkGroup = Cento.WorkGroups.findOne(groupId);
+      }
+
+      data.workItems = Cento.WorkItems.find(query, {limit: Session.get('itemsLimit'), sort: {'created': -1},
+        transform: function(doc){
+          doc.user = Meteor.users.findOne(doc.user_id);
+          doc.solutions = Cento.Solutions.find({'related.related_work_id': doc._id}).fetch();
+          return doc;
+        }
+       });
+
+      return data;
+    }
+  });
+
   this.route('solutions_ideations', {
     path: '/solutions/:solution/ideations',
     template: 'ideation',

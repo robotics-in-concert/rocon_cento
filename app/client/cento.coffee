@@ -12,8 +12,13 @@ Template.layout.rendered = ->
 
   $('.navbar select').change ->
     sid = $(@).val()
+
     # location.href = '/solutions/'+sid+'/ideations'
-    Router.go('solutions_ideations', {solution: sid})
+    console.log sid
+    if sid? && sid != ""
+      Router.go('solutions_ideations', {solution: sid})
+    else
+      Router.go('user_needs')
     false
 
 

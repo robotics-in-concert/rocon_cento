@@ -1,0 +1,15 @@
+<template name="admin_user_needs">
+<h2>User Needs</h2>
+<h3>Item Groups</h3>
+
+<ul>
+  {{#each groups}}
+    <li>{{title}}</li>
+  {{/each}}
+</ul>
+
+<form name="group" class="form-inline">
+<input type="text" class="form-control">
+<button class="btn add_group btn-default">Add</button>
+</form>
+</template>

@@ -1,5 +1,12 @@
+Meteor.startup(function(){
+  $(function(){
+    console.log('jquery ready');
 
-Template.ideation.helpers({
+  });
+  
+
+});
+Template.user_needs.helpers({
 
   'filesToAttach': function(){
     Session.setDefault('filesToAttach', []);
@@ -13,36 +20,20 @@ Template.ideation.helpers({
   }
 });
 
-function showMoreVisible(){
-  var target = $('#showMoreResults'),
-      threshold;
+Template.user_needs.rendered = function(){
+  new Cento.DragAndDrop();
 
-  if(!target.length){
-    return;
-  }
+  $('.modal .add_group').click(function(){
+    var $s = $(this).closest('form').find('select');
+    var title = $(this).closest('form').find('input[name=group_title]').val();
 
-  threshold = $(window).scrollTop() + $(window).height() + target.height();
+    $s.append('<option>'+title+'</option>');
+    $(this).closest('form').find('input[name=group_title]').val('');
+    return false;
+  });
+};
 
-  if (target.offset().top < threshold) {
-    if (!target.data('visible')) {
-      target.data('visible', true);
-      Session.set('itemsLimit', Session.get('itemsLimit') + 10);
-    }
-  } else {
-    if (target.data('visible')) {
-      target.data('visible', false);
-    }
-  }
-}
-
-Template.ideation.rendered = function(){
-  new Cento.DragAndDrop($('.dropzone'));
-  $(window).scroll(showMoreVisible);
-
-}
-
-
-Template.ideation.events({
+Template.user_needs.events({
   'blur .body': function(e){
     var $e = $(e.target);
     Cento.WorkItems.update({_id:this._id}, {$set:{body: $e.html()}});
@@ -69,8 +60,7 @@ Template.ideation.events({
     
     try{
       Cento.WorkItems.insert({
-        type: Cento.WorkItemTypes.IDEA,
-        solution_id: Session.get('currentSolution')._id,
+        type: Cento.WorkItemTypes.USER_NEEDS,
         work_group_id: this.currentWorkGroup._id,
         user_id: Meteor.userId(),
         title: txt,
@@ -84,6 +74,7 @@ Template.ideation.events({
         Meteor.saveFile(files[0], console.log);
       }
       f[0].reset();
+      alertify.success('Successfully created.');
     }catch(e){
       console.error(e.message);
       console.trace(e);
@@ -93,7 +84,6 @@ Template.ideation.events({
   'click .create_task': function(e){
     console.log('xxx');
     var ideation_id = this._id;
-    $('#modal-'+ideation_id).find('select').select2();
     // $('#modal-'+ideation_id).find('select').select2().on('change', function(e){
       // $(this).data("selected", e.val.join());
     // });
@@ -103,20 +93,14 @@ Template.ideation.events({
     return false;
   },
 
-  'click .create_modeling_task': function(e){
+  'click .create_solution': function(e){
     var ideation = this;
     var f = $(e.target).closest('form');
     var modal = $(e.target).closest('.modal');
     var title = f.find('input[name=title]').val();
     var description = f.find('textarea').val();
 
-
-    var assignee = f.find('select[name=assignee]').select2('val');
-    var reviewers = f.find('select[name=reviewers]').select2('val');
-
-    Cento.WorkItems.insert({
-      type: Cento.WorkItemTypes.MODELING,
-      status: Cento.WorkItemStatus.TODO,
+    var sid = Cento.Solutions.insert({
       solution_id: this.solution_id,
       related: [
         {
@@ -125,11 +109,16 @@ Template.ideation.events({
         }
       ],
       user_id: Meteor.userId(),
-      assignee: assignee,
-      reviewers: reviewers,
       title: title,
       description: description,
       created:new Date()
+    });
+
+
+
+    f.find('select option').each(function(){
+      Cento.WorkGroups.insert({solution_id: sid, title: $(this).text()});
+
     });
 
     modal.modal('hide');
