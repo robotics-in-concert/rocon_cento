@@ -99,7 +99,8 @@ Router.map(function(){
       var data = {};
 
       data.workItems = Cento.WorkItems.find({
-        type: Cento.WorkItemTypes.MODELING
+        type: Cento.WorkItemTypes.MODELING,
+        solution_id: this.params.solution
       });
 
 
@@ -114,7 +115,8 @@ Router.map(function(){
       var data = {};
 
       data.workItems = Cento.WorkItems.find({
-        type: Cento.WorkItemTypes.MODELING
+        type: Cento.WorkItemTypes.MODELING,
+        solution_id: this.params.solution
       });
 
       data.workItem = Cento.WorkItems.findOne({_id: this.params.item});
