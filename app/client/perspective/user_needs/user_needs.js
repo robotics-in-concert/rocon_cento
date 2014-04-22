@@ -21,7 +21,7 @@ Template.user_needs.helpers({
 });
 
 Template.user_needs.rendered = function(){
-  new Cento.DragAndDrop($('.dropzone'));
+  new Cento.DragAndDrop();
 
   $('.modal .add_group').click(function(){
     var $s = $(this).closest('form').find('select');

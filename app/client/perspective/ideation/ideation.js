@@ -36,44 +36,13 @@ function showMoreVisible(){
 }
 
 Template.ideation.rendered = function(){
+  new Cento.DragAndDrop($('.dropzone'));
   $(window).scroll(showMoreVisible);
 
 }
 
 
 Template.ideation.events({
-  'dragenter .dropzone': function(){
-    $('.dropzone').addClass('dragenter');
-    $('.dropmask').show();
-    return false;
-  },
-  'dragleave .dropmask': function(){
-    $('.dropzone').removeClass('dragenter');
-    $('.dropmask').hide();
-    return false;
-
-  },
-  'dragover .dropzone': function(e){
-    e.preventDefault();
-    return false;
-  },
-  'drop .dropmask': function(e){
-    $('.dropmask').hide();
-    if (e.preventDefault) {
-      e.preventDefault();
-    }
-    if(e.originalEvent.dataTransfer.files){
-      var files = Session.get('filesToAttach');
-      _.each(e.originalEvent.dataTransfer.files, function(f){
-        files.push(f);
-        Meteor.saveFile(f);
-      });
-      Session.set('filesToAttach', files);
-    }
-    $('.dropzone').removeClass('dragenter');
-    $('.dropmask').hide();
-    return false;
-  },
   'blur .body': function(e){
     var $e = $(e.target);
     Cento.WorkItems.update({_id:this._id}, {$set:{body: $e.html()}});
