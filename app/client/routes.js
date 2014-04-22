@@ -12,7 +12,13 @@ Router.before(function(){
 Router.map(function(){
   this.route('home', {
     path: '/',
-    template: 'home'
+    template: 'home',
+    data: function(){
+      return {
+        solutions: Cento.Solutions.find({})
+      }
+
+    }
   });
 
   this.route('solutions', {
@@ -119,7 +125,14 @@ Router.map(function(){
         solution_id: this.params.solution
       });
 
-      data.workItem = Cento.WorkItems.findOne({_id: this.params.item});
+      data.workItem = Cento.WorkItems.findOne({_id: this.params.item}, {
+        transform: function(doc){
+         console.log(doc);
+         var related_ideation = Cento.WorkItems.findOne({_id: doc.related[0].related_work_id});
+         doc.related_ideation = related_ideation;
+         return doc;
+       }
+      });
       data.artifacts = Cento.Artifacts.find({work_item_id: this.params.item});
 
 
