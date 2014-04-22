@@ -97,6 +97,7 @@ Template.user_needs.events({
         Meteor.saveFile(files[0], console.log);
       }
       f[0].reset();
+      alertify.success('Successfully created.');
     }catch(e){
       console.error(e.message);
       console.trace(e);
