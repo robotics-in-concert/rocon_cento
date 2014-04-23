@@ -199,6 +199,17 @@ Router.map(function(){
     }
 
   });
+  this.route('admin_artifacts', {
+    path: '/admin/artifacts',
+    layoutTemplate: 'admin_layout',
+    template: 'admin_artifacts',
+    data: function(){
+      return {
+        artifacts: Cento.Artifacts.find({})
+      };
+    }
+
+  });
   this.route('admin_user_needs', {
     path: '/admin/user_needs',
     layoutTemplate: 'admin_layout',

@@ -1,0 +1,18 @@
+<template name="admin_artifacts">
+<h3>Artifacts</h3>
+
+<ul class="list-unstyled">
+  {{#each artifacts}}
+  <li>
+  <strong>{{title}}</strong>
+
+    <ul>
+    {{#each attachments}}
+      <li><a href="/data/{{name}}" target="_blank"><img src="/data/{{name}}" width="200" height="200"></a></li>
+    {{/each}}
+  </ul>
+  </li>
+  {{/each}}
+</ul>
+
+</template>
