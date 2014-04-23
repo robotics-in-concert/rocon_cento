@@ -199,6 +199,17 @@ Router.map(function(){
     }
 
   });
+  this.route('admin_user_needs', {
+    path: '/admin/user_needs',
+    layoutTemplate: 'admin_layout',
+    template: 'admin_user_needs',
+    data: function(){
+      return {
+        solutions: Cento.Solutions.find({})
+      };
+    }
+
+  });
   this.route('admin_solutions', {
     path: '/admin/solutions',
     layoutTemplate: 'admin_layout',
