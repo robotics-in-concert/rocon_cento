@@ -188,6 +188,17 @@ Router.map(function(){
     data: function(){
     }
   });
+  this.route('admin_users', {
+    path: '/admin/users',
+    layoutTemplate: 'admin_layout',
+    template: 'admin_users',
+    data: function(){
+      return {
+        users: Meteor.users.find({'services.github':{$exists: true}})
+      };
+    }
+
+  });
   this.route('admin_solution', {
     path: '/admin/solutions',
     layoutTemplate: 'admin_layout',
