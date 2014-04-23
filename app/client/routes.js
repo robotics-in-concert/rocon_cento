@@ -181,8 +181,16 @@ Router.map(function(){
    * admin
    */
 
+  this.route('admin', {
+    path: '/admin',
+    layoutTemplate: 'admin_layout',
+    template: 'admin',
+    data: function(){
+    }
+  });
   this.route('admin_solution', {
     path: '/admin/solutions',
+    layoutTemplate: 'admin_layout',
     template: 'admin_solutions',
     data: function(){
       return {
