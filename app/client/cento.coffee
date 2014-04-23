@@ -22,9 +22,9 @@ Template.layout.rendered = ->
     false
 
 
-Template.layout.isActivePath = (path)->
-  current = Router.current()
-  return current && current.route.name == path
+# Template.layout.isActivePath = (path)->
+  # current = Router.current()
+  # return current && current.route.name == path
 
 Template.layout.selectIfCurrentSolution = (currentSolution)->
       # return "selected=\"selected\""

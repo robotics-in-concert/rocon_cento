@@ -199,7 +199,7 @@ Router.map(function(){
     }
 
   });
-  this.route('admin_solution', {
+  this.route('admin_solutions', {
     path: '/admin/solutions',
     layoutTemplate: 'admin_layout',
     template: 'admin_solutions',
