@@ -36,6 +36,6 @@ cento_server
     ```
  - Run
  
-  ``` MONGO_URL=mongodb://localhost:27017/cento mrt ```
+  ``` ROOT_URL=Your URL:Port MONGO_URL=mongodb://localhost:27017/cento mrt ```
  
 
