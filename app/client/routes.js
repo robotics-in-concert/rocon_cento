@@ -181,8 +181,49 @@ Router.map(function(){
    * admin
    */
 
-  this.route('admin_solution', {
+  this.route('admin', {
+    path: '/admin',
+    layoutTemplate: 'admin_layout',
+    template: 'admin',
+    data: function(){
+    }
+  });
+  this.route('admin_users', {
+    path: '/admin/users',
+    layoutTemplate: 'admin_layout',
+    template: 'admin_users',
+    data: function(){
+      return {
+        users: Meteor.users.find({'services.github':{$exists: true}})
+      };
+    }
+
+  });
+  this.route('admin_artifacts', {
+    path: '/admin/artifacts',
+    layoutTemplate: 'admin_layout',
+    template: 'admin_artifacts',
+    data: function(){
+      return {
+        artifacts: Cento.Artifacts.find({})
+      };
+    }
+
+  });
+  this.route('admin_user_needs', {
+    path: '/admin/user_needs',
+    layoutTemplate: 'admin_layout',
+    template: 'admin_user_needs',
+    data: function(){
+      return {
+        solutions: Cento.Solutions.find({})
+      };
+    }
+
+  });
+  this.route('admin_solutions', {
     path: '/admin/solutions',
+    layoutTemplate: 'admin_layout',
     template: 'admin_solutions',
     data: function(){
       return {
