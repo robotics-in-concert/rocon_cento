@@ -1,3 +1,9 @@
+UI.registerHelper('isActivePath', function(path){
+  var current = Router.current();
+  console.log(current);
+  return current && current.route.name == path;
+});
+
 UI.registerHelper('currentSolution', function(){
   return Session.get('currentSolution');
 });
