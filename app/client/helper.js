@@ -1,3 +1,8 @@
+UI.registerHelper('$eq', function (a, b) {
+  return (a === b); //Only text, numbers, boolean - not array & objects
+});
+
+
 UI.registerHelper('isActivePath', function(path){
   var current = Router.current();
   console.log(current);
