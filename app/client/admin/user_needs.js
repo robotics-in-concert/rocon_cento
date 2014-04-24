@@ -11,7 +11,7 @@ Template.admin_user_needs.events({
 
     Cento.WorkGroups.insert({title:title});
     f[0].reset();
-    return false;  
+    return false;
 
   }
 });
