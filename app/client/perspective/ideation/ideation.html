@@ -117,7 +117,7 @@
             <div class="panel-body">
               <ul class="list-unstyled">
                 {{#each related}}
-                {{#with workItem related_work_id}}
+                {{#with getWorkItem related_work_id}}
                 <li><i class="glyphicon glyphicon-random"></i> &nbsp;<a href="/solutions/{{solution_id}}/modelings/{{_id}}">{{title}}</a></li>
                 {{/with}}
                 {{/each}}
