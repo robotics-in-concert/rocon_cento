@@ -94,6 +94,7 @@ Template.ideation.events({
     console.log('xxx');
     var ideation_id = this._id;
     $('#modal-'+ideation_id).find('select').select2();
+    // $('#modal-'+ideation_id).find('select:not([name=type])').select2();
     // $('#modal-'+ideation_id).find('select').select2().on('change', function(e){
       // $(this).data("selected", e.val.join());
     // });
@@ -111,11 +112,12 @@ Template.ideation.events({
     var description = f.find('textarea').val();
 
 
+    var workType = f.find('select[name=type]').select2('val');
     var assignee = f.find('select[name=assignee]').select2('val');
     var reviewers = f.find('select[name=reviewers]').select2('val');
 
     Cento.WorkItems.insert({
-      type: Cento.WorkItemTypes.MODELING,
+      type: workType,
       status: Cento.WorkItemStatus.TODO,
       solution_id: this.solution_id,
       related: [
@@ -134,6 +136,7 @@ Template.ideation.events({
       Cento.WorkItems.update({_id: ideation._id},
         {$push: {related: {related_work_id: modelingId, type: 'referred'}}});
       modal.modal('hide');
+      alertify.success('Successfully created.');
     });
 
 
