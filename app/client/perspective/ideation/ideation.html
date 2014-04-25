@@ -103,8 +103,28 @@
               {{#each attachments}}
               <li><img src="{{fileIconPath name}}"> <a href="/data/{{name}}">{{name}} ({{size}})</a></li>
               {{/each}}
-          </ul>
+            </ul>
           </div>
+          {{#if related.length}}
+
+
+
+
+          <div class="panel panel-success related">
+            <div class="panel-heading">
+              <h4 class="panel-title">Referenced</h4>
+            </div>
+            <div class="panel-body">
+              <ul class="list-unstyled">
+                {{#each related}}
+                {{#with workItem related_work_id}}
+                <li><i class="glyphicon glyphicon-random"></i> &nbsp;<a href="/solutions/{{solution_id}}/modelings/{{_id}}">{{title}}</a></li>
+                {{/with}}
+                {{/each}}
+              </ul>
+            </div>
+          </div>
+          {{/if}}
           <div class="datetime">{{formatDate created 'YYYY-MM-DD HH:mm:ss'}}</div>
           <div class="post_actions">
             Votes : {{votes}}

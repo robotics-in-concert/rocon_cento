@@ -2,6 +2,9 @@ UI.registerHelper('$eq', function (a, b) {
   return (a === b); //Only text, numbers, boolean - not array & objects
 });
 
+UI.registerHelper('workItem', function(id){
+  return Cento.WorkItems.findOne({_id: id});
+});
 
 UI.registerHelper('isActivePath', function(path){
   var current = Router.current();

@@ -130,9 +130,13 @@ Template.ideation.events({
       title: title,
       description: description,
       created:new Date()
+    }, function(e, modelingId){
+      Cento.WorkItems.update({_id: ideation._id},
+        {$push: {related: {related_work_id: modelingId, type: 'referred'}}});
+      modal.modal('hide');
     });
 
-    modal.modal('hide');
+
     return false;
 
 
