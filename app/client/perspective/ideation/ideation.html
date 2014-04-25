@@ -60,12 +60,20 @@
 
              <form data-card_id="{{_id}}">
                <div class="form-group">
+                 <label>Type</label>
+                 <div>
+                 <select name="type" class="">
+                    <option value="modeling">Modeling</option>
+                 </select>
+                 </div>
+               </div>
+               <div class="form-group">
                  <label>Title</label>
                  <input class="form-control" type="text" name="title">
                </div>
                <div class="form-group">
                  <label>Description</label>
-                 <textarea class="comment_text form-control" rows="3"></textarea>
+                 <textarea class="comment_text form-control" rows="3">{{body}}</textarea>
                </div>
           <h4>Assignee</h4>
           <div class="form-group">
@@ -103,12 +111,32 @@
               {{#each attachments}}
               <li><img src="{{fileIconPath name}}"> <a href="/data/{{name}}">{{name}} ({{size}})</a></li>
               {{/each}}
-          </ul>
+            </ul>
           </div>
+          {{#if related.length}}
+
+
+
+
+          <div class="panel panel-success related">
+            <div class="panel-heading">
+              <h4 class="panel-title">Referenced</h4>
+            </div>
+            <div class="panel-body">
+              <ul class="list-unstyled">
+                {{#each related}}
+                {{#with getWorkItem related_work_id}}
+                <li><i class="glyphicon glyphicon-random"></i> &nbsp;<a href="/solutions/{{solution_id}}/modelings/{{_id}}">{{title}}</a></li>
+                {{/with}}
+                {{/each}}
+              </ul>
+            </div>
+          </div>
+          {{/if}}
           <div class="datetime">{{formatDate created 'YYYY-MM-DD HH:mm:ss'}}</div>
           <div class="post_actions">
             Votes : {{votes}}
-            <a href="#" class="create_task"><i class="glyphicon glyphicon-arrow-up"></i> create task</a>
+            <a href="#" class="create_task"><i class="glyphicon glyphicon-arrow-up"></i> create</a>
             <a href="#" class="upvote_post"><i class="glyphicon glyphicon-arrow-up"></i> upvote</a>
             <a href="#" class="downvote_post"><i class="glyphicon glyphicon-arrow-down"></i> downvote</a>
             <a href="#" class="delete_post"><i class="glyphicon glyphicon-remove"></i> delete</a>

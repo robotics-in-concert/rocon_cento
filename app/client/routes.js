@@ -101,6 +101,18 @@ Router.map(function(){
   this.route('solutions_modelings', {
     path: '/solutions/:solution/modelings',
     template: 'modeling_list',
+    onBeforeAction: function(){
+      var firstItem = Cento.WorkItems.findOne({
+        type: Cento.WorkItemTypes.MODELING,
+        solution_id: this.params.solution
+      });
+
+      console.log('obc........');
+
+      Router.go('solutions_modelings_show', {solution: this.params.solution, item: firstItem._id});
+
+
+    },
     data: function(){
       var data = {};
 
