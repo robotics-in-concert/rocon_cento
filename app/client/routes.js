@@ -7,8 +7,9 @@ var Hooks = {
   'loginRequired': function(pause){
     if(!Meteor.user()){
       alertify.error("Please login.");
-      this.render('login');
-      pause();
+      // this.render('login');
+      // pause();
+      this.redirect('login')
       return false;
     }
   }
