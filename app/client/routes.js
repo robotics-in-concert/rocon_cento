@@ -1,12 +1,27 @@
 
+/*
+ * Hooks
+ *
+ */
+var Hooks = {
+  'loginRequired': function(pause){
+    if(!Meteor.user()){
+      alertify.error("Please login.");
+      this.render('login');
+      pause();
+      return false;
+    }
+  }
+
+};
 
 Router.configure({
   layoutTemplate: 'layout',
 });
 
-Router.before(function(){
-  Session.set('currentSolution', Cento.Solutions.findOne({_id: this.params.solution}));
-});
+// Router.before(function(){
+  // Session.set('currentSolution', Cento.Solutions.findOne({_id: this.params.solution}));
+// });
 
 
 Router.map(function(){
@@ -290,3 +305,4 @@ Router.map(function(){
     */
 
 });
+Router.onBeforeAction(Hooks.loginRequired, {except: ['login']});
