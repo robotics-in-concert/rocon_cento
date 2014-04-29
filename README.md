@@ -25,14 +25,17 @@ cento_server
     
 ### Run on a private machine
 
- - Register application to Github(https://github.com/settings/applications)
-  - Fill Homepage URL and Authorization callback URL form( ex: http://127.0.0.1:3000 )
+ - Register application to Github (https://github.com/settings/applications)
+  - Fill Homepage URL and Authorization callback URL form:
+    - Homepage URL: http://localhost:3000
+    - Authorization callback URL: http://localhost:3000/_oauth/github?close
  - Connect to mongoDB and insert login service configuration
   
     ``` 
     use cento
     db.meteor_accounts_loginServiceConfiguration.insert({ "_id" : "Arbitary Value like(S5mtDCFeruAAEgSnC)",
-    "service" : "github", "clientId" : "Your ID", "secret" :  "Your Password" })
+    "service" : "github", "clientId" : "Your Client ID", "secret" :
+"Your Client Secret" })
     ```
  - Run
  
