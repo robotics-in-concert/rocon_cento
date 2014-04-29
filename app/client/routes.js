@@ -96,6 +96,18 @@ Router.map(function(){
   });
 
 
+  this.route('solutions_management', {
+    path: '/solutions/:solution/management',
+    template: 'management',
+    data: function(){
+      var data = {};
+      var sid = this.params.solution;
+      data.ideations = Cento.WorkItems.find({type: Cento.WorkItemTypes.IDEA, solution_id: sid});
+      data.modeling = Cento.WorkItems.find({type: Cento.WorkItemTypes.IDEA, solution_id: sid});
+      return data;
+    }
+  });
+
 
 
   this.route('solutions_modelings', {
@@ -161,11 +173,6 @@ Router.map(function(){
       var data = {};
       return data;
     }
-  });
-
-  this.route('management', {
-    path: '/management',
-    template: 'management'
   });
 
   this.route('solution', {
