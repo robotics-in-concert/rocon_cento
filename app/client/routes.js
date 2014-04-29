@@ -5,7 +5,7 @@
  */
 var Hooks = {
   'loginRequired': function(pause){
-    if(!Meteor.user()){
+    if(!(Meteor.loggingIn() || Meteor.user())){
       alertify.error("Please login.");
       // this.render('login');
       // pause();
@@ -20,9 +20,10 @@ Router.configure({
   layoutTemplate: 'layout',
 });
 
-// Router.before(function(){
-  // Session.set('currentSolution', Cento.Solutions.findOne({_id: this.params.solution}));
-// });
+Router.onBeforeAction(function(){
+  Session.set('currentSolution', Cento.Solutions.findOne({_id: this.params.solution}));
+});
+Router.onBeforeAction(Hooks.loginRequired, {except: ['login']});
 
 
 Router.map(function(){
@@ -306,4 +307,3 @@ Router.map(function(){
     */
 
 });
-Router.onBeforeAction(Hooks.loginRequired, {except: ['login']});

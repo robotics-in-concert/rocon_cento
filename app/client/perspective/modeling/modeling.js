@@ -14,6 +14,13 @@ Template.modeling_show.events({
     });
     // t.find('input[type=file]').value = '';
   },
+  'click .delete_artifact': function(e){
+    var aid = $(e.target).closest('[data-artifact_id]').data('artifact_id')
+    console.log(aid);
+    Cento.Artifacts.remove({_id:aid});
+    alertify.success('Artifact deleted.');
+    return false;
+  },
   'click .create_artifact': function(e){
     var f = $(e.target).closest('form');
     var modal = $(e.target).closest('.modal');
@@ -30,7 +37,7 @@ Template.modeling_show.events({
     var file = f.find('input[type=file]')[0].files[0];
     
     Meteor.saveFile(file, function(e, r){
-      Cento.Artifacts.update({_id: id}, {$push: {attachments: {name: r}}});
+      Cento.Artifacts.update({_id: id}, {$push: {attachments: {_id: Random.id(), name: r}}});
       modal.modal('hide');
 
     });
