@@ -13,5 +13,11 @@ Template.admin_user_needs.events({
     f[0].reset();
     return false;
 
+  },
+  'click .delete_group': function(){
+
+    Cento.WorkGroups.remove({_id: this._id});
+    return false;
+
   }
 });

@@ -1,12 +1,29 @@
 
+/*
+ * Hooks
+ *
+ */
+var Hooks = {
+  'loginRequired': function(pause){
+    if(!(Meteor.loggingIn() || Meteor.user())){
+      alertify.error("Please login.");
+      // this.render('login');
+      // pause();
+      this.redirect('login')
+      return false;
+    }
+  }
+
+};
 
 Router.configure({
   layoutTemplate: 'layout',
 });
 
-Router.before(function(){
+Router.onBeforeAction(function(){
   Session.set('currentSolution', Cento.Solutions.findOne({_id: this.params.solution}));
 });
+Router.onBeforeAction(Hooks.loginRequired, {except: ['login']});
 
 
 Router.map(function(){

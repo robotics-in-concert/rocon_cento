@@ -9,13 +9,27 @@ Template.comments.events({
     Cento.WorkItems.update({_id: id},
         {$push: {comments:{_id: Random.id(), body: txt, 'created':new Date(), user_id: Meteor.userId()}}});
     f[0].reset();
+
+
+    //email
+    var m = txt.match(/@(\S+)/g);
+    if(m){
+      m.forEach(function(login){
+        login = login.substr(1);
+        Meteor.call('notify', login, 'notification : commented', txt);
+      });
+
+    }
+      
+
+
+
     return false;
   },
 
   'click .delete_comment': function(e){
-    var pid = $(e.target).closest('li.post').data('post_id');
+    var pid = $(e.target).closest('.work_item[data-id]').data('id');
     var cid = $(e.target).closest('li').data('comment_id');
-    console.log(cid);
     Cento.WorkItems.update({_id:pid}, {$pull:{comments:{_id: cid}}});
     return false;
   }

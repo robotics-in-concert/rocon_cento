@@ -72,6 +72,9 @@
 {{#with workItem}}
 
 
+<div class="work_item" data-id="{{_id}}">
+
+
 <div class="well">
   <blockquote>
     <p>{{related_ideation.body}}</p>
@@ -92,7 +95,10 @@
     <ul class="images">
   {{#each ../artifacts}}
     {{#each attachments}}
-      <li><a href="/data/{{name}}" target="_blank"><img src="/data/{{name}}" width="200" height="200"></a></li>
+    <li data-artifact_id="{{../_id}}">
+    <p><a href="/data/{{name}}" target="_blank"><img src="/data/{{name}}" width="200" height="200"></a></p>
+    <a href="#" class="delete_artifact"><i class="glyphicon glyphicon-remove"></i> delete</a>
+    </li>
     {{/each}}
   {{else}}
     No artifacts...
@@ -141,6 +147,9 @@
 
     </div>
   </div>
+</div>
+
+
 </div>
 
 
