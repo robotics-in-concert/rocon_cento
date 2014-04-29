@@ -12,6 +12,7 @@ CMD="
 export PORT=$PORT;
 export ROOT_URL=$ROOT_URL;
 export MONGO_URL=$MONGO_URL;
+export MAIL_URL=$MAIL_URL;
 
 cd $DEPLOY_PATH/git;
 
