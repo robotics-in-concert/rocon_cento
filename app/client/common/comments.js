@@ -13,9 +13,8 @@ Template.comments.events({
   },
 
   'click .delete_comment': function(e){
-    var pid = $(e.target).closest('li.post').data('post_id');
+    var pid = $(e.target).closest('.work_item[data-id]').data('id');
     var cid = $(e.target).closest('li').data('comment_id');
-    console.log(cid);
     Cento.WorkItems.update({_id:pid}, {$pull:{comments:{_id: cid}}});
     return false;
   }
