@@ -13,9 +13,9 @@
     <!-- /list -->
     <!-- list -->
     <div data-id="{{_id}}" class="list">
-      <h1>Ideation</h1>
+      <h1>Modeling</h1>
       <ul class="cards">
-        {{#each ideations}}
+        {{#each modelings}}
           {{> card}}
         {{/each}}
       </ul>
@@ -37,10 +37,10 @@
   {{/if}}
   </div>
 
-    {{#if users}}
+    {{#if assignee}}
     <ul class="card_users">
-      {{#each users}}
-      <li><img src="{{avatar_src}}" width="25" height="25"></li>
+      {{#each assignee}}
+      <li><img src="{{avatarUrl .}}" width="25" height="25"></li>
       {{/each}}
     </ul>
     {{/if}}

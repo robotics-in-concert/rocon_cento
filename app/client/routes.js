@@ -103,7 +103,7 @@ Router.map(function(){
       var data = {};
       var sid = this.params.solution;
       data.ideations = Cento.WorkItems.find({type: Cento.WorkItemTypes.IDEA, solution_id: sid});
-      data.modeling = Cento.WorkItems.find({type: Cento.WorkItemTypes.IDEA, solution_id: sid});
+      data.modelings = Cento.WorkItems.find({type: Cento.WorkItemTypes.MODELING, solution_id: sid});
       return data;
     }
   });
