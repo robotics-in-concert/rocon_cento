@@ -13,6 +13,14 @@ Template.management.rendered = function(){
 
 };
 Template.card.events({
+  'click .card': function(e){
+    var m = this;
+
+
+    Router.go('solutions_modelings_show', {solution: m.solution_id, item: m._id});
+
+    return false;
+  },
   'click .more': function(e){
     var m = this;
 
