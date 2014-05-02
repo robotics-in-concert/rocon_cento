@@ -1,3 +1,16 @@
+
+@font-face {
+  font-family: 'Myriad';
+  src: url('/fonts/MyriadPro-Regular.otf')  format('truetype');
+  /* -webkit-font-smoothing: antialiased; */
+       
+}
+
+@light-blue-color: #E2F5FC;
+@blue-color: #0099ff;
+@gray-color: #666666;
+@white-color: white;
+
 .clearfix {
   position: relative;
   overflow: hidden;
@@ -10,6 +23,12 @@
   select.form-control {
     margin-top: 10px;
 
+  }
+
+  li > a {
+    line-height: 36px;
+    padding-top: 20px;
+    padding-bottom: 16px;
   }
 
 }
@@ -28,7 +47,13 @@
 }
 
 body, select {
-  font-family: 'PT Sans', sans-serif;
+  font-family: 'Myriad', sans-serif;
+}
+
+.contents {
+  /* margin-top: 70px; */
+  /* padding-top: 10px; */
+
 }
 
 h2 {
@@ -36,8 +61,115 @@ h2 {
 
 }
 
+
+
+.lnb {
+  .button {
+    border-radius: 0;
+    border: solid 2px @blue-color;
+    background: white;
+    width: 100%;
+    padding: 10px 0;
+
+  }
+
+  h3 {
+    color: @blue-color;
+    font-size: 16px;
+
+  }
+
+  .recent_events {
+    li {
+      background-color: #e2f5fc;
+      font-size: 12px;
+      padding: 5px;
+      margin-bottom: 5px;
+      
+
+
+      &.alt {
+        background-color: #f3f3f3;
+      }
+      .head {
+        color: @blue-color;
+
+      }
+    }
+
+  }
+
+  .solution {
+    border: solid 3px @blue-color;
+    margin-bottom: 10px;
+    .detail {
+      color: @gray-color;
+      padding: 3px;
+
+      h4 {
+        margin-top: 10px;
+        margin-bottom: 3px;
+        font-size: 12px;
+        color: @blue-color;
+      }
+
+
+      .members {
+        li { display: inline-block; }
+
+      }
+
+    }
+    h2 {
+      background-color: @blue-color;
+      margin: 0;
+      color: white;
+      font-size: 16px;
+      padding: 8px 2px;
+
+    }
+
+  }
+
+}
+a {
+  color: #333;
+  &:hover {
+    color: @blue-color;
+  }
+}
+.ct.heading.ttop {
+  /* color: @blue-color; */
+  color: @blue-color;
+  font-size: 16px;
+
+}
+.ct.table {
+  th, td { border: 0; }
+
+
+  &.blue > tbody > tr:nth-child(odd) > td,
+  &.blue > tbody > tr:nth-child(odd) > th {
+    background-color: @light-blue-color;
+  }
+  &.gray > tbody > tr:nth-child(odd) > td,
+  &.gray > tbody > tr:nth-child(odd) > th {
+    background-color: #f3f3f3;
+  }
+
+}
+
 .navbar {
   background: white;
+
+}
+
+.filters {
+  select {
+    width: 100px;
+    display: inline-block;
+    margin-right: 10px;
+  }
 
 }
 

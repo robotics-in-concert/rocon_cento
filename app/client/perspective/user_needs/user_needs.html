@@ -2,93 +2,203 @@
 <template name="user_needs">
 
 <div id="ideation">
-  <h2>User Needs</h2>
-
-
 
   <div class="row">
 
-    <div class="col-md-3">
+    <div class="col-md-2">
+    
+      <div class="lnb">
+        <button class="button large">My needs Reg</button>
+        <h3>Recent event</h3>
+        
+        <ul class="recent_events list-unstyled">
+          <li>
+            <div class="head">Reply from huey.</div>
+            <div class="body">qweoifjqowief jqoiwef j...</div>
+          </li>
+          <li>
+            <div class="head">Reply from huey.</div>
+            <div class="body">qweoifjqowief jqoiwef j...</div>
+          </li>
+          <li class="alt">
+            <div class="head">Reply from huey.</div>
+            <div class="body">qweoifjqowief jqoiwef j...</div>
+          </li>
+        </ul>
+
+
+      </div>
       
-      <ul class="nav nav-pills nav-stacked">
-        <li class="{{#unless currentWorkGroup}}active{{/unless}}"><a href="?group=">All</a></li>
-        {{#each workGroups}}
-        <li class="{{activeIfEq ../currentWorkGroup._id _id}}"><a href="?group={{_id}}">
-          {{title}}
-        </a></li>
-        {{/each}}
-      </ul>
+      <!-- <ul class="nav nav-pills nav-stacked"> -->
+        <!-- <li class="{{#unless currentWorkGroup}}active{{/unless}}"><a href="?group=">All</a></li> -->
+        <!-- {{#each workGroups}} -->
+        <!-- <li class="{{activeIfEq ../currentWorkGroup._id _id}}"><a href="?group={{_id}}"> -->
+          <!-- {{title}} -->
+        <!-- </a></li> -->
+        <!-- {{/each}} -->
+      <!-- </ul> -->
     </div>
     
-    <div class="col-md-9">
+    <div class="col-md-10">
       {{#if currentUser}}
       {{#if currentWorkGroup}}
-      <div class="well dropzone">
-        <form data-category="{{category}}">
-        <div class="form-group"><textarea class="form-control" rows="3"></textarea></div>
-        <div class="form-group">
-          <ul>
-            {{#each filesToAttach}}
-              <li>{{name}}</li>
-            {{/each}}
-          </ul>
-        </div>
-        <div class="text-right">
-          <button type="submit" class="btn post btn-default">Submit</button>
-        </div>
-        </form>
-        <div class="dropmask">&nbsp;</div>
-        <div class="dropinfo">
-          Drop here to attach.
-        </div>
+      <!-- <div class="well dropzone"> -->
+        <!-- <form data-category="{{category}}"> -->
+        <!-- <div class="form-group"><textarea class="form-control" rows="3"></textarea></div> -->
+        <!-- <div class="form-group"> -->
+          <!-- <ul> -->
+            <!-- {{#each filesToAttach}} -->
+              <!-- <li>{{name}}</li> -->
+            <!-- {{/each}} -->
+          <!-- </ul> -->
+        <!-- </div> -->
+        <!-- <div class="text-right"> -->
+          <!-- <button type="submit" class="btn post btn-default">Submit</button> -->
+        <!-- </div> -->
+        <!-- </form> -->
+        <!-- <div class="dropmask">&nbsp;</div> -->
+        <!-- <div class="dropinfo"> -->
+          <!-- Drop here to attach. -->
+        <!-- </div> -->
+      <!-- </div> -->
+      {{/if}}
+      {{/if}}
+
+      <h3 class="ct heading ttop">New Replys list to @me</h3>
+      <table class="ct blue table table-striped">
+        {{#each notifications}}
+        <tr>
+          <td>1</td>
+          <td><a href="#" class="show">{{body}}</a></td>
+          <td>{{votes}}</td>
+          <td>{{comments.length}}</td>
+          <td>{{username user}}</td>
+          <td class="datetime">{{formatDate created 'YYYY-MM-DD'}}</td>
+          <td>tag1, tag2</td>
+
+        </tr>
+        {{/each}}
+
+      </table>
+      <div class="filters">
+        <select class="form-control">
+          <option>qwerqwer</option>
+          <option>qwerqwer</option>
+          <option>qwerqwer</option>
+        </select>
+        <select class="form-control">
+          <option>qwerqwer</option>
+          <option>qwerqwer</option>
+          <option>qwerqwer</option>
+        </select>
       </div>
-      {{/if}}
-      {{/if}}
+
+      <table class="ct gray table table-striped">
+        <thead>
+          <th>Rank</th>
+          <th>Title</th>
+          <th>Vote</th>
+          <th>Reply</th>
+          <th>Writer</th>
+          <th>Date</th>
+          <th>Tags</th>
+        </thead>
+        {{#each workItems}}
+        <tr>
+          <td>1</td>
+          <td><a href="#" class="show">{{body}}</a></td>
+          <td>{{votes}}</td>
+          <td>{{comments.length}}</td>
+          <td>{{username user}}</td>
+          <td class="datetime">{{formatDate created 'YYYY-MM-DD'}}</td>
+          <td>tag1, tag2</td>
+
+<div id="modal-{{_id}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                  <h4 class="modal-title">Create Solution</h4>
+                </div>
+
+                <div class="modal-body">
+                  <div class="left">
+
+                       <form data-card_id="{{_id}}">
+                         <div class="form-group">
+                           <label>Title</label>
+                           <input class="form-control" type="text" name="title">
+                         </div>
+                         <div class="form-group">
+                           <label>Description</label>
+                           <textarea class="comment_text form-control" rows="3"></textarea>
+                         </div>
+                         <div class="form-group">
+                           <label>Groups</label>
+                           <select name="groups" multiple class="form-control"></select>
+                           <input class="form-control" type="text" name="group_title">
+                           <a href="#" class="btn add_group btn-default btn-sm">add</a>
 
 
+                         </div>
+                       <button type="submit" class="create_solution btn btn-default">Create</button>
+                       </form>
+
+
+                  </div>
+                </div>
+
+
+              </div>
+            </div>
+          </div>
+        </tr>
+        {{/each}}
+
+      </table>
       <ul class="posts list-unstyled">
         {{#each workItems}}
         <li class="post" data-post_id="{{_id}}">
 
-<div id="modal-{{_id}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title">Create Solution</h4>
-      </div>
+          <div id="modal2-{{_id}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                  <h4 class="modal-title">Create Solution</h4>
+                </div>
 
-      <div class="modal-body">
-        <div class="left">
+                <div class="modal-body">
+                  <div class="left">
 
-             <form data-card_id="{{_id}}">
-               <div class="form-group">
-                 <label>Title</label>
-                 <input class="form-control" type="text" name="title">
-               </div>
-               <div class="form-group">
-                 <label>Description</label>
-                 <textarea class="comment_text form-control" rows="3"></textarea>
-               </div>
-               <div class="form-group">
-                 <label>Groups</label>
-                 <select name="groups" multiple class="form-control"></select>
-                 <input class="form-control" type="text" name="group_title">
-                 <a href="#" class="btn add_group btn-default btn-sm">add</a>
-
-
-               </div>
-             <button type="submit" class="create_solution btn btn-default">Create</button>
-             </form>
+                       <form data-card_id="{{_id}}">
+                         <div class="form-group">
+                           <label>Title</label>
+                           <input class="form-control" type="text" name="title">
+                         </div>
+                         <div class="form-group">
+                           <label>Description</label>
+                           <textarea class="comment_text form-control" rows="3"></textarea>
+                         </div>
+                         <div class="form-group">
+                           <label>Groups</label>
+                           <select name="groups" multiple class="form-control"></select>
+                           <input class="form-control" type="text" name="group_title">
+                           <a href="#" class="btn add_group btn-default btn-sm">add</a>
 
 
-        </div>
-      </div>
+                         </div>
+                       <button type="submit" class="create_solution btn btn-default">Create</button>
+                       </form>
 
 
-    </div>
-  </div>
-</div>
+                  </div>
+                </div>
+
+
+              </div>
+            </div>
+          </div>
 
           {{#if solutions.length}}
 <div class="mark">
@@ -121,11 +231,6 @@
         {{/each}}
       </ul>
 
-      {{#if posts.length}}
-      <div id="showMoreResults center">
-        <button class="btn btn-default loading">Loading...</button>
-      </div>
-      {{/if}}
     </div>
 
     </div>

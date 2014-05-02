@@ -34,6 +34,14 @@ Template.user_needs.rendered = function(){
 };
 
 Template.user_needs.events({
+  'click .show': function(e){
+    var id = this._id;
+    var m = $(e.target).closest('tr').find('.modal');
+    
+    // $('#modal-'+id).modal();
+    m.modal();
+    return false;
+  },
   'blur .body': function(e){
     var $e = $(e.target);
     Cento.WorkItems.update({_id:this._id}, {$set:{body: $e.html()}});

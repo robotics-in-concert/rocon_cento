@@ -57,6 +57,13 @@ Router.map(function(){
           return doc;
         }
        });
+      data.notifications = Cento.WorkItems.find(query, {limit: 4, sort: {'created': -1},
+        transform: function(doc){
+          doc.user = Meteor.users.findOne(doc.user_id);
+          doc.solutions = Cento.Solutions.find({'related.related_work_id': doc._id}).fetch();
+          return doc;
+        }
+       });
 
       return data;
     }
@@ -75,6 +82,8 @@ Router.map(function(){
       var sid = this.params.solution;
     
       var data = {};
+      data.solutions = Cento.Solutions.find({});
+      data.users = Meteor.users.find({});
       
       data.workGroups = Cento.WorkGroups.find({solution_id: sid});
       var query = {type: Cento.WorkItemTypes.IDEA, solution_id: sid};
