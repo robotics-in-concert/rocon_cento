@@ -62,6 +62,15 @@ Router.map(function(){
     }
   });
 
+  this.route('solutions_ideations_show', {
+    path: '/solutions/:solution/ideations/:item',
+    template: 'ideation_show',
+    data: function(){
+      var data = {};
+      data.workItem = Cento.WorkGroups.findOne({_id: this.params.item});
+      return data;
+    }
+  });
   this.route('solutions_ideations', {
     path: '/solutions/:solution/ideations',
     template: 'ideation',
