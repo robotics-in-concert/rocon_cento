@@ -26,7 +26,8 @@ Router.map(function(){
     template: 'solutions',
     data: function(){
       return {
-        solutions: Cento.Solutions.find({})
+        solutions: Cento.Solutions.find({}),
+        users: Meteor.users.find({'services.github': {$exists: true}}).fetch()
       }
 
     }
