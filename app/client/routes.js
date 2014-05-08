@@ -94,6 +94,13 @@ Router.map(function(){
         data.currentWorkGroup = Cento.WorkGroups.findOne(groupId);
       }
 
+      data.notifications = Cento.WorkItems.find(query, {limit: 4, sort: {'created': -1},
+        transform: function(doc){
+          doc.user = Meteor.users.findOne(doc.user_id);
+          doc.solutions = Cento.Solutions.find({'related.related_work_id': doc._id}).fetch();
+          return doc;
+        }
+       });
       data.workItems = Cento.WorkItems.find(query, {limit: Session.get('itemsLimit'), sort: {'created': -1},
         transform: function(doc){
           doc.user = Meteor.users.findOne(doc.user_id);
@@ -117,7 +124,6 @@ Router.map(function(){
         solution_id: this.params.solution
       });
 
-      console.log('obc........');
 
       Router.go('solutions_modelings_show', {solution: this.params.solution, item: firstItem._id});
 

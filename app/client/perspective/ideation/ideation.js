@@ -49,6 +49,14 @@ Template.ideation.events({
 
   },
 
+  'click .toggle_rel': function(e){
+    var $e = $(e.target);
+    var $tr = $e.closest('tr').next('tr');
+    $tr.toggle();
+
+    return false;
+  },
+
   'click .delete_post': function(){
     Cento.WorkItems.remove({_id: this._id});
   },

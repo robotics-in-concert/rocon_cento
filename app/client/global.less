@@ -180,6 +180,17 @@ a {
     color: @blue-color;
   }
 }
+
+form.ct {
+  select {
+    background-color: @blue-color;
+    border: none;
+    color: @white-color;
+    overflow-y: auto;
+
+  }
+}
+
 .ct.btn {
   background-color: @blue-color;
   border: none;
@@ -197,18 +208,28 @@ a {
   border-radius: 0;
 }
 .ct.table {
-  th, td { border: 0; }
+  th, td { border: 0; background-color: white; }
 
 
   &.blue > tbody > tr:nth-child(odd) > td,
   &.blue > tbody > tr:nth-child(odd) > th {
     background-color: @light-blue-color;
   }
-  &.gray > tbody > tr:nth-child(odd) > td,
-  &.gray > tbody > tr:nth-child(odd) > th {
-    background-color: @row-alt-bg-color;
+  &.gray.normal > tbody > tr:nth-child(odd) { 
+    & > td, & > th {
+      background-color: @row-alt-bg-color;
+    }
   }
-
+  &.gray.extra_row > tbody > tr:nth-child(4n+1) { 
+    & > td {
+      background-color: @row-alt-bg-color;
+    }
+  }
+  &.gray.extra_row > tbody > tr:nth-child(4n+2) { 
+    & > td {
+      background-color: @row-alt-bg-color;
+    }
+  }
 }
 
 .modal.user_needs_show {
