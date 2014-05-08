@@ -1,3 +1,20 @@
+Template.modelings.helpers({
+  'users': function(){
+    return Meteor.users.find({'services.github': {$exists: true}}).fetch();
+  }
+
+});
+
+Template.modelings.events({
+
+  'click .toggle_rel': function(e){
+    var $e = $(e.target);
+    var $tr = $e.closest('tr').next('tr');
+    $tr.toggle();
+
+    return false;
+  }
+});
 Template.modeling_item.events({
   'change select': function(e){
     var newStatus = $(e.target).val();

@@ -72,7 +72,7 @@
         {{#each notifications}}
         <tr>
           <td>1</td>
-          <td><a href="#" class="show">{{body}}</a></td>
+          <td><a href="#" class="show">{{title}}</a></td>
           <td>{{votes}}</td>
           <td>{{comments.length}}</td>
           <td>{{username user}}</td>
@@ -98,24 +98,32 @@
       </div>
       <table class="ct gray extra_row table">
         <thead>
-          <th>Rank</th>
+          <th>State</th>
           <th>Title</th>
           <th>Vote</th>
           <th>Reply</th>
-          <th>Writer</th>
           <th>Date</th>
-          <th>Tags</th>
+          <th>Asignees</th>
+          <th>Reviewers</th>
           <th></th>
         </thead>
         {{#each workItems}}
         <tr>
-          <td>1</td>
-          <td><a href="#" class="show">{{body}}</a></td>
+          <td><span class="label {{itemStatusLabelClass status}} ">{{status}}</span></td>
+          <td><a href="#" class="show">{{title}}</a></td>
           <td>{{votes}}</td>
           <td>{{comments.length}}</td>
-          <td>{{username user}}</td>
           <td class="datetime">{{formatDate created 'YYYY-MM-DD'}}</td>
-          <td>tag1, tag2</td>
+          <td>
+          {{#each assignee}}
+            <span class="ib"><img src="{{avatarUrl .}}" height="25"></span>
+          {{/each}}
+          </td>
+          <td>
+          {{#each reviewers}}
+            <span class="ib"><img src="{{avatarUrl .}}" height="25"></span>
+          {{/each}}
+          </td>
           <td>
           {{#if related.length}}
             <a href="#" class="toggle_rel"><i class="glyphicon glyphicon-random"></i></a>
@@ -124,7 +132,7 @@
 
         </tr>
         <tr style="display:none;">
-          <td colspan="8">
+          <td colspan="7">
             {{#each related}}
             {{#with getWorkItem related_work_id}}
             <p><a href="/solutions/{{solution_id}}/modelings/{{_id}}">{{title}}</a></p>
