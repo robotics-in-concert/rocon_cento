@@ -1,23 +1,46 @@
 <template name="ideation">
 
 <div id="ideation">
-  <h2><span class="label label-primary">{{currentSolution.title}}</span> - Ideation</h2>
 
 
 
   <div class="row">
 
-    <div class="col-md-3">
-      
-      <ul class="nav nav-pills nav-stacked">
-        <li class="{{#unless currentWorkGroup}}active{{/unless}}"><a href="?group=">All</a></li>
-        {{#each workGroups}}
-        <li class="{{activeIfEq ../currentWorkGroup._id _id}}"><a href="?group={{_id}}">{{title}}</a></li>
+    <div class="col-md-2">
+      <div class="lnb">
+        <div class="solution solution_box">
+          {{#with currentSolution}}
+          <h2>{{currentSolution.title}}</h2>
+          <div class="detail">
+            <p>{{description}}</p>
+            <h4 class="members_heading">Members</h4>
+            <ul class="members list-unstyled">
+              {{#each users}}
+              <li><img src="{{avatarUrl .}}" height="20"></li>
+              {{/each}}
+            </ul>
+          </div>
+
+          {{/with}}
+        </div>
+      </div>
+
+      <select class="form-control" data-current_solution="{{solution._id}}">
+        <option value="">Select Solution..</option>
+        {{#each solutions}}
+         <option value="{{_id}}">{{title}}</option>
         {{/each}}
-      </ul>
+      </select>
+      
+      <!-- <ul class="nav nav-pills nav-stacked"> -->
+        <!-- <li class="{{#unless currentWorkGroup}}active{{/unless}}"><a href="?group=">All</a></li> -->
+        <!-- {{#each workGroups}} -->
+        <!-- <li class="{{activeIfEq ../currentWorkGroup._id _id}}"><a href="?group={{_id}}">{{title}}</a></li> -->
+        <!-- {{/each}} -->
+      <!-- </ul> -->
     </div>
     
-    <div class="col-md-9">
+    <div class="col-md-10">
       {{#if currentUser}}
       {{#if currentWorkGroup}}
       <div class="well dropzone">

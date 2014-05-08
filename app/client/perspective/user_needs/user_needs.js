@@ -34,6 +34,14 @@ Template.user_needs.rendered = function(){
 };
 
 Template.user_needs.events({
+  'click .show': function(e){
+    var id = this._id;
+    var m = $(e.target).closest('tr').find('.modal_show');
+    
+    // $('#modal-'+id).modal();
+    m.modal();
+    return false;
+  },
   'blur .body': function(e){
     var $e = $(e.target);
     Cento.WorkItems.update({_id:this._id}, {$set:{body: $e.html()}});
@@ -95,33 +103,39 @@ Template.user_needs.events({
 
   'click .create_solution': function(e){
     var ideation = this;
-    var f = $(e.target).closest('form');
-    var modal = $(e.target).closest('.modal');
-    var title = f.find('input[name=title]').val();
-    var description = f.find('textarea').val();
+    var $t = $(e.target);
 
-    var sid = Cento.Solutions.insert({
-      solution_id: this.solution_id,
-      related: [
-        {
-          related_work_id: ideation._id,
-          type: 'reference'
-        }
-      ],
-      user_id: Meteor.userId(),
-      title: title,
-      description: description,
-      created:new Date()
-    });
+    $('.modal:visible').on('hidden.bs.modal', function(){
+      console.log('hhhhhhhhhhhhhhhhhh');
+      $('#modal-'+ideation._id).modal('show');
+    }).modal('hide');
+    // var f = $(e.target).closest('form');
+    // var modal = $(e.target).closest('.modal');
+    // var title = f.find('input[name=title]').val();
+    // var description = f.find('textarea').val();
+
+    // var sid = Cento.Solutions.insert({
+      // solution_id: this.solution_id,
+      // related: [
+        // {
+          // related_work_id: ideation._id,
+          // type: 'reference'
+        // }
+      // ],
+      // user_id: Meteor.userId(),
+      // title: title,
+      // description: description,
+      // created:new Date()
+    // });
 
 
 
-    f.find('select option').each(function(){
-      Cento.WorkGroups.insert({solution_id: sid, title: $(this).text()});
+    // f.find('select option').each(function(){
+      // Cento.WorkGroups.insert({solution_id: sid, title: $(this).text()});
 
-    });
+    // });
 
-    modal.modal('hide');
+    // modal.modal('hide');
     return false;
 
 
