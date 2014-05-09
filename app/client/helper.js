@@ -8,7 +8,6 @@ UI.registerHelper('getWorkItem', function(id){
 
 UI.registerHelper('isActivePath', function(path){
   var current = Router.current();
-  console.log(current);
   return current && current.route.name == path;
 });
 

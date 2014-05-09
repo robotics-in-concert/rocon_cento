@@ -5,6 +5,13 @@ Template.modelings.helpers({
 
 });
 
+Template.modeling_modal.helpers({
+  'artifacts': function(wid){
+    return Cento.Artifacts.find({work_item_id: wid});
+
+ }
+});
+
 Template.modelings.events({
 
   'click .toggle_rel': function(e){
@@ -13,7 +20,12 @@ Template.modelings.events({
     $tr.toggle();
 
     return false;
-  }
+  },
+  'click .show': function(e){
+    var id = this._id;
+    $('#modal-'+id).modal();
+    return false;
+  },
 });
 Template.modeling_item.events({
   'change select': function(e){

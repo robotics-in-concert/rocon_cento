@@ -1,3 +1,36 @@
+<template name="user_needs_form_modal">
+<div class="modal user_needs_form fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">New User Needs</h4>
+      </div>
+
+      <div class="modal-body">
+        <div class="left">
+
+             <form data-card_id="{{_id}}" class="ct">
+               <div class="form-group">
+                 <label>Title</label>
+                 <input class="form-control" type="text" name="title">
+               </div>
+               <div class="form-group">
+                 <label>Description</label>
+                 <textarea name="description" class="comment_text form-control" rows="8"></textarea>
+               </div>
+             <button type="submit" class="post btn btn-default">Create</button>
+             </form>
+
+
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+</template>
 <template name="user_needs_create_solution_modal">
 <div id="modal-{{_id}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -67,7 +100,7 @@
             {{#each comments}} 
             <li class="comment" data-comment_id="{{_id}}"> 
             <span class="user">
-              <!-- <img src="{{avatarUrl user_id}}" height="18"> -->
+              <img src="{{avatarUrl user_id}}" height="18">
               <a href="#">{{username user_id}}</a></span>
               <span class="body">{{body}}</span>
               <!-- <span class="datetime">{{formatDate created 'YYYY-MM-DD HH:mm:ss'}}</span> -->
@@ -98,8 +131,10 @@
     <div class="col-md-2">
     
       <div class="lnb">
-        <button class="button large">My needs Reg</button>
+        <button class="button large new_needs">My needs Reg</button>
         <h3>Recent event</h3>
+
+        {{>user_needs_form_modal}}
         
         <ul class="recent_events list-unstyled">
           <li>
@@ -119,40 +154,9 @@
 
       </div>
       
-      <!-- <ul class="nav nav-pills nav-stacked"> -->
-        <!-- <li class="{{#unless currentWorkGroup}}active{{/unless}}"><a href="?group=">All</a></li> -->
-        <!-- {{#each workGroups}} -->
-        <!-- <li class="{{activeIfEq ../currentWorkGroup._id _id}}"><a href="?group={{_id}}"> -->
-          <!-- {{title}} -->
-        <!-- </a></li> -->
-        <!-- {{/each}} -->
-      <!-- </ul> -->
     </div>
     
     <div class="col-md-10">
-      {{#if currentUser}}
-      {{#if currentWorkGroup}}
-      <!-- <div class="well dropzone"> -->
-        <!-- <form data-category="{{category}}"> -->
-        <!-- <div class="form-group"><textarea class="form-control" rows="3"></textarea></div> -->
-        <!-- <div class="form-group"> -->
-          <!-- <ul> -->
-            <!-- {{#each filesToAttach}} -->
-              <!-- <li>{{name}}</li> -->
-            <!-- {{/each}} -->
-          <!-- </ul> -->
-        <!-- </div> -->
-        <!-- <div class="text-right"> -->
-          <!-- <button type="submit" class="btn post btn-default">Submit</button> -->
-        <!-- </div> -->
-        <!-- </form> -->
-        <!-- <div class="dropmask">&nbsp;</div> -->
-        <!-- <div class="dropinfo"> -->
-          <!-- Drop here to attach. -->
-        <!-- </div> -->
-      <!-- </div> -->
-      {{/if}}
-      {{/if}}
 
       <h3 class="ct heading ttop">New Replys list to @me</h3>
       <table class="ct blue table table-striped">
@@ -197,7 +201,7 @@
         {{#each workItems}}
         <tr>
           <td>1</td>
-          <td><a href="#" class="show">{{body}}</a></td>
+          <td><a href="#" class="show">{{title}}</a></td>
           <td>{{votes}}</td>
           <td>{{comments.length}}</td>
           <td>{{username user}}</td>

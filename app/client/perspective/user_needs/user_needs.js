@@ -20,6 +20,43 @@ Template.user_needs.helpers({
   }
 });
 
+Template.user_needs_form_modal.events({
+  'click .btn.post': function(e){
+    var f = $(e.target).closest('form');
+    var title = $('input[name=title]').val();
+    var txt = $('textarea').val();
+    var files = Session.get('filesToAttach');
+    var attachments = _.map(files, function(f){
+      return _.pick(f, 'name', 'size', 'type');
+    });
+
+    
+    try{
+      Cento.WorkItems.insert({
+        type: Cento.WorkItemTypes.USER_NEEDS,
+        // work_group_id: this.currentWorkGroup._id,
+        user_id: Meteor.userId(),
+        title: title,
+        body: txt,
+        created:new Date(),
+        votes: 0,
+        attachments: attachments
+      });
+
+      if(files && files.length > 0){
+        Meteor.saveFile(files[0], console.log);
+      }
+      f[0].reset();
+      $('.modal.user_needs_form').modal('hide');
+      alertify.success('Successfully created.');
+    }catch(e){
+      console.error(e.message);
+      console.trace(e);
+    }
+    return false;
+  },
+});
+
 Template.user_needs.rendered = function(){
   new Cento.DragAndDrop();
 
@@ -34,6 +71,10 @@ Template.user_needs.rendered = function(){
 };
 
 Template.user_needs.events({
+  'click .new_needs': function(e){
+    $('.modal.user_needs_form').modal();
+    return false;
+  },
   'click .show': function(e){
     var id = this._id;
     var m = $(e.target).closest('tr').find('.modal_show');
@@ -56,38 +97,6 @@ Template.user_needs.events({
   },
   'click .downvote_post': function(){
     Cento.WorkItems.update({_id: this._id}, {$inc: {votes:-1}});
-  },
-  'click .btn.post': function(e){
-    var f = $(e.target).closest('form');
-    var txt = $('textarea').val();
-    var files = Session.get('filesToAttach');
-    var attachments = _.map(files, function(f){
-      return _.pick(f, 'name', 'size', 'type');
-    });
-
-    
-    try{
-      Cento.WorkItems.insert({
-        type: Cento.WorkItemTypes.USER_NEEDS,
-        work_group_id: this.currentWorkGroup._id,
-        user_id: Meteor.userId(),
-        title: txt,
-        body: txt,
-        created:new Date(),
-        votes: 0,
-        attachments: attachments
-      });
-
-      if(files && files.length > 0){
-        Meteor.saveFile(files[0], console.log);
-      }
-      f[0].reset();
-      alertify.success('Successfully created.');
-    }catch(e){
-      console.error(e.message);
-      console.trace(e);
-    }
-    return false;
   },
   'click .create_task': function(e){
     console.log('xxx');
