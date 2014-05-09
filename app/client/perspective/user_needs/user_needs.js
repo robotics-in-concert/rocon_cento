@@ -112,12 +112,7 @@ Template.user_needs.events({
 
   'click .create_solution': function(e){
     var ideation = this;
-    var $t = $(e.target);
-
-    $('.modal:visible').on('hidden.bs.modal', function(){
-      console.log('hhhhhhhhhhhhhhhhhh');
-      $('#modal-'+ideation._id).modal('show');
-    }).modal('hide');
+    $('#modal-'+ideation._id).modal('show');
     // var f = $(e.target).closest('form');
     // var modal = $(e.target).closest('.modal');
     // var title = f.find('input[name=title]').val();
