@@ -29,7 +29,8 @@ Template.user_needs_form_modal.events({
     var attachments = _.map(files, function(f){
       return _.pick(f, 'name', 'size', 'type');
     });
-
+    var tags = $('.tag').toArray().map(function(e){ return e.value; });
+    tags = _.compact(tags);
     
     try{
       Cento.WorkItems.insert({
@@ -40,6 +41,7 @@ Template.user_needs_form_modal.events({
         body: txt,
         created:new Date(),
         votes: 0,
+        tags: tags,
         attachments: attachments
       });
 

@@ -19,6 +19,20 @@
                  <label>Description</label>
                  <textarea name="description" class="comment_text form-control" rows="8"></textarea>
                </div>
+               <div class="form-group">
+                 <label>Tags</label>
+                 <div class="row">
+                   <div class="col-xs-2">
+                     <input class="tag form-control col-xs-2" type="text" name="title">
+                   </div>
+                   <div class="col-xs-2">
+                     <input class="tag form-control col-xs-2" type="text" name="title">
+                   </div>
+                   <div class="col-xs-2">
+                     <input class="tag form-control col-xs-2" type="text" name="title">
+                   </div>
+                 </div>
+               </div>
              <button type="submit" class="post btn btn-default">Create</button>
              </form>
 
@@ -206,7 +220,7 @@
           <td>{{comments.length}}</td>
           <td>{{username user}}</td>
           <td class="datetime">{{formatDate created 'YYYY-MM-DD'}}</td>
-          <td>tag1, tag2</td>
+          <td>{{tagsJoin tags}}</td>
 
           {{> user_needs_show_modal}}
           {{> user_needs_create_solution_modal}}

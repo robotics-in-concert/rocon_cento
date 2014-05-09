@@ -2,6 +2,13 @@ UI.registerHelper('$eq', function (a, b) {
   return (a === b); //Only text, numbers, boolean - not array & objects
 });
 
+UI.registerHelper('tagsJoin', function(tags){
+  if(tags){
+    return tags.join(", ");
+  }
+  return "";
+});
+
 UI.registerHelper('getWorkItem', function(id){
   return Cento.WorkItems.findOne({_id: id});
 });
