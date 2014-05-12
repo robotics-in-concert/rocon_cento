@@ -43,6 +43,10 @@ Template.ideation.rendered = function(){
 
 
 Template.ideation.events({
+  'click .new_ideation': function(e){
+    $('.modal.ideation_form').modal();
+    return false;
+  },
   'blur .body': function(e){
     var $e = $(e.target);
     Cento.WorkItems.update({_id:this._id}, {$set:{body: $e.html()}});
