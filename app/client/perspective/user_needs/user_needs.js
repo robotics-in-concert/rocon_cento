@@ -94,12 +94,6 @@ Template.user_needs.events({
   'click .delete_post': function(){
     Cento.WorkItems.remove({_id: this._id});
   },
-  'click .upvote_post': function(){
-    Cento.WorkItems.update({_id: this._id}, {$inc: {votes:1}});
-  },
-  'click .downvote_post': function(){
-    Cento.WorkItems.update({_id: this._id}, {$inc: {votes:-1}});
-  },
   'click .create_task': function(e){
     console.log('xxx');
     var ideation_id = this._id;
