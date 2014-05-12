@@ -1,0 +1,36 @@
+<template name="user_needs_show_modal">
+<div id="modal-show-{{_id}}" class="modal user_needs_show modal_show fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">User Needs</h4>
+      </div>
+
+      <div class="modal-body">
+
+        <h2>{{body}}</h2>
+
+        <div class="meta">
+          <p>Tag : tag, tag2, tag3</p>
+          <p>Tag : tag, tag2, tag3</p>
+          <p>Tag : tag, tag2, tag3</p>
+        </div>
+        <button type="submit" class="create_solution ct btn btn-default">Create Project</button>
+
+
+
+        {{>modal_comment}}
+        <div class="actions">
+          <button class="btn upvote ct">upvote</button>
+          <button class="btn downvote ct">downvote</button>
+        </div>
+      </div> <!-- /modal-body -->
+
+
+    </div>
+  </div>
+</div>
+
+</template>
+
