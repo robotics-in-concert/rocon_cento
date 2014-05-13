@@ -16,7 +16,7 @@
 </div>
 
   <select class="form-control" name="solutions" data-current_solution="{{solution._id}}">
-    <option value="">Select Solution..</option>
+    <option value="">Select Project..</option>
     {{#each solutions}}
     <option value="{{_id}}" selected="{{#if $eq solution._id _id}}true{{/if}}">{{title}}</option>
     {{/each}}

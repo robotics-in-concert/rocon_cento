@@ -38,9 +38,9 @@ Router.map(function(){
     }
   });
 
-  this.route('solutions', {
-    path: '/solutions',
-    template: 'solutions',
+  this.route('projects', {
+    path: '/projects',
+    template: 'projects',
     data: function(){
       return {
         solutions: Cento.Solutions.find({}),
