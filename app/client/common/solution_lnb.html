@@ -1,0 +1,26 @@
+<template name="solution_lnb">
+<div class="solution solution_box">
+  {{#with currentSolution}}
+  <h2>{{currentSolution.title}}</h2>
+  <div class="detail">
+    <p>{{description}}</p>
+    <h4 class="members_heading">Members</h4>
+    <ul class="members list-unstyled">
+      {{#each users}}
+      <li><img src="{{avatarUrl .}}" height="20"></li>
+      {{/each}}
+    </ul>
+  </div>
+
+  {{/with}}
+</div>
+
+  <select class="form-control" name="solutions" data-current_solution="{{solution._id}}">
+    <option value="">Select Solution..</option>
+    {{#each solutions}}
+    <option value="{{_id}}" selected="{{#if $eq solution._id _id}}true{{/if}}">{{title}}</option>
+    {{/each}}
+  </select>
+      
+
+</template>

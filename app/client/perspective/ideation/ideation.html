@@ -9,30 +9,9 @@
     <div class="col-md-2">
       <div class="lnb">
         <button class="button large new_ideation">New Ideation</button>
-        <div class="solution solution_box">
-          {{#with currentSolution}}
-          <h2>{{currentSolution.title}}</h2>
-          <div class="detail">
-            <p>{{description}}</p>
-            <h4 class="members_heading">Members</h4>
-            <ul class="members list-unstyled">
-              {{#each users}}
-              <li><img src="{{avatarUrl .}}" height="20"></li>
-              {{/each}}
-            </ul>
-          </div>
-
-          {{/with}}
-        </div>
+        {{> solution_lnb }}
       </div>
 
-      <select class="form-control" data-current_solution="{{solution._id}}">
-        <option value="">Select Solution..</option>
-        {{#each solutions}}
-         <option value="{{_id}}">{{title}}</option>
-        {{/each}}
-      </select>
-      
       <!-- <ul class="nav nav-pills nav-stacked"> -->
         <!-- <li class="{{#unless currentWorkGroup}}active{{/unless}}"><a href="?group=">All</a></li> -->
         <!-- {{#each workGroups}} -->
