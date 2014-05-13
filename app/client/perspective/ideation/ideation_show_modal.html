@@ -1,5 +1,6 @@
 <template name="ideation_show_modal">
-<div id="modal-show-{{_id}}" class="modal ideation_show modal_show fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+<div id="modal-show-ideation" class="modal ideation_show modal_show fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+{{#with currentIdeation}}
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -29,6 +30,7 @@
 
     </div>
   </div>
+{{/with}}
 </div>
 
 </template>

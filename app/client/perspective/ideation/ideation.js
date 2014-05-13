@@ -7,6 +7,9 @@ Template.ideation.helpers({
   },
   'new_replys': function(login){
     return Cento.WorkItems.find({type: Cento.WorkItemTypes.IDEA, 'comments.body': new RegExp("@"+login)}).fetch();
+  },
+  'currentIdeation': function(){
+    return Session.get('currentIdeation');
   }
 
 
@@ -43,7 +46,8 @@ Template.ideation.rendered = function(){
 
 Template.ideation.events({
   'click .show': function(e){
-    $('#modal-show-'+this._id).modal();
+    Session.set('currentIdeation', this._id);
+    $('#modal-show-ideation').modal();
     return false;
   },
   'click .new_ideation': function(e){

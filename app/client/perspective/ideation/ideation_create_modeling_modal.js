@@ -1,10 +1,18 @@
+Template.ideation_create_modeling_modal.helpers({
+  'currentIdeation': function(){
+    return Cento.WorkItems.findOne({_id: Session.get('currentIdeation')});
+  }
+
+});
 Template.ideation_create_modeling_modal.rendered = function(){
+  $(function(){
   $('select.select2').select2({width: '200px'});
+  });
 
 };
 Template.ideation_create_modeling_modal.events({
   'click .create_task': function(e){
-    var ideation = this;
+    var ideation = Cento.WorkItems.findOne({_id: Session.get('currentIdeation')});
     var f = $(e.target).closest('form');
     var modal = $(e.target).closest('.modal');
     var title = f.find('input[name=title]').val();
@@ -20,7 +28,7 @@ Template.ideation_create_modeling_modal.events({
       Cento.WorkItems.insert({
         type: Cento.WorkItemTypes.MODELING,
         status: Cento.WorkItemStatus.TODO,
-        solution_id: this.solution_id,
+        solution_id: ideation.solution_id,
         related: [
           {
             related_work_id: ideation._id,
