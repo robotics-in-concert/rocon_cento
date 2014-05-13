@@ -1,6 +1,7 @@
 
 Template.solution_lnb.helpers({
   'users': function(){
+
     return Meteor.users.find({'services.github': {$exists: true}}).fetch();
     // return Meteor.users.find({});
   },
