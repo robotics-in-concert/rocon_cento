@@ -1,5 +1,19 @@
+UI.registerHelper('default', function(a, x) {
+  if(typeof a === 'undefined'){
+    return x;
+  }
+  return a;
+});
+
 UI.registerHelper('$eq', function (a, b) {
   return (a === b); //Only text, numbers, boolean - not array & objects
+});
+
+UI.registerHelper('tagsJoin', function(tags){
+  if(tags){
+    return tags.join(", ");
+  }
+  return "";
 });
 
 UI.registerHelper('getWorkItem', function(id){
@@ -8,7 +22,6 @@ UI.registerHelper('getWorkItem', function(id){
 
 UI.registerHelper('isActivePath', function(path){
   var current = Router.current();
-  console.log(current);
   return current && current.route.name == path;
 });
 
@@ -73,6 +86,10 @@ UI.registerHelper('avatarUrl', function(user){
     return "";
   }
 
+});
+
+UI.registerHelper('allUsers', function(){
+  return Meteor.users.find();
 });
 
 UI.registerHelper('username', function(user){

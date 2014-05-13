@@ -43,7 +43,8 @@ Router.map(function(){
     template: 'solutions',
     data: function(){
       return {
-        solutions: Cento.Solutions.find({})
+        solutions: Cento.Solutions.find({}),
+        users: Meteor.users.find({'services.github': {$exists: true}}).fetch()
       }
 
     }
@@ -74,6 +75,14 @@ Router.map(function(){
           return doc;
         }
        });
+      data.notifications = Cento.WorkItems.find(query, {limit: 4, sort: {'created': -1},
+        transform: function(doc){
+          doc.user = Meteor.users.findOne(doc.user_id);
+          doc.solutions = Cento.Solutions.find({'related.related_work_id': doc._id}).fetch();
+          return doc;
+        }
+       });
+      data.actions = Cento.Actions.find({type: Cento.ActionTypes.COMMENT_ON_USERNEEDS}, {limit: 5, sort: {created_at: -1}});
 
       return data;
     }
@@ -92,6 +101,8 @@ Router.map(function(){
       var sid = this.params.solution;
     
       var data = {};
+      data.solutions = Cento.Solutions.find({});
+      data.users = Meteor.users.find({});
       
       data.workGroups = Cento.WorkGroups.find({solution_id: sid});
       var query = {type: Cento.WorkItemTypes.IDEA, solution_id: sid};
@@ -101,6 +112,13 @@ Router.map(function(){
         data.currentWorkGroup = Cento.WorkGroups.findOne(groupId);
       }
 
+      data.notifications = Cento.WorkItems.find(query, {limit: 4, sort: {'created': -1},
+        transform: function(doc){
+          doc.user = Meteor.users.findOne(doc.user_id);
+          doc.solutions = Cento.Solutions.find({'related.related_work_id': doc._id}).fetch();
+          return doc;
+        }
+       });
       data.workItems = Cento.WorkItems.find(query, {limit: Session.get('itemsLimit'), sort: {'created': -1},
         transform: function(doc){
           doc.user = Meteor.users.findOne(doc.user_id);
@@ -117,27 +135,33 @@ Router.map(function(){
 
   this.route('solutions_modelings', {
     path: '/solutions/:solution/modelings',
-    template: 'modeling_list',
+    template: 'modelings',
     onBeforeAction: function(){
-      var firstItem = Cento.WorkItems.findOne({
-        type: Cento.WorkItemTypes.MODELING,
-        solution_id: this.params.solution
-      });
-
-      console.log('obc........');
-
-      Router.go('solutions_modelings_show', {solution: this.params.solution, item: firstItem._id});
-
-
     },
     data: function(){
       var data = {};
 
-      data.workItems = Cento.WorkItems.find({
-        type: Cento.WorkItemTypes.MODELING,
-        solution_id: this.params.solution
-      });
+      var sid = this.params.solution;
+    
+      data.solutions = Cento.Solutions.find({});
+      data.users = Meteor.users.find({});
+      
+      data.workGroups = Cento.WorkGroups.find({solution_id: sid});
+      var query = {type: Cento.WorkItemTypes.MODELING, solution_id: sid};
 
+      data.notifications = Cento.WorkItems.find(query, {limit: 4, sort: {'created': -1},
+        transform: function(doc){
+          doc.user = Meteor.users.findOne(doc.user_id);
+          doc.solutions = Cento.Solutions.find({'related.related_work_id': doc._id}).fetch();
+          return doc;
+        }
+       });
+      data.workItems = Cento.WorkItems.find(query, {limit: Session.get('itemsLimit'), sort: {'created': -1},
+        transform: function(doc){
+          doc.user = Meteor.users.findOne(doc.user_id);
+          return doc;
+        }
+       });
 
       return data;
     }

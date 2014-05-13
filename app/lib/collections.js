@@ -21,3 +21,17 @@ Cento.WorkItemStatus = {
   DONE: 'done'
 };
 
+Cento.ActionTypes = {
+  COMMENT: 'comment',
+  COMMENT_ON_USERNEEDS: 'comment_on_user_needs',
+  POST_IDEATION: 'post_ideation',
+  POST_USER_NEEDS: 'post_user_needs',
+  POST_ARTIFACTS: 'post_artifacts'
+};
+
+
+
+
+Cento.createAction = function(type, refId, extra){
+  Cento.Actions.insert({type: type, user_id: Meteor.userId(), created_at: new Date(), ref_id: refId, extra: extra});
+};

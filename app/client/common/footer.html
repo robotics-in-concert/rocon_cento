@@ -1,0 +1,46 @@
+<template name="footer">
+<div id="footer">
+
+  <div class="container">
+
+    <div class="nav-wrap">
+          <ul class="nav navbar-nav">
+            {{#if currentSolution}}
+            <li class="{{#if isActivePath 'solutions_ideations' }}active{{/if}}"><a href="/solutions/{{currentSolution._id}}/ideations">Ideation</a></li>
+            <li class="{{#if isActivePath 'solutions_modelings' }}active{{/if}} {{#if isActivePath 'solutions_modelings_show' }}active{{/if}}"><a href="/solutions/{{currentSolution._id}}/modelings">Modeling</a></li>
+            <li class="{{#if isActivePath 'battle_loom' }}active{{/if}}"><a href="/battle_loom">Battle loom</a></li>
+            <li class="{{#if isActivePath 'solution' }}active{{/if}}"><a href="/solutions">Solution</a></li>
+            <li class="{{#if isActivePath 'management' }}active{{/if}}"><a href="/management">Management</a></li>
+            {{else}}
+            <li class="{{#if isActivePath 'user_needs' }}active{{/if}}"><a href="/user_needs">User Needs</a></li>
+            {{/if}}
+
+          </ul>
+          <!-- <ul class="nav navbar-nav"> -->
+            <!-- <li><a href="#">qwerqwer</a></li> -->
+            <!-- <li><a href="#">qwerqwer</a></li> -->
+            <!-- <li><a href="#">qwerqwer</a></li> -->
+            <!-- <li><a href="#">qwerqwer</a></li> -->
+            <!-- <li><a href="#">qwerqwer</a></li> -->
+          <!-- </ul> -->
+    </div>
+
+
+    <hr />
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin elementum posuere elit sit amet lacinia. Mauris nunc elit, bibendum et lacinia in, vulputate ullamcorper metus. Nullam nec mattis elit. Maecenas risus metus, tincidunt et euismod eu, ultricies ac dui. Curabitur euismod posuere ante vel porttitor. Nulla ut elementum magna, in porta arcu. Etiam risus magna, commodo vitae gravida sed, porttitor eget urna. Donec vitae tortor nec turpis placerat faucibus ut elementum augue. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Proin congue leo vitae turpis mollis, a imperdiet lorem semper. Quisque et diam at sapien consectetur sagittis. Duis tortor nulla, pretium ut tristique ut, mattis sed nisi. Nulla convallis consequat erat at laoreet. Maecenas eu sapien eros.
+    <div class="copyright">
+    <hr />
+      <p class="line1">
+      Yujin Robot Co., Ltd  |  Tel. + 82 70 4657 7000  | Namseong Plaza Rm #1214, 130, Digital-ro, Geumcheon-gu, Seoul <br />
+      Contact us : hkyoo@yujinrobot.com
+      </p>
+
+      <p class="line2">
+      Copyright © 2014 YUJIN ROBOT All rights reserved. <br />
+      All rights reserved including the right of reproduction in whole or in part in any form.
+      </p>
+    </div>
+  </div>
+
+</div>
+</template>

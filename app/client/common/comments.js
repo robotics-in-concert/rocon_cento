@@ -8,6 +8,7 @@ Template.comments.events({
     
     Cento.WorkItems.update({_id: id},
         {$push: {comments:{_id: Random.id(), body: txt, 'created':new Date(), user_id: Meteor.userId()}}});
+    Cento.createAction(Cento.ActionTypes.COMMENT, id, {body: txt});
     f[0].reset();
 
 

@@ -5,12 +5,14 @@ Template.ideation.helpers({
     Session.setDefault('filesToAttach', []);
     return Session.get('filesToAttach');
   },
-
-
-  'users': function(){
-    return Meteor.users.find({'services.github': {$exists: true}}).fetch();
-    // return Meteor.users.find({});
+  'new_replys': function(login){
+    return Cento.WorkItems.find({type: Cento.WorkItemTypes.IDEA, 'comments.body': new RegExp("@"+login)}).fetch();
+  },
+  'currentIdeation': function(){
+    return Session.get('currentIdeation');
   }
+
+
 });
 
 function showMoreVisible(){
@@ -43,10 +45,27 @@ Template.ideation.rendered = function(){
 
 
 Template.ideation.events({
+  'click .show': function(e){
+    Session.set('currentIdeation', this._id);
+    $('#modal-show-ideation').modal();
+    return false;
+  },
+  'click .new_ideation': function(e){
+    $('.modal.ideation_form').modal();
+    return false;
+  },
   'blur .body': function(e){
     var $e = $(e.target);
     Cento.WorkItems.update({_id:this._id}, {$set:{body: $e.html()}});
 
+  },
+
+  'click .toggle_rel': function(e){
+    var $e = $(e.target);
+    var $tr = $e.closest('tr').next('tr');
+    $tr.toggle();
+
+    return false;
   },
 
   'click .delete_post': function(){
@@ -90,60 +109,5 @@ Template.ideation.events({
     }
     return false;
   },
-  'click .create_task': function(e){
-    console.log('xxx');
-    var ideation_id = this._id;
-    $('#modal-'+ideation_id).find('select').select2();
-    // $('#modal-'+ideation_id).find('select:not([name=type])').select2();
-    // $('#modal-'+ideation_id).find('select').select2().on('change', function(e){
-      // $(this).data("selected", e.val.join());
-    // });
-      
-    $('#modal-'+ideation_id).modal();
-
-    return false;
-  },
-
-  'click .create_modeling_task': function(e){
-    var ideation = this;
-    var f = $(e.target).closest('form');
-    var modal = $(e.target).closest('.modal');
-    var title = f.find('input[name=title]').val();
-    var description = f.find('textarea').val();
-
-
-    var workType = f.find('select[name=type]').select2('val');
-    var assignee = f.find('select[name=assignee]').select2('val');
-    var reviewers = f.find('select[name=reviewers]').select2('val');
-
-    Cento.WorkItems.insert({
-      type: workType,
-      status: Cento.WorkItemStatus.TODO,
-      solution_id: this.solution_id,
-      related: [
-        {
-          related_work_id: ideation._id,
-          type: 'reference'
-        }
-      ],
-      user_id: Meteor.userId(),
-      assignee: assignee,
-      reviewers: reviewers,
-      title: title,
-      description: description,
-      created:new Date()
-    }, function(e, modelingId){
-      Cento.WorkItems.update({_id: ideation._id},
-        {$push: {related: {related_work_id: modelingId, type: 'referred'}}});
-      modal.modal('hide');
-      alertify.success('Successfully created.');
-    });
-
-
-    return false;
-
-
-  }
-
 
 });

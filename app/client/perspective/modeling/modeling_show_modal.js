@@ -1,0 +1,39 @@
+
+Template.modeling_show_modal.helpers({
+  'artifacts': function(wid){
+    return Cento.Artifacts.find({work_item_id: wid});
+
+ }
+});
+
+
+
+Template.modeling_show_modal.events({
+  'click .create_artifact': function(e){
+    $('#modal-'+this._id+'.create_artifact').modal();
+    return false;
+  },
+  'click .show_artifact': function(e){
+    var aid = $(e.target).closest('li').data('artifact_id');
+    // console.log(aid);
+    $('#modal-'+aid+'.show_artifact').modal();
+    return false;
+  },
+
+  'change select[name=status]': function(e){
+    var newVal = $(e.target).val();
+    console.log(newVal);
+    Cento.WorkItems.update({_id: this._id}, {$set: {status: newVal}});
+  },
+  'click .upvote': function(e){
+    Cento.WorkItems.update({_id: this._id}, {$inc: {votes:1}});
+    $(e.target).closest('.modal').modal('hide');
+
+  },
+  'click .downvote': function(e){
+    Cento.WorkItems.update({_id: this._id}, {$inc: {votes:-1}});
+    $(e.target).closest('.modal').modal('hide');
+  }
+
+
+});

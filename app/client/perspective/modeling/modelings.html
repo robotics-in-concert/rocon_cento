@@ -1,25 +1,17 @@
-<template name="ideation">
 
-<div id="ideation">
+<template name="modelings">
+
+<div id="modelings">
 
 
-  {{> ideation_show_modal}}
-  {{>ideation_new_modal}}
-  {{> ideation_create_modeling_modal}}
+
   <div class="row">
 
     <div class="col-md-2">
       <div class="lnb">
-        <button class="button large new_ideation">New Ideation</button>
         {{> solution_lnb }}
       </div>
 
-      <!-- <ul class="nav nav-pills nav-stacked"> -->
-        <!-- <li class="{{#unless currentWorkGroup}}active{{/unless}}"><a href="?group=">All</a></li> -->
-        <!-- {{#each workGroups}} -->
-        <!-- <li class="{{activeIfEq ../currentWorkGroup._id _id}}"><a href="?group={{_id}}">{{title}}</a></li> -->
-        <!-- {{/each}} -->
-      <!-- </ul> -->
     </div>
     
     <div class="col-md-10">
@@ -53,8 +45,8 @@
         {{#each new_replys currentUser.profile.login}}
         <tr>
           <td>1</td>
-          <td><a href="#" class="show">{{body}}</a></td>
-          <td>{{votes}}</td>
+          <td><a href="#" class="show">{{title}}</a></td>
+          <td>{{default votes 0}}</td>
           <td>{{comments.length}}</td>
           <td>{{username user}}</td>
           <td class="datetime">{{formatDate created 'YYYY-MM-DD'}}</td>
@@ -66,7 +58,7 @@
       <div class="filters">
         <select class="form-control">
           <option>qwerqwer</option>
-          <option>qwerqwer</option>
+          <option>qwerqwer123123</option>
           <option>qwerqwer</option>
         </select>
         <i class="glyphicon glyphicon-chevron-down"></i>
@@ -79,24 +71,32 @@
       </div>
       <table class="ct gray extra_row table">
         <thead>
-          <th>Rank</th>
+          <th>State</th>
           <th>Title</th>
           <th>Vote</th>
           <th>Reply</th>
-          <th>Writer</th>
           <th>Date</th>
-          <th>Tags</th>
+          <th>Asignees</th>
+          <th>Reviewers</th>
           <th></th>
         </thead>
         {{#each workItems}}
         <tr>
-          <td>1</td>
+          <td><span class="label {{itemStatusLabelClass status}} ">{{status}}</span></td>
           <td><a href="#" class="show">{{title}}</a></td>
-          <td>{{votes}}</td>
+          <td>{{default votes 0}}</td>
           <td>{{default comments.length 0}}</td>
-          <td>{{username user}}</td>
           <td class="datetime">{{formatDate created 'YYYY-MM-DD'}}</td>
-          <td>{{tagsJoin tags}}</td>
+          <td>
+          {{#each assignee}}
+            <span class="ib"><img src="{{avatarUrl .}}" height="25"></span>
+          {{/each}}
+          </td>
+          <td>
+          {{#each reviewers}}
+            <span class="ib"><img src="{{avatarUrl .}}" height="25"></span>
+          {{/each}}
+          </td>
           <td>
           {{#if related.length}}
             <a href="#" class="toggle_rel"><i class="glyphicon glyphicon-random"></i></a>
@@ -105,7 +105,7 @@
 
         </tr>
         <tr style="display:none;">
-          <td colspan="8">
+          <td colspan="7">
             {{#each related}}
             {{#with getWorkItem related_work_id}}
             <p><a href="/solutions/{{solution_id}}/modelings/{{_id}}">{{title}}</a></p>
@@ -114,6 +114,11 @@
           </td>
         
         </tr>
+        {{>modeling_show_modal}}
+        {{#each artifacts _id}}
+          {{> modeling_show_artifact_modal}}
+        {{/each}}
+        {{>modeling_create_artifact_modal}}
         {{/each}}
 
       </table>

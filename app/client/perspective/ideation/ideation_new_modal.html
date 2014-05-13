@@ -1,0 +1,47 @@
+<template name="ideation_new_modal">
+<div class="modal ideation_form fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">New Ideation</h4>
+      </div>
+
+      <div class="modal-body">
+        <div class="left">
+
+             <form data-card_id="{{_id}}" class="ct">
+               <div class="form-group">
+                 <label>Title</label>
+                 <input class="form-control" type="text" name="title">
+               </div>
+               <div class="form-group">
+                 <label>Description</label>
+                 <textarea name="description" class="comment_text form-control" rows="8"></textarea>
+               </div>
+               <div class="form-group">
+                 <label>Tags</label>
+                 <div class="row">
+                   <div class="col-xs-2">
+                     <input class="tag form-control col-xs-2" type="text" name="title">
+                   </div>
+                   <div class="col-xs-2">
+                     <input class="tag form-control col-xs-2" type="text" name="title">
+                   </div>
+                   <div class="col-xs-2">
+                     <input class="tag form-control col-xs-2" type="text" name="title">
+                   </div>
+                 </div>
+               </div>
+             <button type="submit" class="post btn btn-default">Create</button>
+             </form>
+
+
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+</template>

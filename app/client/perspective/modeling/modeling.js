@@ -1,3 +1,32 @@
+Template.modelings.helpers({
+  'users': function(){
+    return Meteor.users.find({'services.github': {$exists: true}}).fetch();
+  },
+
+  'artifacts': function(wid){
+    return Cento.Artifacts.find({work_item_id: wid});
+
+ },
+  'new_replys': function(login){
+    return Cento.WorkItems.find({type: Cento.WorkItemTypes.MODELING, 'comments.body': new RegExp("@"+login)}).fetch();
+  }
+});
+
+Template.modelings.events({
+
+  'click .toggle_rel': function(e){
+    var $e = $(e.target);
+    var $tr = $e.closest('tr').next('tr');
+    $tr.toggle();
+
+    return false;
+  },
+  'click .show': function(e){
+    var id = this._id;
+    $('#modal-'+id).modal();
+    return false;
+  },
+});
 Template.modeling_item.events({
   'change select': function(e){
     var newStatus = $(e.target).val();
