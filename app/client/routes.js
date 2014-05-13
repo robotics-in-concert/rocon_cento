@@ -96,6 +96,14 @@ Router.map(function(){
       Session.setDefault('itemsLimit', ITEMS_PER_PAGE);
       Session.set('filesToAttach', []);
     },
+    onBeforeAction: function(){
+      if(location.hash){
+        Template.ideation_show_modal.rendered = function(){
+          Session.set('currentIdeation', location.hash.substring(1));
+          $('#modal-show-ideation').modal();
+        };
+      }
+    },
     data: function(){
       var groupId = this.params.group;
       var sid = this.params.solution;
@@ -136,7 +144,9 @@ Router.map(function(){
   this.route('solutions_modelings', {
     path: '/solutions/:solution/modelings',
     template: 'modelings',
-    onBeforeAction: function(){
+    onAfterAction: function(){
+      console.log(location.hash);
+
     },
     data: function(){
       var data = {};

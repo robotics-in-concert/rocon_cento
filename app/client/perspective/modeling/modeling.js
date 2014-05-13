@@ -12,6 +12,9 @@ Template.modelings.helpers({
   }
 });
 
+
+Template.modelings.rendered = function(){
+};
 Template.modelings.events({
 
   'click .toggle_rel': function(e){
