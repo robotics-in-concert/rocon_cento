@@ -88,6 +88,10 @@ UI.registerHelper('avatarUrl', function(user){
 
 });
 
+UI.registerHelper('allUsers', function(){
+  return Meteor.users.find();
+});
+
 UI.registerHelper('username', function(user){
   var u = user;
   if(typeof user === 'string'){

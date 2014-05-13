@@ -1,0 +1,85 @@
+@import "common";
+
+/*
+ * Modal
+ */
+.modal-content {
+  border-radius: 0;
+}
+
+.modal {
+  .modal-content {
+    h3, h4 {
+      color: @blue-color;
+    }
+
+  }
+
+}
+.modal.modeling {
+  .artifacts {
+
+    ul {
+      .clearfix();
+      li {
+        float: left;
+        img {
+          width: 140px;
+          margin-right: 10px;
+          margin-bottom: 10px;
+        }
+      }
+    }
+  }
+
+}
+
+.modal {
+  .modal-header {
+    color: @blue-color;
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  h2 {
+    color: @gray-color;
+  }
+  .meta {
+    color: @blue-color;
+    font-size: 12px;
+
+    p {
+      line-height: 100%;
+    }
+  }
+
+  .comment_wrap {
+    margin-top: 10px;
+
+    form {
+
+    }
+  }
+  .comments {
+    margin-top: 20px;
+    .comment {
+      padding: 5px;
+      &:nth-child(odd) {
+      background-color: @row-alt-bg-color;
+      }
+      font-size: 12px;
+      span {
+        display: block;
+      }
+      span.user a {
+        color: @blue-color;
+      }
+      span.body {
+        color: @gray-color;
+      }
+      .comment_actions { display: none; }
+
+    }
+  }
+
+}

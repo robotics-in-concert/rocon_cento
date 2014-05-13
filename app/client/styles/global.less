@@ -1,29 +1,4 @@
-@font-face {
-  font-family: 'Myriad';
-  src: url('/fonts/MyriadPro-Regular.otf')  format('truetype');
-  /* -webkit-font-smoothing: antialiased; */
-       
-}
-
-@light-blue-color: #E2F5FC;
-/* @blue-color: #0099ff; */
-@blue-color: #0099ff;
-@gray-color: #666666;
-@white-color: white;
-@row-alt-bg-color: #f3f3f3;
-
-@footer-color: #B2B1B2;
-@footer-bg-color: #060808;
-@footer-line-color: #00A1B8;
-
-
-.clearfix {
-  position: relative;
-  overflow: hidden;
-}
-.ib {
-  display: inline-block;
-}
+@import "common";
 
 #footer {
 
@@ -142,13 +117,6 @@ input.form-control, textarea.form-control {
   border: none;
 }
 
-.modal {
-  .modal-header {
-    color: @blue-color;
-    border-bottom: none;
-    padding-bottom: 0;
-  }
-}
 
 /*
 * Ideation
@@ -159,12 +127,6 @@ input.form-control, textarea.form-control {
     margin-bottom: 10px;
   }
 
-
-}
-/*
-* User Needs Modal
-*/
-.user_needs_show {
 
 }
 
@@ -284,36 +246,6 @@ form.ct {
   font-size: 16px;
 
 }
-.modal-content {
-  border-radius: 0;
-}
-
-.modal {
-  .modal-content {
-    h3, h4 {
-      color: @blue-color;
-    }
-
-  }
-
-}
-.modal.modeling {
-  .artifacts {
-
-    ul {
-      .clearfix();
-      li {
-        float: left;
-        img {
-          width: 140px;
-          margin-right: 10px;
-          margin-bottom: 10px;
-        }
-      }
-    }
-  }
-
-}
 
 .ct.table {
   th, td { border: 0; background-color: white; }
@@ -340,49 +272,7 @@ form.ct {
   }
 }
 
-.modal {
-  h2 {
-    color: @gray-color;
-  }
-  .meta {
-    color: @blue-color;
-    font-size: 12px;
 
-    p {
-      line-height: 100%;
-    }
-  }
-
-  .comment_wrap {
-    margin-top: 10px;
-
-    form {
-
-    }
-  }
-  .comments {
-    margin-top: 20px;
-    .comment {
-      padding: 5px;
-      &:nth-child(odd) {
-      background-color: @row-alt-bg-color;
-      }
-      font-size: 12px;
-      span {
-        display: block;
-      }
-      span.user a {
-        color: @blue-color;
-      }
-      span.body {
-        color: @gray-color;
-      }
-      .comment_actions { display: none; }
-
-    }
-  }
-
-}
 .navbar {
   background: white;
 
@@ -412,22 +302,6 @@ form.ct {
   }
 
 }
-
-/* .comment_wrap { */
-
-  /* li { */
-    /* border-top: dotted 1px #ccc; */
-    /* padding: 1em 0; */
-    /* font-size: 0.9em; */
-
-    /* span.datetime { color: #999; } */
-  /* } */
-  /* li:nth-child(1) { */
-    /* border-top: none; */
-  /* } */
-
-/* } */
-/* files */
 
 .images_wrap {
   padding: 10px;
