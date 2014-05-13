@@ -6,7 +6,10 @@ Template.modelings.helpers({
   'artifacts': function(wid){
     return Cento.Artifacts.find({work_item_id: wid});
 
- }
+ },
+  'new_replys': function(login){
+    return Cento.WorkItems.find({type: Cento.WorkItemTypes.MODELING, 'comments.body': new RegExp("@"+login)}).fetch();
+  }
 });
 
 Template.modelings.events({

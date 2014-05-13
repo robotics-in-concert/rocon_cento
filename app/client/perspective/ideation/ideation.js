@@ -5,6 +5,9 @@ Template.ideation.helpers({
     Session.setDefault('filesToAttach', []);
     return Session.get('filesToAttach');
   },
+  'new_replys': function(login){
+    return Cento.WorkItems.find({type: Cento.WorkItemTypes.IDEA, 'comments.body': new RegExp("@"+login)}).fetch();
+  }
 
 
 });
@@ -40,8 +43,7 @@ Template.ideation.rendered = function(){
 
 Template.ideation.events({
   'click .show': function(e){
-    var m = $(e.target).closest('tr').find('.modal.ideation_show');
-    m.modal();
+    $('#modal-show-'+this._id).modal();
     return false;
   },
   'click .new_ideation': function(e){
