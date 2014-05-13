@@ -5,13 +5,6 @@ Template.modelings.helpers({
 
 });
 
-Template.modeling_modal.helpers({
-  'artifacts': function(wid){
-    return Cento.Artifacts.find({work_item_id: wid});
-
- }
-});
-
 Template.modelings.events({
 
   'click .toggle_rel': function(e){
