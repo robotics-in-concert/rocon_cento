@@ -18,6 +18,12 @@ Template.modeling_show_modal.events({
     // console.log(aid);
     $('#modal-'+aid+'.show_artifact').modal();
     return false;
+  },
+
+  'change select[name=status]': function(e){
+    var newVal = $(e.target).val();
+    console.log(newVal);
+    Cento.WorkItems.update({_id: this._id}, {$set: {status: newVal}});
   }
 
 
