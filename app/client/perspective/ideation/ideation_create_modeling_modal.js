@@ -11,32 +11,37 @@ Template.ideation_create_modeling_modal.events({
     var description = f.find('textarea').val();
 
 
-    var workType = f.find('select[name=type]').select2('val');
-    var assignee = f.find('select[name=assignee]').select2('val');
+    // var workType = f.find('select[name=type]').select2('val');
+    var assignee = f.find('select[name=assignees]').select2('val');
     var reviewers = f.find('select[name=reviewers]').select2('val');
+    console.log(assignee, reviewers);
 
-    Cento.WorkItems.insert({
-      type: workType,
-      status: Cento.WorkItemStatus.TODO,
-      solution_id: this.solution_id,
-      related: [
-        {
-          related_work_id: ideation._id,
-          type: 'reference'
-        }
-      ],
-      user_id: Meteor.userId(),
-      assignee: assignee,
-      reviewers: reviewers,
-      title: title,
-      description: description,
-      created:new Date()
-    }, function(e, modelingId){
-      Cento.WorkItems.update({_id: ideation._id},
-        {$push: {related: {related_work_id: modelingId, type: 'referred'}}});
-      modal.modal('hide');
-      alertify.success('Successfully created.');
-    });
+    try {
+      Cento.WorkItems.insert({
+        type: Cento.WorkItemTypes.MODELING,
+        status: Cento.WorkItemStatus.TODO,
+        solution_id: this.solution_id,
+        related: [
+          {
+            related_work_id: ideation._id,
+            type: 'reference'
+          }
+        ],
+        user_id: Meteor.userId(),
+        assignee: assignee,
+        reviewers: reviewers,
+        title: title,
+        description: description,
+        created:new Date()
+      }, function(e, modelingId){
+        Cento.WorkItems.update({_id: ideation._id},
+          {$push: {related: {related_work_id: modelingId, type: 'referred'}}});
+        modal.modal('hide');
+        alertify.success('Successfully created.');
+      });
+    }catch(e){
+      console.error(e);
+    }
 
 
     return false;

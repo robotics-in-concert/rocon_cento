@@ -21,17 +21,17 @@
                </div>
                <div class="form-group">
                  <label>Asignee</label>
-                 <select class="select2" multiple>
+                 <select class="select2" name="assignees" multiple>
                    {{#each allUsers}}
-                   <option value="{{profile.login}}">{{profile.login}}</option>
+                   <option value="{{_id}}">{{profile.login}}</option>
                    {{/each}}
                  </select>
                </div>
                <div class="form-group">
                  <label>Reviewers</label>
-                 <select class="select2" multiple>
+                 <select class="select2" name="reviewers" multiple>
                    {{#each allUsers}}
-                   <option value="{{profile.login}}">{{profile.login}}</option>
+                   <option value="{{_id}}">{{profile.login}}</option>
                    {{/each}}
                  </select>
                </div>
