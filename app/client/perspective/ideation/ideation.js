@@ -43,6 +43,11 @@ Template.ideation.rendered = function(){
 
 
 Template.ideation.events({
+  'click .show': function(e){
+    var m = $(e.target).closest('tr').find('.modal.ideation_show');
+    m.modal();
+    return false;
+  },
   'click .new_ideation': function(e){
     $('.modal.ideation_form').modal();
     return false;
