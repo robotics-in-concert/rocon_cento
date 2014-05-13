@@ -32,18 +32,18 @@ Router.map(function(){
     template: 'home',
     data: function(){
       return {
-        solutions: Cento.Solutions.find({})
+        solutions: Cento.solutions()
       }
 
     }
   });
 
-  this.route('solutions', {
-    path: '/solutions',
-    template: 'solutions',
+  this.route('projects', {
+    path: '/projects',
+    template: 'projects',
     data: function(){
       return {
-        solutions: Cento.Solutions.find({}),
+        solutions: Cento.solutions(),
         users: Meteor.users.find({'services.github': {$exists: true}}).fetch()
       }
 
@@ -61,7 +61,7 @@ Router.map(function(){
       var groupId = this.params.group;
 
       data.workGroups = Cento.WorkGroups.find({solution_id: {$exists: false}});
-      var query = {type: Cento.WorkItemTypes.USER_NEEDS};
+      var query = {type: Cento.WorkItemTypes.USER_NEEDS, deleted_at: {$exists: false}};
       if(groupId && groupId !== ""){
         query.work_group_id = groupId;
         data.group_id = groupId;
@@ -96,23 +96,31 @@ Router.map(function(){
       Session.setDefault('itemsLimit', ITEMS_PER_PAGE);
       Session.set('filesToAttach', []);
     },
+    onBeforeAction: function(){
+      if(location.hash){
+        Template.ideation_show_modal.rendered = function(){
+          Session.set('currentIdeation', location.hash.substring(1));
+          $('#modal-show-ideation').modal();
+        };
+      }
+    },
     data: function(){
       var groupId = this.params.group;
       var sid = this.params.solution;
     
       var data = {};
-      data.solutions = Cento.Solutions.find({});
+      data.solutions = Cento.solutions();
       data.users = Meteor.users.find({});
       
       data.workGroups = Cento.WorkGroups.find({solution_id: sid});
-      var query = {type: Cento.WorkItemTypes.IDEA, solution_id: sid};
+      var query = {type: Cento.WorkItemTypes.IDEA, solution_id: sid, deleted_at:{$exists: false}};
       if(groupId && groupId !== ""){
         query.work_group_id = groupId;
         data.group_id = groupId;
         data.currentWorkGroup = Cento.WorkGroups.findOne(groupId);
       }
 
-      data.notifications = Cento.WorkItems.find(query, {limit: 4, sort: {'created': -1},
+      data.notifications = Cento.WorkItems.find(query, {limit: 4, sort: {'created': -1}, deleted_at: {$exists: false},
         transform: function(doc){
           doc.user = Meteor.users.findOne(doc.user_id);
           doc.solutions = Cento.Solutions.find({'related.related_work_id': doc._id}).fetch();
@@ -136,18 +144,20 @@ Router.map(function(){
   this.route('solutions_modelings', {
     path: '/solutions/:solution/modelings',
     template: 'modelings',
-    onBeforeAction: function(){
+    onAfterAction: function(){
+      console.log(location.hash);
+
     },
     data: function(){
       var data = {};
 
       var sid = this.params.solution;
     
-      data.solutions = Cento.Solutions.find({});
+      data.solutions = Cento.solutions();
       data.users = Meteor.users.find({});
       
       data.workGroups = Cento.WorkGroups.find({solution_id: sid});
-      var query = {type: Cento.WorkItemTypes.MODELING, solution_id: sid};
+      var query = {type: Cento.WorkItemTypes.MODELING, solution_id: sid, deleted_at: {$exists: false}};
 
       data.notifications = Cento.WorkItems.find(query, {limit: 4, sort: {'created': -1},
         transform: function(doc){

@@ -10,7 +10,7 @@
 
     <div class="col-md-2">
       <div class="lnb">
-        <button class="button large new_ideation">New Ideation</button>
+        <button class="button large new_ideation">New Idea</button>
         {{> solution_lnb }}
       </div>
 
@@ -65,15 +65,9 @@
       </table>
       <div class="filters">
         <select class="form-control">
-          <option>qwerqwer</option>
-          <option>qwerqwer</option>
-          <option>qwerqwer</option>
-        </select>
-        <i class="glyphicon glyphicon-chevron-down"></i>
-        <select class="form-control">
-          <option>qwerqwer</option>
-          <option>qwerqwer</option>
-          <option>qwerqwer</option>
+          <option>All ideation</option>
+          <option>Doing ideation</option>
+          <option>Modeled ideation</option>
         </select>
         <i class="glyphicon glyphicon-chevron-down"></i>
       </div>
@@ -101,6 +95,7 @@
           {{#if related.length}}
             <a href="#" class="toggle_rel"><i class="glyphicon glyphicon-random"></i></a>
           {{/if}}
+          <a href="#" class="delete"><i class="glyphicon glyphicon-remove"></i></a>
           </td>
 
         </tr>
@@ -108,7 +103,7 @@
           <td colspan="8">
             {{#each related}}
             {{#with getWorkItem related_work_id}}
-            <p><a href="/solutions/{{solution_id}}/modelings/{{_id}}">{{title}}</a></p>
+            <p><a href="/solutions/{{solution_id}}/modelings#{{_id}}">{{title}}</a></p>
             {{/with}}
             {{/each}}
           </td>

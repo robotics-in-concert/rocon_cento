@@ -19,7 +19,7 @@ Template.user_needs.helpers({
     // return Meteor.users.find({});
   },
   'new_replys': function(login){
-    return Cento.WorkItems.find({type: Cento.WorkItemTypes.USER_NEEDS, 'comments.body': new RegExp("@"+login)}).fetch();
+    return Cento.WorkItems.find({type: Cento.WorkItemTypes.USER_NEEDS, 'comments.body': new RegExp("@"+login), deleted_at: {$exists: false}}).fetch();
   }
 });
 
@@ -78,6 +78,11 @@ Template.user_needs.rendered = function(){
 Template.user_needs.events({
   'click .new_needs': function(e){
     $('.modal.user_needs_form').modal();
+    return false;
+  },
+  'click .delete': function(e){
+    var id = this._id;
+    Cento.deleteWorkItem(id);
     return false;
   },
   'click .show': function(e){

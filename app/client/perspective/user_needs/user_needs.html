@@ -92,15 +92,8 @@
       </table>
       <div class="filters">
         <select class="form-control">
-          <option>qwerqwer</option>
-          <option>qwerqwer</option>
-          <option>qwerqwer</option>
-        </select>
-        <i class="glyphicon glyphicon-chevron-down"></i>
-        <select class="form-control">
-          <option>qwerqwer</option>
-          <option>qwerqwer</option>
-          <option>qwerqwer</option>
+          <option>All needs</option>
+          <option>My needs</option>
         </select>
         <i class="glyphicon glyphicon-chevron-down"></i>
       </div>
@@ -114,6 +107,7 @@
           <th>Writer</th>
           <th>Date</th>
           <th>Tags</th>
+          <th></th>
         </thead>
         {{#each workItems}}
         <tr>
@@ -124,6 +118,9 @@
           <td>{{username user}}</td>
           <td class="datetime">{{formatDate created 'YYYY-MM-DD'}}</td>
           <td>{{tagsJoin tags}}</td>
+          <td>
+          <a href="#" class="delete"><i class="glyphicon glyphicon-remove"></i></a>
+          </td>
 
           {{> user_needs_show_modal}}
           {{> user_needs_create_solution_modal}}
