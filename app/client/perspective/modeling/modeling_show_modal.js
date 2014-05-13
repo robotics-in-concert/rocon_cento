@@ -24,6 +24,15 @@ Template.modeling_show_modal.events({
     var newVal = $(e.target).val();
     console.log(newVal);
     Cento.WorkItems.update({_id: this._id}, {$set: {status: newVal}});
+  },
+  'click .upvote': function(e){
+    Cento.WorkItems.update({_id: this._id}, {$inc: {votes:1}});
+    $(e.target).closest('.modal').modal('hide');
+
+  },
+  'click .downvote': function(e){
+    Cento.WorkItems.update({_id: this._id}, {$inc: {votes:-1}});
+    $(e.target).closest('.modal').modal('hide');
   }
 
 
