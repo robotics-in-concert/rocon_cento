@@ -4,9 +4,14 @@ Template.modal_comment.events({
     var f = $(e.target).closest('form');
     var id = this._id;
     var txt = f.find('textarea').val();
-    
-    Cento.WorkItems.update({_id: id},
-        {$push: {comments:{_id: Random.id(), body: txt, 'created':new Date(), user_id: Meteor.userId()}}});
+
+    if(this.attachments){
+      Cento.Artifacts.update({_id: id},
+          {$push: {comments:{_id: Random.id(), body: txt, 'created':new Date(), user_id: Meteor.userId()}}});
+    }else{
+      Cento.WorkItems.update({_id: id},
+          {$push: {comments:{_id: Random.id(), body: txt, 'created':new Date(), user_id: Meteor.userId()}}});
+    }
     f[0].reset();
     return false;
   },

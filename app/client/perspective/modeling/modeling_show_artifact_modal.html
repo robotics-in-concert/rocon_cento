@@ -1,0 +1,32 @@
+<template name="modeling_show_artifact_modal">
+<div id="modal-{{_id}}" class="modal show_artifact fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Create Artifact</h4>
+      </div>
+
+      <div class="modal-body">
+        {{#each attachments}}
+        <p><img src="/data/{{name}}"></p>
+        {{/each}}
+
+        <h4>Title</h4>
+        <p>{{title}}</p>
+
+        <h4>Description</h4>
+        <p>{{description}}</p>
+
+
+        {{>modal_comment}}
+      </div> <!-- /modal-body -->
+
+
+    </div>
+  </div>
+</div>
+
+</template>
+
+

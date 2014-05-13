@@ -13,6 +13,12 @@ Template.modeling_show_modal.events({
     $('#modal-'+this._id+'.create_artifact').modal();
     return false;
   },
+  'click .show_artifact': function(e){
+    var aid = $(e.target).closest('li').data('artifact_id');
+    // console.log(aid);
+    $('#modal-'+aid+'.show_artifact').modal();
+    return false;
+  }
 
 
 });
