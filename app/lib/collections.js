@@ -35,3 +35,12 @@ Cento.ActionTypes = {
 Cento.createAction = function(type, refId, extra){
   Cento.Actions.insert({type: type, user_id: Meteor.userId(), created_at: new Date(), ref_id: refId, extra: extra});
 };
+
+Cento.deleteWorkItem = function(id){
+  Cento.WorkItems.update({_id: id}, {$set : {deleted_at: new Date}});
+};
+
+
+Cento.solutions = function(){
+  return Cento.Solutions.find({deleted_at: {$exists: false}});
+};

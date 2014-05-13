@@ -32,7 +32,7 @@ Router.map(function(){
     template: 'home',
     data: function(){
       return {
-        solutions: Cento.Solutions.find({})
+        solutions: Cento.solutions()
       }
 
     }
@@ -43,7 +43,7 @@ Router.map(function(){
     template: 'projects',
     data: function(){
       return {
-        solutions: Cento.Solutions.find({}),
+        solutions: Cento.solutions(),
         users: Meteor.users.find({'services.github': {$exists: true}}).fetch()
       }
 
@@ -61,7 +61,7 @@ Router.map(function(){
       var groupId = this.params.group;
 
       data.workGroups = Cento.WorkGroups.find({solution_id: {$exists: false}});
-      var query = {type: Cento.WorkItemTypes.USER_NEEDS};
+      var query = {type: Cento.WorkItemTypes.USER_NEEDS, deleted_at: {$exists: false}};
       if(groupId && groupId !== ""){
         query.work_group_id = groupId;
         data.group_id = groupId;
@@ -101,18 +101,18 @@ Router.map(function(){
       var sid = this.params.solution;
     
       var data = {};
-      data.solutions = Cento.Solutions.find({});
+      data.solutions = Cento.solutions();
       data.users = Meteor.users.find({});
       
       data.workGroups = Cento.WorkGroups.find({solution_id: sid});
-      var query = {type: Cento.WorkItemTypes.IDEA, solution_id: sid};
+      var query = {type: Cento.WorkItemTypes.IDEA, solution_id: sid, deleted_at:{$exists: false}};
       if(groupId && groupId !== ""){
         query.work_group_id = groupId;
         data.group_id = groupId;
         data.currentWorkGroup = Cento.WorkGroups.findOne(groupId);
       }
 
-      data.notifications = Cento.WorkItems.find(query, {limit: 4, sort: {'created': -1},
+      data.notifications = Cento.WorkItems.find(query, {limit: 4, sort: {'created': -1}, deleted_at: {$exists: false},
         transform: function(doc){
           doc.user = Meteor.users.findOne(doc.user_id);
           doc.solutions = Cento.Solutions.find({'related.related_work_id': doc._id}).fetch();
@@ -143,11 +143,11 @@ Router.map(function(){
 
       var sid = this.params.solution;
     
-      data.solutions = Cento.Solutions.find({});
+      data.solutions = Cento.solutions();
       data.users = Meteor.users.find({});
       
       data.workGroups = Cento.WorkGroups.find({solution_id: sid});
-      var query = {type: Cento.WorkItemTypes.MODELING, solution_id: sid};
+      var query = {type: Cento.WorkItemTypes.MODELING, solution_id: sid, deleted_at: {$exists: false}};
 
       data.notifications = Cento.WorkItems.find(query, {limit: 4, sort: {'created': -1},
         transform: function(doc){

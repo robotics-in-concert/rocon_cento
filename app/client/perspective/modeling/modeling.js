@@ -8,7 +8,7 @@ Template.modelings.helpers({
 
  },
   'new_replys': function(login){
-    return Cento.WorkItems.find({type: Cento.WorkItemTypes.MODELING, 'comments.body': new RegExp("@"+login)}).fetch();
+    return Cento.WorkItems.find({deleted_at: {$exists: false}, type: Cento.WorkItemTypes.MODELING, 'comments.body': new RegExp("@"+login)}).fetch();
   }
 });
 
@@ -24,6 +24,11 @@ Template.modelings.events({
   'click .show': function(e){
     var id = this._id;
     $('#modal-'+id).modal();
+    return false;
+  },
+  'click .delete': function(e){
+    var id = this._id;
+    Cento.deleteWorkItem(id);
     return false;
   },
 });

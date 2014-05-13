@@ -6,7 +6,7 @@ Template.ideation.helpers({
     return Session.get('filesToAttach');
   },
   'new_replys': function(login){
-    return Cento.WorkItems.find({type: Cento.WorkItemTypes.IDEA, 'comments.body': new RegExp("@"+login)}).fetch();
+    return Cento.WorkItems.find({type: Cento.WorkItemTypes.IDEA, 'comments.body': new RegExp("@"+login), deleted_at: {$exists: false}}).fetch();
   },
   'currentIdeation': function(){
     return Session.get('currentIdeation');
@@ -48,6 +48,11 @@ Template.ideation.events({
   'click .show': function(e){
     Session.set('currentIdeation', this._id);
     $('#modal-show-ideation').modal();
+    return false;
+  },
+  'click .delete': function(e){
+    Cento.deleteWorkItem(this._id);
+    console.log('deleted')
     return false;
   },
   'click .new_ideation': function(e){
