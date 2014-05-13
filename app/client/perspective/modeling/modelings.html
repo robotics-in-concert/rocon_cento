@@ -142,6 +142,9 @@
         
         </tr>
         {{>modeling_show_modal}}
+        {{#each artifacts _id}}
+          {{> modeling_show_artifact_modal}}
+        {{/each}}
         {{>modeling_create_artifact_modal}}
         {{/each}}
 

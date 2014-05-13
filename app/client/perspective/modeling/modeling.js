@@ -1,8 +1,12 @@
 Template.modelings.helpers({
   'users': function(){
     return Meteor.users.find({'services.github': {$exists: true}}).fetch();
-  }
+  },
 
+  'artifacts': function(wid){
+    return Cento.Artifacts.find({work_item_id: wid});
+
+ }
 });
 
 Template.modelings.events({
