@@ -1,3 +1,60 @@
+<template name="ideation_show">
+
+<div id="ideation">
+  <div class="row">
+    <div class="post" data-post_id="{{_id}}">
+      <div class="user">
+        <img src="{{avatarUrl%20user}}"> {{username user}}
+      </div>
+
+      <div class="body" contenteditable="">
+        {{nl2br body}}
+      </div>
+
+      <div class="attachments">
+        <ul class="list-unstyled">
+          <li style="list-style: none">{{#each attachments}}</li>
+
+          <li><img src="{{fileIconPath%20name}}"> <a href=
+          "/data/{{name}}">{{name}} ({{size}})</a></li>
+
+          <li style="list-style: none">{{/each}}</li>
+        </ul>
+      </div>{{#if related.length}}
+
+      <div class="panel panel-success related">
+        <div class="panel-heading">
+          <h4 class="panel-title">Referenced</h4>
+        </div>
+
+        <div class="panel-body">
+          <ul class="list-unstyled">
+            <li style="list-style: none">{{#each related}}
+            {{#with getWorkItem related_work_id}}</li>
+
+            <li>&nbsp;<a href=
+            "/solutions/{{solution_id}}/modelings/{{_id}}">{{title}}</a></li>
+
+            <li style="list-style: none">{{/with}} {{/each}}</li>
+          </ul>
+        </div>
+      </div>{{/if}}
+
+      <div class="datetime">
+        {{formatDate created 'YYYY-MM-DD HH:mm:ss'}}
+      </div>
+
+      <div class="post_actions">
+        Votes : {{votes}} <a href="#" class="create_task"> create</a> <a href="#" class="upvote_post"> upvote</a>
+        <a href="#" class="downvote_post"> downvote</a> <a href="#" class="delete_post"> delete</a>
+      </div>{{&gt;comments}}
+    </div>
+  </div>
+</div>
+
+
+
+</template>
 <template name="ideation">
 
 <div id="ideation">
