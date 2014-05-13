@@ -60,18 +60,12 @@
         {{>user_needs_form_modal}}
         
         <ul class="recent_events list-unstyled">
-          <li>
-            <div class="head">Reply from huey.</div>
-            <div class="body">qweoifjqowief jqoiwef j...</div>
-          </li>
-          <li>
-            <div class="head">Reply from huey.</div>
-            <div class="body">qweoifjqowief jqoiwef j...</div>
-          </li>
+          {{#each actions}}
           <li class="alt">
-            <div class="head">Reply from huey.</div>
-            <div class="body">qweoifjqowief jqoiwef j...</div>
+            <div class="head">Reply from {{username user_id}}.</div>
+            <div class="body">{{extra.body}}</div>
           </li>
+          {{/each}}
         </ul>
 
 

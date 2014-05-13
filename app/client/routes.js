@@ -65,6 +65,7 @@ Router.map(function(){
           return doc;
         }
        });
+      data.actions = Cento.Actions.find({type: Cento.ActionTypes.COMMENT_ON_USERNEEDS}, {limit: 5, sort: {created_at: -1}});
 
       return data;
     }

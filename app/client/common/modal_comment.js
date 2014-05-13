@@ -5,13 +5,14 @@ Template.modal_comment.events({
     var id = this._id;
     var txt = f.find('textarea').val();
 
-    if(this.attachments){
-      Cento.Artifacts.update({_id: id},
-          {$push: {comments:{_id: Random.id(), body: txt, 'created':new Date(), user_id: Meteor.userId()}}});
-    }else{
+    if(this.type != null && this.type != ''){
       Cento.WorkItems.update({_id: id},
           {$push: {comments:{_id: Random.id(), body: txt, 'created':new Date(), user_id: Meteor.userId()}}});
+    }else{
+      Cento.Artifacts.update({_id: id},
+          {$push: {comments:{_id: Random.id(), body: txt, 'created':new Date(), user_id: Meteor.userId()}}});
     }
+    Cento.createAction(Cento.ActionTypes.COMMENT_ON_USERNEEDS, id, {body: txt});
     f[0].reset();
     return false;
   },
