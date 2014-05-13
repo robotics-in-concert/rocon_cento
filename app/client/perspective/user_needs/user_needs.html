@@ -77,10 +77,10 @@
 
       <h3 class="ct heading ttop">New Replys list to @me</h3>
       <table class="ct blue table table-striped">
-        {{#each notifications}}
+        {{#each new_replys currentUser.profile.login}}
         <tr>
           <td>1</td>
-          <td><a href="#" class="show">{{body}}</a></td>
+          <td><a href="#" class="show">{{title}}</a></td>
           <td>{{votes}}</td>
           <td>{{comments.length}}</td>
           <td>{{username user}}</td>

@@ -17,6 +17,9 @@ Template.user_needs.helpers({
   'users': function(){
     return Meteor.users.find({'services.github': {$exists: true}}).fetch();
     // return Meteor.users.find({});
+  },
+  'new_replys': function(login){
+    return Cento.WorkItems.find({type: Cento.WorkItemTypes.USER_NEEDS, 'comments.body': new RegExp("@"+login)}).fetch();
   }
 });
 
@@ -79,10 +82,11 @@ Template.user_needs.events({
   },
   'click .show': function(e){
     var id = this._id;
-    var m = $(e.target).closest('tr').find('.modal_show');
+    $('#modal-show-'+id).modal();
+    // var m = $(e.target).closest('tr').find('.modal_show');
     
-    // $('#modal-'+id).modal();
-    m.modal();
+    // // $('#modal-'+id).modal();
+    // m.modal();
     return false;
   },
   'blur .body': function(e){
