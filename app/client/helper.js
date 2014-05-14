@@ -16,6 +16,7 @@ UI.registerHelper('tagsJoin', function(tags){
   return "";
 });
 
+
 UI.registerHelper('getWorkItem', function(id){
   return Cento.WorkItems.findOne({_id: id});
 });
