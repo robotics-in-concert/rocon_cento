@@ -45,6 +45,11 @@ Template.ideation.rendered = function(){
 
 
 Template.ideation.events({
+  'click .show_modeling': function(){
+    Session.set('currentModelingItem', this._id);
+    $('#modal-show-modeling').modal();
+    return false;
+  },
   'click .show': function(e){
     Session.set('currentIdeation', this._id);
     $('#modal-show-ideation').modal();
