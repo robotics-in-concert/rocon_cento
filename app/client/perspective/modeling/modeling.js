@@ -15,6 +15,11 @@ Template.modelings.helpers({
 Template.modelings.rendered = function(){
 };
 Template.modelings.events({
+  'click .show_ideation': function(){
+    Session.set('currentIdeation', this._id);
+    $('#modal-show-ideation').modal();
+    return false;
+  },
 
   'click .toggle_rel': function(e){
     var $e = $(e.target);

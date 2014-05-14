@@ -1,5 +1,6 @@
 
 <template name="modelings">
+{{> ideation_show_modal}}
 {{>modeling_show_modal}}
 {{> modeling_show_artifact_modal}}
 {{>modeling_create_artifact_modal}}
@@ -123,7 +124,7 @@
           <td colspan="7">
             {{#each related}}
             {{#with getWorkItem related_work_id}}
-            <p><a href="/solutions/{{solution_id}}/ideations#{{_id}}">{{title}}</a></p>
+            <p><a href="#" class="show_ideation">{{title}}</a></p>
             {{/with}}
             {{/each}}
           </td>
