@@ -25,6 +25,9 @@ UI.registerHelper('isActivePath', function(path){
   var current = Router.current();
   return current && current.route.name == path;
 });
+UI.registerHelper('solutions', function(a, x) {
+  return Cento.solutions();
+});
 
 UI.registerHelper('currentSolution', function(){
   return Session.get('currentSolution');

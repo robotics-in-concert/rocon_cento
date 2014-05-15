@@ -14,14 +14,14 @@ Template.solution_lnb.helpers({
 Template.solution_lnb.events({
   'change select[name=solutions]': function(e){
     var newSolutionId = $(e.target).val();
-    if(location.pathname.match(/modelings/)){
-      location.href = "/solutions/"+newSolutionId+"/modelings";
-
+    var m = null;
+    if(m = location.pathname.match(/projects\/[^/]+\/(\w+)/)){
+      location.href = "/projects/"+newSolutionId+"/"+m[1];
     }
-    else if(location.pathname.match(/ideations/)){
-      location.href = "/solutions/"+newSolutionId+"/ideations";
+    // else if(location.pathname.match(/ideations/)){
+      // location.href = "/solutions/"+newSolutionId+"/ideations";
 
-    }
+    // }
   }
 
 });

@@ -90,7 +90,14 @@ Router.map(function(){
 
   this.route('projects_management', {
     path: '/projects/:solution/management',
-    template: 'management'
+    template: 'management',
+    data: function(){
+      var data = {};
+      var sid = this.params.solution;
+      data.ideations = Cento.WorkItems.find({type: Cento.WorkItemTypes.IDEA, solution_id: sid});
+      data.modelings = Cento.WorkItems.find({type: Cento.WorkItemTypes.MODELING, solution_id: sid});
+      return data;
+    }
   });
   this.route('projects_solutions', {
     path: '/projects/:solution/solutions',
