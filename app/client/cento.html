@@ -21,27 +21,7 @@
 </template>
 
 <template name='home'>
-<h2>solutions</h2>
-
-
-<div class="solutions">
-{{#each solutions}}
-  <div class="solution panel panel-default">
-    <div class="panel-heading">
-      <h3 class="panel-title"><a class="select_item" href="/solutions/{{solution_id}}/ideations">{{title}}</a> </h3>
-    </div>
-    <div class="panel-body">
-      {{description}}
-
-      <div class="solution_actions">
-        <a class="btn btn-default btn-sm" href="/solutions/{{_id}}/ideations">ideation</a>
-        <a class="btn btn-default btn-sm" href="/solutions/{{_id}}/modelings">modeling</a>
-      </div>
-    </div>
-  </div>
-{{/each}}
-</div>
-
+home
 </template>
 
 
@@ -58,22 +38,3 @@
 
 </template>
 
-<template name="google_drive">
-<div id="google_drive">
-<h2>Google Drive Demo</h2>
-
-<div id="items_wrap">
-  <ul id="google_drive_items">
-    {{#each items}}
-      <li><img src="{{iconLink}}"> <a href="#" data-embed_link="{{embedLink}}">{{title}}</a></li>
-    {{/each}}
-  </ul>
-</div>
-
-<div id="embed_area">
-  <iframe frameborder="0" id="embed_frame" width="99%" height="99%;"></iframe>
-</div>
-</div>
-
-
-</template>
