@@ -16,6 +16,7 @@ UI.registerHelper('tagsJoin', function(tags){
   return "";
 });
 
+
 UI.registerHelper('getWorkItem', function(id){
   return Cento.WorkItems.findOne({_id: id});
 });
@@ -23,6 +24,9 @@ UI.registerHelper('getWorkItem', function(id){
 UI.registerHelper('isActivePath', function(path){
   var current = Router.current();
   return current && current.route.name == path;
+});
+UI.registerHelper('solutions', function(a, x) {
+  return Cento.solutions();
 });
 
 UI.registerHelper('currentSolution', function(){

@@ -5,8 +5,7 @@ Template.modelings.helpers({
 
   'artifacts': function(wid){
     return Cento.Artifacts.find({work_item_id: wid});
-
- },
+  },
   'new_replys': function(login){
     return Cento.WorkItems.find({deleted_at: {$exists: false}, type: Cento.WorkItemTypes.MODELING, 'comments.body': new RegExp("@"+login)}).fetch();
   }
@@ -16,6 +15,11 @@ Template.modelings.helpers({
 Template.modelings.rendered = function(){
 };
 Template.modelings.events({
+  'click .show_ideation': function(){
+    Session.set('currentIdeation', this._id);
+    $('#modal-show-ideation').modal();
+    return false;
+  },
 
   'click .toggle_rel': function(e){
     var $e = $(e.target);
@@ -26,7 +30,9 @@ Template.modelings.events({
   },
   'click .show': function(e){
     var id = this._id;
-    $('#modal-'+id).modal();
+    console.log('yyy', id);
+    Session.set('currentModelingItem', id);
+    $('#modal-show-modeling').modal();
     return false;
   },
   'click .delete': function(e){

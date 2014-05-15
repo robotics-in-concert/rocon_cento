@@ -1,4 +1,106 @@
 <template name="management">
+{{> modals}}
+<div id="management">
+  <div id="card_actions_dropdown">
+    <ul class="menu" role="menu" aria-labelledby="dropdownmenu1">
+      <li><a role="menuitem" tabindex="-1" class="show" href="#">show</a></li>
+      <li><a role="menuitem" tabindex="-1" class="delete" href="#">delete</a></li>
+    </ul>
+  </div>
+  <div class="row">
+
+    <div class="col-md-2">
+      <div class="lnb">
+        {{> solution_lnb }}
+      </div>
+
+      <!-- <ul class="nav nav-pills nav-stacked"> -->
+        <!-- <li class="{{#unless currentWorkGroup}}active{{/unless}}"><a href="?group=">All</a></li> -->
+        <!-- {{#each workGroups}} -->
+        <!-- <li class="{{activeIfEq ../currentWorkGroup._id _id}}"><a href="?group={{_id}}">{{title}}</a></li> -->
+        <!-- {{/each}} -->
+      <!-- </ul> -->
+    </div>
+    
+    <div class="col-md-10">
+
+        <div class="lists">
+          <!-- list -->
+          <div data-id="{{_id}}" class="list">
+            <h1>ideation</h1>
+            <ul class="cards">
+              {{#each ideations}}
+                {{> card}}
+              {{/each}}
+            </ul>
+          </div>
+          <!-- /list -->
+          <!-- list -->
+          <div data-id="{{_id}}" class="list">
+            <h1>modeling</h1>
+            <ul class="cards">
+              {{#each modelings}}
+                {{> card}}
+              {{/each}}
+            </ul>
+          </div>
+          <!-- /list -->
+
+        </div>
+
+    </div>
+  </div>
+
+</div>
+</template>
+
+
+
+<template name="card">
+  <li id="card-{{_id}}" data-id="{{_id}}" class="card" >
+  <a href="#">{{title}}</a>
+
+  <div class="summary">
+  {{#if comments.length}}
+  <span><i class="glyphicon glyphicon-comment"></i> {{comments.length}}</span>
+  {{/if}}
+  </div>
+
+    {{#if assignee}}
+    <ul class="card_users">
+      {{#each assignee}}
+      <li><img src="{{avatarUrl .}}" width="25" height="25"></li>
+      {{/each}}
+    </ul>
+    {{/if}}
+
+  <div class="top_right">
+    <i class="more glyphicon glyphicon-collapse-down" data-toggle="popover" data-container="body" data-content="Consectetur blanditiis dolor dolores optio rem fugiat! Corporis neque doloremque consequatur eaque ratione? Est doloremque iure odio aperiam veritatis vero? Excepturi sint ullam quibusdam nesciunt omnis nisi earum repudiandae similique."></i>
+    <!-- <i class="delete glyphicon glyphicon-remove"></i> -->
+  </div>
+
+  </li>
+
+</template>
+
+<template name="list">
+  <div data-id="{{_id}}" class="list">
+    <div class="top_right">
+      <!-- <i class="more glyphicon glyphicon-collapse-down" data-toggle="popover" data-container="body" data-content="Consectetur blanditiis dolor dolores optio rem fugiat! Corporis neque doloremque consequatur eaque ratione? Est doloremque iure odio aperiam veritatis vero? Excepturi sint ullam quibusdam nesciunt omnis nisi earum repudiandae similique."></i> -->
+      <i class="delete_list glyphicon glyphicon-remove"></i>
+    </div>
+    <h1>{{title}}</h1>
+    <ul class="cards">
+      {{#each cards _id}}
+        {{> card}}
+      {{/each}}
+      <div class="form-group"><textarea class="txt_card form-control"></textarea></div>
+      <div class="form-group"><button data-list_id="{{_id}}" class="btn btn-default btn-small save_card">Add</button></div>
+    </ul>
+  </div>
+</template>
+
+<template name="management_vis">
 
   <h2>Management</h2>
 

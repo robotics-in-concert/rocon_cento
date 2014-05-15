@@ -88,8 +88,27 @@ Router.map(function(){
     }
   });
 
-  this.route('solutions_ideations', {
-    path: '/solutions/:solution/ideations',
+  this.route('projects_management', {
+    path: '/projects/:solution/management',
+    template: 'management',
+    data: function(){
+      var data = {};
+      var sid = this.params.solution;
+      data.ideations = Cento.WorkItems.find({type: Cento.WorkItemTypes.IDEA, solution_id: sid});
+      data.modelings = Cento.WorkItems.find({type: Cento.WorkItemTypes.MODELING, solution_id: sid});
+      return data;
+    }
+  });
+  this.route('projects_solutions', {
+    path: '/projects/:solution/solutions',
+    template: 'solutions'
+  });
+  this.route('projects_battleloom', {
+    path: '/projects/:solution/battle_loom',
+    template: 'battle_loom'
+  });
+  this.route('projects_ideations', {
+    path: '/projects/:solution/ideations',
     template: 'ideation',
     onBeforeAction: function(){
       var ITEMS_PER_PAGE = 10;
@@ -141,8 +160,8 @@ Router.map(function(){
 
 
 
-  this.route('solutions_modelings', {
-    path: '/solutions/:solution/modelings',
+  this.route('projects_modelings', {
+    path: '/projects/:solution/modelings',
     template: 'modelings',
     onAfterAction: function(){
       console.log(location.hash);
@@ -177,67 +196,9 @@ Router.map(function(){
     }
 
   });
-  this.route('solutions_modelings_show', {
-    path: '/solutions/:solution/modelings/:item',
-    template: 'modeling_show',
-    data: function(){
-      var data = {};
 
-      data.workItems = Cento.WorkItems.find({
-        type: Cento.WorkItemTypes.MODELING,
-        solution_id: this.params.solution
-      });
-
-      data.workItem = Cento.WorkItems.findOne({_id: this.params.item}, {
-        transform: function(doc){
-         console.log(doc);
-         var related_ideation = Cento.WorkItems.findOne({_id: doc.related[0].related_work_id});
-         doc.related_ideation = related_ideation;
-         return doc;
-       }
-      });
-      data.artifacts = Cento.Artifacts.find({work_item_id: this.params.item});
-
-
-
-      return data;
-    }
-
-  });
-
-  this.route('battle_loom', {
-    path: '/battle_loom',
-    template: 'battle_loom',
-    data: function(){
-      var data = {};
-      return data;
-    }
-  });
-
-  this.route('management', {
-    path: '/management',
-    template: 'management'
-  });
-
-  this.route('solution', {
-    path: '/solution',
-    template: 'solution'
-  });
-
-  this.route('google_drive', {
-    path: '/google_drive',
-    template: 'google_drive'
-  });
-  this.route('manage', {
-    path: '/manage',
-    template: 'manage'
-  });
   this.route('login', {
     path: '/login',
-  });
-
-  this.route('users', {
-    path: '/users',
   });
 
   /*
@@ -295,49 +256,5 @@ Router.map(function(){
     }
 
   });
-
-  /*
-  this.route('ideation', {
-    path: '/ideation',
-    template: 'ideation',
-    before: function(){
-      var ITEMS_PER_PAGE = 10;
-      Session.setDefault('itemsLimit', ITEMS_PER_PAGE);
-      Session.set('filesToAttach', []);
-    },
-    data: function(){
-      console.log("DATA!!!!")
-      console.log(this.params);
-      var categoryId = this.params.category;
-      var sid = this.params.solution;
-    
-      var data = {};
-      if(this.params.solution){
-        data.solution = Cento.Solutions.findOne({_id: this.params.solution});
-      }
-      var query = {type: 'ideation'};
-      if(categoryId && categoryId !== ""){
-        query.category = categoryId;
-        data.category = categoryId;
-        data.workGroups = Cento.WorkGroups.find({solution_id: sid});
-
-        console.log(categoryId);
-      }
-
-      data['posts'] = Cento.Posts.find(query, {limit: Session.get('itemsLimit'), sort: {'created': -1},
-        transform: function(doc){
-          doc.user = Meteor.users.findOne(doc.user_id);
-          return doc;
-        }
-       });
-
-      if(categoryId){
-        data.currentCategory = Cento.Categories.findOne(categoryId);
-        return data;
-      }
-      return data;
-    }
-    });
-    */
 
 });

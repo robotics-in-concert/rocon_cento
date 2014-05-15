@@ -1,5 +1,6 @@
 <template name="modeling_show_modal">
-<div id="modal-{{_id}}" class="modal modeling fade large" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+<div id="modal-show-modeling" class="modal modeling fade large" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  {{#with currentModelingItem}}
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
@@ -52,6 +53,7 @@
 
     </div>
   </div>
+  {{/with}}
 </div>
 
 </template>

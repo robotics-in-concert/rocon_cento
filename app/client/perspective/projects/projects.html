@@ -1,0 +1,41 @@
+
+<template name="projects">
+
+<div id="projects">
+<h2>Projects</h2>
+
+
+<div class="solutions">
+{{#each solutions}}
+  <div class="solution solution_box">
+    <h2>{{title}}</h2>
+    <div class="detail">
+      <p>{{description}}</p>
+      <h4 class="members_heading">Members</h4>
+      <ul class="members list-unstyled">
+        {{#each ../users}}
+        <li><img src="{{avatarUrl .}}" height="20"></li>
+        {{/each}}
+      </ul>
+    </div>
+    <div class="project_nav">
+      <select class="form-control">
+        <option value="ideations">Ideation</option>
+        <option value="modelings">Modeling</option>
+        <option value="battle_loom">Battle Loom</option>
+        <option value="solutions">Solution</option>
+        <option value="management">Management</option>
+      </select>
+      <button class="btn btn-default btn-xs go">Go</button>
+    </div>
+
+    <a href="#" class="delete"><i class="glyphicon glyphicon-remove"></i></a>
+  </div>
+
+{{/each}}
+</div>
+
+</div>
+
+
+</template>

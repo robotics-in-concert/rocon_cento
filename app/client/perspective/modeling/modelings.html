@@ -1,5 +1,6 @@
 
 <template name="modelings">
+{{> modals}}
 
 <div id="modelings">
 
@@ -119,7 +120,7 @@
           <td colspan="7">
             {{#each related}}
             {{#with getWorkItem related_work_id}}
-            <p><a href="/solutions/{{solution_id}}/ideations#{{_id}}">{{title}}</a></p>
+            <p><a href="#" class="show_ideation">{{title}}</a></p>
             {{/with}}
             {{/each}}
           </td>

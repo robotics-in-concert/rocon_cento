@@ -4,7 +4,7 @@ Template.modeling_create_artifact_modal.events({
     var f = $(e.target).closest('form');
     var modal = $(e.target).closest('.modal');
     var arr = f.serializeArray();
-    var data = {work_item_id: this._id};
+    var data = {work_item_id: Session.get('currentModelingItem')};
     _.each(arr, function(kv){
       data[kv.name] = kv.value;
     });
