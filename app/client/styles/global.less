@@ -161,18 +161,23 @@ input.form-control, textarea.form-control {
 
 }
 
-.filters {
-select.form-control {
-  background-color: rgba(0,0,0,0);
-  border:0;
-  -webkit-appearance: initial;
-  color: @blue-color;
-  margin-right: 0;
-  padding-right: 0;
-  font-size: 14px;
 
+.filters {
+  select.form-control {
+    background-color: rgba(0,0,0,0);
+    border:0;
+    -webkit-appearance: initial;
+    color: @blue-color;
+    margin-right: 0;
+    padding-right: 0;
+    font-size: 14px;
+
+
+  }
+  i { color: @blue-color; left: -20px; }
 }
-i { color: @blue-color; left: -20px; }
+select.filter_type {
+  width: 135px;
 }
 /* /override bootstrap */
 
@@ -331,7 +336,6 @@ form.ct {
 
 .filters {
   select {
-    width: 100px;
     display: inline-block;
     margin-right: 10px;
   }

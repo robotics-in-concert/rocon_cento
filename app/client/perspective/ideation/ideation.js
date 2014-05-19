@@ -45,6 +45,12 @@ Template.ideation.rendered = function(){
 
 
 Template.ideation.events({
+  'change select[name=filter_type]': function(e){
+    var filterType = $(e.target).val();
+    Session.set('ideationFilterType', filterType);
+
+    return false;
+  },
   'click .show_modeling': function(){
     Session.set('currentModelingItem', this._id);
     $('#modal-show-modeling').modal();
