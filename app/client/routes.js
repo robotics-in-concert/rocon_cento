@@ -187,6 +187,12 @@ Router.map(function(){
       data.workGroups = Cento.WorkGroups.find({solution_id: sid});
       var query = {type: Cento.WorkItemTypes.MODELING, solution_id: sid, deleted_at: {$exists: false}};
 
+      var filterStatus = Session.get('modelingFilterStatus');
+      if(filterStatus){
+        query.status = filterStatus;
+      }
+
+
       data.notifications = Cento.WorkItems.find(query, {limit: 4, sort: {'created': -1},
         transform: function(doc){
           doc.user = Meteor.users.findOne(doc.user_id);

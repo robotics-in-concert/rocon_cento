@@ -162,23 +162,6 @@ input.form-control, textarea.form-control {
 }
 
 
-.filters {
-  select.form-control {
-    background-color: rgba(0,0,0,0);
-    border:0;
-    -webkit-appearance: initial;
-    color: @blue-color;
-    margin-right: 0;
-    padding-right: 0;
-    font-size: 14px;
-
-
-  }
-  i { color: @blue-color; left: -20px; }
-}
-select.filter_type {
-  width: 135px;
-}
 /* /override bootstrap */
 
 
@@ -334,13 +317,29 @@ form.ct {
 
 }
 
+/* filter select box customize */
+
 .filters {
-  select {
+  select.form-control {
+    width: 135px;
+    background-color: rgba(0,0,0,0);
+    border:0;
+    -webkit-appearance: initial;
+    color: @blue-color;
+    margin-right: 0;
+    padding-right: 0;
+    font-size: 14px;
     display: inline-block;
     margin-right: 10px;
   }
 
+  i { color: @blue-color; left: -20px; }
+
+  select.filter_type {
+    width: 135px;
+  }
 }
+
 
 .solutions {
   .clearfix();
