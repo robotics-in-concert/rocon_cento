@@ -172,6 +172,11 @@ Router.map(function(){
   this.route('projects_modelings', {
     path: '/projects/:solution/modelings',
     template: 'modelings',
+    onBeforeAction: function(){
+      Session.set('modelingFilterMember', null);
+      Session.set('modelingFilterStatus', null);
+
+    },
     onAfterAction: function(){
       console.log(location.hash);
 
@@ -191,6 +196,15 @@ Router.map(function(){
       if(filterStatus){
         query.status = filterStatus;
       }
+
+      var filterMember = Session.get('modelingFilterMember');
+      console.log("Filter Member : ", filterMember);
+      if(filterMember == 'assign_me'){
+        query.assignee = {$in: [Meteor.userId()]};
+      }else if(filterMember == 'review_from_me'){
+        query.reviewers = {$in: [Meteor.userId()]};
+      }
+
 
 
       data.notifications = Cento.WorkItems.find(query, {limit: 4, sort: {'created': -1},
