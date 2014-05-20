@@ -114,6 +114,7 @@ Router.map(function(){
       var ITEMS_PER_PAGE = 10;
       Session.setDefault('itemsLimit', ITEMS_PER_PAGE);
       Session.set('filesToAttach', []);
+      Session.set('ideation:sort', null);
     },
     onBeforeAction: function(){
       if(location.hash){
@@ -139,14 +140,28 @@ Router.map(function(){
         data.currentWorkGroup = Cento.WorkGroups.findOne(groupId);
       }
 
-      data.notifications = Cento.WorkItems.find(query, {limit: 4, sort: {'created': -1}, deleted_at: {$exists: false},
+      var filterType = Session.get('ideationFilterType');
+      if(filterType === 'modeled'){
+        query.related = {$exists: true};
+      }else if(filterType === 'doing'){
+        query.related = {$exists: false};
+      }else{
+      }
+
+      var sorts = Session.get('ideation:sort');
+      if(sorts){
+      }else{
+        sorts = {};
+      }
+
+      data.notifications = Cento.WorkItems.find(query, {limit: 4, sort: sorts, deleted_at: {$exists: false},
         transform: function(doc){
           doc.user = Meteor.users.findOne(doc.user_id);
           doc.solutions = Cento.Solutions.find({'related.related_work_id': doc._id}).fetch();
           return doc;
         }
        });
-      data.workItems = Cento.WorkItems.find(query, {limit: Session.get('itemsLimit'), sort: {'created': -1},
+      data.workItems = Cento.WorkItems.find(query, {limit: Session.get('itemsLimit'), sort: sorts,
         transform: function(doc){
           doc.user = Meteor.users.findOne(doc.user_id);
           return doc;
@@ -163,6 +178,11 @@ Router.map(function(){
   this.route('projects_modelings', {
     path: '/projects/:solution/modelings',
     template: 'modelings',
+    onBeforeAction: function(){
+      Session.set('modelingFilterMember', null);
+      Session.set('modelingFilterStatus', null);
+
+    },
     onAfterAction: function(){
       console.log(location.hash);
 
@@ -177,6 +197,21 @@ Router.map(function(){
       
       data.workGroups = Cento.WorkGroups.find({solution_id: sid});
       var query = {type: Cento.WorkItemTypes.MODELING, solution_id: sid, deleted_at: {$exists: false}};
+
+      var filterStatus = Session.get('modelingFilterStatus');
+      if(filterStatus){
+        query.status = filterStatus;
+      }
+
+      var filterMember = Session.get('modelingFilterMember');
+      console.log("Filter Member : ", filterMember);
+      if(filterMember == 'assign_me'){
+        query.assignee = {$in: [Meteor.userId()]};
+      }else if(filterMember == 'review_from_me'){
+        query.reviewers = {$in: [Meteor.userId()]};
+      }
+
+
 
       data.notifications = Cento.WorkItems.find(query, {limit: 4, sort: {'created': -1},
         transform: function(doc){

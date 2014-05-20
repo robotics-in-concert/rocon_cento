@@ -7,7 +7,7 @@ Template.modal_comment.events({
 
     if(this.type != null && this.type != ''){
       Cento.WorkItems.update({_id: id},
-          {$push: {comments:{_id: Random.id(), body: txt, 'created':new Date(), user_id: Meteor.userId()}}});
+          {$inc: {comments_count: 1}, $push: {comments:{_id: Random.id(), body: txt, 'created':new Date(), user_id: Meteor.userId()}}});
     }else{
       Cento.Artifacts.update({_id: id},
           {$push: {comments:{_id: Random.id(), body: txt, 'created':new Date(), user_id: Meteor.userId()}}});
