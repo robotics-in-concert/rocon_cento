@@ -73,7 +73,7 @@
           <th>Rank</th>
           <th>Title</th>
           <th class="sortable" data-item_type="ideation" data-field="votes">Vote</th>
-          <th>Reply</th>
+          <th class="sortable" data-item_type="ideation" data-field="comments_count">Reply</th>
           <th>Writer</th>
           <th class="sortable" data-item_type="ideation" data-field="created">Date</th>
           <th>Tags</th>
@@ -84,7 +84,7 @@
           <td>1</td>
           <td><a href="#" class="show">{{title}}</a></td>
           <td>{{votes}}</td>
-          <td>{{default comments.length 0}}</td>
+          <td>{{default comments_count 0}}</td>
           <td>{{username user}}</td>
           <td class="datetime">{{formatDate created 'YYYY-MM-DD'}}</td>
           <td>{{tagsJoin tags}}</td>
