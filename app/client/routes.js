@@ -114,6 +114,7 @@ Router.map(function(){
       var ITEMS_PER_PAGE = 10;
       Session.setDefault('itemsLimit', ITEMS_PER_PAGE);
       Session.set('filesToAttach', []);
+      Session.set('ideation:sort', null);
     },
     onBeforeAction: function(){
       if(location.hash){
@@ -140,7 +141,6 @@ Router.map(function(){
       }
 
       var filterType = Session.get('ideationFilterType');
-      console.log(query);
       if(filterType === 'modeled'){
         query.related = {$exists: true};
       }else if(filterType === 'doing'){
@@ -148,14 +148,20 @@ Router.map(function(){
       }else{
       }
 
-      data.notifications = Cento.WorkItems.find(query, {limit: 4, sort: {'created': -1}, deleted_at: {$exists: false},
+      var sorts = Session.get('ideation:sort');
+      if(sorts){
+      }else{
+        sorts = {};
+      }
+
+      data.notifications = Cento.WorkItems.find(query, {limit: 4, sort: sorts, deleted_at: {$exists: false},
         transform: function(doc){
           doc.user = Meteor.users.findOne(doc.user_id);
           doc.solutions = Cento.Solutions.find({'related.related_work_id': doc._id}).fetch();
           return doc;
         }
        });
-      data.workItems = Cento.WorkItems.find(query, {limit: Session.get('itemsLimit'), sort: {'created': -1},
+      data.workItems = Cento.WorkItems.find(query, {limit: Session.get('itemsLimit'), sort: sorts,
         transform: function(doc){
           doc.user = Meteor.users.findOne(doc.user_id);
           return doc;

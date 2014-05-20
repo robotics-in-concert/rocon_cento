@@ -45,6 +45,23 @@ Template.ideation.rendered = function(){
 
 
 Template.ideation.events({
+  // 'click table.ct th.sortable': function(e){
+    // var fld = $(e.target).data('field');
+    // var sorts = Session.get('ideation:sort');
+    // if(!sorts){ sorts = {}; }
+
+    // sorts[fld] = $(e.target).hasClass('desc') ? 1 : -1;
+
+    // if(sorts[fld] == 1){
+      // $(e.target).removeClass('desc').addClass('asc');
+    // }else{
+      // $(e.target).removeClass('asc').addClass('desc');
+    // }
+
+
+    // Session.set('ideation:sort', sorts);
+  // },
+
   'change select[name=filter_type]': function(e){
     var filterType = $(e.target).val();
     Session.set('ideationFilterType', filterType);

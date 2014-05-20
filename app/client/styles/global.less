@@ -277,6 +277,44 @@ form.ct {
 .ct.table {
   th, td { border: 0; background-color: white; }
 
+  th.sortable {
+    cursor: pointer;
+
+  }
+
+  ._sortmarker {
+    -webkit-font-smoothing: antialiased;
+    color: rgb(0, 153, 255);
+    font-family: 'Glyphicons Halflings';
+    font-size: 12px;
+    font-style: normal;
+    font-weight: normal;
+    height: 14px;
+    line-height: 20px;
+    vertical-align: bottom;
+    width: 14px;
+    margin-left: 3px;
+
+    /* position: relative; */
+    /* top: 1px; */
+    /* display: inline-block; */
+    /* box-sizing: border-box; */
+
+
+  }
+  th.sortable:after {
+    content: "\2212";
+    ._sortmarker();
+  }
+  th.asc.sortable:after {
+    content: "\e113";
+    ._sortmarker();
+
+  }
+  th.desc.sortable:after {
+    content: "\e114";
+    ._sortmarker();
+  }
 
   &.blue > tbody > tr:nth-child(odd) > td,
   &.blue > tbody > tr:nth-child(odd) > th {
