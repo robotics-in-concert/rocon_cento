@@ -4,7 +4,25 @@ Template.ideation_show_modal.helpers({
   }
 
 });
+Template.ideation_show_modal.rendered = function(){
+  $('#modal-show-ideation').on('save', '.edit_description', function(e, data){
+    var wid = Session.get('currentIdeation');
+    Cento.WorkItems.update({_id: wid}, {$set: {body: data.value}});
+    return false;
+
+  });
+
+
+};
 Template.ideation_show_modal.events({
+  // 'click .edit_description': function(e){
+    // $(e.target).on('save', function(e, x){
+      // console.log(x);
+      // return false;
+
+    // });
+
+  // },
   'click .upvote': function(e){
     Cento.WorkItems.update({_id: this._id}, {$inc: {votes:1}});
     $(e.target).closest('.modal').modal('hide');

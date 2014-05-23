@@ -4,20 +4,41 @@ $( function(){
 
 
   $(document.body).on('click', 'a.edit', function(e){
-    $editable = $($(e.target).data('target'));
+    var $trigger = $(e.target);
+    var $editable = $($(e.target).data('target'));
 
 
 
-    if($editable.data('edit_type') == 'textarea'){
+    // TODO : use handlebar
+    if($editable.data('edit_type') === 'textarea'){
       var html = '<form class="edit_form">'+
          '   <div class="form-group">'+
-         '     <textarea class="form-control">'+$editable.text()+'</textarea>'+
+         '     <textarea name="body" class="form-control">'+$editable.text()+'</textarea>'+
          '   </div>'+
          '   <div class="form-group">'+
-         '     <button class="ct btn btn-sm save">save</button> <a href="#" class="cancel_edit">&times;</a>'+
+         '     <button class="ct btn btn-sm save_edit">save</button> <a href="#" class="cancel_edit">&times;</a>'+
          '   </div>'+
          ' </form>';
-      $editable.after(html);
+      var $form = $(html);
+      $form.find('.save_edit').click( function(){
+        console.log('save!');
+        $editable.show();
+
+        $trigger.trigger('save', $form.serializeArray());
+        $form.hide();
+
+        
+        return false;
+
+      });
+      $form.find('.cancel_edit').click( function(){
+        $editable.show();
+        $form.hide();
+        return false;
+
+      });
+      $editable.after($form);
+
 
     }
     $editable.hide();
