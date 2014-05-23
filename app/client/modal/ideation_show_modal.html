@@ -12,11 +12,10 @@
 
         <h2>{{title}}</h2>
         <input value="{{title}}">
+        
 
-        <h3>{{body}}</h3>
-        <textarea>{{body}}</textarea>
-        <button class="ct btn btn-sm">save</button> <a href="#" class="cancel_edit">&times;</a>
-        <a href="#">edit</a>
+        <a href="#" class="edit" data-target="#ideation_description">edit</a>
+        <h3 id="ideation_description" class="editable" data-edit_type="textarea">{{body}}</h3>
 
         <div class="meta">
           <p>Tags : {{tagsJoin tags}}</p>
