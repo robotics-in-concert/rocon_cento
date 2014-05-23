@@ -7,7 +7,6 @@ Template.ideation_show_modal.helpers({
 Template.ideation_show_modal.rendered = function(){
   $('#modal-show-ideation').on('save', '.edit_description', function(e, data){
     var wid = Session.get('currentIdeation');
-    Cento.WorkItems.update({_id: wid}, {$set: {body: data.value}});
     return false;
 
   });
@@ -23,6 +22,17 @@ Template.ideation_show_modal.events({
     // });
 
   // },
+  'done .editable': function(e){
+    var $editable = $(e.target);
+    var $f = $editable.next('form[name=edit]');
+    var newVal = $f.find('textarea').val();
+
+    var field = $editable.data('field');
+    var params = {};
+    params[field] = newVal;
+    Cento.WorkItems.update({_id: this._id}, {$set: params});
+
+  },
   'click .upvote': function(e){
     Cento.WorkItems.update({_id: this._id}, {$inc: {votes:1}});
     $(e.target).closest('.modal').modal('hide');

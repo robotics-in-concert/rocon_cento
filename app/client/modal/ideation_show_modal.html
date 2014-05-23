@@ -1,7 +1,7 @@
 <template name="ideation_show_modal">
 <div id="modal-show-ideation" class="modal ideation_show modal_show fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
 {{#with currentIdeation}}
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -10,26 +10,39 @@
 
       <div class="modal-body">
 
-        <h2>{{title}}</h2>
-        <input value="{{title}}">
-        
 
-        <a href="#" class="edit edit_description" data-target="#ideation_description">edit</a>
-        <h3 id="ideation_description" class="editable" data-edit_type="textarea">{{body}}</h3>
+        <div class="modal_wrapper">
+          <div class="modal_left">
 
-        <div class="meta">
-          <p>Tags : {{tagsJoin tags}}</p>
+            <div class="editable" data-field="title" data-content="{{title}}">
+              <h2 class="edit_trigger">{{title}}</h2>
+            </div>
+            
+
+            <div class="editable" data-field="body" data-content="{{body}}">
+              <h3 id="ideation_description" class="edit_trigger">{{body}}</h3>
+            </div>
+
+            <div class="meta">
+              <p>Tags : {{tagsJoin tags}}</p>
+            </div>
+
+
+            <hr />
+
+            {{>modal_comment}}
+            <div class="actions">
+              <button class="btn upvote ct">upvote</button>
+              <button class="btn downvote ct">downvote</button>
+            </div>
         </div>
-        <button type="submit" class="create_modeling ct btn btn-default">Create Modeling Task</button>
+        <div class="modal_right">
+            <button type="submit" class="create_modeling ct btn btn-default">Create Modeling Task</button>
 
-
-        {{>modal_comment}}
-        <div class="actions">
-          <button class="btn upvote ct">upvote</button>
-          <button class="btn downvote ct">downvote</button>
         </div>
+      </div>
+
       </div> <!-- /modal-body -->
-
 
     </div>
   </div>
