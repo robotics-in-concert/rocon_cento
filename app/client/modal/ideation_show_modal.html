@@ -20,7 +20,7 @@
             
 
             <div class="editable" data-field="body" data-content="{{body}}">
-              <h3 id="ideation_description" class="edit_trigger">{{body}}</h3>
+              <h3 id="ideation_description" class="edit_trigger">{{nl2br body}}</h3>
             </div>
 
             <div class="meta">
@@ -32,12 +32,12 @@
 
             {{>modal_comment}}
             <div class="actions">
-              <button class="btn upvote ct">upvote</button>
-              <button class="btn downvote ct">downvote</button>
             </div>
         </div>
         <div class="modal_right">
             <button type="submit" class="create_modeling ct btn btn-default">Create Modeling Task</button>
+            <button class="btn upvote ct">upvote</button>
+            <button class="btn downvote ct">downvote</button>
 
         </div>
       </div>

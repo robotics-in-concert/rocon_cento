@@ -23,5 +23,34 @@ Template.modal_comment.events({
     console.log(cid);
     Cento.WorkItems.update({_id:pid}, {$pull:{comments:{_id: cid}}});
     return false;
-  }
+  },
+  'done .editable': function(e){
+    var $editable = $(e.target);
+    var $f = $editable.next('form[name=edit]');
+    var newVal = $f.find('textarea').val();
+
+    var field = $editable.data('field');
+    var params = {};
+    var cid = this._id;
+    params[field] = newVal;
+
+    console.log(this._id, newVal);
+    var wi = Cento.WorkItems.findOne({'comments._id': this._id});
+    var comments = _.map(wi.comments, function(c){
+      if(c._id === cid){
+        c.body = newVal;
+      }
+      return c;
+
+    });
+    
+
+    try{
+      console.log(comments);
+    Cento.WorkItems.update({_id: wi._id}, {$set: {'comments': comments}});
+    }catch(e){
+      console.error(e);
+    }
+
+  },
 });
