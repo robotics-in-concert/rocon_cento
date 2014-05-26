@@ -2,6 +2,12 @@
 $( function(){
 
 
+  
+  $(document.body).on('click', 'button[data-toggle]', function(e){
+    $(this).popover('show');
+
+  });
+
 
   $(document.body).on('click', '.editable .edit_trigger', function(e){
     var $trigger = $(e.target);
