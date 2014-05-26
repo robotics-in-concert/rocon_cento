@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.omg.org/bpmn20" 
+xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" 
+xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" 
+xmlns:drools="http://www.jboss.org/drools" id="" 
+xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd" targetNamespace="http://www.omg.org/bpmn20">
+  <bpmn2:process id="${PACKAGE_NAME}.${ASSET_NAME}" drools:packageName="${PACKAGE_NAME}" name="${ASSET_NAME}" isExecutable="true"/>
+  <bpmndi:BPMNDiagram id="">
+    <bpmndi:BPMNPlane id="" bpmnElement="${PACKAGE_NAME}.${ASSET_NAME}"/>
+  </bpmndi:BPMNDiagram>
+  <bpmn2:relationship id="">
+    <bpmn2:extensionElements>
+      <drools:ProcessAnalysisData>
+        <drools:Scenario xsi:type="drools:Scenario" id="default" name="Simulationscenario">
+          <drools:ScenarioParameters xsi:type="drools:ScenarioParameters_._type" baseTimeUnit="s"/>
+        </drools:Scenario>
+      </drools:ProcessAnalysisData>
+    </bpmn2:extensionElements>
+    <bpmn2:source></bpmn2:source>
+    <bpmn2:target></bpmn2:target>
+  </bpmn2:relationship>
+</bpmn2:definitions>
