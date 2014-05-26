@@ -12,13 +12,17 @@
     <ul class="comments list-unstyled">
       {{#each comments}} 
       <li class="comment" data-comment_id="{{_id}}"> 
-      <span class="user">
+      <div class="editable" data-content="{{body}}">
+        <span class="user">
         <img src="{{avatarUrl user_id}}" height="18">
         <a href="#">{{username user_id}}</a></span>
-        <span class="body">{{body}}</span>
+
+        <span class="body edit_trigger">{{nl2br body}}</span>
         <!-- <span class="datetime">{{formatDate created 'YYYY-MM-DD HH:mm:ss'}}</span> -->
         <span class="comment_actions"><a href="#" class="delete_comment">delete</a></span>
+      </div>
       </li>
+
       {{/each}} 
     </ul>
   </div>

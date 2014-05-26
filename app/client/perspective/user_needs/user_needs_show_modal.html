@@ -9,7 +9,11 @@
 
       <div class="modal-body">
 
-        <h2>{{body}}</h2>
+        <div class="editable" data-field="title" data-content="{{title}}">
+          <h2 class="edit_trigger">{{title}}</h2>
+        </div>
+        
+
 
         <div class="meta">
           <p>Tags : {{tagsJoin tags}}</p>
