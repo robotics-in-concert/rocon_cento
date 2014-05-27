@@ -22,6 +22,25 @@ Template.ideation_show_modal.events({
     // });
 
   // },
+  //
+  'click .create_checklist': function(e){
+    var $popover = $('.popover.create_checklist');
+    if($popover.is(':visible')){
+      $popover.offset({left: 0, top: 0});
+      $popover.hide();
+
+      return false;
+    }
+
+    var $e = $(e.target);
+    var offset = {
+      top: $e.outerHeight() + $e.offset().top,
+      left: $e.offset().left
+    };
+    $('.popover.create_checklist').offset(offset).show();
+    
+    return false;
+  },
   'click .upvote': function(e){
     Cento.WorkItems.update({_id: this._id}, {$inc: {votes:1}});
     $(e.target).closest('.modal').modal('hide');
