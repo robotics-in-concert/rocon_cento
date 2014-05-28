@@ -23,6 +23,25 @@ Template.ideation_show_modal.events({
 
   // },
   //
+  'click button.duedate': function(e){
+    var $popover = $('.popover.duedate');
+    if($popover.is(':visible')){
+      $popover.offset({left: 0, top: 0});
+      // console.log('here');
+      $popover.hide();
+
+      return false;
+    }
+
+    var $e = $(e.target);
+    var offset = {
+      top: $e.outerHeight() + $e.offset().top + 5,
+      left: $e.offset().left
+    };
+    $popover.offset(offset).show();
+    
+    return false;
+  },
   'click button.create_checklist': function(e){
     var $popover = $('.popover.create_checklist');
     if($popover.is(':visible')){
