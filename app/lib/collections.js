@@ -7,6 +7,7 @@ Cento.WorkGroups = new Meteor.Collection('work_groups');
 Cento.WorkItems = new Meteor.Collection('work_items');
 Cento.Artifacts = new Meteor.Collection('artifacts');
 Cento.Actions = new Meteor.Collection('actions');
+Cento.Checklists = new Meteor.Collection('checklists');
 
 
 Cento.WorkItemTypes = {
