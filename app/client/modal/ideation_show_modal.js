@@ -23,10 +23,11 @@ Template.ideation_show_modal.events({
 
   // },
   //
-  'click .create_checklist': function(e){
+  'click button.create_checklist': function(e){
     var $popover = $('.popover.create_checklist');
     if($popover.is(':visible')){
       $popover.offset({left: 0, top: 0});
+      // console.log('here');
       $popover.hide();
 
       return false;
@@ -34,7 +35,7 @@ Template.ideation_show_modal.events({
 
     var $e = $(e.target);
     var offset = {
-      top: $e.outerHeight() + $e.offset().top,
+      top: $e.outerHeight() + $e.offset().top + 5,
       left: $e.offset().left
     };
     $('.popover.create_checklist').offset(offset).show();

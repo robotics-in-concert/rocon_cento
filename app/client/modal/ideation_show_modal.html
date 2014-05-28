@@ -1,6 +1,7 @@
 <template name="ideation_show_modal">
 <div id="modal-show-ideation" class="modal ideation_show modal_show fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
 {{#with currentIdeation}}
+{{> popover_checklist}}
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
@@ -28,6 +29,18 @@
             </div>
 
 
+            {{#if getChecklists _id}}
+            <hr />
+
+            {{#each getChecklists _id}}
+            {{> checklists}}
+
+
+            {{/each}}
+
+            {{/if}}
+
+
             <hr />
 
             {{>modal_comment}}
@@ -38,6 +51,7 @@
               <button class="btn upvote ct">Upvote</button>
               <button class="btn downvote ct">Downvote</button>
               <button class="btn create_checklist ct" data-container="body" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">Create Checklist</button>
+              <button class="btn duedate ct" data-container="body" data-toggle="popover" data-placement="top" data-content="">Duedate</button>
             </div>
 
         </div>

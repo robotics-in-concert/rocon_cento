@@ -374,8 +374,14 @@ form.ct {
 
 }
 .popover {
-  z-index: 2000;
+  position: fixed;
+  z-index: 3000;
   border-radius: 0;
+
+  input {
+    z-index: 5000;
+
+  }
 
 }
 
@@ -650,3 +656,11 @@ form.ct {
 
 }
 
+
+.checklist ul {
+
+  li.done {
+    text-decoration:line-through;
+    color: #ccc;
+  }
+}
