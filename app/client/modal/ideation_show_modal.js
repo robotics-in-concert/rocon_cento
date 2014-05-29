@@ -11,6 +11,22 @@ Template.ideation_show_modal.rendered = function(){
 
   });
 
+  
+  // $(function(){
+    // var $popover = $('.popover.duedate');
+    // $popover.position({
+      // of: 'button.duedate',
+      // at: 'left bottom+10',
+      // my: 'left top'
+      
+
+
+    // });
+
+  // });
+  //
+  //
+
 
 };
 Template.ideation_show_modal.events({
@@ -24,40 +40,80 @@ Template.ideation_show_modal.events({
   // },
   //
   'click button.duedate': function(e){
-    var $popover = $('.popover.duedate');
-    if($popover.is(':visible')){
-      $popover.offset({left: 0, top: 0});
-      // console.log('here');
-      $popover.hide();
 
-      return false;
+
+
+    var $popover = $('.popover.duedate');
+    var $e = $(e.target);
+    if($popover.is(':visible')){
+      $popover.trigger('hide');
+    }else{
+      $popover.position({
+        of: 'button.duedate',
+        at: 'left bottom+10',
+        my: 'left top'
+      });
+
+      $popover.show();
     }
 
-    var $e = $(e.target);
-    var offset = {
-      top: $e.outerHeight() + $e.offset().top + 5,
-      left: $e.offset().left
-    };
-    $popover.offset(offset).show();
+
+    // console.log('VISIBLE : ', $popover.is(':visible'));
+    // if($popover.is(':visible')){
+      // console.log('visible, will hide');
+      // $popover.offset({left: 0, top: 0});
+      // // console.log('here');
+      // $popover.hide();
+
+      // return false;
+    // }
+
+
+
+
+    // var offset = {
+      // top: $e.outerHeight() + $e.offset().top + 5,
+      // left: $e.offset().left
+    // };
+    // console.log('new offset', offset);
+    // if($popover.offset().top == 0)
+      // $popover.offset(offset);
+
     
     return false;
   },
   'click button.create_checklist': function(e){
+    
     var $popover = $('.popover.create_checklist');
+    var $e = $(e.target);
     if($popover.is(':visible')){
-      $popover.offset({left: 0, top: 0});
-      // console.log('here');
-      $popover.hide();
+      $popover.trigger('hide');
+    }else{
+      $popover.position({
+        of: $e,
+        at: 'left bottom+10',
+        my: 'left top'
+      });
 
-      return false;
+      $popover.show();
     }
 
-    var $e = $(e.target);
-    var offset = {
-      top: $e.outerHeight() + $e.offset().top + 5,
-      left: $e.offset().left
-    };
-    $('.popover.create_checklist').offset(offset).show();
+    // var $popover = $('.popover.create_checklist');
+    // $popover.offset({left: 0, top: 0});
+    // if($popover.is(':visible')){
+      // $popover.offset({left: 0, top: 0});
+      // // console.log('here');
+      // $popover.hide();
+
+      // return false;
+    // }
+
+    // var $e = $(e.target);
+    // var offset = {
+      // top: $e.outerHeight() + $e.offset().top + 5,
+      // left: $e.offset().left
+    // };
+    // $('.popover.create_checklist').offset(offset).show();
     
     return false;
   },

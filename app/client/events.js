@@ -8,13 +8,25 @@ $( function(){
 
   // });
 
-  $(document.body).click(function(){
+  $(document.body).mouseup(function(e){
 
-    $('.popover:visible').each(function(){
-      $(this).offset({left: 0, top: 0}).hide();
+    
+    // console.log('1111');
+    // if(!$(e.target).parents('.popover').length){
+      // console.log('2222');
+      // $('.popover:visible').each(function(){
+        // $(this).hide();
+          // // $(this).offset({left: 0, top: 0}).hide();
+      // });
+    // }
 
-    });
 
+  });
+
+
+  $(document.body).on('hide', '.popover', function(e){
+    $(this).offset({top: 0, left: 0});
+    $(this).hide();
 
   });
 

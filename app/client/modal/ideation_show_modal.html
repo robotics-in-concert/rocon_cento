@@ -2,7 +2,7 @@
 <div id="modal-show-ideation" class="modal ideation_show modal_show fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
 {{#with currentIdeation}}
 {{> popover_checklist}}
-{{> popover_duedate}}
+                {{> popover_duedate}}
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
@@ -27,6 +27,9 @@
 
             <div class="meta">
               <p>Tags : {{tagsJoin tags}}</p>
+              {{#if duedate}}
+              <p>Due date : {{duedate}}</p>
+              {{/if}}
             </div>
 
 
@@ -52,7 +55,9 @@
               <button class="btn upvote ct">Upvote</button>
               <button class="btn downvote ct">Downvote</button>
               <button class="btn create_checklist ct" data-container="body" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">Create Checklist</button>
-              <button class="btn duedate ct" data-container="body" data-toggle="popover" data-placement="top" data-content="">Duedate</button>
+              <button class="btn duedate ct" data-container="body" data-toggle="popoverxxx" data-placement="top" data-content="">
+                Duedate
+              </button>
             </div>
 
         </div>
