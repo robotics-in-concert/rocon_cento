@@ -23,6 +23,23 @@ $( function(){
 
   });
 
+  $(document.body).on('click', 'button[data-toggle=popover]', function(e){
+    var popoverCss = $(this).data('target');
+    $popover = $(popoverCss);
+    var $e = $(e.target);
+    if($popover.is(':visible')){
+      $popover.trigger('hide');
+    }else{
+      $popover.position({
+        of: $e,
+        at: 'left bottom+10',
+        my: 'left top'
+      });
+
+      $popover.show();
+    }
+
+  });
 
   $(document.body).on('hide', '.popover', function(e){
     $(this).offset({top: 0, left: 0});

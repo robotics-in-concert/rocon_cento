@@ -2,7 +2,8 @@
 <div id="modal-show-ideation" class="modal ideation_show modal_show fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
 {{#with currentIdeation}}
 {{> popover_checklist}}
-                {{> popover_duedate}}
+{{> popover_duedate}}
+{{> popover_label}}
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
@@ -39,6 +40,24 @@
               <p id="ideation_description" class="edit_trigger">{{nl2br body}}</p>
             </div>
 
+            {{#if labels.length}}
+            <ul class="labels list-unstyled">
+              {{#each labels}}
+              <li class="label-{{.}}"></li>
+              {{/each}}
+            </ul>
+            {{/if}}
+            
+
+
+               <div class="meta">
+                 {{#if tags.length}}
+                 <p>Tags : {{tagsJoin tags}}</p>
+                 {{/if}}
+                 {{#if duedate}}
+                 <p>Due date : {{duedate}}</p>
+                 {{/if}}
+                </div>
 
             {{#if getChecklists _id}}
             <hr />
@@ -61,8 +80,10 @@
               <button type="submit" class="create_modeling ct btn btn-default">Create Modeling Task</button>
               <button class="btn upvote ct">Upvote</button>
               <button class="btn downvote ct">Downvote</button>
-              <button class="btn create_checklist ct" data-container="body" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">Create Checklist</button>
-              <button class="btn create_checklist ct" data-container="body" data-toggle="popover" data-placement="top" data-content="">Labels</button>
+              <button class="btn create_checklist ct" data-toggle="popover">Create Checklist</button>
+              <button class="btn ct" data-toggle="popover" data-target=".popover.labels">Labels</button>
+
+              <hr />
               <button class="btn duedate ct" data-container="body" data-toggle="popoverxxx" data-placement="top" data-content="">
                 Duedate
               </button>

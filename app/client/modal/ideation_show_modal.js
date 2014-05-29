@@ -98,23 +98,6 @@ Template.ideation_show_modal.events({
       $popover.show();
     }
 
-    // var $popover = $('.popover.create_checklist');
-    // $popover.offset({left: 0, top: 0});
-    // if($popover.is(':visible')){
-      // $popover.offset({left: 0, top: 0});
-      // // console.log('here');
-      // $popover.hide();
-
-      // return false;
-    // }
-
-    // var $e = $(e.target);
-    // var offset = {
-      // top: $e.outerHeight() + $e.offset().top + 5,
-      // left: $e.offset().left
-    // };
-    // $('.popover.create_checklist').offset(offset).show();
-    
     return false;
   },
   'click .upvote': function(e){

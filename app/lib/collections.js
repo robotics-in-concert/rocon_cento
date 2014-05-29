@@ -41,6 +41,10 @@ Cento.deleteWorkItem = function(id){
   Cento.WorkItems.update({_id: id}, {$set : {deleted_at: new Date}});
 };
 
+Cento.updateWorkItem = function(id, params){
+  Cento.WorkItems.update({_id: id}, {$set: params});
+};
+
 
 Cento.solutions = function(){
   return Cento.Solutions.find({deleted_at: {$exists: false}});

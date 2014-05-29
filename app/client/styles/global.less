@@ -87,6 +87,11 @@ ul.splits-line {
   }
 
 }
+
+.well {
+  border-radius: 0;
+
+}
 .navbar {
   select.form-control {
     margin-top: 10px;
@@ -672,7 +677,50 @@ form.ct {
 
 }
 
+  .label-green{background-color:#34b27d}
+  .label-yellow{background-color:#dbdb57}
+  .label-orange{background-color:#e09952}
+  .label-red{background-color:#cb4d4d}
+  .label-purple{background-color:#93c}
+  .label-blue{background-color:#4d77cb}
+
+.popover.labels {
+
+
+  ul {
+    li {
+      height: 24px;
+      margin-bottom: 5px;
+      text-indent: -1000px;
+      width: 120px;
+
+
+      &.active {
+        border: solid 2px #777;
+
+      }
+      &.selected {
+        border: solid 2px #333;
+
+      }
+
+    }
+
+  }
+
+}
+
 #modal-show-ideation {
+  ul.labels {
+    li {
+      width: 30px;
+      height: 24px;
+      display: inline-block;
+      margin-right: 5px;
+
+    }
+
+  }
   .modal_right {
 
 
