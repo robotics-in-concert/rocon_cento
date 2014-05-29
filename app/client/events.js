@@ -8,6 +8,16 @@ $( function(){
 
   // });
 
+  $(document.body).click(function(){
+
+    $('.popover:visible').each(function(){
+      $(this).offset({left: 0, top: 0}).hide();
+
+    });
+
+
+  });
+
 
   $(document.body).on('click', '.editable .edit_trigger', function(e){
     var $trigger = $(e.target);
