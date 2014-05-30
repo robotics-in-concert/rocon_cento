@@ -15,13 +15,13 @@ UI.registerHelper('solutionLabelText', function(labelClr){
   console.log(idx);
   console.groupEnd();
 
-  return sol.label_titles[idx];
+  return sol.label_titles ? sol.label_titles[idx] : '';
 });
 
 UI.registerHelper('solutionLabels', function(){
   var sol = Session.get('currentSolution');
   var colors =  ["green", "yellow", "orange", "red", "purple", "blue"];
-  var titles = sol.label_titles;
+  var titles = sol.label_titles || [];
 
   data = _.reduce(_.zip(colors, titles), function(memo, arr){
     memo.push({color: arr[0], title: arr[1]});
