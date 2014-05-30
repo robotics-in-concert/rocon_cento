@@ -43,8 +43,9 @@
             {{#if labels.length}}
             <ul class="labels list-unstyled">
               {{#each labels}}
-              <li class="label-{{.}}"></li>
+              <li class="label-{{.}}"><span>{{solutionLabelText .}}</span></li>
               {{/each}}
+              <li><a href="# change_label" data-toggle="popover" data-target=".popover.labels">Change Label</a></li>
             </ul>
             {{/if}}
             

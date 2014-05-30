@@ -30,6 +30,7 @@ Cento.ActionTypes = {
   POST_ARTIFACTS: 'post_artifacts'
 };
 
+Cento.LabelColors = ['green', 'yellow', 'orange', 'red', 'purple', 'blue'];
 
 
 

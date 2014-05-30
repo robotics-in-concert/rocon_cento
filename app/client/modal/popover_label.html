@@ -6,12 +6,9 @@
 
 
       <ul class="select_labels list-unstyled">
-        <li class="label-green">green <i class="glyphicon glyphicon-ok"></i></li>
-        <li class="label-yellow">yello <i class="glyphicon glyphicon-ok"></i></li>
-        <li class="label-orange">orange <i class="glyphicon glyphicon-ok"></i></li>
-        <li class="label-red">red <i class="glyphicon glyphicon-ok"></i></li>
-        <li class="label-purple">purple <i class="glyphicon glyphicon-ok"></i></li>
-        <li class="label-blue">blue <i class="glyphicon glyphicon-ok"></i></li>
+        {{#each solutionLabels}}
+        <li class="{{checkSelected .. color}} label-{{color}}">{{color}} <i class="glyphicon glyphicon-ok"></i></li>
+        {{/each}}
       </ul>
       <form>
         <div class="form-group">
@@ -29,7 +26,7 @@
 
 
       <ul class="label-titles list-unstyled">
-        {{#each labels}}
+        {{#each solutionLabels}}
         <li class="">
           <span class="label-{{color}}">{{color}}</span>
           <input type="text" class="ct" name="txt-{{color}}" value="{{title}}">

@@ -5,6 +5,32 @@ UI.registerHelper('default', function(a, x) {
   return a;
 });
 
+
+
+UI.registerHelper('solutionLabelText', function(labelClr){
+  var sol = Session.get('currentSolution');
+  var colors =  ["green", "yellow", "orange", "red", "purple", "blue"];
+  var idx = _.indexOf(colors, labelClr);
+  console.group('labelText');
+  console.log(idx);
+  console.groupEnd();
+
+  return sol.label_titles[idx];
+});
+
+UI.registerHelper('solutionLabels', function(){
+  var sol = Session.get('currentSolution');
+  var colors =  ["green", "yellow", "orange", "red", "purple", "blue"];
+  var titles = sol.label_titles;
+
+  data = _.reduce(_.zip(colors, titles), function(memo, arr){
+    memo.push({color: arr[0], title: arr[1]});
+    return memo;
+  }, []);
+  console.log(data);
+  return data;
+});
+
 UI.registerHelper('$eq', function (a, b) {
   return (a === b); //Only text, numbers, boolean - not array & objects
 });

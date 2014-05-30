@@ -1,15 +1,14 @@
 Template.popover_label.helpers({
-  'labels': function(){
-    var sol = Session.get('currentSolution');
-    var colors =  ["green", "yellow", "orange", "red", "purple", "blue"];
-    var titles = sol.label_titles;
+  'checkSelected': function(workItem, color){
+    var idx = _.include(workItem.labels, color);
+    console.group('clickSelected');
+    console.log(this);
+    console.log(workItem);
+    console.log(color);
+    console.log(idx);
 
-    data = _.reduce(_.zip(colors, titles), function(memo, arr){
-      memo.push({color: arr[0], title: arr[1]});
-      return memo;
-    }, []);
-    console.log(data);
-    return data;
+    console.groupEnd();
+    return idx ? 'selected' : '';
   }
 
 });
