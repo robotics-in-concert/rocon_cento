@@ -1,0 +1,5 @@
+DEPLOY_HOST=toyweb
+DEPLOY_PATH=/path/to/deploy
+PORT=3000
+MONGO_URL=mongodb://mongodb_url/dbname
+ROOT_URL=http://root_url_of_meteor_app
