@@ -762,6 +762,36 @@ form.ct {
     }
 
   }
+  .checklist {
+    margin-bottom: 20px;
+    .checklist-progress {
+      position: relative;
+      height: 30px;
+      span {
+        position: absolute;
+        top: 0px;
+      }
+
+      .checklist-progress-bar {
+        margin-left: 40px;
+        position: relative;
+        background-color: #d9d9d9;
+          height: 12px;
+
+
+        .checklist-progress-bar-current {
+          position: absolute;
+          top: 0;
+          left: 0;
+          height: 12px;
+          background: linear-gradient(to bottom, hsl(202, 60%, 55%) 0, hsl(202, 70%, 45%) 100%);
+
+        }
+
+      }
+    }
+
+  }
   .modal_right {
 
 
