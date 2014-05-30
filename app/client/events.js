@@ -2,6 +2,51 @@
 $( function(){
 
 
+  
+  // $(document.body).on('click', 'button[data-toggle]', function(e){
+    // $(this).popover('show');
+
+  // });
+
+  $(document.body).mouseup(function(e){
+
+    
+    // console.log('1111');
+    // if(!$(e.target).parents('.popover').length){
+      // console.log('2222');
+      // $('.popover:visible').each(function(){
+        // $(this).hide();
+          // // $(this).offset({left: 0, top: 0}).hide();
+      // });
+    // }
+
+
+  });
+
+  $(document.body).on('click', 'button[data-toggle=popover]', function(e){
+    var popoverCss = $(this).data('target');
+    $popover = $(popoverCss);
+    var $e = $(e.target);
+    if($popover.is(':visible')){
+      $popover.trigger('hide');
+    }else{
+      $popover.position({
+        of: $e,
+        at: 'left bottom+10',
+        my: 'left top'
+      });
+
+      $popover.show();
+    }
+
+  });
+
+  $(document.body).on('hide', '.popover', function(e){
+    $(this).offset({top: 0, left: 0});
+    $(this).hide();
+
+  });
+
 
   $(document.body).on('click', '.editable .edit_trigger', function(e){
     var $trigger = $(e.target);

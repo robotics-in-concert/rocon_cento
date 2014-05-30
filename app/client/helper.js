@@ -16,6 +16,9 @@ UI.registerHelper('tagsJoin', function(tags){
   return "";
 });
 
+UI.registerHelper('getChecklists', function(id){
+  return Cento.Checklists.find({work_item_id: id}, {}, {sort: {created: -1}});
+});
 
 UI.registerHelper('getWorkItem', function(id){
   return Cento.WorkItems.findOne({_id: id});
