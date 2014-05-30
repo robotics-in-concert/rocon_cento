@@ -1,3 +1,18 @@
+Template.popover_label.helpers({
+  'labels': function(){
+    var sol = Session.get('currentSolution');
+    var colors =  ["green", "yellow", "orange", "red", "purple", "blue"];
+    var titles = sol.label_titles;
+
+    data = _.reduce(_.zip(colors, titles), function(memo, arr){
+      memo.push({color: arr[0], title: arr[1]});
+      return memo;
+    }, []);
+    console.log(data);
+    return data;
+  }
+
+});
 Template.popover_label.events({
 
 
@@ -8,10 +23,53 @@ Template.popover_label.events({
     $li.addClass('active');
 
   },
+  'mouseleave .popover.labels li': function(e){
+    $li = $(e.target);
+    $li.removeClass('active');
+
+  },
   'click .popover.labels li': function(e){
     $li = $(e.target);
     $li.toggleClass('selected');
 
+  },
+  'click .change_titles': function(e){
+    console.log('here');
+    $e = $(e.target);
+    $popover = $e.closest('.popover');
+    $popover.trigger('changePage', 1);
+    return false;
+  },
+  'click .cancel_label_titles': function(e){
+    var $e = $(e.target);
+    var $page = $e.closest('.page');
+    var $popover = $e.closest('.popover');
+
+    $popover.trigger('changePage', 0);
+
+    return false;
+    
+
+    
+  },
+  'click .save_label_titles': function(e){
+    var $e = $(e.target);
+    var $page = $e.closest('.page');
+    var $popover = $e.closest('.popover');
+
+    var values = [];
+    $page.find('input').each(function(e){
+      values.push($(this).val());
+    });
+
+    var sol = Session.get('currentSolution');
+    Cento.Solutions.update({_id: sol._id}, {$set: {label_titles: values}});
+    $popover.trigger('changePage', 0);
+
+    return false;
+    
+
+    
   },
   'click .save': function(e){
     $e = $(e.target);

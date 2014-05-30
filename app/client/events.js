@@ -7,6 +7,9 @@ $( function(){
     // $(this).popover('show');
 
   // });
+  //
+  //
+
 
   $(document.body).mouseup(function(e){
 
@@ -23,6 +26,11 @@ $( function(){
 
   });
 
+  $(document.body).on('changePage', '.popover', function(e, page){
+    console.log(arguments);
+    $popover.find('.page:not(:eq('+page+'))').hide();
+    $popover.find('.page:eq('+page+')').show();
+  });
   $(document.body).on('click', 'button[data-toggle=popover]', function(e){
     var popoverCss = $(this).data('target');
     $popover = $(popoverCss);
@@ -36,7 +44,10 @@ $( function(){
         my: 'left top'
       });
 
+      $popover.find('.page:not(:first-child)').hide();
+      $popover.find('.page:eq(0)').show();
       $popover.show();
+
     }
 
   });
