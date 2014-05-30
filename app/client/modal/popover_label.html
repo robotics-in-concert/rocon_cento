@@ -1,22 +1,47 @@
 <template name="popover_label">
 <div class="popover labels">
-  <h3 class="popover-title">Label</h3>
-  <div class="popover-content">
+  <div class="page">
+    <h3 class="popover-title">Label</h3>
+    <div class="popover-content">
 
 
-    <ul class="labels list-unstyled">
-      <li class="label-green">green</li>
-      <li class="label-yellow">yello</li>
-      <li class="label-orange">orange</li>
-      <li class="label-red">red</li>
-      <li class="label-purple">purple</li>
-      <li class="label-blue">blue</li>
-    </ul>
-    <form>
-      <div class="form-group">
-        <button class="save btn ct btn-sm">Save</button>
+      <ul class="select_labels list-unstyled">
+        {{#each solutionLabels}}
+        <li class="{{checkSelected .. color}} label-{{color}}">{{color}} <i class="glyphicon glyphicon-ok"></i></li>
+        {{/each}}
+      </ul>
+      <form>
+        <div class="form-group">
+          <button class="save btn ct btn-sm">Save</button>
+        </div>
+      </form>
+      <div class="bottom">
+        <a href="#" class="change_titles">Change label titles...</a>
       </div>
-    </form>
+    </div>
+  </div>
+  <div class="page change_titles">
+    <h3 class="popover-title">Label Titles</h3>
+    <div class="popover-content">
+
+
+      <ul class="label-titles list-unstyled">
+        {{#each solutionLabels}}
+        <li class="">
+          <span class="label-{{color}}">{{color}}</span>
+          <input type="text" class="ct" name="txt-{{color}}" value="{{title}}">
+        </li>
+        {{/each}}
+      </ul>
+      <form>
+        <div class="form-group">
+          <button class="save_label_titles btn ct btn-sm">Save</button>
+          <button class="cancel_label_titles btn ct btn-sm">Cancel</button>
+        </div>
+      </form>
+      <div class="bottom">
+      </div>
+    </div>
   </div>
 
 </div>
