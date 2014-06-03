@@ -1,10 +1,26 @@
 Template.modal_comment.helpers({
+  'attachmentsForComment': function(cid){
+    return Cento.Artifacts.find({comment_id: cid});
+  },
   'commentFiles': function(){
     return Session.get('currentCommentFiles');
   }
 
 });
 Template.modal_comment.events({
+  'focus form.comment textarea': function(e){
+    $f = $(e.target).closest('form');
+    $f.addClass('focus')
+
+  },
+  'click .cancel_comment': function(e){
+    $f = $(e.target).closest('form');
+    $f.removeClass('focus')
+    Session.set('currentCommentFiles', []);
+    $f.find('textarea').val('');
+    return false;
+
+  },
   'click .attach': function(e){
     $('input[type=file]').click();
 
@@ -42,9 +58,23 @@ Template.modal_comment.events({
       attachments = curFiles;
     }
 
+
     if(this.type != null && this.type != ''){
+      var cid = Random.id();
       Cento.WorkItems.update({_id: id},
-          {$push: {comments:{_id: Random.id(), body: txt, 'created':new Date(), user_id: Meteor.userId(), attachments: attachments}}});
+          {$push: {comments:{_id: cid, body: txt, 'created':new Date(), user_id: Meteor.userId()}}});
+      attachments.forEach(function(a){
+        var data = {
+          work_item_id: id,
+          comment_id: cid,
+          file: a,
+          created: new Date(),
+          user_id: Meteor.userId()
+        };
+
+        Cento.Artifacts.insert(data);
+
+      });
     }else{
       Cento.Artifacts.update({_id: id},
           {$push: {comments:{_id: Random.id(), body: txt, 'created':new Date(), user_id: Meteor.userId()}}});
@@ -55,9 +85,9 @@ Template.modal_comment.events({
     return false;
   },
 
-  'click .delete_comment': function(e){
-    var pid = $(e.target).closest('li.post').data('post_id');
-    var cid = $(e.target).closest('li').data('comment_id');
+  'click .delete_comment': function(e, tpl){
+    var pid = tpl.data._id;
+    var cid = this._id;
     console.log(cid);
     Cento.WorkItems.update({_id:pid}, {$pull:{comments:{_id: cid}}});
     return false;
