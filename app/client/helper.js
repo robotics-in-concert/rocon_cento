@@ -101,6 +101,12 @@ UI.registerHelper('fileIconPath', function(name){
 
   return "/fileicons/"+ext+".png";
 });
+UI.registerHelper('fileIsImage', function(name){
+  var m = name.match(/\.([0-9a-zA-Z]+)$/i);
+  if(m[1].toLowerCase() == 'jpg')
+    return true;
+  return false;
+});
 
 UI.registerHelper('nl2br', function(text){
   var nl2br = (text + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g,

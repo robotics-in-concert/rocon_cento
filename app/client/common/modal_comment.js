@@ -11,15 +11,21 @@ Template.modal_comment.events({
   },
   'change input[type=file]': function(e){
     $input = $(e.target);
-    var file = $input[0].files[0];
-    
-    Meteor.saveFile(file, function(e, r){
-      console.log(r);
-      $input.val('');
-      Session.set('currentCommentFiles', [r]);
+    Session.set('currentCommentFiles', []);
 
-      
-      // Cento.Artifacts.update({_id: id}, {$push: {attachments: {name: r}}});
+    [].slice.apply($input[0].files).forEach(function(file){
+      Meteor.saveFile(file, function(e, r){
+        var files = Session.get('currentCommentFiles');
+        files.push(r);
+        Session.set('currentCommentFiles', files);
+        // console.log(r);
+        // $input.val('');
+        // Session.set('currentCommentFiles', [r]);
+
+        
+        // Cento.Artifacts.update({_id: id}, {$push: {attachments: {name: r}}});
+      });
+
     });
 
   },

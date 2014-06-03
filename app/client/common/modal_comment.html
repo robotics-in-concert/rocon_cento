@@ -7,15 +7,17 @@
       </div>
       <div class="form-group">
         {{#if commentFiles.length}}
-          {{#each commentFiles}}
-          {{.}}
-          {{/each}}
+          <ul class="files_to_upload">
+            {{#each commentFiles}}
+            <li><img src="{{fileIconPath .}}"> {{.}}</li>
+            {{/each}}
+          </ul>
         {{/if}}
       </div>
-      <div class="form-group text-right">
+      <div class="form-group text-right buttons">
         <a href="#" class="attach">attach files</a>
         <button class="ct btn comment btn-sm">Comment</button>
-        <input type="file" name="file" style="display: none;">
+        <input type="file" name="file" multiple style="display: none;">
       </div>
     </form>
     <ul class="comments list-unstyled">
@@ -26,12 +28,19 @@
         <img src="{{avatarUrl user_id}}" height="18">
         <a href="#">{{username user_id}}</a></span>
 
-        <span class="body edit_trigger">{{nl2br body}}</span>
+        <p class="body edit_trigger">{{nl2br body}}</p>
         <!-- <span class="datetime">{{formatDate created 'YYYY-MM-DD HH:mm:ss'}}</span> -->
         <span class="comment_actions"><a href="#" class="delete_comment">delete</a></span>
 
+        
         {{#each attachments}}
-        <img src="/data/{{.}}">
+        <div class="attachment">
+          {{#if fileIsImage .}}
+          <img src="/data/{{.}}">
+          {{else}}
+          <img src="{{fileIconPath .}}"> <a href="/data/{{.}}">{{.}}</a>
+          {{/if}}
+        </div>
         {{/each}}
       </div>
       </li>
