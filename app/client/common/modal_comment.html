@@ -5,8 +5,17 @@
       <div class="form-group">
         <textarea name="comment_body" class="form-control"></textarea>
       </div>
+      <div class="form-group">
+        {{#if commentFiles.length}}
+          {{#each commentFiles}}
+          {{.}}
+          {{/each}}
+        {{/if}}
+      </div>
       <div class="form-group text-right">
+        <a href="#" class="attach">attach files</a>
         <button class="ct btn comment btn-sm">Comment</button>
+        <input type="file" name="file" style="display: none;">
       </div>
     </form>
     <ul class="comments list-unstyled">
@@ -20,6 +29,10 @@
         <span class="body edit_trigger">{{nl2br body}}</span>
         <!-- <span class="datetime">{{formatDate created 'YYYY-MM-DD HH:mm:ss'}}</span> -->
         <span class="comment_actions"><a href="#" class="delete_comment">delete</a></span>
+
+        {{#each attachments}}
+        <img src="/data/{{.}}">
+        {{/each}}
       </div>
       </li>
 

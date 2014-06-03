@@ -135,10 +135,14 @@ h2 {
 }
 
 /* override bootstrap */
+
 .form-control {
-  border-radius: 0;
+  border-radius: 0 !important;
   box-shadow: none;
   -webkit-box-shadow: none;
+}
+.form-inline .form-control {
+  .form-control();
 }
 
 .form-group {
