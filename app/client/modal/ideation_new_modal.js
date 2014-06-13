@@ -13,9 +13,11 @@ Template.ideation_new_modal.rendered = function(){
 };
 Template.ideation_new_modal.events({
   'click .btn.post': function(e){
+    var editor = Quill.editors[0];
     var f = $(e.target).closest('form');
     var title = $('input[name=title]').val();
-    var txt = $('textarea[name=body]').val();
+    // var txt = $('textarea[name=body]').val();
+    var txt = editor.getHTML();
     var files = Session.get('filesToAttach');
     var attachments = _.map(files, function(f){
       return _.pick(f, 'name', 'size', 'type');
@@ -47,6 +49,10 @@ Template.ideation_new_modal.events({
       console.error(e.message);
       console.trace(e);
     }
+
+
+    editor.setHTML("");
+    
     return false;
   },
 });
