@@ -1,3 +1,16 @@
+Template.ideation_new_modal.rendered = function(){
+
+  // Initialize editor with custom theme and modules
+  var fullEditor = new Quill('#full-editor', {
+    modules: {
+      'toolbar': { container: '#full-toolbar' },
+      'link-tooltip': true
+    },
+    theme: 'snow'
+  });
+
+
+};
 Template.ideation_new_modal.events({
   'click .btn.post': function(e){
     var f = $(e.target).closest('form');
