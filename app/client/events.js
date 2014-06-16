@@ -28,11 +28,15 @@ $( function(){
 
   $(document.body).on('hidden.bs.modal', '.modal', function(e, page){
     if($('form.comment').length){
-      $('form.comment').get(0).reset();
+      var $f = $('form.comment');
+      $f.get(0).reset();
       $f.removeClass('focus')
       Session.set('currentCommentFiles', []);
     }
 
+    if($('form.new_ideation').length){
+      $('form.new_ideation').get(0).reset();
+    }
   });
   $(document.body).on('changePage', '.popover', function(e, page){
     console.log(arguments);
