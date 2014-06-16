@@ -2,6 +2,8 @@
 
 DD=`date +%Y%m%dT%H%M%S`
 
+source deploy/config
+
 [[ -z "$DEPLOY_HOST" ]] && exit 1;
 [[ -z "$DEPLOY_PATH" ]] && exit 1
 [[ -z "$PORT" ]] && exit 1
