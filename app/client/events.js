@@ -26,6 +26,14 @@ $( function(){
 
   });
 
+  $(document.body).on('hidden.bs.modal', '.modal', function(e, page){
+    if($('form.comment').length){
+      $('form.comment').get(0).reset();
+      $f.removeClass('focus')
+      Session.set('currentCommentFiles', []);
+    }
+
+  });
   $(document.body).on('changePage', '.popover', function(e, page){
     console.log(arguments);
     $popover.find('.page:not(:eq('+page+'))').hide();
