@@ -103,7 +103,7 @@ UI.registerHelper('fileIconPath', function(name){
 });
 UI.registerHelper('fileIsImage', function(name){
   var m = name.match(/\.([0-9a-zA-Z]+)$/i);
-  if(m[1].toLowerCase() == 'jpg')
+  if(_.include(['jpg', 'jpeg', 'png', 'gif'], m[1].toLowerCase()))
     return true;
   return false;
 });
