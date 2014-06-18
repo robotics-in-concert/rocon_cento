@@ -14,6 +14,15 @@ Template.admin_solutions.events({
     return false;
 
   },
+  'click .add_work_item_type': function(e){
+    var f = $(e.target).closest('form');
+    var title = f.find('input[name=title]').val();
+
+    Cento.Solutions.update({_id: this._id}, {$push: {work_item_types: title}});
+    f[0].reset();
+    return false;
+
+  },
   'click .save_solution': function(e){
     var f = $(e.target).closest('form');
 

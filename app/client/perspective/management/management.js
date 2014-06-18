@@ -43,6 +43,10 @@ Template.card.events({
       Session.set('currentModelingItem', this._id);
       $('#modal-show-modeling').modal();
 
+    }else{
+      Session.set('currentModelingItem', this._id);
+      $('#modal-show-modeling').modal();
+
     }
 
 

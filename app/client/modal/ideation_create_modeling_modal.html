@@ -12,6 +12,14 @@
 
              <form data-card_id="{{_id}}" class="ct">
                <div class="form-group">
+                 <label>Type</label>
+                 <select class="select2" name="work_item_type">
+                   {{#each workItemTypes}}
+                   <option value="{{.}}">{{.}}</option>
+                   {{/each}}
+                 </select>
+               </div>
+               <div class="form-group">
                  <label>Title</label>
                  <input class="form-control" type="text" name="title">
                </div>
