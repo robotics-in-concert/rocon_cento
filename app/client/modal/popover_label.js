@@ -1,13 +1,7 @@
 Template.popover_label.helpers({
   'checkSelected': function(workItem, color){
     var idx = _.include(workItem.labels, color);
-    console.group('clickSelected');
-    console.log(this);
-    console.log(workItem);
-    console.log(color);
-    console.log(idx);
 
-    console.groupEnd();
     return idx ? 'selected' : '';
   }
 

@@ -94,7 +94,7 @@ Template.modal_comment.events({
   },
   'done .editable': function(e){
     var $editable = $(e.target);
-    var $f = $editable.next('form[name=edit]');
+    var $f = $editable.prev('form[name=edit]');
     var newVal = $f.find('textarea').val();
 
     var field = $editable.data('field');
