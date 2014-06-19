@@ -132,7 +132,7 @@ Router.map(function(){
       data.users = Meteor.users.find({});
       
       data.workGroups = Cento.WorkGroups.find({solution_id: sid});
-      var query = {type: Cento.WorkItemTypes.IDEA, solution_id: sid, deleted_at:{$exists: false}};
+      var query = {type: Cento.WorkItemTypes.IDEA, solution_id: sid, deleted_at:{$exists: false}, archive:{$exists: false}};
       if(groupId && groupId !== ""){
         query.work_group_id = groupId;
         data.group_id = groupId;

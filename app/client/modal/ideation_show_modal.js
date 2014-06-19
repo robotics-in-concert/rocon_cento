@@ -105,6 +105,11 @@ Template.ideation_show_modal.events({
     $(e.target).closest('.modal').modal('hide');
 
   },
+  'click .archive': function(e){
+    Cento.WorkItems.update({_id: this._id}, {$set: {archive:true}});
+    $(e.target).closest('.modal').modal('hide');
+    return false;
+  },
   'click .downvote': function(e){
     Cento.WorkItems.update({_id: this._id}, {$inc: {votes:-1}});
     $(e.target).closest('.modal').modal('hide');
