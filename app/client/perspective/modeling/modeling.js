@@ -1,3 +1,4 @@
+
 Template.modelings.helpers({
   'users': function(){
     return Meteor.users.find({'services.github': {$exists: true}}).fetch();
@@ -15,6 +16,12 @@ Template.modelings.helpers({
 Template.modelings.rendered = function(){
 };
 Template.modelings.events({
+  'change select.filter_status': function(e){
+    Session.set('modelingFilterStatus', $(e.target).val());
+  },
+  'change select.filter_member': function(e){
+    Session.set('modelingFilterMember', $(e.target).val());
+  },
   'click .show_ideation': function(){
     Session.set('currentIdeation', this._id);
     $('#modal-show-ideation').modal();

@@ -61,16 +61,16 @@
 
       </table>
       <div class="filters">
-        <select class="form-control">
-          <option>All ideation</option>
-          <option>Doing ideation</option>
-          <option>Modeled ideation</option>
+        <select name="filter_type" class="filter_type form-control">
+          <option value="">All ideation</option>
+          <option value="doing">Doing ideation</option>
+          <option value="modeled">Modeled ideation</option>
         </select>
         <i class="glyphicon glyphicon-chevron-down"></i>
 
-        <select class="form-control">
-          <option>Unarchived</option>
-          <option>Archieved</option>
+        <select name="filter_archive" class="form-control">
+          <option value="0">Unarchived</option>
+          <option value="1">Archieved</option>
         </select>
         <i class="glyphicon glyphicon-chevron-down"></i>
       </div>
@@ -78,10 +78,10 @@
         <thead>
           <th>Rank</th>
           <th>Title</th>
-          <th>Vote</th>
-          <th>Reply</th>
+          <th class="sortable" data-item_type="ideation" data-field="votes">Vote</th>
+          <th class="sortable" data-item_type="ideation" data-field="comments_count">Reply</th>
           <th>Writer</th>
-          <th>Date</th>
+          <th class="sortable" data-item_type="ideation" data-field="created">Date</th>
           <th>Tags</th>
           <th></th>
         </thead>
