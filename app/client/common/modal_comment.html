@@ -25,7 +25,7 @@
     <ul class="comments list-unstyled">
       {{#each comments}} 
       <li class="comment"> 
-      <div class="editable" data-content="{{body}}">
+      <div class="editable" data-field="body" data-plain="true" data-content="{{body}}">
         <span class="user">
         <img src="{{avatarUrl user_id}}" height="18">
         <a href="#">{{username user_id}}</a>

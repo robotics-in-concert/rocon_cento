@@ -1,6 +1,6 @@
 
 Template.modeling_create_artifact_modal.events({
-  'click .create_artifact': function(e){
+  'click button.create_artifact': function(e){
     var f = $(e.target).closest('form');
     var modal = $(e.target).closest('.modal');
     var arr = f.serializeArray();
