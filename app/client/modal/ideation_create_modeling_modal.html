@@ -1,5 +1,6 @@
 <template name="ideation_create_modeling_modal">
 <div id="modal-create-modeling" class="modal create_modeling fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+{{> popover_add_work_item_type}}
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -18,7 +19,8 @@
                    <option value="{{.}}">{{.}}</option>
                    {{/each}}
                  </select>
-                 <a href="#" class="add_work_item_type">add</a>
+                 <button class="btn ct" data-toggle="popover" data-target=".popover.create_work_item_type">Add</button>
+                 <!-- <a href="#" class="add_work_item_type">add</a> -->
                </div>
                <div class="form-group">
                  <label>Title</label>
