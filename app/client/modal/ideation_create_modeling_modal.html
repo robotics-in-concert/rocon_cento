@@ -11,13 +11,14 @@
         <div class="left">
 
              <form data-card_id="{{_id}}" class="ct">
-               <div class="form-group">
+               <div class="form-group inline">
                  <label>Type</label>
                  <select class="select2" name="work_item_type">
                    {{#each workItemTypes}}
                    <option value="{{.}}">{{.}}</option>
                    {{/each}}
                  </select>
+                 <a href="#" class="add_work_item_type">add</a>
                </div>
                <div class="form-group">
                  <label>Title</label>
@@ -27,7 +28,7 @@
                  <label>Description</label>
                  <textarea class="comment_text form-control" rows="3">{{currentIdeation.body}}</textarea>
                </div>
-               <div class="form-group">
+               <div class="form-group inline">
                  <label>Asignee</label>
                  <select class="select2" name="assignees" multiple>
                    {{#each allUsers}}
@@ -35,7 +36,7 @@
                    {{/each}}
                  </select>
                </div>
-               <div class="form-group">
+               <div class="form-group inline">
                  <label>Reviewers</label>
                  <select class="select2" name="reviewers" multiple>
                    {{#each allUsers}}
