@@ -1,6 +1,23 @@
 
 Template.layout.events({
 
+  'hidden.bs.modal .modal': function(e){
+    if($('form.comment').length){
+      var $f = $('form.comment');
+      $f.get(0).reset();
+      $f.removeClass('focus')
+      Session.set('currentCommentFiles', []);
+    }
+
+
+    if($('form[name=edit]').length){
+      $('form[name=edit]').trigger('close');
+    }
+
+    if($('form.new_ideation').length){
+      $('form.new_ideation').get(0).reset();
+    }
+  },
   'click .editable .edit_trigger': function(e){
     var $trigger = $(e.target);
     var $editable = $trigger.closest('.editable');
