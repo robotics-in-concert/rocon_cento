@@ -1,6 +1,7 @@
 <template name="ideation_create_modeling_modal">
 <div id="modal-create-modeling" class="modal create_modeling fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
 {{> popover_add_work_item_type}}
+{{> popover_add_work_group}}
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -12,6 +13,16 @@
         <div class="left">
 
              <form data-card_id="{{_id}}" class="ct">
+               <div class="form-group inline">
+                 <label>Work Group</label>
+                 <select class="select2" name="work_group">
+                   {{#each workGroups}}
+                   <option value="{{_id}}">{{title}}</option>
+                   {{/each}}
+                 </select>
+                 <button class="btn ct" data-toggle="popover" data-target=".popover.create_work_group">Add</button>
+                 <!-- <a href="#" class="add_work_item_type">add</a> -->
+               </div>
                <div class="form-group inline">
                  <label>Type</label>
                  <select class="select2" name="work_item_type">

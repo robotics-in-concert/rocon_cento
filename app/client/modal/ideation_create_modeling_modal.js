@@ -1,5 +1,7 @@
+
 Template.ideation_create_modeling_modal.helpers({
   'currentIdeation': function(){
+
     return Cento.WorkItems.findOne({_id: Session.get('currentIdeation')});
   },
   'workItemTypes': function(){
@@ -35,12 +37,13 @@ Template.ideation_create_modeling_modal.events({
     // var workType = f.find('select[name=type]').select2('val');
     var assignee = f.find('select[name=assignees]').select2('val');
     var work_item_type = f.find('select[name=work_item_type]').select2('val');
+    var work_group_id = f.find('select[name=work_group]').select2('val');
     var reviewers = f.find('select[name=reviewers]').select2('val');
-    console.log(assignee, reviewers);
 
-    try {
+    // try {
       Cento.WorkItems.insert({
         type: work_item_type,
+        work_group_id: work_group_id,
         status: Cento.WorkItemStatus.TODO,
         solution_id: ideation.solution_id,
         related: [
@@ -61,9 +64,9 @@ Template.ideation_create_modeling_modal.events({
         modal.modal('hide');
         alertify.success('Successfully created.');
       });
-    }catch(e){
-      console.error(e);
-    }
+    // }catch(err){
+      // console.log(err.toString());
+    // }
 
 
     return false;

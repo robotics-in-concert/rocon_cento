@@ -7,6 +7,14 @@ UI.registerHelper('default', function(a, x) {
 
 
 
+UI.registerHelper('workGroups', function () {
+  var sol = Session.get('currentSolution');
+  if(!sol)
+    return null;
+  return Cento.WorkGroups.find({solution_id: sol._id});
+});
+
+
 UI.registerHelper('solutionLabelText', function(labelClr){
   var sol = Session.get('currentSolution');
   var colors =  ["green", "yellow", "orange", "red", "purple", "blue"];
