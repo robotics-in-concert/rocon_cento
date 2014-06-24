@@ -94,6 +94,7 @@ Router.map(function(){
     data: function(){
       var data = {};
       var sid = this.params.solution;
+      data.workGroups = Cento.WorkGroups.find({solution_id: sid});
       data.ideations = Cento.WorkItems.find({type: Cento.WorkItemTypes.IDEA, solution_id: sid});
       data.modelings = Cento.WorkItems.find({type: {$ne: Cento.WorkItemTypes.IDEA}, solution_id: sid});
       return data;

@@ -24,26 +24,31 @@
     
     <div class="col-md-10">
 
-        <div class="lists">
+      <div class="lists" style="width: 3000px">
           <!-- list -->
           <div data-id="{{_id}}" class="list">
             <h1>ideation</h1>
             <ul class="cards">
-              {{#each ideations}}
+              {{#each workItemsInGroup null}}
                 {{> card}}
               {{/each}}
             </ul>
           </div>
           <!-- /list -->
+
+
+
+          {{#each workGroups}}
           <!-- list -->
           <div data-id="{{_id}}" class="list">
-            <h1>modeling</h1>
+            <h1>{{title}}</h1>
             <ul class="cards">
-              {{#each modelings}}
+              {{#each workItemsInGroup _id}}
                 {{> card}}
               {{/each}}
             </ul>
           </div>
+          {{/each}}
           <!-- /list -->
 
         </div>
@@ -58,7 +63,7 @@
 
 <template name="card">
   <li id="card-{{_id}}" data-id="{{_id}}" class="card" >
-  <a href="#">{{title}}</a>
+  <a href="#"><span class="label label-default">{{type}}</span> {{title}}</a>
 
   <div class="summary">
   {{#if comments.length}}
