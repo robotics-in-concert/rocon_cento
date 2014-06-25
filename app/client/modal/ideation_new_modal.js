@@ -5,10 +5,11 @@ Template.ideation_new_modal.rendered = function(){
 };
 Template.ideation_new_modal.events({
   'click .btn.post': function(e){
-    var editor = Quill.editors[0];
     var f = $(e.target).closest('form');
     var title = $('input[name=title]').val();
     // var txt = $('textarea[name=body]').val();
+    var eid = $('.editor-container', f.find('iframe').contents()).attr('id')
+    var editor = _.detect(Quill.editors, function(e){ return e.id == eid; })
     var txt = editor.getHTML();
     var files = Session.get('filesToAttach');
     var attachments = _.map(files, function(f){
