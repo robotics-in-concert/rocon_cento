@@ -11,7 +11,11 @@ function openModal(tpl, data){
     });
     tpl.rendered = function(){
       console.log(arguments);
-      this.$('.modal').modal();
+      var opts = {};
+      if($('.modal').length > 1){
+        opts.backdrop = false;
+      }
+      this.$('.modal').modal(opts);
 
 
     };
