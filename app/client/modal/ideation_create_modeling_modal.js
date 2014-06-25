@@ -12,7 +12,7 @@ Template.ideation_create_modeling_modal.rendered = function(){
 };
 Template.ideation_create_modeling_modal.events({
   'click .create_task': function(e){
-    var ideation = Cento.WorkItems.findOne({_id: Session.get('currentIdeation')});
+    var ideation = this.item;
     var f = $(e.target).closest('form');
     var modal = $(e.target).closest('.modal');
     var title = f.find('input[name=title]').val();

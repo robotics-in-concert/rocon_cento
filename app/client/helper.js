@@ -49,6 +49,10 @@ UI.registerHelper('getChecklists', function(id){
 UI.registerHelper('getWorkItem', function(id){
   return Cento.WorkItems.findOne({_id: id});
 });
+UI.registerHelper('getArtifact', function(id){
+  return Cento.Artifacts.findOne({_id: id});
+});
+
 
 UI.registerHelper('isActivePath', function(path){
   var current = Router.current();

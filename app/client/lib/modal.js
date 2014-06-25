@@ -9,6 +9,14 @@ function openModal(tpl, data){
       }
 
     });
+    tpl.rendered = function(){
+      console.log(arguments);
+      this.$('.modal').modal();
+
+
+    };
+    console.log(tpl);
+    console.log(tpl.find);
     return UI.insert(tpl, document.body);
 
 }
