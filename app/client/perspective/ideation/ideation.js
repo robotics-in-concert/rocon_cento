@@ -52,7 +52,6 @@ Template.ideation.events({
   },
   'click .show': function(e){
     var re = openModal('ideation_show_modal', {item: this});
-    // Session.set('currentIdeation', this._id);
     $('#modal-show-ideation').modal();
     return false;
   },
@@ -62,6 +61,7 @@ Template.ideation.events({
     return false;
   },
   'click .new_ideation': function(e){
+    var re = openModal('ideation_new_modal', {item: this});
     $('.modal.ideation_form').modal();
     return false;
   },
