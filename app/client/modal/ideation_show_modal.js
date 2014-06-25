@@ -10,8 +10,7 @@ Template.ideation_show_modal.events({
     $(e.target).closest('.modal').modal('hide');
   },
   'click .create_modeling': function(){
-    var re = openModal('ideation_create_modeling_modal', {item: this});
-    $('#modal-create-modeling').modal();
+    openModal('ideation_create_modeling_modal', {item: this});
     return false;
   },
 

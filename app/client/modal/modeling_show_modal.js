@@ -19,7 +19,6 @@ Template.modeling_show_modal.events({
   'click .show_artifact': function(e){
     var aid = $(e.target).closest('li').data('artifact_id');
     openModal('modeling_show_artifact_modal', {_id: aid});
-    $('#modal_show_artifact').modal();
     return false;
   },
 
