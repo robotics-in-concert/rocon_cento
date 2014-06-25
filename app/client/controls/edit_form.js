@@ -31,12 +31,35 @@ Template.edit_form.events({
   'click .save_edit': function(e){
     var $f = $(e.target).closest('form'); 
     var $editable = $f.next('.editable:eq(0)');
+
+
+    console.log(this);
+
+
+    var newVal;
+    if($f.find('textarea').length){
+      newVal = $f.find('textarea').val();
+    }else{
+      var editor = window.editors[$f.attr('id')];
+      // var newVal = $f.find('textarea').val();
+      newVal = editor.getHTML();
+      console.log("new content : ", newVal);
+
+    }
+
+    var field = $editable.data('field');
+    var params = {};
+    params[field] = newVal;
+    Cento.WorkItems.update({_id: this._id}, {$set: params});
+
+
+
     $editable.trigger('done');
-    console.log('done');
     $editable.show();
     $f.remove();
     return false;
 
+    
   }
 
 });

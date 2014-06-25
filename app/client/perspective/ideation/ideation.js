@@ -51,7 +51,7 @@ Template.ideation.events({
     return false;
   },
   'click .show': function(e){
-    var re = openModal('ideation_show_modal', {item: this});
+    var re = openModal('ideation_show_modal', {_id: this._id});
     $('#modal-show-ideation').modal();
     return false;
   },
