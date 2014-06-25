@@ -51,7 +51,8 @@ Template.ideation.events({
     return false;
   },
   'click .show': function(e){
-    Session.set('currentIdeation', this._id);
+    var re = openModal('ideation_show_modal', {item: this});
+    // Session.set('currentIdeation', this._id);
     $('#modal-show-ideation').modal();
     return false;
   },
