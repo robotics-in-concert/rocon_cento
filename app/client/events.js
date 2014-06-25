@@ -23,6 +23,16 @@ $( function(){
   */
 
   $(document.body).on('hidden.bs.modal', '.modal', function(e, page){
+
+    var $m = $(e.target);
+
+    if($m.find('form').length){
+      $m.find('form').each(function(){
+        $(this).get(0).reset();
+
+      });
+    }
+
     if($('form.comment').length){
       var $f = $('form.comment');
       $f.get(0).reset();
