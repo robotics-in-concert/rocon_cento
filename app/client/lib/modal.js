@@ -16,6 +16,8 @@ function openModal(tpl, data){
         opts.backdrop = false;
       }
       this.$('.modal').modal(opts);
+      if(typeof tpl.after_modal_rendered === 'function')
+        tpl.after_modal_rendered();
 
 
     };

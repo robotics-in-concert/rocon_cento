@@ -11,6 +11,7 @@ Template.editor.rendered = function () {
     },
     theme: 'snow'
   });
+  console.log("new editor id: ", fullEditor.id);
   console.log("editor rendered");
 
   

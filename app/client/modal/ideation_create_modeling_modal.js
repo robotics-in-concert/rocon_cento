@@ -4,19 +4,26 @@ Template.ideation_create_modeling_modal.helpers({
   }
 
 });
-Template.ideation_create_modeling_modal.rendered = function(){
+Template.ideation_create_modeling_modal.after_modal_rendered = function(){
   $(function(){
-  $('select.select2').select2({width: '200px'});
+    $('select.select2').select2({width: '200px'});
   });
 
 };
 Template.ideation_create_modeling_modal.events({
   'click .create_task': function(e){
-    var ideation = this.item;
+    var ideation = Cento.WorkItems.findOne(this._id);
     var f = $(e.target).closest('form');
     var modal = $(e.target).closest('.modal');
     var title = f.find('input[name=title]').val();
-    var description = f.find('textarea').val();
+    // var description = f.find('textarea').val();
+
+
+    var eid = $('.editor-container', f.find('iframe').contents()).attr('id')
+    var editorInstance = _.detect(Quill.editors, function(e){ return e.id == eid; })
+    
+    var description = editorInstance.getHTML();
+    
 
 
     // var workType = f.find('select[name=type]').select2('val');
