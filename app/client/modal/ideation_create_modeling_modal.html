@@ -1,5 +1,7 @@
 <template name="ideation_create_modeling_modal">
 <div id="modal-create-modeling" class="modal create_modeling fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+{{> popover_add_work_item_type}}
+{{> popover_add_work_group}}
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -11,15 +13,38 @@
         <div class="left">
 
              <form data-card_id="{{_id}}" class="ct">
+               <div class="form-group inline">
+                 <label>Work Group</label>
+                 <select class="select2" name="work_group">
+                   {{#each workGroups}}
+                   <option value="{{_id}}">{{title}}</option>
+                   {{/each}}
+                 </select>
+                 <button class="btn ct" data-toggle="popover" data-target=".popover.create_work_group">Add</button>
+                 <!-- <a href="#" class="add_work_item_type">add</a> -->
+               </div>
+               <div class="form-group inline">
+                 <label>Type</label>
+                 <select class="select2" name="work_item_type">
+                   {{#each workItemTypes}}
+                   <option value="{{.}}">{{.}}</option>
+                   {{/each}}
+                 </select>
+                 <button class="btn ct" data-toggle="popover" data-target=".popover.create_work_item_type">Add</button>
+                 <!-- <a href="#" class="add_work_item_type">add</a> -->
+               </div>
                <div class="form-group">
                  <label>Title</label>
                  <input class="form-control" type="text" name="title">
                </div>
                <div class="form-group">
                  <label>Description</label>
-                 <textarea class="comment_text form-control" rows="3">{{currentIdeation.body}}</textarea>
+                 <!-- <textarea class="comment_text form-control" rows="3">{{currentIdeation.body}}</textarea> -->
+                 {{#with getWorkItem _id}}
+                 {{> editor }}
+                 {{/with}}
                </div>
-               <div class="form-group">
+               <div class="form-group inline">
                  <label>Asignee</label>
                  <select class="select2" name="assignees" multiple>
                    {{#each allUsers}}
@@ -27,7 +52,7 @@
                    {{/each}}
                  </select>
                </div>
-               <div class="form-group">
+               <div class="form-group inline">
                  <label>Reviewers</label>
                  <select class="select2" name="reviewers" multiple>
                    {{#each allUsers}}

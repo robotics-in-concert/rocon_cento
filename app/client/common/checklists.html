@@ -1,0 +1,33 @@
+<template name="checklists">
+
+<div class="checklist">
+  <h4><i class="glyphicon glyphicon-th-list"></i> {{title}}</h4>
+
+
+{{#if progress}}
+<div class="checklist-progress">
+  <span>{{progress}}</span>
+  <div class="checklist-progress-bar">
+    <div class="checklist-progress-bar-current" style="width: {{progress}}"></div>
+  </div>
+</div>
+{{/if}}
+
+<ul class="list-unstyled">
+{{#each items}}
+<li class="{{#if done}}done{{/if}}"><input type="checkbox" checked="{{done}}"> {{body}}</li>
+{{/each}}
+</ul>
+
+
+<a href="#" class="add_item">add item</a>
+<form class="ct" style="display: none;">
+  <div class="form-group">
+    <textarea type="text" class="form-control"></textarea>
+  </div>
+  <button class="btn ct create">Create</button>
+</form>
+
+</div>
+
+</template>

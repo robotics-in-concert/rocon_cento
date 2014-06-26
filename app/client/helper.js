@@ -5,6 +5,47 @@ UI.registerHelper('default', function(a, x) {
   return a;
 });
 
+
+
+UI.registerHelper('workGroups', function () {
+  var sol = Session.get('currentSolution');
+  if(!sol)
+    return null;
+  return Cento.WorkGroups.find({solution_id: sol._id});
+});
+
+UI.registerHelper('workItemsInGroup', function (gid) {
+  var filter = {work_group_id: {$exists: false}};
+  if(gid) filter.work_group_id = gid;
+
+  return Cento.WorkItems.find(filter);
+});
+
+
+UI.registerHelper('solutionLabelText', function(labelClr){
+  var sol = Session.get('currentSolution');
+  var colors =  ["green", "yellow", "orange", "red", "purple", "blue"];
+  var idx = _.indexOf(colors, labelClr);
+  console.group('labelText');
+  console.log(idx);
+  console.groupEnd();
+
+  return sol.label_titles ? sol.label_titles[idx] : '';
+});
+
+UI.registerHelper('solutionLabels', function(){
+  var sol = Session.get('currentSolution');
+  var colors =  ["green", "yellow", "orange", "red", "purple", "blue"];
+  var titles = sol.label_titles || [];
+
+  data = _.reduce(_.zip(colors, titles), function(memo, arr){
+    memo.push({color: arr[0], title: arr[1]});
+    return memo;
+  }, []);
+  console.log(data);
+  return data;
+});
+
 UI.registerHelper('$eq', function (a, b) {
   return (a === b); //Only text, numbers, boolean - not array & objects
 });
@@ -16,10 +57,17 @@ UI.registerHelper('tagsJoin', function(tags){
   return "";
 });
 
+UI.registerHelper('getChecklists', function(id){
+  return Cento.Checklists.find({work_item_id: id}, {}, {sort: {created: -1}});
+});
 
 UI.registerHelper('getWorkItem', function(id){
   return Cento.WorkItems.findOne({_id: id});
 });
+UI.registerHelper('getArtifact', function(id){
+  return Cento.Artifacts.findOne({_id: id});
+});
+
 
 UI.registerHelper('isActivePath', function(path){
   var current = Router.current();
@@ -71,6 +119,12 @@ UI.registerHelper('fileIconPath', function(name){
   }
 
   return "/fileicons/"+ext+".png";
+});
+UI.registerHelper('fileIsImage', function(name){
+  var m = name.match(/\.([0-9a-zA-Z]+)$/i);
+  if(_.include(['jpg', 'jpeg', 'png', 'gif'], m[1].toLowerCase()))
+    return true;
+  return false;
 });
 
 UI.registerHelper('nl2br', function(text){

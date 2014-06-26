@@ -35,6 +35,33 @@
 }
 
 .modal {
+  .edit_trigger {
+    cursor: pointer;
+
+  }
+  .modal_wrapper {
+    .clearfix();
+
+  }
+  .modal_left {
+    width: 80%;
+    float: left;
+    margin-right: 15px;
+
+  }
+  .modal_right {
+    width: 18%;
+    float: left;
+
+    .actions {
+      button {
+        margin-bottom: 8px;
+
+      }
+
+    }
+
+  }
   .modal-header {
     color: @blue-color;
     border-bottom: none;
@@ -60,9 +87,65 @@
 
     }
   }
+  .comment_wrap {
+    form.comment {
+      textarea {
+        height: 30px;
+        overflow-y: hidden;
+        -webkit-transition: height ease-in-out 85ms;
+
+      }
+      .buttons {
+        display: none;
+
+      }
+
+      &.focus {
+        textarea {
+          height: 90px;
+
+        }
+        .buttons {
+          display: block;
+
+        }
+
+      }
+
+    }
+    .files_to_upload {
+      font-size: 12px;
+
+    }
+    .buttons {
+      a, button {
+        display: inline-block;
+        margin-left: 10px;
+
+      }
+      a {
+        font-size: 12px;
+        color: @blue-color;
+      }
+
+    }
+  }
   .comments {
     margin-top: 20px;
+    position: relative;
+    img {
+      max-width: 400px;
+    }
     .comment {
+      &:hover {
+        .comment_actions { display: block; }
+
+      }
+
+      .attachment {
+        margin-bottom: 10px;
+
+      }
       padding: 5px;
       &:nth-child(odd) {
       background-color: @row-alt-bg-color;
@@ -74,10 +157,16 @@
       span.user a {
         color: @blue-color;
       }
-      span.body {
+      p.body {
         color: @gray-color;
+        padding: 15px 5px;
       }
-      .comment_actions { display: none; }
+      .comment_actions { 
+        display: none; 
+        position: absolute;
+        top: 10px;
+        right: 10px;
+      }
 
     }
   }

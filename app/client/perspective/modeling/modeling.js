@@ -1,3 +1,4 @@
+
 Template.modelings.helpers({
   'users': function(){
     return Meteor.users.find({'services.github': {$exists: true}}).fetch();
@@ -15,8 +16,14 @@ Template.modelings.helpers({
 Template.modelings.rendered = function(){
 };
 Template.modelings.events({
+  'change select.filter_status': function(e){
+    Session.set('modelingFilterStatus', $(e.target).val());
+  },
+  'change select.filter_member': function(e){
+    Session.set('modelingFilterMember', $(e.target).val());
+  },
   'click .show_ideation': function(){
-    Session.set('currentIdeation', this._id);
+    openModal('ideation_show_modal', {_id: this._id});
     $('#modal-show-ideation').modal();
     return false;
   },
@@ -30,9 +37,7 @@ Template.modelings.events({
   },
   'click .show': function(e){
     var id = this._id;
-    console.log('yyy', id);
-    Session.set('currentModelingItem', id);
-    $('#modal-show-modeling').modal();
+    openModal('modeling_show_modal', {_id: id});
     return false;
   },
   'click .delete': function(e){

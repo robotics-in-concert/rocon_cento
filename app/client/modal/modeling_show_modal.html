@@ -1,6 +1,6 @@
 <template name="modeling_show_modal">
 <div id="modal-show-modeling" class="modal modeling fade large" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-  {{#with currentModelingItem}}
+  {{#with getWorkItem _id}}
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
@@ -11,10 +11,14 @@
       <div class="modal-body">
 
         <h4>Title</h4>
-        <p>{{title}}</p>
+        <div class="editable" data-field="title" data-content="{{title}}">
+          <p class="edit_trigger">{{title}}</p>
+        </div>
 
         <h4>Description</h4>
-        <p>{{description}}</p>
+        <div class="editable" data-field="description" data-content="{{description}}">
+          <p class="edit_trigger">{{{description}}}</p>
+        </div>
 
 
         <h4>Status</h4>

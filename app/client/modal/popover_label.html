@@ -1,0 +1,48 @@
+<template name="popover_label">
+<div class="popover labels">
+  <div class="page">
+    <h3 class="popover-title">Label</h3>
+    <div class="popover-content">
+
+
+      <ul class="select_labels list-unstyled">
+        {{#each solutionLabels}}
+        <li class="{{checkSelected .. color}} label-{{color}}">{{color}} <i class="glyphicon glyphicon-ok"></i></li>
+        {{/each}}
+      </ul>
+      <form>
+        <div class="form-group">
+          <button class="save btn ct btn-sm">Save</button>
+        </div>
+      </form>
+      <div class="bottom">
+        <a href="#" class="change_titles">Change label titles...</a>
+      </div>
+    </div>
+  </div>
+  <div class="page change_titles">
+    <h3 class="popover-title">Label Titles</h3>
+    <div class="popover-content">
+
+
+      <ul class="label-titles list-unstyled">
+        {{#each solutionLabels}}
+        <li class="">
+          <span class="label-{{color}}">{{color}}</span>
+          <input type="text" class="ct" name="txt-{{color}}" value="{{title}}">
+        </li>
+        {{/each}}
+      </ul>
+      <form>
+        <div class="form-group">
+          <button class="save_label_titles btn ct btn-sm">Save</button>
+          <button class="cancel_label_titles btn ct btn-sm">Cancel</button>
+        </div>
+      </form>
+      <div class="bottom">
+      </div>
+    </div>
+  </div>
+
+</div>
+</template>

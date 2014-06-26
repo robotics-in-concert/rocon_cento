@@ -1,7 +1,10 @@
 <template name="ideation_show_modal">
 <div id="modal-show-ideation" class="modal ideation_show modal_show fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-{{#with currentIdeation}}
-  <div class="modal-dialog">
+{{#with getWorkItem _id}}
+{{> popover_checklist}}
+{{> popover_duedate}}
+{{> popover_label}}
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -10,23 +13,85 @@
 
       <div class="modal-body">
 
-        <h2>{{title}}</h2>
-        <h3>{{body}}</h3>
 
-        <div class="meta">
-          <p>Tags : {{tagsJoin tags}}</p>
+        <div class="modal_wrapper">
+          <div class="modal_left">
+
+
+
+
+              <!-- <div class="panel panel-default"> -->
+                <!-- <div class="panel-heading"> -->
+                  <!-- <h3 class="panel-title">{{title}}</h3> -->
+                <!-- </div> -->
+                <!-- <div class="panel-body"> -->
+                  <!-- {{nl2br body}} -->
+                <!-- </div> -->
+              <!-- </div> -->
+
+
+
+            <div class="editable" data-id="{{_id}}" data-field="title" data-plain="true" data-content="{{title}}">
+              <h2 class="edit_trigger">{{title}}</h2>
+            </div>
+            
+
+            <div class="editable well" data-id="{{_id}}" data-field="body" data-content="{{body}}">
+              <p id="ideation_description" class="edit_trigger">{{nl2br body}}</p>
+            </div>
+
+            {{#if labels.length}}
+            <ul class="labels list-unstyled">
+              {{#each labels}}
+              <li class="label-{{.}}"><span>{{solutionLabelText .}}</span></li>
+              {{/each}}
+              <li><a href="# change_label" data-toggle="popover" data-target=".popover.labels">Change Label</a></li>
+            </ul>
+            {{/if}}
+            
+
+
+               <div class="meta">
+                 {{#if tags.length}}
+                 <p>Tags : {{tagsJoin tags}}</p>
+                 {{/if}}
+                 {{#if duedate}}
+                 <p>Due date : {{duedate}}</p>
+                 {{/if}}
+                </div>
+
+            {{#if getChecklists _id}}
+            <hr />
+
+            {{#each getChecklists _id}}
+            {{> checklists}}
+
+
+            {{/each}}
+
+            {{/if}}
+
+
+            <hr />
+
+            {{>modal_comment}}
         </div>
-        <button type="submit" class="create_modeling ct btn btn-default">Create Modeling Task</button>
+        <div class="modal_right">
+            <div class="actions">
+              <button type="submit" class="create_modeling ct btn btn-default">Create Modeling Task</button>
+              <button class="btn ct" data-toggle="popover" data-target=".popover.create_checklist">Create Checklist</button>
+              <button class="btn ct" data-toggle="popover" data-target=".popover.labels">Labels</button>
+              <button class="btn ct" data-toggle="popover" data-target=".popover.duedate">Duedate</button>
+              <button class="btn archive ct">Archive</button>
+              <hr />
+              <button class="btn upvote ct">Upvote</button>
+              <button class="btn downvote ct">Downvote</button>
+            </div>
 
-
-
-        {{>modal_comment}}
-        <div class="actions">
-          <button class="btn upvote ct">upvote</button>
-          <button class="btn downvote ct">downvote</button>
         </div>
+      </div>
+
       </div> <!-- /modal-body -->
-
 
     </div>
   </div>

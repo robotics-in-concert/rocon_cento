@@ -7,6 +7,7 @@ Cento.WorkGroups = new Meteor.Collection('work_groups');
 Cento.WorkItems = new Meteor.Collection('work_items');
 Cento.Artifacts = new Meteor.Collection('artifacts');
 Cento.Actions = new Meteor.Collection('actions');
+Cento.Checklists = new Meteor.Collection('checklists');
 
 
 Cento.WorkItemTypes = {
@@ -29,6 +30,7 @@ Cento.ActionTypes = {
   POST_ARTIFACTS: 'post_artifacts'
 };
 
+Cento.LabelColors = ['green', 'yellow', 'orange', 'red', 'purple', 'blue'];
 
 
 
@@ -38,6 +40,10 @@ Cento.createAction = function(type, refId, extra){
 
 Cento.deleteWorkItem = function(id){
   Cento.WorkItems.update({_id: id}, {$set : {deleted_at: new Date}});
+};
+
+Cento.updateWorkItem = function(id, params){
+  Cento.WorkItems.update({_id: id}, {$set: params});
 };
 
 
