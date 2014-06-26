@@ -67,6 +67,9 @@ UI.registerHelper('getWorkItem', function(id){
 UI.registerHelper('getArtifact', function(id){
   return Cento.Artifacts.findOne({_id: id});
 });
+UI.registerHelper('artifacts', function(wid){
+  return Cento.Artifacts.find({work_item_id: wid});
+});
 
 
 UI.registerHelper('isActivePath', function(path){
