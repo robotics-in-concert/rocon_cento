@@ -62,7 +62,7 @@ Template.modal_comment.events({
     if(this.type != null && this.type != ''){
       var cid = Random.id();
       Cento.WorkItems.update({_id: id},
-          {$push: {comments:{_id: cid, body: txt, 'created':new Date(), user_id: Meteor.userId()}}});
+          {$inc: {comments_count: 1}, $push: {comments:{_id: cid, body: txt, 'created':new Date(), user_id: Meteor.userId()}}});
       attachments.forEach(function(a){
         var data = {
           work_item_id: id,

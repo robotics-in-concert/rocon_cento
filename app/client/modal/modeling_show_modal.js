@@ -13,13 +13,12 @@ Template.modeling_show_modal.helpers({
 
 Template.modeling_show_modal.events({
   'click .create_artifact': function(){
-    $('#modal_create_artifact').modal();
+    openModal('modeling_create_artifact_modal', {_id: this._id});
     return false;
   },
   'click .show_artifact': function(e){
     var aid = $(e.target).closest('li').data('artifact_id');
-    Session.set('currentArtifact', aid);
-    $('#modal_show_artifact').modal();
+    openModal('modeling_show_artifact_modal', {_id: aid});
     return false;
   },
 

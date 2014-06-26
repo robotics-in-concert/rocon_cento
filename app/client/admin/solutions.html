@@ -39,6 +39,22 @@
       </form>
     </ul>
 
+    <h4>Work Item Types</h4>
+    <ul>
+      <li>modeling</li>
+      {{#each work_item_types}}
+      <li>{{.}}</li>
+      {{/each}}
+
+      <form class="form-inline">
+        <div class="form-group">
+          <label>Title</label>
+          <input class="form-control" name="title" type="text">
+        </div>
+        <button class="add_work_item_type btn btn-default">Add</button>
+      </form>
+    </ul>
+
     <div>
       <a class="btn btn-default btn-sm" href="/solutions/{{_id}}/ideations">ideation</a>
       <a class="btn btn-default btn-sm" href="/solutions/{{_id}}/modelings">modeling</a>

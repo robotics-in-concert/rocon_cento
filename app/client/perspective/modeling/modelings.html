@@ -1,6 +1,5 @@
 
 <template name="modelings">
-{{> modals}}
 
 <div id="modelings">
 
@@ -57,16 +56,17 @@
 
       </table>
       <div class="filters">
-        <select class="form-control">
-          <option>Todo</option>
-          <option>Doing</option>
-          <option>Done</option>
+        <select class="filter_status form-control">
+          <option value="">All</option>
+          <option value="todo">Todo</option>
+          <option value="doing">Doing</option>
+          <option value="done">Done</option>
         </select>
         <i class="glyphicon glyphicon-chevron-down"></i>
-        <select class="form-control">
-          <option>Assign me</option>
-          <option>Review from me</option>
-          <option>All</option>
+        <select class="filter_member form-control">
+          <option value="">All</option>
+          <option value="assign_me">Assign me</option>
+          <option value="review_from_me">Review from me</option>
         </select>
         <i class="glyphicon glyphicon-chevron-down"></i>
       </div>
@@ -126,11 +126,6 @@
           </td>
         
         </tr>
-        {{>modeling_show_modal}}
-        {{#each artifacts _id}}
-          {{> modeling_show_artifact_modal}}
-        {{/each}}
-        {{>modeling_create_artifact_modal}}
         {{/each}}
 
       </table>

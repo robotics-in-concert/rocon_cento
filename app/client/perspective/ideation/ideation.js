@@ -45,14 +45,41 @@ Template.ideation.rendered = function(){
 
 
 Template.ideation.events({
+  // 'click table.ct th.sortable': function(e){
+    // var fld = $(e.target).data('field');
+    // var sorts = Session.get('ideation:sort');
+    // if(!sorts){ sorts = {}; }
+
+    // sorts[fld] = $(e.target).hasClass('desc') ? 1 : -1;
+
+    // if(sorts[fld] == 1){
+      // $(e.target).removeClass('desc').addClass('asc');
+    // }else{
+      // $(e.target).removeClass('asc').addClass('desc');
+    // }
+
+
+    // Session.set('ideation:sort', sorts);
+  // },
+
+  'change select[name=filter_type]': function(e){
+    var filterType = $(e.target).val();
+    Session.set('ideationFilterType', filterType);
+
+    return false;
+  },
+  'change select[name=filter_archive]': function(e){
+    var filterType = $(e.target).val();
+    Session.set('ideationFilterArchive', filterType);
+
+    return false;
+  },
   'click .show_modeling': function(){
-    Session.set('currentModelingItem', this._id);
-    $('#modal-show-modeling').modal();
+    openModal('modeling_show_modal', {_id: this._id});
     return false;
   },
   'click .show': function(e){
-    Session.set('currentIdeation', this._id);
-    $('#modal-show-ideation').modal();
+    openModal('ideation_show_modal', {_id: this._id});
     return false;
   },
   'click .delete': function(e){
@@ -61,7 +88,7 @@ Template.ideation.events({
     return false;
   },
   'click .new_ideation': function(e){
-    $('.modal.ideation_form').modal();
+    openModal('ideation_new_modal', {item: this});
     return false;
   },
   'blur .body': function(e){
