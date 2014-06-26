@@ -88,7 +88,7 @@ Template.ideation.events({
     return false;
   },
   'click .new_ideation': function(e){
-    openWorkItemModal(this._id);
+    openModal('ideation_new_modal');
     return false;
   },
   'blur .body': function(e){
