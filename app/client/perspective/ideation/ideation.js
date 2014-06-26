@@ -75,13 +75,11 @@ Template.ideation.events({
     return false;
   },
   'click .show_modeling': function(){
-    Session.set('currentModelingItem', this._id);
-    $('#modal-show-modeling').modal();
+    openModal('modeling_show_modal', {_id: this._id});
     return false;
   },
   'click .show': function(e){
-    Session.set('currentIdeation', this._id);
-    $('#modal-show-ideation').modal();
+    openModal('ideation_show_modal', {_id: this._id});
     return false;
   },
   'click .delete': function(e){
@@ -90,7 +88,7 @@ Template.ideation.events({
     return false;
   },
   'click .new_ideation': function(e){
-    $('.modal.ideation_form').modal();
+    openModal('ideation_new_modal', {item: this});
     return false;
   },
   'blur .body': function(e){

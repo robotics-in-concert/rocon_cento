@@ -39,7 +39,10 @@
                </div>
                <div class="form-group">
                  <label>Description</label>
-                 <textarea class="comment_text form-control" rows="3">{{currentIdeation.body}}</textarea>
+                 <!-- <textarea class="comment_text form-control" rows="3">{{currentIdeation.body}}</textarea> -->
+                 {{#with getWorkItem _id}}
+                 {{> editor }}
+                 {{/with}}
                </div>
                <div class="form-group inline">
                  <label>Asignee</label>

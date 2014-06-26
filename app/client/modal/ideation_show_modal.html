@@ -1,6 +1,6 @@
 <template name="ideation_show_modal">
 <div id="modal-show-ideation" class="modal ideation_show modal_show fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-{{#with currentIdeation}}
+{{#with getWorkItem _id}}
 {{> popover_checklist}}
 {{> popover_duedate}}
 {{> popover_label}}
@@ -31,12 +31,12 @@
 
 
 
-            <div class="editable" data-field="title" data-plain="true" data-content="{{title}}">
+            <div class="editable" data-id="{{_id}}" data-field="title" data-plain="true" data-content="{{title}}">
               <h2 class="edit_trigger">{{title}}</h2>
             </div>
             
 
-            <div class="editable well" data-field="body" data-content="{{body}}">
+            <div class="editable well" data-id="{{_id}}" data-field="body" data-content="{{body}}">
               <p id="ideation_description" class="edit_trigger">{{nl2br body}}</p>
             </div>
 

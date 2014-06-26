@@ -13,12 +13,9 @@ Template.management.events({
     var m = Cento.WorkItems.findOne({_id: cid});
     console.log(m);
     if(m.type == Cento.WorkItemTypes.IDEA){
-      Session.set('currentIdeation', m._id);
-      $('#modal-show-ideation').modal();
+      openModal('ideation_show_modal', {_id: cid})
     }else if(m.type == Cento.WorkItemTypes.MODELING){
-      Session.set('currentModelingItem', m._id);
-      $('#modal-show-modeling').modal();
-
+      openModal('modeling_show_modal', {_id: cid})
     }
     $('#card_actions_dropdown').hide();
     return false;
@@ -37,15 +34,11 @@ Template.card.events({
   'click .card': function(e){
     var m = this;
     if(m.type == Cento.WorkItemTypes.IDEA){
-      Session.set('currentIdeation', this._id);
-      $('#modal-show-ideation').modal();
+      openModal('ideation_show_modal', {_id: m._id})
     }else if(m.type == Cento.WorkItemTypes.MODELING){
-      Session.set('currentModelingItem', this._id);
-      $('#modal-show-modeling').modal();
-
+      openModal('modeling_show_modal', {_id: m._id})
     }else{
-      Session.set('currentModelingItem', this._id);
-      $('#modal-show-modeling').modal();
+      openModal('modeling_show_modal', {_id: m._id})
 
     }
 

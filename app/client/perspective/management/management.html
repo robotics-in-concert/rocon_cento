@@ -1,5 +1,4 @@
 <template name="management">
-{{> modals}}
 <div id="management">
   <div id="card_actions_dropdown">
     <ul class="menu" role="menu" aria-labelledby="dropdownmenu1">
@@ -27,7 +26,7 @@
       <div class="lists" style="width: 3000px">
           <!-- list -->
           <div data-id="{{_id}}" class="list">
-            <h1>ideation</h1>
+            <h1>Default</h1>
             <ul class="cards">
               {{#each workItemsInGroup null}}
                 {{> card}}
