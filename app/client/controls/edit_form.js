@@ -20,6 +20,12 @@ Template.edit_form.rendered = function(){
 
 };
 Template.edit_form.events({
+  'close form[name=edit]': function (e) {
+    var $f = $(e.target);
+    $f.next('.editable').show();
+    $f.remove();
+    return false;
+  },
 
   'click .cancel_edit': function(e){
     var $f = $(e.target).closest('form'); 

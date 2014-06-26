@@ -10,6 +10,8 @@ Template.ideation_new_modal.rendered = function(){
   });
 
 
+
+
 };
 Template.ideation_new_modal.events({
   'click .btn.post': function(e){

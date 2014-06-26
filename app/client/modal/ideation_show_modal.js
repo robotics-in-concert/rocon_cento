@@ -30,6 +30,12 @@ Template.ideation_show_modal.rendered = function(){
 
 };
 Template.ideation_show_modal.events({
+  
+  'hidden.bs.modal .modal':function (e) {
+    console.log('hidden');
+
+      
+  },
   // 'click .edit_description': function(e){
     // $(e.target).on('save', function(e, x){
       // console.log(x);
