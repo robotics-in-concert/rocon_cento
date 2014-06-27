@@ -15,8 +15,17 @@ UI.registerHelper('workGroups', function () {
 });
 
 UI.registerHelper('workItemsInGroup', function (gid) {
+  var sol = Session.get('currentSolution');
   var filter = {work_group_id: {$exists: false}};
+  if(sol){
+    filter.solution_id = sol._id;
+  }
+
   if(gid) filter.work_group_id = gid;
+
+
+  console.log("management filter", filter);
+
 
   return Cento.WorkItems.find(filter);
 });
