@@ -159,7 +159,8 @@ Router.map(function(){
       var sorts = Session.get('ideation:sort');
       if(sorts){
       }else{
-        sorts = {};
+        // default sort
+        sorts = {created: -1};
       }
 
       data.notifications = Cento.WorkItems.find(query, {limit: 4, sort: sorts, deleted_at: {$exists: false},
