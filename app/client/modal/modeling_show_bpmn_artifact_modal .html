@@ -1,0 +1,34 @@
+<template name="modeling_show_bpmn_artifact_modal">
+<div id="modal_show_bpmn_artifact" class="modal show_bpmn_artifact fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  {{#with getArtifact _id}}
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Artifact</h4>
+      </div>
+
+      <div class="modal-body">
+        {{#if attachment}}
+            {{#each attachments}}
+                <p class="text-center"><img src="/data/{{name}}"></p>
+            {{/each}}
+        {{else}}
+            <iframe class=" cento-process-viewer" src="http://106.240.238.35:8080/drools-guvnor/org.drools.guvnor.Guvnor/standaloneEditorServlet?assetsUUIDs={{uuid}}&client=oryx"></iframe>
+        {{/if}}
+        <h4>Title</h4>
+        <p>{{title}}</p>
+
+        <h4>Description</h4>
+        <p>{{description}}</p>
+
+        {{>modal_comment}}
+      </div> <!-- /modal-body -->
+
+
+    </div>
+  </div>
+  {{/with}}
+</div>
+
+</template>

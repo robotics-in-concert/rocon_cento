@@ -1,0 +1,44 @@
+
+<template name="modeling_create_bpmn_artifact_modal">
+<div id="modal_create_bpmn_artifact" class="modal create_bpmn_artifact fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Create BPMN</h4>
+      </div>
+
+      <div class="modal-body">
+        <h4>Title</h4>
+        <div class="input-group">
+          <input type="text" class="form-control bpmn_artifact_title" placeholder="Title">
+        </div>
+        <h4>Description</h4>
+        <div class="input-group">
+          <input type="text" class="form-control bpmn_artifact_desc" placeholder="Description">
+        </div>
+        <h4>BPMN Attachment</h4>
+        <button class="btn btn-default btn-xs open_bpmn">Open</button>
+        <button class="btn btn-default btn-xs close_bpmn">Close</button>
+        
+        {{#if jbpm_viewer_uuid}}
+          <p></p>
+          <iframe class=" cento-process-viewer" 
+                  frameborder="0" style="overflow:hidden;overflow-x:hidden;overflow-y:hidden;height:100%;width:100%;" 
+                  src="http://106.240.238.35:8080/drools-guvnor/org.drools.guvnor.Guvnor/standaloneEditorServlet?assetsUUIDs={{jbpm_viewer_uuid}}&client=oryx"></iframe>
+        {{/if}}
+
+        <p></p>
+        <button class="ct create_bpmn_artifact_create btn btn-default">Create</button>
+        <button class="ct create_bpmn_artifact_cancel btn btn-default">Cancel</button>
+        <button class="ct create_bpmn_artifact_delete btn btn-default">All Delete</button>
+      </div> <!-- /modal-body -->
+
+
+    </div>
+  </div>
+</div>
+
+</template>
+
+

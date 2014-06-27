@@ -28,21 +28,27 @@
           <option value="done">done</option>
         </select></p>
 
-        <h4>Attach files (images & doc)</h4>
+        <h4>Attach files (images & doc & BPMN)</h4>
         <form>
           <div class="form-group">
             <button class="btn ct btn-sm create_artifact">Create Artifact</button>
+            <button class="btn ct btn-sm create_bpmn_artifact">Create BPMN</button>
           </div>
         </form>
         <div class="artifacts">
           <ul class="list-unstyled">
 
           {{#each artifacts _id}}
-            {{#each attachments}}
-            <li data-artifact_id="{{../_id}}"><a href="/data/{{name}}" class="show_artifact" target="_blank"><img src="/data/{{name}}"></a></li>
-            {{/each}}
-          {{else}}
-          <p>No artifacts...</p>
+            {{#if attachments}}
+                {{#each attachments}}
+                <li data-artifact_id="{{../_id}}"><a href="/data/{{name}}" class="show_artifact" target="_blank"><img src="/data/{{name}}"></a></li>
+                {{/each}}
+            {{else}}
+                <li data-artifact_id="{{_id}}"><a href="/data/{{name}}" class="show_bpmn_artifact" target="_blank"><img src="http://placehold.it/140x105&text=BPMN"></a></li>                
+            {{/if}}
+          
+            {{else}}
+              <p>No artifacts...</p>
           {{/each}}
           </ul>
         </div>

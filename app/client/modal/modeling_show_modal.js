@@ -12,6 +12,10 @@ Template.modeling_show_modal.helpers({
 
 
 Template.modeling_show_modal.events({
+  'click .create_bpmn_artifact': function(){
+    openModal('modeling_create_bpmn_artifact_modal', {_id: this._id});
+    return false;
+  },
   'click .create_artifact': function(){
     openModal('modeling_create_artifact_modal', {_id: this._id});
     return false;
@@ -21,6 +25,12 @@ Template.modeling_show_modal.events({
     openModal('modeling_show_artifact_modal', {_id: aid});
     return false;
   },
+  'click .show_bpmn_artifact': function(e){
+    var aid = $(e.target).closest('li').data('artifact_id');
+    openModal('modeling_show_bpmn_artifact_modal', {_id: aid});
+    return false;
+  },
+  
 
   'change select[name=status]': function(e){
     var newVal = $(e.target).val();
