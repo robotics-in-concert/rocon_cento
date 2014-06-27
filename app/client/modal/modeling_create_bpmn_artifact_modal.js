@@ -14,14 +14,6 @@ Template.modeling_create_bpmn_artifact_modal.helpers({
 });
 
 Template.modeling_create_bpmn_artifact_modal.events({
-  'click .create_bpmn_artifact_delete': function(e,t){
-    var wid = this._id;
-    console.log("wid: ", wid);
-    Cento.Artifacts.find({work_item_id: wid}).forEach(function(artifact){
-        Cento.Artifacts.remove({_id:artifact._id});
-    });
-  },
-  
   'click .create_bpmn_artifact_create': function(e,t){
     var uuid = Session.get('jbpm_viewer_uuid');
     var id = Session.get('jbpm_artifact_id');
