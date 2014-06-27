@@ -23,8 +23,7 @@ Template.modelings.events({
     Session.set('modelingFilterMember', $(e.target).val());
   },
   'click .show_ideation': function(){
-    openModal('ideation_show_modal', {_id: this._id});
-    $('#modal-show-ideation').modal();
+    openWorkItemModal(this._id);
     return false;
   },
 
@@ -37,7 +36,7 @@ Template.modelings.events({
   },
   'click .show': function(e){
     var id = this._id;
-    openModal('modeling_show_modal', {_id: id});
+    openWorkItemModal(this._id);
     return false;
   },
   'click .delete': function(e){
