@@ -111,7 +111,7 @@ $( function(){
 
 
   /*
-  * Editing
+  * Sorting
   */
 
 
