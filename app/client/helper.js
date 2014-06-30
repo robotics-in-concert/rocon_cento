@@ -1,3 +1,9 @@
+UI.registerHelper('$include', function(arr, item){
+  return _.include(arr, item);
+
+});
+
+
 UI.registerHelper('default', function(a, x) {
   if(typeof a === 'undefined'){
     return x;
