@@ -1,0 +1,8 @@
+
+<template name="user_select">
+   <select class="select2" name="assignees" multiple>
+     {{#each allUsers}}
+     <option value="{{_id}}">{{profile.login}}</option>
+     {{/each}}
+   </select>
+</template>

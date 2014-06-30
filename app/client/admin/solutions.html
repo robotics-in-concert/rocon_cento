@@ -2,6 +2,7 @@
 
 <h3>Solutions</h3>
 <div class="well">
+{{>popover_user_select}}
   <h3>New Solution</h3>
   <form>
     <div class="form-group">
@@ -55,6 +56,20 @@
       </form>
     </ul>
 
+    <h4>Work Item Types</h4>
+    <ul>
+      <li>modeling</li>
+      {{#each work_item_types}}
+      <li>{{.}}</li>
+      {{/each}}
+
+      <form class="form-inline">
+        <div class="form-group">
+          {{> user_select}}
+        </div>
+        <button data-toggle="popover2" data-target="popover_duedate" class="user_add btn btn-default">Add</button>
+      </form>
+    </ul>
     <div>
       <a class="btn btn-default btn-sm" href="/solutions/{{_id}}/ideations">ideation</a>
       <a class="btn btn-default btn-sm" href="/solutions/{{_id}}/modelings">modeling</a>
