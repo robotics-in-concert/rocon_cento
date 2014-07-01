@@ -13,9 +13,9 @@ Template.management.events({
     var m = Cento.WorkItems.findOne({_id: cid});
     console.log(m);
     if(m.type == Cento.WorkItemTypes.IDEA){
-      openModal('ideation_show_modal', {_id: cid})
+      openWorkItemModal(cid)
     }else if(m.type == Cento.WorkItemTypes.MODELING){
-      openModal('modeling_show_modal', {_id: cid})
+      openWorkItemModal(cid)
     }
     $('#card_actions_dropdown').hide();
     return false;
@@ -34,11 +34,11 @@ Template.card.events({
   'click .card': function(e){
     var m = this;
     if(m.type == Cento.WorkItemTypes.IDEA){
-      openModal('ideation_show_modal', {_id: m._id})
+      openWorkItemModal(m._id);
     }else if(m.type == Cento.WorkItemTypes.MODELING){
-      openModal('modeling_show_modal', {_id: m._id})
+      openWorkItemModal(m._id);
     }else{
-      openModal('modeling_show_modal', {_id: m._id})
+      openWorkItemModal(m._id);
 
     }
 
