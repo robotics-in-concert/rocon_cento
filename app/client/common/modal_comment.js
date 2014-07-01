@@ -78,22 +78,6 @@ Template.modal_comment.events({
       });
 
 
-      // TODO : refactor / notification
-      var subs = this.subscribers;
-      subs = _.reject(subs, function(uid){ return uid == Meteor.userId(); });
-
-      var solution = Session.get('currentSolution');
-      var currentLogin = Meteor.user().profile.login;
-      subs.forEach(function(uid){
-        var from = currentLogin + " <noreply@gmail.com>";
-        var title = "["+solution.title+"] "+workItem.title;
-        var text =  txt;
-        var u = Meteor.users.findOne({_id: uid});
-          
-
-        Meteor.call('sendEmail', from, u.profile.email, title, text);
-
-      });
 
     }else{
       Cento.Artifacts.update({_id: id},
