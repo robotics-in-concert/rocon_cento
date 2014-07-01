@@ -17,6 +17,15 @@ Template.popover_duedate.rendered = function(){
 };
 
 Template.popover_duedate.events({
+  'click .test': function(e){
+    console.log('xxx');
+    var $pop = $(e.target).closest('.popover');
+
+    $pop.trigger('xxx');
+    $pop.trigger('hide');
+    return false;
+
+  },
   'click .save': function(e){
     var $f = $(e.target).closest('form');
     var dd = $f.find('input.date').val();

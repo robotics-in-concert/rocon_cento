@@ -1,3 +1,13 @@
+Template.admin_solutions.rendered = function() {
+  console.log('rendered::::', this);
+
+  $(document.body).on('xxx', '.popover', function(){
+    console.log('ERERERERER');
+    return false;
+
+
+  });
+}
 Template.admin_solutions.helpers({
   'workGroupsFor': function(solutionId){
     return Cento.WorkGroups.find({solution_id: solutionId});
@@ -5,6 +15,12 @@ Template.admin_solutions.helpers({
 
 });
 Template.admin_solutions.events({
+  'xxx .popover': function(e){
+    console.log('HEREERERERERERE');
+    
+
+
+  },
   'click .add_work_group': function(e){
     var f = $(e.target).closest('form');
     var title = f.find('input[name=title]').val();

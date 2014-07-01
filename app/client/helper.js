@@ -1,3 +1,9 @@
+UI.registerHelper('$include', function(arr, item){
+  return _.include(arr, item);
+
+});
+
+
 UI.registerHelper('default', function(a, x) {
   if(typeof a === 'undefined'){
     return x;
@@ -75,6 +81,9 @@ UI.registerHelper('getWorkItem', function(id){
 });
 UI.registerHelper('getArtifact', function(id){
   return Cento.Artifacts.findOne({_id: id});
+});
+UI.registerHelper('artifacts', function(wid){
+  return Cento.Artifacts.find({work_item_id: wid});
 });
 
 

@@ -26,5 +26,9 @@ function openModal(tpl, data){
     return UI.insert(tpl, document.body);
 
 }
+function openWorkItemModal(id){
+  openModal('work_item_show_modal', {_id: id});
+}
 
 window.openModal = openModal;
+window.openWorkItemModal = openWorkItemModal;

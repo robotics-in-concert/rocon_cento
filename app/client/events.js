@@ -81,6 +81,65 @@ $( function(){
     $popover.find('.page:eq('+page+')').show();
 
   });
+  $(document.body).on('click', 'button[data-toggle=popover2], a[data-toggle=popover2]', function(e){
+
+    var $e = $(e.target);
+    if($e.data('popover')){
+      return;
+    }
+    
+    var tplName = $(this).data('target');
+    var tpl = UI.renderWithData(Template[tplName]);
+
+
+
+
+
+    UI.insert(tpl, $e.parent()[0])
+
+
+    var $popover = tpl.templateInstance.$('.popover');
+
+    var hide = function(){
+        $popover.remove();
+        $e.removeData('popover');
+    };
+    var clean = function(e){
+      if($(e.target).closest('.popover').length)
+        return;
+
+      if($popover.is(':visible')){
+        $popover.remove();
+        $e.removeData('popover');
+      }
+      return false;
+    };
+    $('body').on('mousedown', clean);
+    $('body').on('hide', hide);
+
+    
+    $popover.show();
+    $popover.position({
+      of: $e,
+      at: 'left bottom+5',
+      my: 'left top'
+    });
+    $e.data('popover', 'on');
+
+    // $popover = $(popoverCss);
+    // if($popover.is(':visible')){
+      // // $popover.trigger('hide');
+    // }else{
+      // $popover.position({
+        // of: $e,
+        // at: 'left bottom+5',
+        // my: 'left top'
+      // });
+
+    // }
+    return false;
+
+  });
   $(document.body).on('click', 'button[data-toggle=popover], a[data-toggle=popover]', function(e){
     var popoverCss = $(this).data('target');
     $popover = $(popoverCss);
