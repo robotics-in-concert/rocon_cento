@@ -1,10 +1,10 @@
 
 <template name="modeling_create_bpmn_artifact_modal">
 <div id="modal_create_bpmn_artifact" class="modal create_bpmn_artifact fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <button type="button" class="close create_bpmn_artifact_exit" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h4 class="modal-title">Create BPMN</h4>
       </div>
 
@@ -24,7 +24,8 @@
         {{#if jbpm_viewer_uuid}}
           <p></p>
           <iframe class=" cento-process-viewer" 
-                  frameborder="0" style="overflow:hidden;overflow-x:hidden;overflow-y:hidden;height:100%;width:100%;" 
+                  style="height:1057px;width:100%;overflow:visible; " 
+                  
                   src="http://106.240.238.35:8080/drools-guvnor/org.drools.guvnor.Guvnor/standaloneEditorServlet?assetsUUIDs={{jbpm_viewer_uuid}}&client=oryx"></iframe>
         {{/if}}
 

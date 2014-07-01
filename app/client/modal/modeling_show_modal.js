@@ -5,7 +5,7 @@ Template.modeling_show_modal.helpers({
 
   },
   'currentModelingItem': function(){
-    return Cento.WorkItems.findOne({_id: Session.get('currentModelingItem')});
+    return Cento.WorkItems.findOne({_id: this._id});
   }
 });
 

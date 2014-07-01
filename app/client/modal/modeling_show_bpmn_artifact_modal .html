@@ -1,7 +1,7 @@
 <template name="modeling_show_bpmn_artifact_modal">
 <div id="modal_show_bpmn_artifact" class="modal show_bpmn_artifact fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   {{#with getArtifact _id}}
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -14,7 +14,10 @@
                 <p class="text-center"><img src="/data/{{name}}"></p>
             {{/each}}
         {{else}}
-            <iframe class=" cento-process-viewer" src="http://106.240.238.35:8080/drools-guvnor/org.drools.guvnor.Guvnor/standaloneEditorServlet?assetsUUIDs={{uuid}}&client=oryx"></iframe>
+            <iframe class="cento-process-viewer" 
+                    width = "100%"
+                    height = "1057px"
+                    src="http://106.240.238.35:8080/drools-guvnor/org.drools.guvnor.Guvnor/standaloneEditorServlet?assetsUUIDs={{uuid}}&client=oryx"></iframe>
         {{/if}}
         <h4>Title</h4>
         <p>{{title}}</p>
