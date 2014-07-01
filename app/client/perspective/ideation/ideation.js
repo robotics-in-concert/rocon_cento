@@ -41,6 +41,14 @@ Template.ideation.rendered = function(){
   new Cento.DragAndDrop($('.dropzone'));
   $(window).scroll(showMoreVisible);
 
+  $(function(){
+  if(window.location.hash){
+    var id = window.location.hash.substring(1);
+    console.log("id", id);
+
+    openWorkItemModal(id);
+  }
+  });
 }
 
 
