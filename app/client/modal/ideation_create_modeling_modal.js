@@ -28,6 +28,7 @@ Template.ideation_create_modeling_modal.after_modal_rendered = function(){
 Template.ideation_create_modeling_modal.events({
   'click .create_task': function(e){
     var ideation = Cento.WorkItems.findOne(this._id);
+    var sol = Session.get('currentSolution');
     var f = $(e.target).closest('form');
     var modal = $(e.target).closest('.modal');
     var title = f.find('input[name=title]').val();
@@ -47,27 +48,35 @@ Template.ideation_create_modeling_modal.events({
     var work_group_id = f.find('select[name=work_group]').select2('val');
     var reviewers = f.find('select[name=reviewers]').select2('val');
 
+
+    var data = {
+      type: work_item_type,
+      work_group_id: work_group_id,
+      status: Cento.WorkItemStatus.TODO,
+      solution_id: sol._id,
+      user_id: Meteor.userId(),
+      assignee: assignee,
+      reviewers: reviewers,
+      title: title,
+      body: description,
+      created:new Date()
+    };
+
+    if(this._id){
+      data.related = [
+        {
+          related_work_id: ideation._id,
+          type: 'reference'
+        }
+      ];
+    }
+
     // try {
-      Cento.WorkItems.insert({
-        type: work_item_type,
-        work_group_id: work_group_id,
-        status: Cento.WorkItemStatus.TODO,
-        solution_id: ideation.solution_id,
-        related: [
-          {
-            related_work_id: ideation._id,
-            type: 'reference'
-          }
-        ],
-        user_id: Meteor.userId(),
-        assignee: assignee,
-        reviewers: reviewers,
-        title: title,
-        body: description,
-        created:new Date()
-      }, function(e, modelingId){
-        Cento.WorkItems.update({_id: ideation._id},
-          {$push: {related: {related_work_id: modelingId, type: 'referred'}}});
+      Cento.WorkItems.insert(data, function(e, modelingId){
+        if(ideation){
+          Cento.WorkItems.update({_id: ideation._id},
+            {$push: {related: {related_work_id: modelingId, type: 'referred'}}});
+        }
         modal.modal('hide');
         alertify.success('Successfully created.');
       });
