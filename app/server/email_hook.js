@@ -29,7 +29,7 @@ Cento.WorkItems.find({}).observe({
     subs.forEach(function(uid){
       var from = currentLogin + " <noreply@gmail.com>";
       var title = "["+solution.title+"] " + newDoc.title;
-      var text =  lastComment.body;
+      var text =  lastComment.body + "\n---\n" + Meteor.absoluteUrl("projects/"+solution._id+"/ideations#"+newDoc._id);
       var u = Meteor.users.findOne({_id: uid});
 
       Meteor.call('sendEmail', from, u.profile.email, title, text);

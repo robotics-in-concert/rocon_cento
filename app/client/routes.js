@@ -117,14 +117,6 @@ Router.map(function(){
       Session.set('filesToAttach', []);
       Session.set('ideation:sort', null);
     },
-    onBeforeAction: function(){
-      if(location.hash){
-        Template.ideation_show_modal.rendered = function(){
-          Session.set('currentIdeation', location.hash.substring(1));
-          $('#modal-show-ideation').modal();
-        };
-      }
-    },
     data: function(){
       var groupId = this.params.group;
       var sid = this.params.solution;
