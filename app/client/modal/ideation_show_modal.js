@@ -1,4 +1,5 @@
-Template.work_item_show_modal.events({
+Template.ideation_show_modal.events({
+
   'click .unsubscribe': function(e){
     var uid = Meteor.userId();
     Cento.WorkItems.update({_id: this._id}, {$pull: {subscribers: uid}});
@@ -11,7 +12,6 @@ Template.work_item_show_modal.events({
     return false;
 
   },
-
   'click .upvote': function(e){
     Cento.WorkItems.update({_id: this._id}, {$inc: {votes:1}});
     $(e.target).closest('.modal').modal('hide');
@@ -31,22 +31,4 @@ Template.work_item_show_modal.events({
     return false;
   },
 
-  'click .create_artifact': function(){
-    openModal('modeling_create_artifact_modal', {_id: this._id});
-    return false;
-  },
-  'click .show_artifact': function(e){
-    var aid = $(e.target).closest('li').data('artifact_id');
-    openModal('modeling_show_artifact_modal', {_id: aid});
-    return false;
-  },
-
-  'change select[name=status]': function(e){
-    var newVal = $(e.target).val();
-    console.log("change status : ",this._id);
-
-
-    Cento.WorkItems.update({_id: this._id}, {$set: {status: newVal}});
-  },
 });
-

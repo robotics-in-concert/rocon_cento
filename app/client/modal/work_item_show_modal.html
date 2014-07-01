@@ -98,6 +98,11 @@
               <button class="btn ct" data-toggle="popover" data-target=".popover.labels">Labels</button>
               <button class="btn ct" data-toggle="popover" data-target=".popover.duedate">Duedate</button>
               <button class="btn archive ct">Archive</button>
+              {{#if $include subscribers currentUser._id }}
+              <button class="btn unsubscribe ct">Unsubscribe</button>
+              {{else}}
+              <button class="btn subscribe ct">Subscribe</button>
+              {{/if}}
               <hr />
               <button class="btn upvote ct">Upvote</button>
               <button class="btn downvote ct">Downvote</button>
