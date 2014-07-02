@@ -3,7 +3,11 @@ var sendEmail = function(from, to, subject, text){
   return Email.send({from: from, to: to, subject: subject, text: text});
 };
 Meteor.methods({
-  sendEmail: sendEmail,
+  'sendEmail': function(opts){
+    console.log("send mail : ", opts);
+    Email.send(opts);
+
+  },
 
   notify: function(login, subject, text){
     var u = Meteor.users.findOne({'profile.login': login});
