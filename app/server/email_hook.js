@@ -1,7 +1,25 @@
 console.log('hook setup on ', moment().toString());
 Cento.WorkItems.find({created: {$gt: new Date()}}).observe({
   'added': function(newDoc){
-     console.log('ADDED!!!!');
+
+
+    var solution = Cento.Solutions.findOne({_id: newDoc.solution_id});
+    var subs = solution.subscribers;
+    console.log(subs);
+
+    subs = _.reject(subs, function(uid){ return uid === newDoc.user_id; });
+    console.log(subs);
+
+    var currentLogin = Meteor.users.findOne({_id: newDoc.user_id}).profile.login;
+    subs.forEach(function(uid){
+      var from = currentLogin + " <noreply@gmail.com>";
+      var title = "["+solution.title+"] " + newDoc.title;
+      var html =  newDoc.body + "<hr />" + Meteor.absoluteUrl("projects/"+solution._id+"/ideations#"+newDoc._id);
+      var u = Meteor.users.findOne({_id: uid});
+
+      Meteor.call('sendEmail', {from: from, to: u.profile.email, subject: title, html: html});
+
+    });
   }
 });
 
