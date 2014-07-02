@@ -26,6 +26,7 @@ Template.ideation_new_modal.events({
         // work_group_id: this.currentWorkGroup._id,
         solution_id: Session.get('currentSolution')._id,
         user_id: Meteor.userId(),
+        subscribers: [Meteor.userId()],
         title: title,
         body: txt,
         created:new Date(),

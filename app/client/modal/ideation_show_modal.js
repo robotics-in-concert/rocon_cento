@@ -1,5 +1,17 @@
 Template.ideation_show_modal.events({
 
+  'click .unsubscribe': function(e){
+    var uid = Meteor.userId();
+    Cento.WorkItems.update({_id: this._id}, {$pull: {subscribers: uid}});
+    return false;
+
+  },
+  'click .subscribe': function(e){
+    var uid = Meteor.userId();
+    Cento.WorkItems.update({_id: this._id}, {$addToSet: {subscribers: uid}});
+    return false;
+
+  },
   'click .upvote': function(e){
     Cento.WorkItems.update({_id: this._id}, {$inc: {votes:1}});
     $(e.target).closest('.modal').modal('hide');

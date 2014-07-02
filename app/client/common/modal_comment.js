@@ -50,6 +50,7 @@ Template.modal_comment.events({
     var f = $(e.target).closest('form');
     var id = this._id;
     var txt = f.find('textarea').val();
+    var workItem = this;
 
     var attachments = [];
 
@@ -75,6 +76,9 @@ Template.modal_comment.events({
         Cento.Artifacts.insert(data);
 
       });
+
+
+
     }else{
       Cento.Artifacts.update({_id: id},
           {$push: {comments:{_id: Random.id(), body: txt, 'created':new Date(), user_id: Meteor.userId()}}});

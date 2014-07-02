@@ -1,3 +1,9 @@
+UI.registerHelper('$include', function(arr, item){
+  return _.include(arr, item);
+
+});
+
+
 UI.registerHelper('default', function(a, x) {
   if(typeof a === 'undefined'){
     return x;
@@ -15,8 +21,17 @@ UI.registerHelper('workGroups', function () {
 });
 
 UI.registerHelper('workItemsInGroup', function (gid) {
+  var sol = Session.get('currentSolution');
   var filter = {work_group_id: {$exists: false}};
+  if(sol){
+    filter.solution_id = sol._id;
+  }
+
   if(gid) filter.work_group_id = gid;
+
+
+  console.log("management filter", filter);
+
 
   return Cento.WorkItems.find(filter);
 });
@@ -66,6 +81,9 @@ UI.registerHelper('getWorkItem', function(id){
 });
 UI.registerHelper('getArtifact', function(id){
   return Cento.Artifacts.findOne({_id: id});
+});
+UI.registerHelper('artifacts', function(wid){
+  return Cento.Artifacts.find({work_item_id: wid});
 });
 
 

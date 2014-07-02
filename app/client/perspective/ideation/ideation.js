@@ -75,11 +75,11 @@ Template.ideation.events({
     return false;
   },
   'click .show_modeling': function(){
-    openModal('modeling_show_modal', {_id: this._id});
+    openWorkItemModal(this._id);
     return false;
   },
   'click .show': function(e){
-    openModal('ideation_show_modal', {_id: this._id});
+    openWorkItemModal(this._id);
     return false;
   },
   'click .delete': function(e){
@@ -88,7 +88,7 @@ Template.ideation.events({
     return false;
   },
   'click .new_ideation': function(e){
-    openModal('ideation_new_modal', {item: this});
+    openModal('ideation_new_modal');
     return false;
   },
   'blur .body': function(e){

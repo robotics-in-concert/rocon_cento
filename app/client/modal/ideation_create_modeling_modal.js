@@ -63,7 +63,7 @@ Template.ideation_create_modeling_modal.events({
         assignee: assignee,
         reviewers: reviewers,
         title: title,
-        description: description,
+        body: description,
         created:new Date()
       }, function(e, modelingId){
         Cento.WorkItems.update({_id: ideation._id},

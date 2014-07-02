@@ -1,6 +1,6 @@
-var sendEmail = function(to, subject, text){
+var sendEmail = function(from, to, subject, text){
   console.log("send email : ", arguments);
-  return Email.send({to: to, subject: subject, text: text});
+  return Email.send({from: from, to: to, subject: subject, text: text});
 };
 Meteor.methods({
   sendEmail: sendEmail,
