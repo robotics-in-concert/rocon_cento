@@ -10,6 +10,14 @@
       <li><img src="{{avatarUrl .}}" height="20"></li>
       {{/each}}
     </ul>
+
+  </div>
+  <div class="buttons">
+    {{#if watching}}
+    <button class="unwatch btn ct btn-sm">Unwatch</button>
+    {{else}}
+    <button class="watch btn ct btn-sm">Watch</button>
+    {{/if}}
   </div>
 
   {{/with}}
