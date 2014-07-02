@@ -41,10 +41,20 @@
           {{#each artifacts _id}}
             {{#if attachments}}
                 {{#each attachments}}
-                <li data-artifact_id="{{../_id}}"><a href="/data/{{name}}" class="show_artifact" target="_blank"><img src="/data/{{name}}"></a></li>
+                <li data-artifact_id="{{../_id}}">
+                  <a href="/data/{{name}}" class="show_artifact" target="_blank">
+                    <img src="/data/{{name}}">
+                  </a>
+                  <p>{{../title}}</p>
+                </li>
                 {{/each}}
             {{else}}
-                <li data-artifact_id="{{_id}}"><a href="/data/{{name}}" class="show_bpmn_artifact" target="_blank"><img src="http://placehold.it/140x105&text=BPMN"></a></li>                
+                <li data-artifact_id="{{_id}}">
+                  <a href="/data/{{name}}" class="show_bpmn_artifact" target="_blank">
+                      <img class="bpmn-artifact-preview" src="http://placehold.it/105x105&text=BPMN">
+                  </a>
+                  <p>{{title}}</p>
+                </li>                
             {{/if}}
           
             {{else}}
