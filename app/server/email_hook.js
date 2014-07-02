@@ -35,10 +35,23 @@ Cento.WorkItems.find({}).observe({
     }
 
 
+    // new comments
     var lastComment = _.last(newDoc.comments);
 
     var subs = newDoc.subscribers;
     console.log(subs);
+
+
+    // at tags
+    var re = (/(^|\s)@(\w+)\b/g);
+    var match = re.exec(lastComment.body);
+    while (match != null) {
+      var userLogin = match[2];
+      var user = Meteor.users.findOne({"profile.login": userLogin});
+      subs.push(user._id);
+    }
+
+    subs = _.uniq(subs);
     subs = _.reject(subs, function(uid){ return uid === lastComment.user_id; });
     console.log(subs);
 
