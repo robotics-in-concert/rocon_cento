@@ -1,0 +1,80 @@
+<template name="modeling_show_modal">
+<div id="modal-show-modeling" class="modal modeling fade large" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  {{#with getWorkItem _id}}
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Modeling</h4>
+      </div>
+
+      <div class="modal-body">
+
+        <h4>Title</h4>
+        <div class="editable" data-field="title" data-content="{{title}}">
+          <p class="edit_trigger">{{title}}</p>
+        </div>
+
+        <h4>Description</h4>
+        <div class="editable" data-field="description" data-content="{{description}}">
+          <p class="edit_trigger">{{{description}}}</p>
+        </div>
+
+
+        <h4>Status</h4>
+        <p><select name="status">
+          <option value="todo">todo</option>
+          <option value="doing">doing</option>
+          <option value="done">done</option>
+        </select></p>
+
+        <h4>Attach files (images & doc & BPMN)</h4>
+        <form>
+          <div class="form-group">
+            <button class="btn ct btn-sm create_artifact">Create Artifact</button>
+            <button class="btn ct btn-sm create_bpmn_artifact">Create BPMN</button>
+          </div>
+        </form>
+        <div class="artifacts">
+          <ul class="list-unstyled">
+
+          {{#each artifacts _id}}
+            {{#if attachments}}
+                {{#each attachments}}
+                <li data-artifact_id="{{../_id}}">
+                  <a href="/data/{{name}}" class="show_artifact" target="_blank">
+                    <img src="/data/{{name}}">
+                  </a>
+                  <p>{{../title}}</p>
+                </li>
+                {{/each}}
+            {{else}}
+                <li data-artifact_id="{{_id}}">
+                  <a href="/data/{{name}}" class="show_bpmn_artifact" target="_blank">
+                      <img class="bpmn-artifact-preview" src="http://placehold.it/105x105&text=BPMN">
+                  </a>
+                  <p>{{title}}</p>
+                </li>                
+            {{/if}}
+          
+            {{else}}
+              <p>No artifacts...</p>
+          {{/each}}
+          </ul>
+        </div>
+
+        {{>modal_comment}}
+        <div class="actions">
+          <button class="btn upvote ct">upvote</button>
+          <button class="btn downvote ct">downvote</button>
+        </div>
+      </div> <!-- /modal-body -->
+
+
+    </div>
+  </div>
+  {{/with}}
+</div>
+
+</template>
+
