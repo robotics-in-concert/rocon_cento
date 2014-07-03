@@ -1,3 +1,5 @@
+i18n.setDefaultLanguage('ko')
+
 Deps.autorun (c)->
   solution = Session.get('currentSolution')
   $('.navbar select option').removeAttr('selected')
