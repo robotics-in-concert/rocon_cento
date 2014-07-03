@@ -1,7 +1,25 @@
 console.log('hook setup on ', moment().toString());
 Cento.WorkItems.find({created: {$gt: new Date()}}).observe({
   'added': function(newDoc){
-     console.log('ADDED!!!!');
+
+
+    var solution = Cento.Solutions.findOne({_id: newDoc.solution_id});
+    var subs = solution.subscribers;
+    console.log(subs);
+
+    subs = _.reject(subs, function(uid){ return uid === newDoc.user_id; });
+    console.log(subs);
+
+    var currentLogin = Meteor.users.findOne({_id: newDoc.user_id}).profile.login;
+    subs.forEach(function(uid){
+      var from = currentLogin + " <noreply@gmail.com>";
+      var title = "["+solution.title+"] " + newDoc.title;
+      var html =  newDoc.body + "<hr />" + Meteor.absoluteUrl("projects/"+solution._id+"/ideations#"+newDoc._id);
+      var u = Meteor.users.findOne({_id: uid});
+
+      Meteor.call('sendEmail', {from: from, to: u.profile.email, subject: title, html: html});
+
+    });
   }
 });
 
@@ -17,10 +35,26 @@ Cento.WorkItems.find({}).observe({
     }
 
 
+    // new comments
     var lastComment = _.last(newDoc.comments);
 
     var subs = newDoc.subscribers;
     console.log(subs);
+
+
+    // at tags
+    var re = (/(^|\s)@(\w+)\b/g);
+    var match = re.exec(lastComment.body);
+    while (match != null) {
+      var userLogin = match[2];
+      console.log('detected at tag user : ', userLogin);
+
+      var user = Meteor.users.findOne({"profile.login": userLogin});
+      subs.push(user._id);
+      match = re.exec(lastComment.body);
+    }
+
+    subs = _.uniq(subs);
     subs = _.reject(subs, function(uid){ return uid === lastComment.user_id; });
     console.log(subs);
 
@@ -29,10 +63,10 @@ Cento.WorkItems.find({}).observe({
     subs.forEach(function(uid){
       var from = currentLogin + " <noreply@gmail.com>";
       var title = "["+solution.title+"] " + newDoc.title;
-      var text =  lastComment.body;
+      var text =  lastComment.body + "\n---\n" + Meteor.absoluteUrl("projects/"+solution._id+"/ideations#"+newDoc._id);
       var u = Meteor.users.findOne({_id: uid});
 
-      Meteor.call('sendEmail', from, u.profile.email, title, text);
+      Meteor.call('sendEmail', {from: from, to: u.profile.email, subject: title, text: text});
 
     });
   }
