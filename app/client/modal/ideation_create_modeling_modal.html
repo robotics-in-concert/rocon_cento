@@ -17,7 +17,9 @@
                  <label>Work Group</label>
                  <select class="select2" name="work_group">
                    {{#each workGroups}}
+                   {{#if title}}
                    <option value="{{_id}}">{{title}}</option>
+                   {{/if}}
                    {{/each}}
                  </select>
                  <button class="btn ct" data-toggle="popover" data-target=".popover.create_work_group">Add</button>
