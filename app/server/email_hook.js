@@ -1,17 +1,35 @@
+function parse_user_tags(txt){
+  // at tags
+  var re = (/(^|\s)@(\w+)\b/g);
+  var match = re.exec(txt);
+  var ids = [];
+  while (match != null) {
+    var userLogin = match[2];
+    var user = Meteor.users.findOne({"profile.login": userLogin});
+    ids.push(user._id);
+    match = re.exec(txt);
+  }
+  return ids;
+
+}
 console.log('hook setup on ', moment().toString());
 Cento.WorkItems.find({created: {$gt: new Date()}}).observe({
   'added': function(newDoc){
 
 
     var solution = Cento.Solutions.findOne({_id: newDoc.solution_id});
-    var subs = solution.subscribers;
-    console.log(subs);
 
 
+    var subs = _.union(
+      parse_user_tags(newDoc.body),
+      solution.subscribers,
+      newDoc.assignee,
+      newDoc.reviewers)
 
-    subs = subs.concat(newDoc.assignee).concat(newDoc.reviewers)
-    subs = _.reject(subs, function(uid){ return uid === newDoc.user_id; });
-    subs = _.uniq(subs);
+    subs = _.chain(subs)
+      .without(newDoc.user_id)
+      .uniq()
+      .value()
     console.log(subs);
 
     var currentLogin = Meteor.users.findOne({_id: newDoc.user_id}).profile.login;
@@ -42,25 +60,15 @@ Cento.WorkItems.find({}).observe({
     // new comments
     var lastComment = _.last(newDoc.comments);
 
-    var subs = newDoc.subscribers;
+    var subs = newDoc.subscribers || [];
     console.log(subs);
 
+    subs = subs.concat(parse_user_tags(lastComment.body));
 
-    // at tags
-    var re = (/(^|\s)@(\w+)\b/g);
-    var match = re.exec(lastComment.body);
-    while (match != null) {
-      var userLogin = match[2];
-      console.log('detected at tag user : ', userLogin);
-
-      var user = Meteor.users.findOne({"profile.login": userLogin});
-      subs.push(user._id);
-      match = re.exec(lastComment.body);
-    }
-
-    subs = _.uniq(subs);
-    subs = _.reject(subs, function(uid){ return uid === lastComment.user_id; });
-    subs = _.uniq(subs);
+    subs = _.chain(subs)
+      .without(lastComment.user_id)
+      .uniq()
+      .value()
     console.log(subs);
 
     var solution = Cento.Solutions.findOne({_id: newDoc.solution_id});
