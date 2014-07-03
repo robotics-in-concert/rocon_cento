@@ -47,8 +47,11 @@ Cento.WorkItems.find({}).observe({
     var match = re.exec(lastComment.body);
     while (match != null) {
       var userLogin = match[2];
+      console.log('detected at tag user : ', userLogin);
+
       var user = Meteor.users.findOne({"profile.login": userLogin});
       subs.push(user._id);
+      match = re.exec(lastComment.body);
     }
 
     subs = _.uniq(subs);
@@ -63,7 +66,7 @@ Cento.WorkItems.find({}).observe({
       var text =  lastComment.body + "\n---\n" + Meteor.absoluteUrl("projects/"+solution._id+"/ideations#"+newDoc._id);
       var u = Meteor.users.findOne({_id: uid});
 
-      Meteor.call('sendEmail', from, u.profile.email, title, text);
+      Meteor.call('sendEmail', {from: from, to: u.profile.email, subject: title, text: text});
 
     });
   }
