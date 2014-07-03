@@ -1,3 +1,6 @@
+Meteor.users.allow
+  'update': (userId, doc)->
+    true
 Accounts.onCreateUser (opts, user)->
 
   if user.services.github?
