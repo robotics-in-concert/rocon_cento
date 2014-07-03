@@ -41,4 +41,51 @@ cento_server
  
   ``` ROOT_URL=Your URL:Port MONGO_URL=mongodb://localhost:27017/cento mrt ```
  
+jbpm
+============
+
+## Install
+
+- Install ant if necessary.
+```
+>> sudo apt-get update
+>> sudo apt-get install ant -y
+```
+- Download jbpm full installer from [sourceforge](http://sourceforge.net/projects/jbpm/files/jBPM%205/jbpm-5.4.0.Final/), using the direct link and unzip.
+```
+>> wget http://downloads.sourceforge.net/project/jbpm/jBPM%205/jbpm-5.4.0.Final/jbpm-5.4.0.Final-installer-full.zip
+>> unzip jbpm-5.4.0.Final-installer-full.zip
+>> cd jbpm-installer/
+```
+- Edit **build.xml** to change the property *jboss.bind.address* to “0.0.0.0”.
+- Edit **standalone.xml** two part.
+    1. Change the interfaces section: make all three of “management”, “public” and “unsecure” interfaces bind to “0.0.0.0”.
+    ```
+<interface name="management">
+  <inet-address value="0.0.0.0"/>
+</interface>
+<interface name="public">
+  <inet-address value="0.0.0.0"/>
+</interface>
+<interface name="unsecure">
+  <inet-address value="0.0.0.0"/>
+</interface>
+    ```
+    1. Change *deployment-timeout* to "1200"
+- Install jbpm server and start
+```
+>> ant install.demo.noeclipse
+>> ant start.demo.noeclipse
+```
+- Stop jbpm server
+```
+>> ant stop.demo
+```
+
+
+
+
+
+
+
 
