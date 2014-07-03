@@ -1,0 +1,43 @@
+<head>
+  <title>jbpm_client</title>
+</head>
+
+<body>
+  {{> hello}}
+  
+</body>
+
+<template name="hello">
+  <h1>Package Setting</h1>
+  <br/>
+  {{#each packages}}
+  <li>
+  {{title}}
+  </li>
+  {{/each}}
+  <br/>
+  <input class="cento-get-pkg-list-btn" type="button" value="get package list" /><br/>
+  <input class="cento-create-pkg-text" type="text" value=""/><input class="cento-create-pkg-btn" type="button" value="create package" /><br/>
+  <input class="cento-delete-pkg-text" type="text" value=""/><input class="cento-delete-pkg-btn" type="button" value="delete package" /><br/>
+
+  <h1>Process Setting</h1>
+  <br/>
+  {{#each assets}}
+  <li>
+  {{title}} :<b> {{uuid}} </b>
+  </li>
+  {{/each}}
+  <br/>
+  <input class="cento-get-asset-list-text" type="text" value=""/><input class="cento-get-asset-list-btn" type="button" value="get asset list" /><br/>
+  not yet <input class="cento-create-asset-text" type="text" value=""/><input class="cento-create-asset-btn" type="button" value="create asset" /><br/>
+  not yet <input class="cento-delete-asset-text" type="text" value=""/><input class="cento-delete-asset-btn" type="button" value="delete asset" /><br/>
+
+  <h1>Process</h1>
+
+  <input class="cento-select-asset-text" type="text" value=""/><input class="cento-select-asset-btn" type="button" value="select asset" /><br/>
+  <br/>
+  {{#if is_process}}
+  <iframe width="650" height="580" src="http://localhost:8080/drools-guvnor/org.drools.guvnor.Guvnor/standaloneEditorServlet?assetsUUIDs={{is_process}}&client=oryx"></iframe>
+  {{/if}}
+
+</template>
