@@ -8,6 +8,11 @@ Template.management.rendered = function(){
 };
 
 Template.management.events({
+  'click .new_work_item': function(){
+    openModal('ideation_create_modeling_modal', {_id: this._id});
+    return false;
+
+  },
   'click #card_actions_dropdown .show': function(){
     var cid = Session.get('selectedCardId');
     var m = Cento.WorkItems.findOne({_id: cid});
