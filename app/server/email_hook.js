@@ -7,7 +7,11 @@ Cento.WorkItems.find({created: {$gt: new Date()}}).observe({
     var subs = solution.subscribers;
     console.log(subs);
 
+
+
+    subs = subs.concat(newDoc.assignee).concat(newDoc.reviewers)
     subs = _.reject(subs, function(uid){ return uid === newDoc.user_id; });
+    subs = _.uniq(subs);
     console.log(subs);
 
     var currentLogin = Meteor.users.findOne({_id: newDoc.user_id}).profile.login;
@@ -56,6 +60,7 @@ Cento.WorkItems.find({}).observe({
 
     subs = _.uniq(subs);
     subs = _.reject(subs, function(uid){ return uid === lastComment.user_id; });
+    subs = _.uniq(subs);
     console.log(subs);
 
     var solution = Cento.Solutions.findOne({_id: newDoc.solution_id});
