@@ -20,8 +20,8 @@ oauth
 oauth1
 accounts-ui
 accounts-google
-less
 select2
 email
 jquery-ui
 jquery-ui-bootstrap
+less
