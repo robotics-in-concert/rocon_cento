@@ -129,6 +129,9 @@
                 note = new AnnotateView(image, editable.note)
                 note.resetPosition(editable, text);
                 image.notes.push(editable.note);
+                console.log("IMG?", image);
+
+                image.trigger('note_created', [1,2,3]);
             }
 
             editable.destroy();

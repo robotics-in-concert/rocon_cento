@@ -39,6 +39,17 @@ Template.modeling_show_artifact_modal.helpers({
 
 });
 Template.modeling_show_artifact_modal.events({
+  'note_created .annotate': function(e){
+    console.log("ARGS", arguments);
+
+    var $img = $(e.target);
+    console.log($img);
+
+    console.log($img.notes);
+    console.log(e.target.notes);
+
+
+  },
   'click .delete': function(e){
     var $modal = $(e.target).closest('.modal');
     Cento.Artifacts.remove({_id: this._id});
