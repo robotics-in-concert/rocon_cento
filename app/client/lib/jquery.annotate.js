@@ -32,20 +32,8 @@
         this.canvas.children('.image-annotate-view, .image-annotate-edit').height(this.height());
         this.canvas.children('.image-annotate-view, .image-annotate-edit').width(this.width());
 
-        // Add the behavior: hide/show the notes when hovering the picture
-        this.canvas.hover(function() {
-            if ($(this).children('.image-annotate-edit').css('display') == 'none') {
-                $(this).children('.image-annotate-view').show();
-            }
-        }, function() {
-            $(this).children('.image-annotate-view').hide();
-        });
+        this.canvas.children('.image-annotate-view').show();
 
-        this.canvas.children('.image-annotate-view').hover(function() {
-            $(this).show();
-        }, function() {
-            $(this).hide();
-        });
 
         // load the notes
         $.fn.annotateImage.load(this);
@@ -144,6 +132,7 @@
             }
 
             editable.destroy();
+            image.canvas.children('.image-annotate-view').show();
         });
         editable.form.find('.form-group:last').append(ok);
     };
