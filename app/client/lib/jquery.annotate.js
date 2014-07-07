@@ -131,7 +131,7 @@
                 image.notes.push(editable.note);
                 console.log("IMG?", image);
 
-                image.trigger('note_created', [1,2,3]);
+                image.trigger('note_created', note.note);
             }
 
             editable.destroy();
