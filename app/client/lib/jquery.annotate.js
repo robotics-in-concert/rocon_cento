@@ -125,7 +125,7 @@
         ///	<summary>
         ///		Creates a Save button on the editable note.
         ///	</summary>
-        var ok = $('<a class="image-annotate-edit-ok">OK</a>');
+        var ok = $('<a class="btn ct btn-sm image-annotate-edit-ok">OK</a>');
 
         ok.click(function() {
             var form = $('#image-annotate-edit-form form');
@@ -145,19 +145,19 @@
 
             editable.destroy();
         });
-        editable.form.append(ok);
+        editable.form.find('.form-group:last').append(ok);
     };
 
     $.fn.annotateImage.createCancelButton = function(editable, image) {
         ///	<summary>
         ///		Creates a Cancel button on the editable note.
         ///	</summary>
-        var cancel = $('<a class="image-annotate-edit-close">Cancel</a>');
+        var cancel = $('<a class="btn ct btn-sm image-annotate-edit-close">Cancel</a>');
         cancel.click(function() {
             editable.destroy();
             image.mode = 'view';
         });
-        editable.form.append(cancel);
+        editable.form.find('.form-group:last').append(cancel);
     };
 
     $.fn.annotateImage.saveAsHtml = function(image, target) {
@@ -209,32 +209,38 @@
         image.canvas.children('.image-annotate-edit').show();
 
         // Add the note (which we'll load with the form afterwards)
-        var form = $('<div id="image-annotate-edit-form"><form><textarea id="image-annotate-text" name="text" rows="3" cols="30">' + this.note.text + '</textarea></form></div>');
+        var form = $('<div class="popover" id="image-annotate-edit-form" style="display: block"><div class="popover-content"><form><textarea id="image-annotate-text" name="text" rows="3" cols="30">' + this.note.text + '</textarea><div class="form-group"></div></form></div></div>');
         this.form = form;
 
         $(image.canvas).append(this.form);
-        this.form.css('left', this.area.offset().left + 'px');
-        this.form.css('top', (parseInt(this.area.offset().top) + parseInt(this.area.height()) + 7) + 'px');
+
+        var reposition = function(area, form){
+          form.css('left', area.position().left + 'px');
+          form.css('top', (parseInt(area.position().top) + parseInt(area.height()) + 7) + 'px');
+        }
+        reposition(this.area, this.form);
+        // this.form.css('left', this.area.position().left + 'px');
+        // this.form.css('top', (parseInt(this.area.position().top) + parseInt(this.area.height()) + 7) + 'px');
 
         // Set the area as a draggable/resizable element contained in the image canvas.
         // Would be better to use the containment option for resizable but buggy
         area.resizable({
             handles: 'all',
 
+            resize: function(e, ui) {
+              reposition(area, form);
+            },
             stop: function(e, ui) {
-                form.css('left', area.offset().left + 'px');
-                form.css('top', (parseInt(area.offset().top) + parseInt(area.height()) + 2) + 'px');
+              reposition(area, form);
             }
         })
         .draggable({
             containment: image.canvas,
             drag: function(e, ui) {
-                form.css('left', area.offset().left + 'px');
-                form.css('top', (parseInt(area.offset().top) + parseInt(area.height()) + 2) + 'px');
+              reposition(area, form);
             },
             stop: function(e, ui) {
-                form.css('left', area.offset().left + 'px');
-                form.css('top', (parseInt(area.offset().top) + parseInt(area.height()) + 2) + 'px');
+              reposition(area, form);
             }
         });
         return this;
