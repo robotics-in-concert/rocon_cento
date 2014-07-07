@@ -81,7 +81,7 @@
         ///     options object.
         ///	</summary>
         for (var i = 0; i < image.notes.length; i++) {
-            image.notes[image.notes[i]] = new $.fn.annotateView(image, image.notes[i]);
+            image.notes[image.notes[i]] = new AnnotateView(image, image.notes[i]);
         }
     };
 
@@ -102,7 +102,7 @@
             image.mode = 'edit';
 
             // Create/prepare the editable note elements
-            var editable = new $.fn.annotateEdit(image);
+            var editable = new AnnotateEdit(image);
 
             $.fn.annotateImage.createSaveButton(editable, image);
             $.fn.annotateImage.createCancelButton(editable, image);
@@ -126,7 +126,7 @@
                 note.resetPosition(editable, text);
             } else {
                 editable.note.editable = true;
-                note = new $.fn.annotateView(image, editable.note)
+                note = new AnnotateView(image, editable.note)
                 note.resetPosition(editable, text);
                 image.notes.push(editable.note);
             }
@@ -166,200 +166,6 @@
         return '&lt;input type="hidden" name="' + name + '" value="' + value + '" /&gt;<br />';
     };
 
-    $.fn.annotateEdit = function(image, note) {
-        ///	<summary>
-        ///		Defines an editable annotation area.
-        ///	</summary>
-        this.image = image;
-
-        if (note) {
-            this.note = note;
-        } else {
-            var newNote = new Object();
-            newNote.id = "new";
-            newNote.top = 30;
-            newNote.left = 30;
-            newNote.width = 30;
-            newNote.height = 30;
-            newNote.text = "";
-            this.note = newNote;
-        }
-
-        // Set area
-        var area = image.canvas.children('.image-annotate-edit').children('.image-annotate-edit-area');
-        this.area = area;
-        this.area.css('height', this.note.height + 'px');
-        this.area.css('width', this.note.width + 'px');
-        this.area.css('left', this.note.left + 'px');
-        this.area.css('top', this.note.top + 'px');
-
-        // Show the edition canvas and hide the view canvas
-        image.canvas.children('.image-annotate-view').hide();
-        image.canvas.children('.image-annotate-edit').show();
-
-        // Add the note (which we'll load with the form afterwards)
-        var form = $('<div class="popover" id="image-annotate-edit-form" style="display: block"><div class="popover-content"><form><textarea id="image-annotate-text" name="text" rows="3" cols="30">' + this.note.text + '</textarea><div class="form-group"></div></form></div></div>');
-        this.form = form;
-
-        $(image.canvas).append(this.form);
-
-        var reposition = function(area, form){
-          form.css('left', area.position().left + 'px');
-          form.css('top', (parseInt(area.position().top) + parseInt(area.height()) + 7) + 'px');
-        }
-        reposition(this.area, this.form);
-        // this.form.css('left', this.area.position().left + 'px');
-        // this.form.css('top', (parseInt(this.area.position().top) + parseInt(this.area.height()) + 7) + 'px');
-
-        // Set the area as a draggable/resizable element contained in the image canvas.
-        // Would be better to use the containment option for resizable but buggy
-        area.resizable({
-            handles: 'all',
-
-            resize: function(e, ui) {
-              reposition(area, form);
-            },
-            stop: function(e, ui) {
-              reposition(area, form);
-            }
-        })
-        .draggable({
-            containment: image.canvas,
-            drag: function(e, ui) {
-              reposition(area, form);
-            },
-            stop: function(e, ui) {
-              reposition(area, form);
-            }
-        });
-        return this;
-    };
-
-    $.fn.annotateEdit.prototype.destroy = function() {
-        ///	<summary>
-        ///		Destroys an editable annotation area.
-        ///	</summary>        
-        this.image.canvas.children('.image-annotate-edit').hide();
-        this.area.resizable('destroy');
-        this.area.draggable('destroy');
-        this.area.css('height', '');
-        this.area.css('width', '');
-        this.area.css('left', '');
-        this.area.css('top', '');
-        this.form.remove();
-    }
-
-    $.fn.annotateView = function(image, note) {
-        ///	<summary>
-        ///		Defines a annotation area.
-        ///	</summary>
-        this.image = image;
-
-        this.note = note;
-
-        this.editable = (note.editable && image.editable);
-
-        // Add the area
-        this.area = $('<div class="image-annotate-area' + (this.editable ? ' image-annotate-area-editable' : '') + '"><div></div></div>');
-        image.canvas.children('.image-annotate-view').prepend(this.area);
-
-        // Add the note
-        this.form = $('<div class="image-annotate-note">' + note.text + '</div>');
-        this.form.hide();
-        image.canvas.children('.image-annotate-view').append(this.form);
-        this.form.children('span.actions').hide();
-
-        // Set the position and size of the note
-        this.setPosition();
-
-        // Add the behavior: hide/display the note when hovering the area
-        var annotation = this;
-        this.area.hover(function() {
-            annotation.show();
-        }, function() {
-            annotation.hide();
-        });
-
-        // Edit a note feature
-        if (this.editable) {
-            var form = this;
-            this.area.click(function() {
-                form.edit();
-            });
-        }
-    };
-
-    $.fn.annotateView.prototype.setPosition = function() {
-        ///	<summary>
-        ///		Sets the position of an annotation.
-        ///	</summary>
-        this.area.children('div').height((parseInt(this.note.height) - 2) + 'px');
-        this.area.children('div').width((parseInt(this.note.width) - 2) + 'px');
-        this.area.css('left', (this.note.left) + 'px');
-        this.area.css('top', (this.note.top) + 'px');
-        this.form.css('left', (this.note.left) + 'px');
-        this.form.css('top', (parseInt(this.note.top) + parseInt(this.note.height) + 7) + 'px');
-    };
-
-    $.fn.annotateView.prototype.show = function() {
-        ///	<summary>
-        ///		Highlights the annotation
-        ///	</summary>
-        this.form.fadeIn(250);
-        if (!this.editable) {
-            this.area.addClass('image-annotate-area-hover');
-        } else {
-            this.area.addClass('image-annotate-area-editable-hover');
-        }
-    };
-
-    $.fn.annotateView.prototype.hide = function() {
-        ///	<summary>
-        ///		Removes the highlight from the annotation.
-        ///	</summary>      
-        this.form.fadeOut(250);
-        this.area.removeClass('image-annotate-area-hover');
-        this.area.removeClass('image-annotate-area-editable-hover');
-    };
-
-    $.fn.annotateView.prototype.destroy = function() {
-        ///	<summary>
-        ///		Destroys the annotation.
-        ///	</summary>      
-        this.area.remove();
-        this.form.remove();
-    }
-
-    $.fn.annotateView.prototype.edit = function() {
-        ///	<summary>
-        ///		Edits the annotation.
-        ///	</summary>      
-        if (this.image.mode == 'view') {
-            this.image.mode = 'edit';
-            var annotation = this;
-
-            // Create/prepare the editable note elements
-            var editable = new $.fn.annotateEdit(this.image, this.note);
-
-            $.fn.annotateImage.createSaveButton(editable, this.image, annotation);
-
-            // Add the delete button
-            var del = $('<a class="image-annotate-edit-delete">Delete</a>');
-            del.click(function() {
-                var form = $('#image-annotate-edit-form form');
-
-                $.fn.annotateImage.appendPosition(form, editable)
-
-                annotation.image.mode = 'view';
-                editable.destroy();
-                annotation.destroy();
-            });
-            editable.form.append(del);
-
-            $.fn.annotateImage.createCancelButton(editable, this.image);
-        }
-    };
-
     $.fn.annotateImage.appendPosition = function(form, editable) {
         ///	<summary>
         ///		Appends the annotations coordinates to the given form that is posted to the server.
@@ -372,29 +178,236 @@
         form.append(areaFields);
     }
 
-    $.fn.annotateView.prototype.resetPosition = function(editable, text) {
-        ///	<summary>
-        ///		Sets the position of an annotation.
-        ///	</summary>
-        this.form.html(text);
-        this.form.hide();
 
-        // Resize
-        this.area.children('div').height(editable.area.height() + 'px');
-        this.area.children('div').width((editable.area.width() - 2) + 'px');
-        this.area.css('left', (editable.area.position().left) + 'px');
-        this.area.css('top', (editable.area.position().top) + 'px');
-        this.form.css('left', (editable.area.position().left) + 'px');
-        this.form.css('top', (parseInt(editable.area.position().top) + parseInt(editable.area.height()) + 7) + 'px');
 
-        // Save new position to note
-        this.note.top = editable.area.position().top;
-        this.note.left = editable.area.position().left;
-        this.note.height = editable.area.height();
-        this.note.width = editable.area.width();
-        this.note.text = text;
-        this.note.id = editable.note.id;
-        this.editable = true;
-    };
+  /*
+   *
+   * AnnotateView
+   *
+   */
+  var AnnotateView = function(image, note) {
+      ///	<summary>
+      ///		Defines a annotation area.
+      ///	</summary>
+      this.image = image;
+
+      this.note = note;
+
+      this.editable = (note.editable && image.editable);
+
+      // Add the area
+      this.area = $('<div class="image-annotate-area' + (this.editable ? ' image-annotate-area-editable' : '') + '"><div></div></div>');
+      image.canvas.children('.image-annotate-view').prepend(this.area);
+
+      // Add the note
+      this.form = $('<div class="image-annotate-note">' + note.text + '</div>');
+      this.form.hide();
+      image.canvas.children('.image-annotate-view').append(this.form);
+      this.form.children('span.actions').hide();
+
+      // Set the position and size of the note
+      this.setPosition();
+
+      // Add the behavior: hide/display the note when hovering the area
+      var annotation = this;
+      this.area.hover(function() {
+          annotation.show();
+      }, function() {
+          annotation.hide();
+      });
+
+      // Edit a note feature
+      if (this.editable) {
+          var form = this;
+          this.area.click(function() {
+              form.edit();
+          });
+      }
+  };
+
+  AnnotateView.prototype.setPosition = function() {
+      ///	<summary>
+      ///		Sets the position of an annotation.
+      ///	</summary>
+      this.area.children('div').height((parseInt(this.note.height) - 2) + 'px');
+      this.area.children('div').width((parseInt(this.note.width) - 2) + 'px');
+      this.area.css('left', (this.note.left) + 'px');
+      this.area.css('top', (this.note.top) + 'px');
+      this.form.css('left', (this.note.left) + 'px');
+      this.form.css('top', (parseInt(this.note.top) + parseInt(this.note.height) + 7) + 'px');
+  };
+
+  AnnotateView.prototype.show = function() {
+      ///	<summary>
+      ///		Highlights the annotation
+      ///	</summary>
+      this.form.fadeIn(250);
+      if (!this.editable) {
+          this.area.addClass('image-annotate-area-hover');
+      } else {
+          this.area.addClass('image-annotate-area-editable-hover');
+      }
+  };
+
+  AnnotateView.prototype.hide = function() {
+      ///	<summary>
+      ///		Removes the highlight from the annotation.
+      ///	</summary>      
+      this.form.fadeOut(250);
+      this.area.removeClass('image-annotate-area-hover');
+      this.area.removeClass('image-annotate-area-editable-hover');
+  };
+
+  AnnotateView.prototype.destroy = function() {
+      ///	<summary>
+      ///		Destroys the annotation.
+      ///	</summary>      
+      this.area.remove();
+      this.form.remove();
+  }
+
+  AnnotateView.prototype.edit = function() {
+      ///	<summary>
+      ///		Edits the annotation.
+      ///	</summary>      
+      if (this.image.mode == 'view') {
+          this.image.mode = 'edit';
+          var annotation = this;
+
+          // Create/prepare the editable note elements
+          var editable = new AnnotateEdit(this.image, this.note);
+
+          $.fn.annotateImage.createSaveButton(editable, this.image, annotation);
+
+          // Add the delete button
+          var del = $('<a class="image-annotate-edit-delete">Delete</a>');
+          del.click(function() {
+              var form = $('#image-annotate-edit-form form');
+
+              $.fn.annotateImage.appendPosition(form, editable)
+
+              annotation.image.mode = 'view';
+              editable.destroy();
+              annotation.destroy();
+          });
+          editable.form.append(del);
+
+          $.fn.annotateImage.createCancelButton(editable, this.image);
+      }
+  };
+  AnnotateView.prototype.resetPosition = function(editable, text) {
+      ///	<summary>
+      ///		Sets the position of an annotation.
+      ///	</summary>
+      this.form.html(text);
+      this.form.hide();
+
+      // Resize
+      this.area.children('div').height(editable.area.height() + 'px');
+      this.area.children('div').width((editable.area.width() - 2) + 'px');
+      this.area.css('left', (editable.area.position().left) + 'px');
+      this.area.css('top', (editable.area.position().top) + 'px');
+      this.form.css('left', (editable.area.position().left) + 'px');
+      this.form.css('top', (parseInt(editable.area.position().top) + parseInt(editable.area.height()) + 7) + 'px');
+
+      // Save new position to note
+      this.note.top = editable.area.position().top;
+      this.note.left = editable.area.position().left;
+      this.note.height = editable.area.height();
+      this.note.width = editable.area.width();
+      this.note.text = text;
+      this.note.id = editable.note.id;
+      this.editable = true;
+  };
+
+
+  /*
+   * 
+   * AnnotateEdit
+   * 
+   */
+  var AnnotateEdit = function(image, note) {
+      ///	<summary>
+      ///		Defines an editable annotation area.
+      ///	</summary>
+      this.image = image;
+
+      if (note) {
+          this.note = note;
+      } else {
+          var newNote = new Object();
+          newNote.id = "new";
+          newNote.top = 30;
+          newNote.left = 30;
+          newNote.width = 30;
+          newNote.height = 30;
+          newNote.text = "";
+          this.note = newNote;
+      }
+
+      // Set area
+      var area = image.canvas.children('.image-annotate-edit').children('.image-annotate-edit-area');
+      this.area = area;
+      this.area.css('height', this.note.height + 'px');
+      this.area.css('width', this.note.width + 'px');
+      this.area.css('left', this.note.left + 'px');
+      this.area.css('top', this.note.top + 'px');
+
+      // Show the edition canvas and hide the view canvas
+      image.canvas.children('.image-annotate-view').hide();
+      image.canvas.children('.image-annotate-edit').show();
+
+      // Add the note (which we'll load with the form afterwards)
+      var form = $('<div class="popover" id="image-annotate-edit-form" style="display: block"><div class="popover-content"><form><textarea id="image-annotate-text" name="text" rows="3" cols="30">' + this.note.text + '</textarea><div class="form-group"></div></form></div></div>');
+      this.form = form;
+
+      $(image.canvas).append(this.form);
+
+      var reposition = function(area, form){
+        form.css('left', area.position().left + 'px');
+        form.css('top', (parseInt(area.position().top) + parseInt(area.height()) + 7) + 'px');
+      }
+      reposition(this.area, this.form);
+      // this.form.css('left', this.area.position().left + 'px');
+      // this.form.css('top', (parseInt(this.area.position().top) + parseInt(this.area.height()) + 7) + 'px');
+
+      // Set the area as a draggable/resizable element contained in the image canvas.
+      // Would be better to use the containment option for resizable but buggy
+      area.resizable({
+          handles: 'all',
+
+          resize: function(e, ui) {
+            reposition(area, form);
+          },
+          stop: function(e, ui) {
+            reposition(area, form);
+          }
+      })
+      .draggable({
+          containment: image.canvas,
+          drag: function(e, ui) {
+            reposition(area, form);
+          },
+          stop: function(e, ui) {
+            reposition(area, form);
+          }
+      });
+      return this;
+  };
+
+  AnnotateEdit.prototype.destroy = function() {
+      ///	<summary>
+      ///		Destroys an editable annotation area.
+      ///	</summary>        
+      this.image.canvas.children('.image-annotate-edit').hide();
+      this.area.resizable('destroy');
+      this.area.draggable('destroy');
+      this.area.css('height', '');
+      this.area.css('width', '');
+      this.area.css('left', '');
+      this.area.css('top', '');
+      this.form.remove();
+  }
+
 
 })(jQuery);
