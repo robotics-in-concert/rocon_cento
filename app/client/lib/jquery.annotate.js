@@ -52,7 +52,7 @@
 
         // Add the "Add a note" button
         if (this.editable) {
-            this.button = $('<a class="image-annotate-add" id="image-annotate-add" href="#">Add Note</a>');
+            this.button = $('<a class="btn ct btn-sm" id="image-annotate-add" href="#">Add Note</a>');
             this.button.click(function() {
                 $.fn.annotateImage.add(image);
             });
