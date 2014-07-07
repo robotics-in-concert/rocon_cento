@@ -8,6 +8,7 @@
     "bootstrap-3": {},
     "select2": {},
     "jquery-ui": {},
-    "jquery-ui-bootstrap": {}
+    "jquery-ui-bootstrap": {},
+    "just-i18n": {}
   }
 }
