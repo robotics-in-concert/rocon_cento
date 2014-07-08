@@ -5,7 +5,11 @@ var sendEmail = function(from, to, subject, text){
 Meteor.methods({
   'sendEmail': function(opts){
     console.log("send mail : ", opts);
-    Email.send(opts);
+    try{
+      Email.send(opts);
+    }catch(e){
+      console.error("failed to send mail ", opts);
+    }
 
   },
 
