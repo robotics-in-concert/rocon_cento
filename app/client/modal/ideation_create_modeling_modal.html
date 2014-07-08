@@ -17,7 +17,9 @@
                  <label>Work Group</label>
                  <select class="select2" name="work_group">
                    {{#each workGroups}}
+                   {{#if title}}
                    <option value="{{_id}}">{{title}}</option>
+                   {{/if}}
                    {{/each}}
                  </select>
                  <button class="btn ct" data-toggle="popover" data-target=".popover.create_work_group">Add</button>
@@ -40,9 +42,13 @@
                <div class="form-group">
                  <label>Description</label>
                  <!-- <textarea class="comment_text form-control" rows="3">{{currentIdeation.body}}</textarea> -->
-                 {{#with getWorkItem _id}}
-                 {{> editor }}
-                 {{/with}}
+                 {{#if getWorkItem _id}}
+                   {{#with getWorkItem _id}}
+                     {{> editor }}
+                   {{/with}}
+                 {{else}}
+                   {{> editor }}
+                 {{/if}}
                </div>
                <div class="form-group inline">
                  <label>Asignee</label>

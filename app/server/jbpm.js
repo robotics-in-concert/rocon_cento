@@ -1,11 +1,14 @@
 var auth = "krisv:krisv"
-var server_address = '106.240.238.35';
-var default_url = 'http://'+server_address+':8080/drools-guvnor/rest/packages';
+var server_address = process.env.DROOLS_URL;
+var default_url = server_address+'/drools-guvnor/rest/packages';
 Meteor.methods({
+    drools_url : function(){
+        console.log('[DROOLS_URL]',server_address);
+        return server_address;
+    },
     drools_get : function(call_url){
         url = default_url+call_url;
         console.log('[GET]', url);
-        
         var result = Meteor.http.call("GET", 
                                       url,
                                       {auth:auth,

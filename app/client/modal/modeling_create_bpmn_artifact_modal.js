@@ -1,7 +1,18 @@
-Template.modeling_create_bpmn_artifact_modal.rendered = function (){
+Template.modeling_create_bpmn_artifact_modal.created = function (){
+    console.debug("Created!!! create modal");
     Session.set('jbpm_viewer_uuid', false);
     Session.set('jbpm_artifact_id', false);
     Session.get('jbpm_viewer_validation', false);
+    
+    Meteor.call('drools_url', function(err, result) {
+      if (err){
+        console.log(err);
+        Session.set('drools_url', false);
+      }
+      else{
+        Session.set('drools_url', result);
+      }
+    });
 };
 
 Template.modeling_create_bpmn_artifact_modal.helpers({
@@ -11,7 +22,12 @@ Template.modeling_create_bpmn_artifact_modal.helpers({
         uuid = false;
     }
     return uuid;
-  }
+  },
+  'drools_url': function(){
+    var url = Session.get('drools_url');
+    return url;
+  },
+  
 });
 
 Template.modeling_create_bpmn_artifact_modal.events({
@@ -46,6 +62,7 @@ Template.modeling_create_bpmn_artifact_modal.events({
   },
   
  'click .open_bpmn': function(e,template){
+    
     var pkg_name = this._id;
     Session.set('jbpm_artifact_name', this._id);
     var data = "package "+pkg_name; //make the template
@@ -81,6 +98,11 @@ Template.modeling_create_bpmn_artifact_modal.events({
                                 Session.set('jbpm_viewer_uuid', uuid);
                                 Session.set('jbpm_viewer_version', version);
                                 Session.set('jbpm_artifact_id', id);
+                                
+                                
+                                console.debug('jbpm_viewer_uuid', uuid);
+                                console.debug('jbpm_viewer_version', version);
+                                console.debug('jbpm_artifact_id', id);
                                
                                 if(changeAssetTimerId === ""){ 
                                     changeAssetTimerId = Meteor.setInterval(checkChangeAsset, 3000);

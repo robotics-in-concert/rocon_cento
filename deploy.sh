@@ -9,12 +9,14 @@ source deploy/config
 [[ -z "$PORT" ]] && exit 1
 [[ -z "$MONGO_URL" ]] && exit 1
 [[ -z "$ROOT_URL" ]] && exit 1
+[[ -z "$DROOLS_URL" ]] && exit 1
 
 CMD="
 export PORT=$PORT;
 export ROOT_URL=$ROOT_URL;
 export MONGO_URL=$MONGO_URL;
 export MAIL_URL=$MAIL_URL;
+export DROOLS_URL=$DROOLS_URL;
 
 cd $DEPLOY_PATH/git;
 
