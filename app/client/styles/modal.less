@@ -145,10 +145,6 @@
       max-width: 400px;
     }
     .comment {
-      &:hover {
-        .comment_actions { display: block; }
-
-      }
 
       .attachment {
         margin-bottom: 10px;
@@ -170,10 +166,10 @@
         padding: 15px 5px;
       }
       .comment_actions { 
-        display: none; 
-        position: absolute;
-        top: 10px;
-        right: 10px;
+        text-align: right;
+        span {
+          display: inline;
+        }
       }
 
     }
