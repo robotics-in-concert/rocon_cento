@@ -162,7 +162,7 @@ Router.map(function(){
           return doc;
         }
        });
-      data.workItems = Cento.WorkItems.find(query, {limit: Session.get('itemsLimit'), sort: sorts,
+      data.workItems = Cento.WorkItems.find(query, {sort: sorts,
         transform: function(doc){
           doc.user = Meteor.users.findOne(doc.user_id);
           return doc;
