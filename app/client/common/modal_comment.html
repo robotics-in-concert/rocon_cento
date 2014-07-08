@@ -27,12 +27,16 @@
       <li class="comment"> 
       <div class="editable" data-field="body" data-plain="true" data-content="{{body}}">
         <span class="user">
-        <img src="{{avatarUrl user_id}}" height="18">
-        <a href="#">{{username user_id}}</a>
-      </span>
+          <img src="{{avatarUrl user_id}}" height="18">
+          <a href="#">{{username user_id}}</a>
+        </span>
 
-        <p class="body edit_trigger">{{nl2br body}}</p>
-        <span class="comment_actions"><a href="#" class="delete_comment">&times;</a></span>
+        <p class="body">{{nl2br body}}</p>
+        <div class="comment_actions">
+          <span class=""><a href="#" class="edit_trigger">edit</a></span>
+          <span class=""><a href="#" class="delete_comment">delete</a></span>
+        </div>
+
 
         
         {{#each attachmentsForComment _id}}
