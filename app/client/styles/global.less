@@ -310,8 +310,8 @@ form.ct {
 
 }
 
-.ct.table {
-  th, td { border: 0; background-color: white; }
+.table.ct {
+  th, td { padding: 0.3em; border: 0; background-color: white; }
 
   th.sortable {
     cursor: pointer;
@@ -352,21 +352,30 @@ form.ct {
     ._sortmarker();
   }
 
+  &.blue > tr:nth-child(odd) > td,
+  &.blue > tr:nth-child(odd) > th {
+    background-color: @light-blue-color;
+  }
+
   &.blue > tbody > tr:nth-child(odd) > td,
   &.blue > tbody > tr:nth-child(odd) > th {
     background-color: @light-blue-color;
   }
-  &.gray.normal > tbody > tr:nth-child(odd) { 
+
+  &.gray.normal > tr:nth-child(odd) { 
     & > td, & > th {
       background-color: @row-alt-bg-color;
     }
   }
-  &.gray.extra_row > tbody > tr:nth-child(4n+1) { 
+
+
+
+  &.gray.extra_row > tr:nth-child(4n+2) { 
     & > td {
       background-color: @row-alt-bg-color;
     }
   }
-  &.gray.extra_row > tbody > tr:nth-child(4n+2) { 
+  &.gray.extra_row > tr:nth-child(4n+3) { 
     & > td {
       background-color: @row-alt-bg-color;
     }
@@ -528,21 +537,11 @@ form.ct {
         text-align: right;
         font-size: 0.9em;
       }
-      .comment_actions {
-        font-size: 0.9em;
-
-      }
 
       .related {
         margin: 5px 8px;
       }
       
-      .comment:hover .comment_actions {
-        display: inline;
-      }
-      .comment .comment_actions {
-        display: none;
-      }
     }
     .post:nth-child(1) {
       border-top: none;

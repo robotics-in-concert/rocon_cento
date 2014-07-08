@@ -145,10 +145,6 @@
       max-width: 400px;
     }
     .comment {
-      &:hover {
-        .comment_actions { display: block; }
-
-      }
 
       .attachment {
         margin-bottom: 10px;
@@ -170,10 +166,10 @@
         padding: 15px 5px;
       }
       .comment_actions { 
-        display: none; 
-        position: absolute;
-        top: 10px;
-        right: 10px;
+        text-align: right;
+        span {
+          display: inline;
+        }
       }
 
     }
@@ -197,5 +193,13 @@
 .modal span.user img {
   width: 18px;
   height: 18px;
+
+}
+
+.body_actions {
+  margin-top: -15px;
+  padding: 0 5px;
+  font-size: 0.85em;
+  text-align: right;
 
 }

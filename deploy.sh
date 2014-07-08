@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 DD=`date +%Y%m%dT%H%M%S`
 
