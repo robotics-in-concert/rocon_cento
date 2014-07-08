@@ -4,7 +4,7 @@
   },
   "packages": {
     "moment": {},
-    "iron-router": {},
+    "iron-router": "0.7.1",
     "bootstrap-3": {},
     "select2": {},
     "jquery-ui": {},
