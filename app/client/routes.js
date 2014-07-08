@@ -111,6 +111,9 @@ Router.map(function(){
   this.route('projects_ideations', {
     path: '/projects/:solution/ideations',
     template: 'ideation',
+    waitOn: function(){
+      return Meteor.subscribe('allWorkItems');
+    },
     onBeforeAction: function(){
       var ITEMS_PER_PAGE = 10;
       Session.setDefault('itemsLimit', ITEMS_PER_PAGE);
@@ -165,6 +168,9 @@ Router.map(function(){
       data.workItems = Cento.WorkItems.find(query, {sort: sorts,
         transform: function(doc){
           doc.user = Meteor.users.findOne(doc.user_id);
+
+
+
           return doc;
         }
        });
@@ -179,6 +185,9 @@ Router.map(function(){
   this.route('projects_modelings', {
     path: '/projects/:solution/modelings',
     template: 'modelings',
+    waitOn: function(){
+      return Meteor.subscribe('allWorkItems');
+    },
     onBeforeAction: function(){
       Session.set('modelingFilterMember', null);
       Session.set('modelingFilterStatus', null);

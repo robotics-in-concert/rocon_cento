@@ -12,6 +12,35 @@ UI.registerHelper('default', function(a, x) {
 });
 
 
+UI.registerHelper('relatedItems', function(id){
+  var rels = [];
+  var doc = Cento.WorkItems.findOne(id);
+
+  var _getRelated = function(item){
+    if(typeof item.related === 'undefined'){
+      return;
+    }
+    item.related.forEach(function(ri){
+      console.log("RI",ri);
+
+      if(ri.type == 'referred'){
+        var i = Cento.WorkItems.findOne({_id: ri.related_work_id});
+        console.log("child item:", i, {_id: ri.related_work_id});
+
+        if(i){
+          _getRelated(i);
+          rels.push(i);
+        }
+      }
+
+    });
+
+  }
+  _getRelated(doc);
+  console.log("RELS", rels);
+  return rels;
+
+});
 
 UI.registerHelper('workGroups', function () {
   var sol = Session.get('currentSolution');

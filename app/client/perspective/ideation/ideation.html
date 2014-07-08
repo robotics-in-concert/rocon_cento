@@ -103,11 +103,11 @@
         </tr>
         <tr style="display:none;">
           <td colspan="8">
-            {{#each related}}
-            {{#with getWorkItem related_work_id}}
-            <p><a href="#" class="show_modeling">{{title}}</a></p>
-            {{/with}}
-            {{/each}}
+            <ul>
+              {{#each relatedItems _id}}
+              <li><a href="#" class="show_modeling">{{title}}</a></li>
+              {{/each}}
+            </ul>
           </td>
         
         </tr>
