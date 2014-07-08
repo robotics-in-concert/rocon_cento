@@ -1,9 +1,20 @@
+i18n.setDefaultLanguage('en')
+
 Deps.autorun (c)->
   solution = Session.get('currentSolution')
   $('.navbar select option').removeAttr('selected')
   if solution?
     console.log "SS", solution._id
     $('.navbar select option[value='+solution._id+']').attr('selected', 'selected')
+
+Deps.autorun (c)->
+  console.log 'AR 000'
+  if Meteor.user()
+    u = Meteor.user()
+    i18n.setLanguage(u.profile.lang) if u.profile.lang?
+
+
+  # console.log 'autorun : user id '+Meteor.userId()
 
 Template.layout.rendered = ->
   sid = $('.navbar select').data('current_solution')
