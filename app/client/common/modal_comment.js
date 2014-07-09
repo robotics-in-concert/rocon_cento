@@ -92,8 +92,9 @@ Template.modal_comment.events({
   'click .delete_comment': function(e, tpl){
     var pid = tpl.data._id;
     var cid = this._id;
-    console.log(cid);
     Cento.WorkItems.update({_id:pid}, {$pull:{comments:{_id: cid}}});
+    console.log("comment deleted : ", cid, pid);
+
     return false;
   },
   'done .editable': function(e){
