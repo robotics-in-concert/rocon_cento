@@ -55,10 +55,16 @@ Cento.WorkItems.find({}).observe({
     if(a === b){
       return;
     }
+    if(!newDoc){ //delete
+      return;
+    }
 
 
     // new comments
     var lastComment = _.last(newDoc.comments);
+    if(!lastComment){
+      return;
+    }
 
     var subs = newDoc.subscribers || [];
     console.log(subs);
