@@ -13,31 +13,36 @@ UI.registerHelper('default', function(a, x) {
 
 
 UI.registerHelper('relatedItems', function(id){
-  var rels = [];
   var doc = Cento.WorkItems.findOne(id);
 
-  var _getRelated = function(item){
-    if(typeof item.related === 'undefined'){
-      return;
+  var _getRelated = function(item, opts){
+
+    var opts = opts || {};
+
+    if(typeof opts.direction === 'undefined'){
+      var a = _getRelated(item, _.extend(opts, {direction: 'referred'}));
+      var b = _getRelated(item, _.extend(opts, {direction: 'reference'}));
+      return a.concat(b);
     }
-    item.related.forEach(function(ri){
-      console.log("RI",ri);
 
-      if(ri.type == 'referred'){
-        var i = Cento.WorkItems.findOne({_id: ri.related_work_id});
-        console.log("child item:", i, {_id: ri.related_work_id});
 
-        if(i){
-          _getRelated(i);
-          rels.push(i);
-        }
-      }
+    if(typeof item.related === 'undefined'){
+      return [];
+    }
 
-    });
+    return _.chain(item.related).reject(function(ri){ return ri.type !== opts.direction; })
+      .map(function(ri){ return Cento.WorkItems.findOne({_id: ri.related_work_id}); })
+      .compact()
+      .tap( function(e){ console.log("tap:",e); } )
+      .map(function(ridoc){
+        return [ridoc].concat(_getRelated(ridoc, opts));
+      })
+      .flatten()
+      .value();
 
   }
-  _getRelated(doc);
-  console.log("RELS", rels);
+  var rels = _getRelated(doc);
+  console.log("RELS", doc.title, rels);
   return rels;
 
 });
