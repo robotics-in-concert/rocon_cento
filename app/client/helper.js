@@ -151,13 +151,24 @@ UI.registerHelper('nl2br', function(text){
   return new Spacebars.SafeString(nl2br);
 });
 
+
+function userProfile(user){
+  if(_.has(user.services, "google"))
+    return user.services.google;
+  else if(_.has(user.services, "github"))
+    return user.profile;
+  else null;
+}
+
 UI.registerHelper('avatarUrl', function(user){
   var u = user;
   if(typeof user === 'string'){
     u = Meteor.users.findOne(u);
   }
   try{
-    return u.profile.avatar_url;
+    
+    var prof = userProfile(u);
+    return _.compact(_.pick(prof, "avatar_url", "picture"))[0];
   }catch(e){
     return "";
   }
