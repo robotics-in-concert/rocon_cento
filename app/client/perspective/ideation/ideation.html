@@ -49,7 +49,7 @@
         {{#each new_replys currentUser.profile.login}}
         <tr>
           <td>1</td>
-          <td><a href="#" class="show">{{body}}</a></td>
+          <td><a href="/item/{{_id}}" class="">{{body}}</a></td>
           <td>{{votes}}</td>
           <td>{{comments.length}}</td>
           <td>{{username user}}</td>
@@ -87,7 +87,7 @@
         {{#each workItems}}
         <tr>
           <td>1</td>
-          <td><a href="#" class="show">{{title}}</a></td>
+          <td><a href="/item/{{_id}}" class="">{{title}}</a></td>
           <td>{{votes}}</td>
           <td>{{default comments.length 0}}</td>
           <td>{{username user_id}}</td>

@@ -1,0 +1,134 @@
+<template name="work_item">
+<div id="work-item" class="ideation_show modal_show fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+{{#with workItem}}
+{{> popover_checklist}}
+{{> popover_duedate}}
+{{> popover_label}}
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">{{type}}</h4>
+      </div>
+
+      <div class="modal-body">
+        <div class="modal_wrapper">
+          <div class="modal_left">
+
+            <div class="editable" data-id="{{_id}}" data-field="title" data-plain="true" data-content="{{title}}">
+              <h2 class="edit_trigger">{{title}}</h2>
+            </div>
+            
+
+            <div class="editable" data-id="{{_id}}" data-field="body" data-content="{{body}}">
+              <div class="well">
+                <p id="ideation_description" class="">{{nl2br body}}</p>
+              </div>
+              <div class="body_actions">
+                <span><a href="#" class="edit_trigger">edit description</a></span>
+              </div>
+            </div>
+
+            {{#if labels.length}}
+            <ul class="labels list-unstyled">
+              {{#each labels}}
+              <li class="label-{{.}}"><span>{{solutionLabelText .}}</span></li>
+              {{/each}}
+              <li><a href="# change_label" data-toggle="popover" data-target=".popover.labels">Change Label</a></li>
+            </ul>
+            {{/if}}
+            
+            <div class="meta">
+              {{#if tags.length}}
+              <p>Tags : {{tagsJoin tags}}</p>
+              {{/if}}
+              {{#if duedate}}
+              <p>Due date : {{duedate}}</p>
+              {{/if}}
+             </div>
+
+             <h4>Status</h4>
+             <p><select name="status">
+               <option value="todo">todo</option>
+               <option value="doing">doing</option>
+               <option value="done">done</option>
+             </select></p>
+
+             <h4>Attach files (images & doc)</h4>
+             <form>
+               <div class="form-group">
+                 <button class="btn ct btn-sm create_artifact">Create Artifact</button>
+                 <button class="btn ct btn-sm create_bpmn_artifact">Create BPMN</button>
+               </div>
+             </form>
+             <div class="artifacts">
+               <ul class="list-unstyled">
+                {{#each artifacts _id}}
+                {{#if attachments}}
+                    {{#each attachments}}
+                    <li data-artifact_id="{{../_id}}">
+                      <a href="/data/{{name}}" class="show_artifact" target="_blank">
+                        <img src="/data/{{name}}">
+                      </a>
+                      <p>{{../title}}</p>
+                    </li>
+                    {{/each}}
+                {{else}}
+                    <li data-artifact_id="{{_id}}">
+                      <a href="/data/{{name}}" class="show_bpmn_artifact" target="_blank">
+                          <img class="bpmn-artifact-preview" src="http://placehold.it/105x105&text=BPMN">
+                      </a>
+                      <p>{{title}}</p>
+                    </li>                
+                {{/if}}
+                {{else}}
+                  <p>No artifacts...</p>
+                {{/each}}
+               </ul>
+             </div>
+
+            {{#if getChecklists _id}}
+            <hr />
+
+            {{#each getChecklists _id}}
+            {{> checklists}}
+
+
+            {{/each}}
+
+            {{/if}}
+
+
+            <hr />
+
+            {{>modal_comment}}
+        </div>
+        <div class="modal_right">
+            <div class="actions">
+              <button type="submit" class="create_modeling ct btn btn-default">Create Task</button>
+              
+              <button class="btn ct" data-toggle="popover" data-target=".popover.create_checklist">Create Checklist</button>
+              <button class="btn ct" data-toggle="popover" data-target=".popover.labels">Labels</button>
+              <button class="btn ct" data-toggle="popover" data-target=".popover.duedate">Duedate</button>
+              <button class="btn archive ct">Archive</button>
+              {{#if $include subscribers currentUser._id }}
+              <button class="btn unsubscribe ct">Unsubscribe</button>
+              {{else}}
+              <button class="btn subscribe ct">Subscribe</button>
+              {{/if}}
+              <hr />
+              <button class="btn upvote ct">Upvote</button>
+              <button class="btn downvote ct">Downvote</button>
+            </div>
+
+        </div>
+      </div>
+
+      </div> <!-- /modal-body -->
+
+    </div>
+  </div>
+{{/with}}
+</div>
+  
+</template>
