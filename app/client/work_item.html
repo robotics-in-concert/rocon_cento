@@ -1,6 +1,5 @@
 <template name="work_item">
-<div id="work-item" class="ideation_show modal_show fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-{{#with workItem}}
+{{title}} {{_id}}
 {{> popover_checklist}}
 {{> popover_duedate}}
 {{> popover_label}}
@@ -128,7 +127,5 @@
 
     </div>
   </div>
-{{/with}}
-</div>
   
 </template>

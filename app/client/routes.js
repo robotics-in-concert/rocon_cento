@@ -109,20 +109,11 @@ Router.map(function(){
     template: 'battle_loom'
   });
   this.route('work_item', {
-    path: '/item/:work_item_id',
+    path: '/projects/:solution/item/:work_item_id',
     template: 'work_item',
-    waitOn: function(){
-    },
-    onBeforeAction: function(){
-    },
     data: function(){
-
-      var groupId = this.params.group;
-      var sid = this.params.solution;
-    
-      var data = {};
-      data.workItem = Cento.WorkItems.findOne({_id: this.params.work_item_id});
-      return data;
+      var item = Cento.WorkItems.findOne({_id: this.params.work_item_id});;
+      return item;
     }
   });
   this.route('projects_ideations', {
