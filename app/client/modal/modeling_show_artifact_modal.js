@@ -13,13 +13,24 @@ Template.modeling_show_artifact_modal.after_modal_rendered = function(){
 
   console.log(notes);
 
+  console.log($img);
 
 
-  $img.on('load', function(){
-    $(this).annotateImage({
-      editable: true,
-      useAjax: false,
-      notes: notes
+
+
+  $img.load(function(){
+    var that = this;
+    _.defer(function(){
+      $(that).attr('width', that.naturalWidth);
+      $(that).attr('height', that.naturalHeight);
+
+
+      $(that).annotateImage({
+        editable: true,
+        useAjax: false,
+        notes: notes
+      });
+
     });
     
   });

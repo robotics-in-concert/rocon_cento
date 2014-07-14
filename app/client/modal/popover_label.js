@@ -1,5 +1,8 @@
 Template.popover_label.helpers({
   'checkSelected': function(workItem, color){
+    if(!workItem){
+      return '';
+    }
     var idx = _.include(workItem.labels, color);
     return idx ? 'selected' : '';
   }
