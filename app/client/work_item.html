@@ -2,7 +2,7 @@
 {{> popover_checklist}}
 {{> popover_duedate}}
 {{> popover_label}}
-<div class="row lnb">
+<div id="work_item" class="row lnb">
 
   <div class="col-md-2">
     <button class="button large new_work_item">New Work Item</button>
@@ -18,7 +18,7 @@
     <!-- </ul> -->
   </div>
     
-  <div class="col-md-10">
+  <div class="col-md-8">
 
 
 
@@ -27,7 +27,7 @@
 
 
 <div class="work_item_header">
-  <h4 class="modal-title">{{type}}</h4>
+  <h3 class="title">{{type}}</h3>
 </div>
 
 <div class="work_item_body">
@@ -122,7 +122,13 @@
 
       {{>modal_comment}}
   </div>
-  <div class="modal_right">
+</div>
+
+</div>
+
+
+</div>
+<div class="col-md-2">
       <div class="actions">
         <button type="submit" class="create_modeling ct btn btn-default">Create Task</button>
         
@@ -139,12 +145,6 @@
         <button class="btn upvote ct">Upvote</button>
         <button class="btn downvote ct">Downvote</button>
       </div>
-
-  </div>
-</div>
-
-</div>
-
 
 </div>
 </div>
