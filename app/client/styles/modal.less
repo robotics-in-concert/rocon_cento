@@ -203,3 +203,92 @@
   text-align: right;
 
 }
+
+
+/* comments */
+.comment_wrap {
+  margin-top: 10px;
+
+  form {
+
+  }
+}
+.comment_wrap {
+  form.comment {
+    textarea {
+      height: 30px;
+      overflow-y: hidden;
+      -webkit-transition: height ease-in-out 85ms;
+
+    }
+    .buttons {
+      display: none;
+
+    }
+
+    &.focus {
+      textarea {
+        height: 90px;
+
+      }
+      .buttons {
+        display: block;
+
+      }
+
+    }
+
+  }
+  .files_to_upload {
+    font-size: 12px;
+
+  }
+  .buttons {
+    a, button {
+      display: inline-block;
+      margin-left: 10px;
+
+    }
+    a {
+      font-size: 12px;
+      color: @blue-color;
+    }
+
+  }
+}
+.comments {
+  margin-top: 20px;
+  position: relative;
+  img {
+    max-width: 400px;
+  }
+  .comment {
+
+    .attachment {
+      margin-bottom: 10px;
+
+    }
+    padding: 5px;
+    &:nth-child(odd) {
+    background-color: @row-alt-bg-color;
+    }
+    font-size: 12px;
+    span {
+      display: block;
+    }
+    span.user a {
+      color: @blue-color;
+    }
+    p.body {
+      color: @gray-color;
+      padding: 15px 5px;
+    }
+    .comment_actions { 
+      text-align: right;
+      span {
+        display: inline;
+      }
+    }
+
+  }
+}
