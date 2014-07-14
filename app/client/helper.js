@@ -81,6 +81,9 @@ UI.registerHelper('solutionLabelText', function(labelClr){
 
 UI.registerHelper('solutionLabels', function(){
   var sol = Session.get('currentSolution');
+  if(!sol){
+    return [];
+  }
   var colors =  ["green", "yellow", "orange", "red", "purple", "blue"];
   var titles = sol.label_titles || [];
 
