@@ -36,11 +36,6 @@ Template.management.events({
 
 });
 Template.card.events({
-  'click .card': function(e){
-    var m = this;
-    Router.go('work_item', {solution: m.solution_id, work_item_id: m._id});
-    return false;
-  },
   'click .more': function(e){
     var m = this;
 

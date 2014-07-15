@@ -22,21 +22,11 @@ Template.modelings.events({
   'change select.filter_member': function(e){
     Session.set('modelingFilterMember', $(e.target).val());
   },
-  'click .show_ideation': function(){
-    openWorkItemModal(this._id);
-    return false;
-  },
-
   'click .toggle_rel': function(e){
     var $e = $(e.target);
     var $tr = $e.closest('tr').next('tr');
     $tr.toggle();
 
-    return false;
-  },
-  'click .show': function(e){
-    var id = this._id;
-    openWorkItemModal(this._id);
     return false;
   },
   'click .delete': function(e){

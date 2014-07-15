@@ -45,7 +45,7 @@
         {{#each new_replys currentUser.profile.login}}
         <tr>
           <td>1</td>
-          <td><a href="#" class="show">{{title}}</a></td>
+          <td><a href="#" class="show_work_item">{{title}}</a></td>
           <td>{{default votes 0}}</td>
           <td>{{comments.length}}</td>
           <td>{{username user}}</td>
@@ -94,7 +94,7 @@
         {{#each workItems}}
         <tr>
           <td><span class="label {{itemStatusLabelClass status}} ">{{status}}</span></td>
-          <td><a href="#" class="show">{{title}}</a></td>
+          <td><a href="#" class="show_work_item">{{title}}</a></td>
           <td>{{default votes 0}}</td>
           <td>{{default comments.length 0}}</td>
           <td class="datetime">{{formatDate created 'YYYY-MM-DD'}}</td>
