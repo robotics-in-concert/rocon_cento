@@ -195,6 +195,9 @@ UI.registerHelper('avatarUrl', function(user){
   if(typeof user === 'string'){
     u = Meteor.users.findOne(u);
   }
+  if(!u || !u.profile){
+    return "";
+  }
   return u.profile.avatar_url;
 
 });
@@ -207,6 +210,9 @@ UI.registerHelper('username', function(user){
   var u = user;
   if(typeof user === 'string'){
     u = Meteor.users.findOne(u);
+  }
+  if(!u || !u.profile){
+    return "";
   }
   return u.profile.login;
 });
