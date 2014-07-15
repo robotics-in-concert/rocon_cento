@@ -26,6 +26,12 @@ Template.ideation_create_modeling_modal.after_modal_rendered = function(){
 
 };
 Template.ideation_create_modeling_modal.events({
+  'click .delete_work_group': function(e){
+    var wgid = $('select[name=work_group').select2('val');
+    Cento.WorkGroups.remove({_id: wgid});
+    $('select[name=work_group').select2('val', '');
+    return false;
+  },
   'click .create_task': function(e){
     var ideation = Cento.WorkItems.findOne(this._id);
     var sol = Session.get('currentSolution');

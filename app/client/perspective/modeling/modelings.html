@@ -118,11 +118,11 @@
         </tr>
         <tr style="display:none;">
           <td colspan="7">
-            {{#each related}}
-            {{#with getWorkItem related_work_id}}
-            <p><a href="#" class="show_ideation">{{title}}</a></p>
-            {{/with}}
-            {{/each}}
+            <ul>
+              {{#each relatedItems _id}}
+              <li><a href="#" class="show_ideation">{{title}}</a></li>
+              {{/each}}
+            </ul>
           </td>
         
         </tr>

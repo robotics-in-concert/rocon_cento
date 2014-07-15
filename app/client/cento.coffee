@@ -63,7 +63,7 @@ Template.layout.events
       location.href = "/"
 
   'click #google_login': ->
-    Meteor.loginWithGoogle requestPermissions: ['https://www.googleapis.com/auth/drive.readonly',
+    Meteor.loginWithGoogle requestPermissions: ['email', 'profile', 'https://www.googleapis.com/auth/drive.readonly',
       'https://www.googleapis.com/auth/userinfo.profile'], (e)->
       console.log(e)
       location.href = "/"

@@ -50,3 +50,12 @@ Cento.updateWorkItem = function(id, params){
 Cento.solutions = function(){
   return Cento.Solutions.find({deleted_at: {$exists: false}});
 };
+
+
+if(Meteor.isServer){
+  Meteor.publish('allWorkItems', function(){
+    return Cento.WorkItems.find({});
+
+  });
+
+}

@@ -12,6 +12,40 @@ UI.registerHelper('default', function(a, x) {
 });
 
 
+UI.registerHelper('relatedItems', function(id){
+  var doc = Cento.WorkItems.findOne(id);
+
+  var _getRelated = function(item, opts){
+
+    var opts = opts || {};
+
+    if(typeof opts.direction === 'undefined'){
+      var a = _getRelated(item, _.extend(opts, {direction: 'referred'}));
+      var b = _getRelated(item, _.extend(opts, {direction: 'reference'}));
+      return a.concat(b);
+    }
+
+
+    if(typeof item.related === 'undefined'){
+      return [];
+    }
+
+    return _.chain(item.related).reject(function(ri){ return ri.type !== opts.direction; })
+      .map(function(ri){ return Cento.WorkItems.findOne({_id: ri.related_work_id}); })
+      .compact()
+      .tap( function(e){ console.log("tap:",e); } )
+      .map(function(ridoc){
+        return [ridoc].concat(_getRelated(ridoc, opts));
+      })
+      .flatten()
+      .value();
+
+  }
+  var rels = _getRelated(doc);
+  console.log("RELS", doc.title, rels);
+  return rels;
+
+});
 
 UI.registerHelper('workGroups', function () {
   var sol = Session.get('currentSolution');
@@ -147,16 +181,21 @@ UI.registerHelper('nl2br', function(text){
   return new Spacebars.SafeString(nl2br);
 });
 
+
+function userProfile(user){
+  if(_.has(user.services, "google"))
+    return user.services.google;
+  else if(_.has(user.services, "github"))
+    return user.profile;
+  else null;
+}
+
 UI.registerHelper('avatarUrl', function(user){
   var u = user;
   if(typeof user === 'string'){
     u = Meteor.users.findOne(u);
   }
-  try{
-    return u.profile.avatar_url;
-  }catch(e){
-    return "";
-  }
+  return u.profile.avatar_url;
 
 });
 
@@ -169,10 +208,6 @@ UI.registerHelper('username', function(user){
   if(typeof user === 'string'){
     u = Meteor.users.findOne(u);
   }
-  try{
-    return u.profile.login;
-  }catch(e){
-    return "";
-  }
+  return u.profile.login;
 });
 
