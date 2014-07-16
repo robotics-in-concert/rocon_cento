@@ -41,6 +41,9 @@ UI.registerHelper('relatedItems', function(id){
       .value();
 
   }
+  if(!doc){
+    return [];
+  }
   var rels = _getRelated(doc);
   console.log("RELS", doc.title, rels);
   return rels;
