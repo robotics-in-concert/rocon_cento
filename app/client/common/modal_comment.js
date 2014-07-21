@@ -4,6 +4,9 @@ Template.modal_comment.helpers({
   },
   'commentFiles': function(){
     return Session.get('currentCommentFiles');
+  },
+  'commentsForItem': function(id){
+    return Cento.Comments.find({parent_item_id: id});
   }
 
 });
@@ -61,13 +64,15 @@ Template.modal_comment.events({
 
 
     if(this.type != null && this.type != ''){
-      var cid = Random.id();
-      Cento.WorkItems.update({_id: id},
-          {$inc: {comments_count: 1}, $push: {comments:{_id: cid, body: txt, 'created':new Date(), user_id: Meteor.userId()}}});
+
+      var data = {body: txt, parent_item_id: id,  created:new Date(), user_id: Meteor.userId()};
+      var newComment = Cento.Comments.insert(data);
+      Cento.WorkItems.update({_id: id}, {$inc: {comments_count: 1}});
+
       attachments.forEach(function(a){
         var data = {
           work_item_id: id,
-          comment_id: cid,
+          comment_id: newComment._id,
           file: a,
           created: new Date(),
           user_id: Meteor.userId()

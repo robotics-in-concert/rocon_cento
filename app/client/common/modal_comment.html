@@ -23,7 +23,7 @@
       </div>
     </form>
     <ul class="comments list-unstyled">
-      {{#each comments}} 
+      {{#each commentsForItem _id}} 
          {{> comment comment=. depth=123}}
 
       {{/each}} 
