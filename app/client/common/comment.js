@@ -8,7 +8,16 @@ Template.comment.events({
 
   'click a.reply': function(e){
     var $wrap = $(e.target).closest('.comment');
-    $wrap.find('form.reply:eq(0)').show();
+    var $f = $wrap.find('form.reply:eq(0)');
+    $f.show();
+    $f.addClass('focus');
+    return false;
+  },
+  'click button.cancel_reply': function(e){
+    var $f = $(e.target).closest('form');
+    $f.hide();
+    $f.addClass('focus');
+    $f[0].reset();
     return false;
   },
 
