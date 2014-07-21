@@ -33,6 +33,12 @@
         <button class="reply btn ct btn-sm">reply</button>
       </form>
     </div>
+
+    {{#each childComments _id}}
+    <ul>
+      {{> comment comment=.}}
+    </ul>
+    {{/each}}
     </li>
 {{/with}}
   

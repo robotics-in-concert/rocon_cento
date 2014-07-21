@@ -6,7 +6,7 @@ Template.modal_comment.helpers({
     return Session.get('currentCommentFiles');
   },
   'commentsForItem': function(id){
-    return Cento.Comments.find({parent_item_id: id});
+    return Cento.Comments.find({parent_item_id: id, parent_id: {$exists: false}});
   }
 
 });
