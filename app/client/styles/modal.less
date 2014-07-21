@@ -139,8 +139,13 @@
     }
   }
   .comments {
-    margin-top: 20px;
     position: relative;
+    list-style-type: none;
+
+    .comments {
+      background-color: @row-alt-bg-color;
+
+    }
     img {
       max-width: 400px;
     }
@@ -151,9 +156,10 @@
 
       }
       padding: 5px;
-      &:nth-child(odd) {
-      background-color: @row-alt-bg-color;
-      }
+
+      /* &:nth-child(odd) { */
+        /* background-color: @row-alt-bg-color; */
+      /* } */
       font-size: 12px;
       span {
         display: block;
