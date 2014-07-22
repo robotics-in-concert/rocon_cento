@@ -1,0 +1,52 @@
+<template name="comment">
+
+
+{{#with comment}}
+    <li class="comment"> 
+      <div class="editable" data-field="body" data-plain="true" data-content="{{body}}">
+        <span class="user">
+          <img src="{{avatarUrl user_id}}" height="18">
+          <a href="#">{{username user_id}}</a>
+        </span>
+
+        <p class="body">{{nl2br body}}</p>
+        <div class="comment_actions">
+          <span class=""><a href="#" class="reply">reply</a></span>
+          <span class=""><a href="#" class="edit_trigger">edit</a></span>
+          <span class=""><a href="#" class="delete_comment">delete</a></span>
+        </div>
+
+
+        
+        {{#each attachmentsForComment _id}}
+        <div class="attachment">
+          {{#if fileIsImage file}}
+          <img src="/data/{{file}}">
+          {{else}}
+          <img src="{{fileIconPath file}}"> <a href="/data/{{file}}">{{file}}</a>
+          {{/if}}
+        </div>
+        {{/each}}
+
+
+        <form class="reply comment" name="comment">
+          <div class="form-group">
+            <textarea name="comment_body" class="form-control" placeholder="Write a comment."></textarea>
+          </div>
+          <div class="form-group text-right buttons">
+            <button class="ct btn reply btn-sm">Comment</button>
+            <button class="ct btn cancel_reply btn-sm">&times;</button>
+          </div>
+        </form>
+
+      </div>
+
+      {{#each childComments _id}}
+      <ul class="comments">
+        {{> comment comment=.}}
+      </ul>
+      {{/each}}
+    </li>
+{{/with}}
+  
+</template>

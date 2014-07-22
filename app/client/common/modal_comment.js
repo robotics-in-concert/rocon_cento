@@ -4,6 +4,9 @@ Template.modal_comment.helpers({
   },
   'commentFiles': function(){
     return Session.get('currentCommentFiles');
+  },
+  'commentsForItem': function(id){
+    return Cento.Comments.find({parent_item_id: id, parent_id: {$exists: false}});
   }
 
 });
@@ -61,13 +64,15 @@ Template.modal_comment.events({
 
 
     if(this.type != null && this.type != ''){
-      var cid = Random.id();
-      Cento.WorkItems.update({_id: id},
-          {$inc: {comments_count: 1}, $push: {comments:{_id: cid, body: txt, 'created':new Date(), user_id: Meteor.userId()}}});
+
+      var data = {body: txt, parent_type: 'work_item', parent_item_id: id,  created:new Date(), user_id: Meteor.userId()};
+      var newComment = Cento.Comments.insert(data);
+      Cento.WorkItems.update({_id: id}, {$inc: {comments_count: 1}});
+
       attachments.forEach(function(a){
         var data = {
           work_item_id: id,
-          comment_id: cid,
+          comment_id: newComment._id,
           file: a,
           created: new Date(),
           user_id: Meteor.userId()
@@ -80,23 +85,15 @@ Template.modal_comment.events({
 
 
     }else{
-      Cento.Artifacts.update({_id: id},
-          {$push: {comments:{_id: Random.id(), body: txt, 'created':new Date(), user_id: Meteor.userId()}}});
+      var data = {body: txt, parent_type: 'artifact', parent_item_id: id,  created:new Date(), user_id: Meteor.userId()};
+      var newComment = Cento.Comments.insert(data);
     }
-    Cento.createAction(Cento.ActionTypes.COMMENT_ON_USERNEEDS, id, {body: txt});
+    // Cento.createAction(Cento.ActionTypes.COMMENT_ON_USERNEEDS, id, {body: txt});
     f[0].reset();
     Session.set('currentCommentFiles', null);
     return false;
   },
 
-  'click .delete_comment': function(e, tpl){
-    var pid = tpl.data._id;
-    var cid = this._id;
-    Cento.WorkItems.update({_id:pid}, {$pull:{comments:{_id: cid}}});
-    console.log("comment deleted : ", cid, pid);
-
-    return false;
-  },
   'done .editable': function(e){
     var $editable = $(e.target);
     var $f = $editable.prev('form[name=edit]');
