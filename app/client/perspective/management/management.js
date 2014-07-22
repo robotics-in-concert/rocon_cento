@@ -38,18 +38,7 @@ Template.management.events({
 Template.card.events({
   'click .card': function(e){
     var m = this;
-    if(m.type == Cento.WorkItemTypes.IDEA){
-      openWorkItemModal(m._id);
-    }else if(m.type == Cento.WorkItemTypes.MODELING){
-      openWorkItemModal(m._id);
-    }else{
-      openWorkItemModal(m._id);
-
-    }
-
-
-    // Router.go('solutions_modelings_show', {solution: m.solution_id, item: m._id});
-
+    Router.go('work_item', {solution: m.solution_id, work_item_id: m._id});
     return false;
   },
   'click .more': function(e){

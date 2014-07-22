@@ -721,13 +721,6 @@ form.ct {
 }
 
 
-.checklist ul {
-
-  li.done {
-    text-decoration:line-through;
-    color: #ccc;
-  }
-}
 
 .popover {
   z-index: 3000;
@@ -748,12 +741,12 @@ form.ct {
 
 }
 
-  .label-green{background-color:#34b27d}
-  .label-yellow{background-color:#dbdb57}
-  .label-orange{background-color:#e09952}
-  .label-red{background-color:#cb4d4d}
-  .label-purple{background-color:#93c}
-  .label-blue{background-color:#4d77cb}
+.label-green{background-color:#34b27d}
+.label-yellow{background-color:#dbdb57}
+.label-orange{background-color:#e09952}
+.label-red{background-color:#cb4d4d}
+.label-purple{background-color:#93c}
+.label-blue{background-color:#4d77cb}
 
 
 @-webkit-keyframes label_over {
@@ -819,7 +812,22 @@ form.ct {
 
 }
 
-#modal-show-ideation {
+.quill-wrapper {
+  border: 1px solid #ccc;
+
+
+  .toolbar {
+    border-bottom: 1px solid #ccc;
+
+  }
+
+}
+
+
+/*
+ * work item
+ */
+#work_item {
   ul.labels {
     .clearfix();
     li {
@@ -833,63 +841,83 @@ form.ct {
     }
 
   }
-  .checklist {
-    margin-bottom: 20px;
-    .checklist-progress {
-      position: relative;
-      height: 30px;
-      span {
-        position: absolute;
-        top: 0px;
+  .actions {
+    button {
+      width: 100%;
+      margin-bottom: 0.5em;
+    }
+
+  }
+  .checklists {
+    .checklist {
+      ul {
+        li.done {
+          text-decoration:line-through;
+          color: #ccc;
+        }
       }
 
-      .checklist-progress-bar {
-        margin-left: 40px;
+
+      margin-bottom: 20px;
+      .checklist-progress {
         position: relative;
-        background-color: #d9d9d9;
-          height: 12px;
-
-
-        .checklist-progress-bar-current {
+        height: 30px;
+        span {
           position: absolute;
-          top: 0;
-          left: 0;
-          height: 12px;
-          background: linear-gradient(to bottom, hsl(202, 60%, 55%) 0, hsl(202, 70%, 45%) 100%);
-
+          top: 0px;
         }
 
+        .checklist-progress-bar {
+          margin-left: 40px;
+          position: relative;
+          background-color: #d9d9d9;
+            height: 12px;
+
+
+          .checklist-progress-bar-current {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 12px;
+            background: linear-gradient(to bottom, hsl(202, 60%, 55%) 0, hsl(202, 70%, 45%) 100%);
+
+          }
+
+        }
       }
+      &:nth-child(1) {
+        border-top: solid 1px #eee;
+        margin-top: 20px;
+        padding-top: 20px;
+      }
+
     }
 
   }
-  .modal_right {
 
 
-    .actions {
+  .artifacts {
 
-
-      button {
-        position: relative;
-        width: 100%;
-
-
+    ul {
+      .clearfix();
+      li {
+        float: left;
+        margin-right: 0.5em;
+        img {
+          height: 105px;
+          display: block;
+          margin-left: auto;
+          margin-right: auto;
+        }
+        p {
+          width:10em; 
+          word-wrap:break-word;
+          text-align:center;
+          margin-left:auto;
+          margin-right:auto;
+        }
       }
-
     }
-
-  }
-
-}
-
-
-.quill-wrapper {
-  border: 1px solid #ccc;
-
-
-  .toolbar {
-    border-bottom: 1px solid #ccc;
-
   }
 
 }

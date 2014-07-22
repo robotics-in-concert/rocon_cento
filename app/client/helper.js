@@ -3,6 +3,13 @@ UI.registerHelper('$include', function(arr, item){
 
 });
 
+UI.registerHelper('isNotEmpty', function(coll){
+  console.log('EEMMM', coll, coll.count());
+  console.log(Cento.WorkItems.find({zzzz: 123}).count());
+
+
+  return coll.count() > 0 ? true : false;
+});
 
 UI.registerHelper('default', function(a, x) {
   if(typeof a === 'undefined'){
@@ -14,6 +21,9 @@ UI.registerHelper('default', function(a, x) {
 
 UI.registerHelper('relatedItems', function(id){
   var doc = Cento.WorkItems.findOne(id);
+  if(!doc){
+    return [];
+  }
 
   var _getRelated = function(item, opts){
 
@@ -84,6 +94,9 @@ UI.registerHelper('solutionLabelText', function(labelClr){
 
 UI.registerHelper('solutionLabels', function(){
   var sol = Session.get('currentSolution');
+  if(!sol){
+    return [];
+  }
   var colors =  ["green", "yellow", "orange", "red", "purple", "blue"];
   var titles = sol.label_titles || [];
 
@@ -106,7 +119,8 @@ UI.registerHelper('tagsJoin', function(tags){
 });
 
 UI.registerHelper('getChecklists', function(id){
-  return Cento.Checklists.find({work_item_id: id}, {}, {sort: {created: -1}});
+  var coll = Cento.Checklists.find({work_item_id: id}, {}, {sort: {created: -1}});
+  return coll;
 });
 
 UI.registerHelper('getWorkItem', function(id){

@@ -108,6 +108,14 @@ Router.map(function(){
     path: '/projects/:solution/battle_loom',
     template: 'battle_loom'
   });
+  this.route('work_item', {
+    path: '/projects/:solution/item/:work_item_id',
+    template: 'work_item',
+    data: function(){
+      var item = Cento.WorkItems.findOne({_id: this.params.work_item_id});;
+      return item;
+    }
+  });
   this.route('projects_ideations', {
     path: '/projects/:solution/ideations',
     template: 'ideation',
