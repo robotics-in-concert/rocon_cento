@@ -65,7 +65,7 @@ Template.modal_comment.events({
 
     if(this.type != null && this.type != ''){
 
-      var data = {body: txt, parent_item_id: id,  created:new Date(), user_id: Meteor.userId()};
+      var data = {body: txt, parent_type: 'work_item', parent_item_id: id,  created:new Date(), user_id: Meteor.userId()};
       var newComment = Cento.Comments.insert(data);
       Cento.WorkItems.update({_id: id}, {$inc: {comments_count: 1}});
 
@@ -85,10 +85,10 @@ Template.modal_comment.events({
 
 
     }else{
-      Cento.Artifacts.update({_id: id},
-          {$push: {comments:{_id: Random.id(), body: txt, 'created':new Date(), user_id: Meteor.userId()}}});
+      var data = {body: txt, parent_type: 'artifact', parent_item_id: id,  created:new Date(), user_id: Meteor.userId()};
+      var newComment = Cento.Comments.insert(data);
     }
-    Cento.createAction(Cento.ActionTypes.COMMENT_ON_USERNEEDS, id, {body: txt});
+    // Cento.createAction(Cento.ActionTypes.COMMENT_ON_USERNEEDS, id, {body: txt});
     f[0].reset();
     Session.set('currentCommentFiles', null);
     return false;
