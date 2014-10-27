@@ -286,6 +286,21 @@ a {
   }
 }
 
+.description {
+  a {
+    color: @blue-color;
+  }
+
+  &.editor-content {
+    p {
+      margin: 0;
+      padding: 0;
+    }
+
+  }
+
+}
+
 form.ct {
   select {
     background-color: @blue-color;
@@ -883,6 +898,14 @@ form.ct {
 }
 
 
+.quill-editor {
+  .resizes {
+    text-align: right;
+    padding: 3px;
+
+  }
+
+}
 .quill-wrapper {
   border: 1px solid #ccc;
 
@@ -890,6 +913,9 @@ form.ct {
   .toolbar {
     border-bottom: 1px solid #ccc;
 
+  }
+  .editor {
+    -webkit-transition: height ease-in-out 160ms;
   }
 
 }

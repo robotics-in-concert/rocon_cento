@@ -194,4 +194,24 @@ $( function(){
     Session.set(itemType+':sort', sorts);
   });
 
+
+
+
+
+
+  $body.on('click', '.editor-larger', function(e){
+    var $btn = $(this);
+    var $editor = $btn.closest('.resizes').prev('.quill-wrapper').find('.editor');
+    $editor.css('height', $editor.height() + 50);
+    return false;
+
+  });
+  $body.on('click', '.editor-smaller', function(e){
+    var $btn = $(this);
+    var $editor = $btn.closest('.resizes').prev('.quill-wrapper').find('.editor');
+    $editor.css('height', $editor.height() - 50);
+    return false;
+
+  });
+
 });

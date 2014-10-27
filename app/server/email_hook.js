@@ -36,7 +36,8 @@ Cento.WorkItems.find({created: {$gt: new Date()}}).observe({
     subs.forEach(function(uid){
       var from = currentLogin + " <noreply@gmail.com>";
       var title = "["+solution.title+"] " + newDoc.title;
-      var html =  newDoc.body + "<hr />" + Meteor.absoluteUrl("projects/"+solution._id+"/ideations#"+newDoc._id);
+      var url = Meteor.absoluteUrl("projects/"+solution._id+"/ideations#"+newDoc._id);
+      var html =  newDoc.body + "<hr />" + "<a href='"+url+"'>"+url+"</a>";
       var u = Meteor.users.findOne({_id: uid});
 
       Meteor.call('sendEmail', {from: from, to: u.profile.email, subject: title, html: html});
@@ -82,10 +83,15 @@ Cento.WorkItems.find({}).observe({
     subs.forEach(function(uid){
       var from = currentLogin + " <noreply@gmail.com>";
       var title = "["+solution.title+"] " + newDoc.title;
-      var text =  lastComment.body + "\n---\n" + Meteor.absoluteUrl("projects/"+solution._id+"/ideations#"+newDoc._id);
+      
+      var text = (lastComment.body).replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + '<br>' + '$2');
+
+
+      var url = Meteor.absoluteUrl("projects/"+solution._id+"/ideations#"+newDoc._id);
+      var html =  text + "<hr />" + "<a href='"+url+"'>"+url+"</a>";
       var u = Meteor.users.findOne({_id: uid});
 
-      Meteor.call('sendEmail', {from: from, to: u.profile.email, subject: title, text: text});
+      Meteor.call('sendEmail', {from: from, to: u.profile.email, subject: title, html: html});
 
     });
   }

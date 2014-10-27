@@ -18,7 +18,7 @@
         </div>
         <a href="#" class="attach">attach files</a>
         <button class="ct btn comment btn-sm">Comment</button>
-        <button class="ct btn cancel_comment btn-sm">&times;</button>
+        <button class="ct btn cancel_comment btn-sm">Cancel</button>
         <input type="file" name="file" multiple style="display: none;">
       </div>
     </form>
@@ -31,7 +31,7 @@
           <a href="#">{{username user_id}}</a>
         </span>
 
-        <p class="body">{{nl2br body}}</p>
+        <p class="body description">{{commentBody body}}</p>
         <div class="comment_actions">
           <span class=""><a href="#" class="edit_trigger">edit</a></span>
           <span class=""><a href="#" class="delete_comment">delete</a></span>
