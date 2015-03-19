@@ -82,3 +82,33 @@ jbpm
 >> ant stop.demo
 ```
 
+
+Backup / Restoration
+====================
+
+Mongodb
+-------
+
+See [Back Up and Restore with MongoDB Tools](http://docs.mongodb.org/manual/tutorial/backup-with-mongodump/)
+
+
+* backup
+	* `mongodump --host localhost:27017 --db DBNAME --out DUMP_PATH`
+		
+
+
+* restore
+	* `mongorestore --host localhost:27017 DUMP_PATH` 
+
+
+* example
+
+
+```
+$ mongodump --host localhost:27017 --db cento --out /tmp/dump
+connected to: localhost:27017
+2015-03-19T17:23:24.015+0900 DATABASE: cento	 to 	/tmp/dump/cento
+
+$ mongorestore --host localhost:27017 /tmp/dump
+connected to: localhost:27017
+```
