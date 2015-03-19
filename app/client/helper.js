@@ -41,6 +41,9 @@ UI.registerHelper('relatedItems', function(id){
       .value();
 
   }
+  if(!doc){
+    return [];
+  }
   var rels = _getRelated(doc);
   console.log("RELS", doc.title, rels);
   return rels;
@@ -175,10 +178,27 @@ UI.registerHelper('fileIsImage', function(name){
   return false;
 });
 
+UI.registerHelper('autolink', function(text){
+  var pattern = /(^|[\s\n]|<br\/?>)((?:https?|ftp):\/\/[\-A-Z0-9+\u0026\u2019@#\/%?=()~_|!:,.;]*[\-A-Z0-9+\u0026@#\/%=~()_|])/gi;
+  return text.replace(pattern, "$1<a href='$2'>$2</a>");
+
+});
 UI.registerHelper('nl2br', function(text){
   var nl2br = (text + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g,
     '$1' + '<br>' + '$2');
   return new Spacebars.SafeString(nl2br);
+});
+
+
+
+UI.registerHelper('commentBody', function(text){
+  // autolink
+  var pattern = /(^|[\s\n]|<br\/?>)((?:https?|ftp):\/\/[\-A-Z0-9+\u0026\u2019@#\/%?=()~_|!:,.;]*[\-A-Z0-9+\u0026@#\/%=~()_|])/gi;
+  text = (text + '').replace(pattern, "$1<a href='$2'>$2</a>");
+
+  // nl2br
+  text = (text + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + '<br>' + '$2');
+  return new Spacebars.SafeString(text);
 });
 
 

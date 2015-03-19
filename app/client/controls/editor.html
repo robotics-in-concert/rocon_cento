@@ -1,4 +1,5 @@
 <template name="editor">
+<div class="quill-editor">
   <div class="quill-wrapper">
     <div id="full-toolbar" class="toolbar">
       <!-- <span class="ql-format-group"> -->
@@ -119,5 +120,13 @@
     <div class="editor">
       {{{body}}}
     </div>
+
+
+
   </div>  
+  <div class="resizes">
+    <button class="editor-smaller btn ct btn-xs"><i class="glyphicon glyphicon-chevron-up"></i></button>
+    <button class="editor-larger btn ct btn-xs"><i class="glyphicon glyphicon-chevron-down"></i></button>
+</div>
+</div>
 </template>
