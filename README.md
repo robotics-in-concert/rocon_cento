@@ -105,9 +105,9 @@ See [Back Up and Restore with MongoDB Tools](http://docs.mongodb.org/manual/tuto
 
 
 ```
-$ mongodump --host localhost:27017 --db cento --out /tmp/dump
+$ mongodump --host localhost:27017 --db meteor-cento --out /tmp/dump
 connected to: localhost:27017
-2015-03-19T17:23:24.015+0900 DATABASE: cento	 to 	/tmp/dump/cento
+2015-03-19T17:23:24.015+0900 DATABASE: cento	 to 	/tmp/dump/meteor-cento
 
 $ mongorestore --host localhost:27017 /tmp/dump
 connected to: localhost:27017
