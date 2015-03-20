@@ -14,14 +14,31 @@ cento_server
  - [Meteor](http://docs.meteor.com)
  - [Meteorite](https://atmospherejs.com/docs/installing)
 
-### Recommended Install on Ubuntu Precise 12.04
+### Install node / npm
 
-    sudo add-apt-repository ppa:chris-lea/node.js
-    sudo apt-get update
-    sudo apt-get install python-software-properties python g++ make nodejs curl
-    curl https://install.meteor.com | /bin/sh
+* install ndoejs
+
+```
+# Setup nodesource repository
+curl -sL https://deb.nodesource.com/setup_0.12 | sudo bash -
+
+# Then install
+sudo apt-get install -y nodejs
+```
+
+* upgrade npm
+
+```
+$ sudo npm install npm -g
+
+# Check npm version is 2.x.x
+$ npm -v
+```
+
+
+### Install meteorite
+
     sudo npm install -g meteorite
-    sudo rm -Rf ~/tmp
     
 ### Run on a private machine
 
