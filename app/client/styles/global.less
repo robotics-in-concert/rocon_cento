@@ -920,7 +920,37 @@ form.ct {
 
 }
 
+
+
+
 #page_home {
+  span.blue  {
+    color: @new-blue;
+  }
+
+
+  #jumbotron {
+    display: flex;
+
+    .left {
+      margin-right: 45px;
+
+    }
+    .right {
+      flex: 1;
+      p {
+        font-size: 36px;
+        margin-bottom: -5px;;
+      }
+      .note {
+        margin-bottom: 20px;
+        margin-top: 20px;
+        color: #888;
+      }
+
+    }
+
+  }
   .main_blue {
     background-color: @new-blue;
     height: 60px;
@@ -939,4 +969,12 @@ form.ct {
 
   }
 
+}
+
+button.bigblack {
+  color: white;
+  background-color: black;
+  padding: 0.5em 1em;
+  font-size: 20px;
+  border: none;
 }
