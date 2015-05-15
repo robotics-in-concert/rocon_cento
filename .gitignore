@@ -3,3 +3,4 @@ app/packages
 .files
 MyriadPro-Regular.otf
 deploy/config
+app/.env

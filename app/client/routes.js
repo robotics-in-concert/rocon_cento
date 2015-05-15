@@ -30,6 +30,7 @@ Router.map(function(){
   this.route('home', {
     path: '/',
     template: 'home',
+    layoutTemplate: 'home_layout',
     data: function(){
       return {
         solutions: Cento.solutions()
