@@ -23,7 +23,7 @@ Router.configure({
 Router.onBeforeAction(function(){
   Session.set('currentSolution', Cento.Solutions.findOne({_id: this.params.solution}));
 });
-Router.onBeforeAction(Hooks.loginRequired, {except: ['login']});
+Router.onBeforeAction(Hooks.loginRequired, {except: ['home', 'login']});
 
 
 Router.map(function(){
