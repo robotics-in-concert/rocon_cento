@@ -32,6 +32,18 @@ ul.splits-line {
       width: 130px;
       display: inline-block;
     }
+    h4 {
+      margin-top: 10px;
+      margin-bottom: 3px;
+      font-size: 12px;
+      color: @blue-color;
+    }
+
+
+    .members {
+      li { display: inline-block; }
+
+    }
 
   }
 
@@ -248,33 +260,22 @@ input.form-control, textarea.form-control {
     color: @white-color;
 
   }
-  border: solid 3px @blue-color;
+  border: solid 2px @new-blue-dark;
   margin-bottom: 10px;
   .detail {
     color: @gray-color;
     padding: 3px;
 
-    h4 {
-      margin-top: 10px;
-      margin-bottom: 3px;
-      font-size: 12px;
-      color: @blue-color;
-    }
-
-
-    .members {
-      li { display: inline-block; }
-
-    }
 
   }
   h2 {
-    background-color: @blue-color;
     margin: 0;
-    color: white;
+    color: @new-blue-dark;
+    font-weight: bold;
     font-size: 16px;
     padding: 8px 2px;
-
+    border-bottom: solid 1px @blue-color;
+    margin: 3px;
   }
 
 }
@@ -982,7 +983,7 @@ button.bigblack {
 table.new_blue {
   th {
     font-weight: bold;
-    color: #1B75BB;
+    color: @new-blue-dark;
 
 
   }
@@ -999,5 +1000,11 @@ table.new_blue {
   tbody > tr:nth-child(odd) > th {
     background-color: #E0F3FC;
   }
+
+}
+
+
+h2.blue {
+  color: @new-blue-dark;
 
 }
