@@ -418,10 +418,11 @@ form.ct {
 /* filter select box customize */
 
 .filters {
+  border: solid 1px #F4F4F5;
   select.form-control {
     width: 135px;
     background-color: rgba(0,0,0,0);
-    border:0;
+    border: 0;
     -webkit-appearance: initial;
     color: @blue-color;
     margin-right: 0;
@@ -974,4 +975,29 @@ button.bigblack {
   padding: 0.5em 1em;
   font-size: 20px;
   border: none;
+}
+
+
+
+table.new_blue {
+  th {
+    font-weight: bold;
+    color: #1B75BB;
+
+
+  }
+
+  thead {
+    border-bottom: solid 1px #18B3EF;
+  }
+  /* tr:nth-child(odd) > td, */
+  /* tr:nth-child(odd) > th { */
+    /* background-color: #E0F3FC; */
+  /* } */
+
+  tbody > tr:nth-child(odd) > td,
+  tbody > tr:nth-child(odd) > th {
+    background-color: #E0F3FC;
+  }
+
 }
