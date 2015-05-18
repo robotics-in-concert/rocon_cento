@@ -40,21 +40,6 @@
       {{/if}}
 
 
-      <h3 class="ct heading ttop">New Replys list to @me</h3>
-      <table class="ct blue table table-striped">
-        {{#each new_replys currentUser.profile.login}}
-        <tr>
-          <td>1</td>
-          <td><a href="#" class="show">{{title}}</a></td>
-          <td>{{default votes 0}}</td>
-          <td>{{comments.length}}</td>
-          <td>{{username user}}</td>
-          <td class="datetime">{{formatDate created 'YYYY-MM-DD'}}</td>
-          <td>{{tagsJoin tags}}</td>
-        </tr>
-        {{/each}}
-
-      </table>
       <div class="filters">
         <select class="filter_status form-control">
           <option value="">All</option>
@@ -70,7 +55,7 @@
         </select>
         <i class="glyphicon glyphicon-chevron-down"></i>
       </div>
-      <table class="ct gray extra_row table">
+      <table class="ct gray-stripe extra_row table new_blue">
         <!-- <colgroup> -->
           <!-- <col> -->
           <!-- <col> -->

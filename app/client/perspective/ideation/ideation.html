@@ -44,21 +44,6 @@
       {{/if}}
 
 
-      <h3 class="ct heading ttop">New Replys list to @me</h3>
-      <table class="ct blue table table-striped">
-        {{#each new_replys currentUser.profile.login}}
-        <tr>
-          <td>1</td>
-          <td><a href="#" class="show">{{body}}</a></td>
-          <td>{{votes}}</td>
-          <td>{{comments.length}}</td>
-          <td>{{username user}}</td>
-          <td class="datetime">{{formatDate created 'YYYY-MM-DD'}}</td>
-          <td>{{tagsJoin tags}}</td>
-        </tr>
-        {{/each}}
-
-      </table>
       <div class="filters">
         <select name="filter_type" class="filter_type form-control">
           <option value="">All ideation</option>
@@ -73,7 +58,7 @@
         </select>
         <i class="glyphicon glyphicon-chevron-down"></i>
       </div>
-      <table class="ct gray extra_row table">
+      <table class="ct extra_row table new_blue gray-stripe">
         <thead>
           <th>Rank</th>
           <th>Title</th>
@@ -84,6 +69,7 @@
           <th>Tags</th>
           <th></th>
         </thead>
+        <tbody>
         {{#each workItems}}
         <tr>
           <td>1</td>
@@ -112,6 +98,7 @@
         
         </tr>
         {{/each}}
+        </tbody>
 
       </table>
       

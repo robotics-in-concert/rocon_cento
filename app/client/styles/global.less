@@ -277,6 +277,18 @@ input.form-control, textarea.form-control {
     border-bottom: solid 1px @blue-color;
     margin: 3px;
   }
+    h4 {
+      margin-top: 10px;
+      margin-bottom: 3px;
+      font-size: 12px;
+      color: @blue-color;
+    }
+
+
+    .members {
+      li { display: inline-block; }
+
+    }
 
 }
 
@@ -996,8 +1008,29 @@ table.new_blue {
     /* background-color: #E0F3FC; */
   /* } */
 
-  tbody > tr:nth-child(odd) > td,
-  tbody > tr:nth-child(odd) > th {
+  /* tbody > tr:nth-child(odd) > td, */
+  /* tbody > tr:nth-child(odd) > th { */
+    /* background-color: #E0F3FC; */
+  /* } */
+
+  &.gray-stripe.normal tbody > tr:nth-child(odd) > td,
+  &.gray-stripe.normal tbody > tr:nth-child(odd) > th {
+      background-color: @row-alt-bg-color;
+  }
+
+  &.gray-stripe.extra_row tbody > tr:nth-child(4n+2) { 
+    & > td {
+      background-color: @row-alt-bg-color;
+    }
+  }
+  &.gray-stripe.extra_row tbody > tr:nth-child(4n+3) { 
+    & > td {
+      background-color: @row-alt-bg-color;
+    }
+  }
+
+  &.blue-stripe tbody > tr:nth-child(odd) > td,
+  &.blue-stripe tbody > tr:nth-child(odd) > th {
     background-color: #E0F3FC;
   }
 
