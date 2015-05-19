@@ -10,7 +10,7 @@
       <div class="modal-body">
         <div class="left">
 
-             <form data-card_id="{{_id}}" class="ct">
+             <form data-card_id="{{_id}}" class="">
                <div class="form-group">
                  <label>Title</label>
                  <input class="form-control" type="text" name="title">
@@ -51,54 +51,36 @@
 
   <div class="row">
 
-    <div class="col-md-2">
-    
-      <div class="lnb">
-        <button class="button large new_needs">Register user needs</button>
-        <h3>Recent event</h3>
-
-        {{>user_needs_form_modal}}
-        
-        <ul class="recent_events list-unstyled">
-          {{#each actions}}
-          <li class="alt">
-            <div class="head">Reply from {{username user_id}}.</div>
-            <div class="body">{{extra.body}}</div>
-          </li>
-          {{/each}}
-        </ul>
-
-
-      </div>
-      
-    </div>
     
     <div class="col-md-10">
 
-      <h3 class="ct heading ttop">New Replys list to @me</h3>
-      <table class="ct blue table table-striped">
-        {{#each new_replys currentUser.profile.login}}
-        <tr>
-          <td>1</td>
-          <td><a href="#" class="show">{{title}}</a></td>
-          <td>{{votes}}</td>
-          <td>{{comments.length}}</td>
-          <td>{{username user}}</td>
-          <td class="datetime">{{formatDate created 'YYYY-MM-DD'}}</td>
-          <td>{{tagsJoin tags}}</td>
-        </tr>
-        {{/each}}
 
-      </table>
-      <div class="filters">
-        <select class="form-control">
-          <option>All needs</option>
-          <option>My needs</option>
-        </select>
-        <i class="glyphicon glyphicon-chevron-down"></i>
+      <h1 class="blue">User Needs</h1>
+
+
+      <div class="page_intro">
+
+        <div class="left">
+          <img src="/img/yellow/user_needs.png">
+        </div>
+        <div class="right">
+          <h2>Suggest your needs here.You may meet good team to develop your needs.</h2>
+          <button class="bigblack new_needs">Register user needs</button>
+        </div>
+
       </div>
 
-      <table class="ct normal gray table">
+      <div class="filters">
+        <div class="filter">
+          <select class="form-control2">
+            <option>All needs</option>
+            <option>My needs</option>
+          </select>
+          <i class="glyphicon glyphicon-chevron-down"></i>
+        </div>
+      </div>
+
+      <table class="ct normal table new_blue blue">
         <thead>
           <th>Rank</th>
           <th>Title</th>
@@ -134,6 +116,26 @@
 
     </div>
 
+    <div class="col-md-2">
+    
+      <div class="lnb">
+        <h2>Event</h2>
+
+        {{>user_needs_form_modal}}
+        
+        <ul class="recent_events list-unstyled">
+          {{#each actions}}
+          <li class="alt">
+            <div class="head">Reply from {{username user_id}}.</div>
+            <div class="body">{{extra.body}}</div>
+          </li>
+          {{/each}}
+        </ul>
+
+
+      </div>
+      
+    </div>
     </div>
   
   </div>

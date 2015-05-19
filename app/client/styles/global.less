@@ -32,6 +32,18 @@ ul.splits-line {
       width: 130px;
       display: inline-block;
     }
+    h4 {
+      margin-top: 10px;
+      margin-bottom: 3px;
+      font-size: 12px;
+      color: @blue-color;
+    }
+
+
+    .members {
+      li { display: inline-block; }
+
+    }
 
   }
 
@@ -41,8 +53,9 @@ ul.splits-line {
   background-color: @footer-bg-color;
   color: @footer-color;
   width: 100%;
-  margin-top: 50px;
-  min-height: 480px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  padding: 1em 0.5em ;
 
 
   hr {
@@ -66,8 +79,7 @@ ul.splits-line {
 
 
   .container {
-    background: url('/img/footer_bg.png') @footer-bg-color no-repeat 0 30px;
-    min-height: 480px;
+    /* background: url('/img/footer_bg.png') @footer-bg-color no-repeat 0 30px; */
     
     position: relative;
 
@@ -215,7 +227,7 @@ input.form-control, textarea.form-control {
 
   .recent_events {
     li {
-      background-color: #e2f5fc;
+      border: solid 1px #DADBDC;
       font-size: 12px;
       padding: 5px;
       margin-bottom: 5px;
@@ -223,7 +235,6 @@ input.form-control, textarea.form-control {
 
 
       &.alt {
-        background-color: @row-alt-bg-color;
       }
       .head {
         color: @blue-color;
@@ -248,12 +259,23 @@ input.form-control, textarea.form-control {
     color: @white-color;
 
   }
-  border: solid 3px @blue-color;
+  border: solid 2px @new-blue-dark;
   margin-bottom: 10px;
   .detail {
     color: @gray-color;
     padding: 3px;
 
+
+  }
+  h2 {
+    margin: 0;
+    color: @new-blue-dark;
+    font-weight: bold;
+    font-size: 16px;
+    padding: 8px 2px;
+    border-bottom: solid 1px @blue-color;
+    margin: 3px;
+  }
     h4 {
       margin-top: 10px;
       margin-bottom: 3px;
@@ -266,16 +288,6 @@ input.form-control, textarea.form-control {
       li { display: inline-block; }
 
     }
-
-  }
-  h2 {
-    background-color: @blue-color;
-    margin: 0;
-    color: white;
-    font-size: 16px;
-    padding: 8px 2px;
-
-  }
 
 }
 
@@ -418,10 +430,10 @@ form.ct {
 /* filter select box customize */
 
 .filters {
-  select.form-control {
+  select.form-control2 {
     width: 135px;
     background-color: rgba(0,0,0,0);
-    border:0;
+    border: 0;
     -webkit-appearance: initial;
     color: @blue-color;
     margin-right: 0;
@@ -429,6 +441,8 @@ form.ct {
     font-size: 14px;
     display: inline-block;
     margin-right: 10px;
+    outline: none;
+    padding: 5px 10px ;
   }
 
   i { color: @blue-color; left: -20px; }
@@ -436,6 +450,14 @@ form.ct {
   select.filter_type {
     width: 135px;
   }
+  .filter {
+    width: 170px;
+    border: solid 1px #E4E5E5;
+    display: inline-block;
+    margin-right: 10px;
+
+  }
+  margin-bottom: 15px;
 }
 
 
@@ -919,3 +941,147 @@ form.ct {
   }
 
 }
+
+
+
+
+#page_home {
+  span.blue  {
+    color: @new-blue;
+  }
+
+
+  #jumbotron {
+
+    .left {
+
+    }
+    .right {
+      p {
+        font-size: 36px;
+        margin-bottom: -5px;;
+      }
+      .note {
+        margin-bottom: 20px;
+        margin-top: 20px;
+        color: #888;
+      }
+
+    }
+
+  }
+  .main_blue {
+    background-color: @new-blue;
+    height: 60px;
+
+  };
+  .main_yellow {
+    background-color: #FCB040;
+    text-align: center;
+    color: white;
+    font-size: 24px;
+    font-style: italic;
+    padding: 1em;
+  }
+  .doc-section {
+    margin-bottom: 40px;
+
+  }
+
+}
+
+a.bigblack, button.bigblack {
+  color: white;
+  background-color: black;
+  padding: 0.5em 1em;
+  font-size: 20px;
+  border: none;
+  text-decoration: none;
+}
+
+
+
+table.new_blue {
+  th {
+    font-weight: bold;
+    color: @new-blue-dark;
+
+
+  }
+
+  thead {
+    border-bottom: solid 1px #18B3EF;
+  }
+  /* tr:nth-child(odd) > td, */
+  /* tr:nth-child(odd) > th { */
+    /* background-color: #E0F3FC; */
+  /* } */
+
+  /* tbody > tr:nth-child(odd) > td, */
+  /* tbody > tr:nth-child(odd) > th { */
+    /* background-color: #E0F3FC; */
+  /* } */
+
+  &.gray-stripe.normal tbody > tr:nth-child(odd) > td,
+  &.gray-stripe.normal tbody > tr:nth-child(odd) > th {
+      background-color: @row-alt-bg-color;
+  }
+
+  &.gray-stripe.extra_row tbody > tr:nth-child(4n+2) { 
+    & > td {
+      background-color: @row-alt-bg-color;
+    }
+  }
+  &.gray-stripe.extra_row tbody > tr:nth-child(4n+3) { 
+    & > td {
+      background-color: @row-alt-bg-color;
+    }
+  }
+
+  &.blue-stripe tbody > tr:nth-child(odd) > td,
+  &.blue-stripe tbody > tr:nth-child(odd) > th {
+    background-color: #E0F3FC;
+  }
+
+}
+
+
+h1.blue, h2.blue {
+  color: @new-blue-dark;
+
+  &.line {
+    border-bottom: solid 1px #E4E5E5;
+  }
+
+  &.no-top-mg {
+    margin-top: 0;
+  }
+
+}
+
+
+
+
+
+
+
+.page_intro {
+  border: solid 1px #E4E5E5;
+  display: flex;
+  padding: 9px;
+  margin-bottom: 20px;
+
+  .left {
+    margin-right: 20px;
+    padding: 5px 20px;
+
+  }
+  .right {
+    flex: 1;
+    h2 {
+      margin-top: 0;
+    }
+  }
+
+};
+

@@ -40,37 +40,36 @@
       {{/if}}
 
 
-      <h3 class="ct heading ttop">New Replys list to @me</h3>
-      <table class="ct blue table table-striped">
-        {{#each new_replys currentUser.profile.login}}
-        <tr>
-          <td>1</td>
-          <td><a href="#" class="show">{{title}}</a></td>
-          <td>{{default votes 0}}</td>
-          <td>{{comments.length}}</td>
-          <td>{{username user}}</td>
-          <td class="datetime">{{formatDate created 'YYYY-MM-DD'}}</td>
-          <td>{{tagsJoin tags}}</td>
-        </tr>
-        {{/each}}
+      <h1 class="blue no-top-mg">Modeling</h1>
+      <div class="page_intro">
+        <div class="left">
+          <img src="/img/yellow/modeling.png">
+        </div>
+        <div class="right">
+          <h2>Suggest your needs here.You may meet good team to develop your needs.</h2>
+        </div>
 
-      </table>
-      <div class="filters">
-        <select class="filter_status form-control">
-          <option value="">All</option>
-          <option value="todo">Todo</option>
-          <option value="doing">Doing</option>
-          <option value="done">Done</option>
-        </select>
-        <i class="glyphicon glyphicon-chevron-down"></i>
-        <select class="filter_member form-control">
-          <option value="">All</option>
-          <option value="assign_me">Assign me</option>
-          <option value="review_from_me">Review from me</option>
-        </select>
-        <i class="glyphicon glyphicon-chevron-down"></i>
       </div>
-      <table class="ct gray extra_row table">
+      <div class="filters">
+        <div class="filter">
+        	<select class="filter_status form-control2">
+        	  <option value="">All</option>
+        	  <option value="todo">Todo</option>
+        	  <option value="doing">Doing</option>
+        	  <option value="done">Done</option>
+        	</select>
+        	<i class="glyphicon glyphicon-chevron-down"></i>
+        </div>
+        <div class="filter">
+        	<select class="filter_member form-control2">
+        	  <option value="">All</option>
+        	  <option value="assign_me">Assign me</option>
+        	  <option value="review_from_me">Review from me</option>
+        	</select>
+        	<i class="glyphicon glyphicon-chevron-down"></i>
+        </div>
+      </div>
+      <table class="ct gray-stripe extra_row table new_blue">
         <!-- <colgroup> -->
           <!-- <col> -->
           <!-- <col> -->
@@ -91,6 +90,7 @@
           <th>Reviewers</th>
           <th></th>
         </thead>
+        <tbody>
         {{#each workItems}}
         <tr>
           <td><span class="label {{itemStatusLabelClass status}} ">{{status}}</span></td>
@@ -127,6 +127,7 @@
         
         </tr>
         {{/each}}
+        </tbody>
 
       </table>
       

@@ -14,28 +14,106 @@
 
   <div class="container contents">
     {{> yield}}
+    {{> footer}}
   </div><!-- /.container -->
 
 
-  {{> footer}}
+
+
+</template>
+
+<template name='home_layout'>
+
+
+  {{> nav}}
+
+  <div class="contents">
+    {{> yield}}
+    <div class="container">
+      {{> footer}}
+    </div>
+  </div><!-- /.container -->
+
+
 
 
 </template>
 
 <template name='home'>
-<img src="/img/cento_main.png">
+<div id="page_home">
+  <div class="container doc-section">
+    <div id="jumbotron" class="row">
+      <div class="left col-md-8 col-lg-6">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/z5FQlflalWk?list=PLD22K5uVYld8dwiWaok3DsWWreUdFs2Zh&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+      </div>
+      <div class="right col-md-4 col-lg-6">
+        <p>Do you have needs for</p>
+        <p><span class="blue">robot solution</span>?</p>
+        <p>Come and develop</p>
+        <p>your solution.</p>
+
+        <div class="note">
+          <span class="blue"></span><span class="gray">Recently completed solution</span><br/>
+          <span class="blue">"Cafe Solution"</span>
+        </div>
+
+        <a href="/user_needs" class="bigblack">Sugguest your needs</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="main_yellow doc-section">
+    From your needs to a completed solution
+  </div>
+
+  <div class="container">
+    <div class="doc-section">
+      <h2>Main Concept</h2>
+
+      <p>The high-level approach of the Cento project is to allow groups of participants to create related work items with their associated artifacts of different types as necessary to move all the way from user needs to a completed solution.</p>
+      <p>Users of Cento include participants from the customer, the solution provider and external partici- pants from the external community.</p>
+      <p>Cento provides specialized perspectives to allow participants of different types to work on specific work items efficiently, displaying a specialized UI and integrating with appropriate external tools relevant to the item being worked on.</p>
+      <p>For each work item created, Cento keeps track of which are its related work items and helps create and manage work items using the context of the related items.</p>
+      <p>Cento provides a recommended process for moving through all the necessary steps to go from a user need to an implemented solution, but it retains the flexibility to allow all users to follow a modified or entirely different process when necessary.</p>
+
+    </div>
+
+    <div class="doc-section">
+      <h2>Process for solution</h2>
+      <div class="text-center">
+        <img src="/img/cento_process.png">
+      </div>
+    </div>
+
+    <div class="doc-section">
+      <h3>Link</h3>
+      <div style="background-color: #09ADEF; line-height:136px;">
+        <a href="http://www.robotconcert.org/" target="_blank"><img src="/img/main_blue_rocon.png" style="margin-left: 8px;"></a>
+        <a href="http://www.ros.org" target="_blank"><img src="/img/main_blue_ros.png" style="margin-left:85px; margin-right: 90px;"></a>
+        <a href="https://github.com/robotics-in-concert" target="_blank"><img src="/img/main_blue_github.png"></a>
+      </div>
+    </div>
+
+  </div>
+  
+
+  <!-- <img src="/img/cento_main.png"> -->
+</div>
 </template>
 
 
+
 <template name="login">
+<div class="text-center">
 <h2>Login</h2>
-<ul>
+<ul class="list-unstyled">
   <li><i class="fa fa-github"></i> <a href="#" id="github_login">Login with Github</a></li>
   <li><i class="fa fa-google-plus"></i> <a href="#" id="google_login">Login with Google</a></li>
   <!--
   <li><i class="fa fa-trello"></i> <a href="#" id="trello_login">Login with Trello</a></li>
   -->
 </ul>
+</div>
 
 
 </template>
