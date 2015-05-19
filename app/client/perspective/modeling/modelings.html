@@ -40,20 +40,35 @@
       {{/if}}
 
 
+      <h1 class="blue">Modeling</h1>
+      <div class="page_intro">
+
+        <div class="left">
+          <img src="/img/bulb.png" width="100px">
+        </div>
+        <div class="right">
+          <h2>Suggest your needs here.You may meet good team to develop your needs.</h2>
+        </div>
+
+      </div>
       <div class="filters">
-        <select class="filter_status form-control">
-          <option value="">All</option>
-          <option value="todo">Todo</option>
-          <option value="doing">Doing</option>
-          <option value="done">Done</option>
-        </select>
-        <i class="glyphicon glyphicon-chevron-down"></i>
-        <select class="filter_member form-control">
-          <option value="">All</option>
-          <option value="assign_me">Assign me</option>
-          <option value="review_from_me">Review from me</option>
-        </select>
-        <i class="glyphicon glyphicon-chevron-down"></i>
+        <div class="filter">
+        	<select class="filter_status form-control2">
+        	  <option value="">All</option>
+        	  <option value="todo">Todo</option>
+        	  <option value="doing">Doing</option>
+        	  <option value="done">Done</option>
+        	</select>
+        	<i class="glyphicon glyphicon-chevron-down"></i>
+        </div>
+        <div class="filter">
+        	<select class="filter_member form-control2">
+        	  <option value="">All</option>
+        	  <option value="assign_me">Assign me</option>
+        	  <option value="review_from_me">Review from me</option>
+        	</select>
+        	<i class="glyphicon glyphicon-chevron-down"></i>
+        </div>
       </div>
       <table class="ct gray-stripe extra_row table new_blue">
         <!-- <colgroup> -->
@@ -76,6 +91,7 @@
           <th>Reviewers</th>
           <th></th>
         </thead>
+        <tbody>
         {{#each workItems}}
         <tr>
           <td><span class="label {{itemStatusLabelClass status}} ">{{status}}</span></td>
@@ -112,6 +128,7 @@
         
         </tr>
         {{/each}}
+        </tbody>
 
       </table>
       
