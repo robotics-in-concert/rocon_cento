@@ -43,20 +43,23 @@
       {{/if}}
       {{/if}}
 
-
       <div class="filters">
-        <select name="filter_type" class="filter_type form-control">
-          <option value="">All ideation</option>
-          <option value="doing">Doing ideation</option>
-          <option value="modeled">Modeled ideation</option>
-        </select>
-        <i class="glyphicon glyphicon-chevron-down"></i>
+        <div class="filter">
+        	<select name="filter_type" class="filter_type form-control2">
+        	  <option value="">All ideation</option>
+        	  <option value="doing">Doing ideation</option>
+        	  <option value="modeled">Modeled ideation</option>
+        	</select>
+        	<i class="glyphicon glyphicon-chevron-down"></i>
+        </div>
 
-        <select name="filter_archive" class="form-control">
-          <option value="0">Unarchived</option>
-          <option value="1">Archieved</option>
-        </select>
-        <i class="glyphicon glyphicon-chevron-down"></i>
+        <div class="filter">
+          <select name="filter_archive" class="form-control2">
+            <option value="0">Unarchived</option>
+            <option value="1">Archieved</option>
+          </select>
+          <i class="glyphicon glyphicon-chevron-down"></i>
+        </div>
       </div>
       <table class="ct extra_row table new_blue gray-stripe">
         <thead>

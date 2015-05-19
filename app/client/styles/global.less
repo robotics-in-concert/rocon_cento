@@ -431,8 +431,7 @@ form.ct {
 /* filter select box customize */
 
 .filters {
-  border: solid 1px #F4F4F5;
-  select.form-control {
+  select.form-control2 {
     width: 135px;
     background-color: rgba(0,0,0,0);
     border: 0;
@@ -443,6 +442,8 @@ form.ct {
     font-size: 14px;
     display: inline-block;
     margin-right: 10px;
+    outline: none;
+    padding: 5px 10px ;
   }
 
   i { color: @blue-color; left: -20px; }
@@ -450,6 +451,14 @@ form.ct {
   select.filter_type {
     width: 135px;
   }
+  .filter {
+    width: 170px;
+    border: solid 1px #E4E5E5;
+    display: inline-block;
+    margin-right: 10px;
+
+  }
+  margin-bottom: 15px;
 }
 
 
@@ -1037,7 +1046,42 @@ table.new_blue {
 }
 
 
-h2.blue {
+h1.blue, h2.blue {
   color: @new-blue-dark;
 
+  &.line {
+    border-bottom: solid 1px #E4E5E5;
+
+
+  }
+
 }
+
+
+
+
+
+
+
+.page_intro {
+  border: solid 1px #E4E5E5;
+  display: flex;
+  padding: 9px;
+  margin-bottom: 20px;
+
+  .left {
+    margin-right: 20px;
+    background-color: #FBAF3F;
+    padding: 5px 20px;
+    border-radius: 5px;
+
+  }
+  .right {
+    flex: 1;
+    h2 {
+      margin-top: 0;
+    }
+  }
+
+};
+
