@@ -20,6 +20,7 @@ db.meteor_accounts_loginServiceConfiguration.insert({
 	1. `git clone git@github.com:robotics-in-concert/rocon_cento.git git`
 
 1. install forever : `npm install forever -g`
+1. install meteor : `curl https://install.meteor.com | /bin/sh`
 1. install metorite : `npm install meteorite -g`
 
 #### Local
