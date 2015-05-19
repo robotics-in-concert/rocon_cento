@@ -990,12 +990,13 @@ form.ct {
 
 }
 
-button.bigblack {
+a.bigblack, button.bigblack {
   color: white;
   background-color: black;
   padding: 0.5em 1em;
   font-size: 20px;
   border: none;
+  text-decoration: none;
 }
 
 
@@ -1050,8 +1051,10 @@ h1.blue, h2.blue {
 
   &.line {
     border-bottom: solid 1px #E4E5E5;
+  }
 
-
+  &.no-top-mg {
+    margin-top: 0;
   }
 
 }
@@ -1070,9 +1073,7 @@ h1.blue, h2.blue {
 
   .left {
     margin-right: 20px;
-    background-color: #FBAF3F;
     padding: 5px 20px;
-    border-radius: 5px;
 
   }
   .right {
