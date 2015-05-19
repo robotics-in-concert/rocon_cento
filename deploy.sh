@@ -28,12 +28,19 @@ echo 'bundle package';
 cd $DEPLOY_PATH/git/app;
 mrt bundle $DEPLOY_PATH/bundle.tgz > /dev/null;
 
+
 cd $DEPLOY_PATH;
+
+
+
+
 
 echo 'stop server';
 forever --plain -s stop $DEPLOY_PATH/bundle/main.js > /dev/null;
 mv $DEPLOY_PATH/bundle $DEPLOY_PATH/bundle.$DD;
 tar xzvf $DEPLOY_PATH/bundle.tgz > /dev/null;
+
+cd $DEPLOY_PATH/bundle/programs/server && npm install fibers
 
 
 echo 'clean';
@@ -43,7 +50,7 @@ echo 'start server';
 forever --plain -s start $DEPLOY_PATH/bundle/main.js > /dev/null;
 "
 
-
+echo $DEPLOY_HOST
 ssh $DEPLOY_HOST $CMD
 
 
