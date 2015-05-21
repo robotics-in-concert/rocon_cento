@@ -1,3 +1,8 @@
+Template.work_item_show_modal.helpers({
+  Type: function(){ return this.type.charAt(0).toUpperCase() + this.type.slice(1); }
+
+});
+
 Template.work_item_show_modal.events({
   'click .unsubscribe': function(e){
     var uid = Meteor.userId();

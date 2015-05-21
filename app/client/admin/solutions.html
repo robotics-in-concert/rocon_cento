@@ -1,9 +1,9 @@
 <template name="admin_solutions">
 
-<h3>Solutions</h3>
+<h3>Projects</h3>
 <div class="well">
 {{>popover_user_select}}
-  <h3>New Solution</h3>
+  <h3>New Project</h3>
   <form>
     <div class="form-group">
       <label>Title</label>
@@ -22,7 +22,7 @@
 <ul class="splits-line">
   {{#each solutions}}
   <li>
-    <h3>{{title}}</h3>
+    <h3>{{title}} <button class="btn btn-danger btn-xs delete_project">delete</button></h3>
     <div class="desc">{{description}}</div>
     <h4>Work Groups</h4>
 
