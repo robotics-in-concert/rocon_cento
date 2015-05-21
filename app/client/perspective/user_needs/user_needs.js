@@ -26,13 +26,14 @@ Template.user_needs.helpers({
 Template.user_needs_form_modal.events({
   'click .btn.post': function(e){
     var f = $(e.target).closest('form');
-    var title = $('input[name=title]').val();
-    var txt = $('textarea').val();
+
+    var title = f.find('input[name=title]').val();
+    var txt = f.find('textarea').val();
     var files = Session.get('filesToAttach');
     var attachments = _.map(files, function(f){
       return _.pick(f, 'name', 'size', 'type');
     });
-    var tags = $('.tag').toArray().map(function(e){ return e.value; });
+    var tags = f.find('.tag').toArray().map(function(e){ return e.value; });
     tags = _.compact(tags);
     
     try{

@@ -137,7 +137,8 @@ ul.splits-line {
 }
 
 body, select {
-  font-family: 'Myriad', sans-serif;
+  /* font-family: 'Myriad', sans-serif; */
+  font-family: Arial, sans-serif;
 }
 
 .contents {
@@ -169,7 +170,8 @@ h2 {
 
 .form-group {
   label {
-    color: @blue-color;
+    font-weight: normal;
+    color: @new-blue-dark;
   }
 }
 .form-group.inline {
@@ -179,12 +181,22 @@ h2 {
 
 }
 input.form-control, textarea.form-control {
-
-  background-color: @blue-color;
-  color: white;
-  border: none;
+  border: solid 1px #BCBEC0;
 }
 
+form.blue {
+  .form-group {
+    label {
+      color: @blue-color;
+    }
+  }
+  input.form-control, textarea.form-control {
+
+    background-color: @blue-color;
+    color: white;
+    border: none;
+  }
+}
 
 /*
 * Ideation
