@@ -15,6 +15,10 @@ Template.admin_solutions.helpers({
 
 });
 Template.admin_solutions.events({
+  'click .delete_project': function(e){
+    Cento.Solutions.update({_id: this._id}, {deleted_at: new Date()})
+
+  },
   'xxx .popover': function(e){
     console.log('HEREERERERERERE');
     
