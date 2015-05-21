@@ -47,8 +47,11 @@
               {{/if}}
              </div>
 
+
+             <hr />
+
              <h4>Status</h4>
-             <p><select name="status">
+             <p><select name="status" class="form-control" style="width: 120px;">
                <option value="todo" selected="{{#if $eq status 'todo'}}selected{{/if}}">todo</option>
                <option value="doing" selected="{{#if $eq status 'doing'}}selected{{/if}}">doing</option>
                <option value="done" selected="{{#if $eq status 'done'}}selected{{/if}}">done</option>
